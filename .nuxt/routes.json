@@ -1,0 +1,51 @@
+[
+  {
+    "name": "failed",
+    "path": "/failed",
+    "component": "/Users/harisgrbo/Desktop/Tip-development-Frontend/pages/failed.vue",
+    "chunkName": "pages/failed",
+    "_name": "_1147a11c"
+  },
+  {
+    "name": "register",
+    "path": "/register",
+    "component": "/Users/harisgrbo/Desktop/Tip-development-Frontend/pages/register.vue",
+    "chunkName": "pages/register",
+    "_name": "_146a58d0"
+  },
+  {
+    "name": "sign-in",
+    "path": "/sign-in",
+    "component": "/Users/harisgrbo/Desktop/Tip-development-Frontend/pages/sign-in.vue",
+    "chunkName": "pages/sign-in",
+    "_name": "_46dc47d0"
+  },
+  {
+    "name": "success",
+    "path": "/success",
+    "component": "/Users/harisgrbo/Desktop/Tip-development-Frontend/pages/success.vue",
+    "chunkName": "pages/success",
+    "_name": "_d37a64c4"
+  },
+  {
+    "name": "users",
+    "path": "/users",
+    "component": "/Users/harisgrbo/Desktop/Tip-development-Frontend/pages/users.vue",
+    "chunkName": "pages/users",
+    "_name": "_7f34d5e3"
+  },
+  {
+    "name": "user-id",
+    "path": "/user/:id?",
+    "component": "/Users/harisgrbo/Desktop/Tip-development-Frontend/pages/user/_id.vue",
+    "chunkName": "pages/user/_id",
+    "_name": "_d2dc3e2a"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/Users/harisgrbo/Desktop/Tip-development-Frontend/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_39cafbad"
+  }
+]
