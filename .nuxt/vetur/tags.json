@@ -1,4 +1,7 @@
 {
+  "GlobalButton": {
+    "description": "Auto imported from components/GlobalButton.vue"
+  },
   "Header": {
     "description": "Auto imported from components/Header.vue"
   },
@@ -7,5 +10,8 @@
   },
   "Tutorial": {
     "description": "Auto imported from components/Tutorial.vue"
+  },
+  "InputsInputField": {
+    "description": "Auto imported from components/inputs/InputField.vue"
   }
 }

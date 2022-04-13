@@ -13,20 +13,15 @@
           <div class="mt-8 bg-white main-form-wrapper">
             <div class="w-full">
               <div class="space-y-6">
-                <h1>Create Account</h1>
-                <small>Create a Tipper account to start receiving more in tips.</small>
-                <InputField v-model="payload.email" label="Enter email Address" placeholder="johndoe@gmail.com"></InputField>
-                <InputField v-model="payload.password" type="password" label="Password" placeholder="*********"></InputField>
-                <InputField v-model="payload.confirm_password" type="password" label="Confirm Password" placeholder="*********"></InputField>
-                <InputField v-model="payload.business_name" label="Business name" placeholder="Business name"></InputField>
-                <InputField v-model="payload.address" label="Address" placeholder="Address"></InputField>
-
+                <h1>Forgot Password</h1>
+                <small>Enter your email and we’ll send a link to reset it.</small>
+                <InputField v-model="payload.username" label="Enter email Address" placeholder="johndoe@gmail.com"></InputField>
                 <div>
-                  <GlobalButton placeholder="Sign up" @handle-button-action="register"></GlobalButton>
+                  <GlobalButton placeholder="Reset" @handle-button-action="reset"></GlobalButton>
                 </div>
                 <div class="sign-up">
-                  <span>Already Have An Account?</span>
-                  <nuxt-link to="/sign-in" class="font-medium text-indigo-600 hover:text-indigo-500">Login</nuxt-link>
+                  <span>Not a member yet? </span>
+                  <nuxt-link to="/register" class="font-medium text-indigo-600 hover:text-indigo-500">Sign up</nuxt-link>
                 </div>
               </div>
             </div>
@@ -38,35 +33,26 @@
 </template>
 
 <script>
+import Header from "~/components/Header";
 import InputField from "~/components/inputs/InputField";
 export default {
-  components: {InputField},
-  name: "register",
+  components: {InputField, Header},
+  name: "password-reset",
   data() {
     return {
-      password_two: '',
       payload: {
-        business_name: '',
-        email: '',
+        grant_type: 'password',
+        client_id: 2,
+        client_secret: 'il4dy3lNuKHlBWIh7AltaTaxhVC3idt1zEOsrKnD',
+        username: '',
         password: '',
-        address: '',
-        confirm_password: ''
       }
     }
   },
   methods: {
-    async register() {
-      if (this.payload.password !== this.payload.confirm_password) {
-        alert('Passwords dont match')
-      }
-
+    async reset() {
       try {
-        let res = await this.$axios.post('/employer/register', this.payload);
-
-        if(res.status === 200) {
-          window.location.href = res.data.redirect_uri;
-        }
-
+        console.log('reset')
       } catch(e) {
         console.log(e)
       }
@@ -172,5 +158,9 @@ export default {
     color: #1B1A1A;
     opacity: 0.6;
   }
+}
+
+button {
+  margin-top: 240px
 }
 </style>

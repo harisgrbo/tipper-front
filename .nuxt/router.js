@@ -4,13 +4,14 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _1147a11c = () => interopDefault(import('../pages/failed.vue' /* webpackChunkName: "pages/failed" */))
-const _146a58d0 = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
-const _46dc47d0 = () => interopDefault(import('../pages/sign-in.vue' /* webpackChunkName: "pages/sign-in" */))
-const _d37a64c4 = () => interopDefault(import('../pages/success.vue' /* webpackChunkName: "pages/success" */))
-const _7f34d5e3 = () => interopDefault(import('../pages/users.vue' /* webpackChunkName: "pages/users" */))
-const _d2dc3e2a = () => interopDefault(import('../pages/user/_id.vue' /* webpackChunkName: "pages/user/_id" */))
-const _39cafbad = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _796c6f4a = () => interopDefault(import('../pages/failed.vue' /* webpackChunkName: "pages/failed" */))
+const _7e109cac = () => interopDefault(import('../pages/password-reset.vue' /* webpackChunkName: "pages/password-reset" */))
+const _34ca7d70 = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
+const _06d402f8 = () => interopDefault(import('../pages/sign-in.vue' /* webpackChunkName: "pages/sign-in" */))
+const _563a88c6 = () => interopDefault(import('../pages/success.vue' /* webpackChunkName: "pages/success" */))
+const _a69d89ea = () => interopDefault(import('../pages/users.vue' /* webpackChunkName: "pages/users" */))
+const _54dcea7a = () => interopDefault(import('../pages/user/_id.vue' /* webpackChunkName: "pages/user/_id" */))
+const _674760d5 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -25,31 +26,35 @@ export const routerOptions = {
 
   routes: [{
     path: "/failed",
-    component: _1147a11c,
+    component: _796c6f4a,
     name: "failed"
   }, {
+    path: "/password-reset",
+    component: _7e109cac,
+    name: "password-reset"
+  }, {
     path: "/register",
-    component: _146a58d0,
+    component: _34ca7d70,
     name: "register"
   }, {
     path: "/sign-in",
-    component: _46dc47d0,
+    component: _06d402f8,
     name: "sign-in"
   }, {
     path: "/success",
-    component: _d37a64c4,
+    component: _563a88c6,
     name: "success"
   }, {
     path: "/users",
-    component: _7f34d5e3,
+    component: _a69d89ea,
     name: "users"
   }, {
     path: "/user/:id?",
-    component: _d2dc3e2a,
+    component: _54dcea7a,
     name: "user-id"
   }, {
     path: "/",
-    component: _39cafbad,
+    component: _674760d5,
     name: "index"
   }],
 

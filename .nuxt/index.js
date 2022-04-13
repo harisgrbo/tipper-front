@@ -13,10 +13,10 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_cfc99a8a from 'nuxt_plugin_plugin_cfc99a8a' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_moment_4e57fd67 from 'nuxt_plugin_moment_4e57fd67' // Source: ./moment.js (mode: 'all')
-import nuxt_plugin_axios_6f81435e from 'nuxt_plugin_axios_6f81435e' // Source: ./axios.js (mode: 'all')
-import nuxt_plugin_auth_6506bcbf from 'nuxt_plugin_auth_6506bcbf' // Source: ./auth.js (mode: 'all')
+import nuxt_plugin_plugin_a1c0f6da from 'nuxt_plugin_plugin_a1c0f6da' // Source: ./components/plugin.js (mode: 'all')
+import nuxt_plugin_moment_7bd4628f from 'nuxt_plugin_moment_7bd4628f' // Source: ./moment.js (mode: 'all')
+import nuxt_plugin_axios_248db429 from 'nuxt_plugin_axios_248db429' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_auth_0d2a4be7 from 'nuxt_plugin_auth_0d2a4be7' // Source: ./auth.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -84,7 +84,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"stripe","htmlAttrs":{"lang":"en"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""},{"name":"format-detection","content":"telephone=no"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[],"script":[]},
+    head: {"title":"stripe","htmlAttrs":{"lang":"en"},"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":""},{"name":"format-detection","content":"telephone=no"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"preconnect","href":"https:\u002F\u002Ffonts.gstatic.com"},{"href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Poppins:wght@100;200;300;400;500&display=swap","rel":"stylesheet"}],"style":[],"script":[]},
 
     store,
     router,
@@ -213,20 +213,20 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_cfc99a8a === 'function') {
-    await nuxt_plugin_plugin_cfc99a8a(app.context, inject)
+  if (typeof nuxt_plugin_plugin_a1c0f6da === 'function') {
+    await nuxt_plugin_plugin_a1c0f6da(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_moment_4e57fd67 === 'function') {
-    await nuxt_plugin_moment_4e57fd67(app.context, inject)
+  if (typeof nuxt_plugin_moment_7bd4628f === 'function') {
+    await nuxt_plugin_moment_7bd4628f(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_6f81435e === 'function') {
-    await nuxt_plugin_axios_6f81435e(app.context, inject)
+  if (typeof nuxt_plugin_axios_248db429 === 'function') {
+    await nuxt_plugin_axios_248db429(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_auth_6506bcbf === 'function') {
-    await nuxt_plugin_auth_6506bcbf(app.context, inject)
+  if (typeof nuxt_plugin_auth_0d2a4be7 === 'function') {
+    await nuxt_plugin_auth_0d2a4be7(app.context, inject)
   }
 
   // Lock enablePreview in context

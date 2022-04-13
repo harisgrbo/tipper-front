@@ -2,50 +2,57 @@
   {
     "name": "failed",
     "path": "/failed",
-    "component": "/Users/harisgrbo/Desktop/Tip-development-Frontend/pages/failed.vue",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/failed.vue",
     "chunkName": "pages/failed",
-    "_name": "_1147a11c"
+    "_name": "_796c6f4a"
+  },
+  {
+    "name": "password-reset",
+    "path": "/password-reset",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/password-reset.vue",
+    "chunkName": "pages/password-reset",
+    "_name": "_7e109cac"
   },
   {
     "name": "register",
     "path": "/register",
-    "component": "/Users/harisgrbo/Desktop/Tip-development-Frontend/pages/register.vue",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/register.vue",
     "chunkName": "pages/register",
-    "_name": "_146a58d0"
+    "_name": "_34ca7d70"
   },
   {
     "name": "sign-in",
     "path": "/sign-in",
-    "component": "/Users/harisgrbo/Desktop/Tip-development-Frontend/pages/sign-in.vue",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/sign-in.vue",
     "chunkName": "pages/sign-in",
-    "_name": "_46dc47d0"
+    "_name": "_06d402f8"
   },
   {
     "name": "success",
     "path": "/success",
-    "component": "/Users/harisgrbo/Desktop/Tip-development-Frontend/pages/success.vue",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/success.vue",
     "chunkName": "pages/success",
-    "_name": "_d37a64c4"
+    "_name": "_563a88c6"
   },
   {
     "name": "users",
     "path": "/users",
-    "component": "/Users/harisgrbo/Desktop/Tip-development-Frontend/pages/users.vue",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/users.vue",
     "chunkName": "pages/users",
-    "_name": "_7f34d5e3"
+    "_name": "_a69d89ea"
   },
   {
     "name": "user-id",
     "path": "/user/:id?",
-    "component": "/Users/harisgrbo/Desktop/Tip-development-Frontend/pages/user/_id.vue",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/user/_id.vue",
     "chunkName": "pages/user/_id",
-    "_name": "_d2dc3e2a"
+    "_name": "_54dcea7a"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/Users/harisgrbo/Desktop/Tip-development-Frontend/pages/index.vue",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_39cafbad"
+    "_name": "_674760d5"
   }
 ]

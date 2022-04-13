@@ -1,58 +1,51 @@
 <template>
   <div class="w-full min-h-screen flex flex-col">
     <div class="min-h-full flex auth-wrapper">
-      <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-        <div class="mx-auto w-full max-w-sm lg:w-96">
-          <div>
-            <img class="h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
-            <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+      <div class="flex flex-1 bg-white">
+      </div>
+      <div class="flex-1 flex flex-col justify-center items-center">
+        <div class="mx-auto w-full">
+          <div class="flex flex-col justify-start items-start title-wrap">
+            <h3 @click="$router.push('/')">LOGO</h3>
+            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
           </div>
 
-          <div class="mt-8">
-            <div class="mt-6">
+          <div class="mt-8 bg-white main-form-wrapper">
+            <div class="w-full">
               <div class="space-y-6">
-                <div>
-                  <label for="email" class="block text-sm font-medium text-gray-700"> Email address </label>
-                  <div class="mt-1">
-                    <input id="email" v-model="payload.username" name="email" type="email" autocomplete="email" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                  </div>
-                </div>
-
-                <div class="space-y-1">
-                  <label for="password" class="block text-sm font-medium text-gray-700"> Password </label>
-                  <div class="mt-1">
-                    <input id="password" v-model="payload.password" name="password" type="password" autocomplete="current-password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                  </div>
-                </div>
+                <h1>Login</h1>
+                <small>Tipper’s mission is to help workers make more money.</small>
+                <InputField v-model="payload.username" label="Email Address" placeholder="johndoe@gmail.com"></InputField>
+                <InputField v-model="payload.password" type="password" label="Password" placeholder="*********"></InputField>
 
                 <div class="flex items-center justify-end">
 
                   <div class="text-sm">
-                    <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </a>
+                    <nuxt-link to="/password-reset" class="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </nuxt-link>
                   </div>
                 </div>
 
                 <div>
-                  <button type="submit" @click="login()" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Sign in</button>
+                  <GlobalButton placeholder="Login" @handle-button-action="login"></GlobalButton>
+                </div>
+                <div class="sign-up">
+                  <span>Not a member yet? </span>
+                  <nuxt-link to="/register" class="font-medium text-indigo-600 hover:text-indigo-500">Sign up</nuxt-link>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="hidden lg:block relative w-0 flex-1">
-        <img class="absolute inset-0 h-full w-full object-cover" src="https://images.unsplash.com/photo-1505904267569-f02eaeb45a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80" alt="">
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Header from "~/components/Header";
+import InputField from "~/components/inputs/InputField";
 export default {
-  components: {Header},
+  components: {InputField},
   name: "sign-in",
-  layout: 'standard',
   data() {
     return {
       payload: {
@@ -82,6 +75,100 @@ export default {
 
 <style scoped lang="scss">
 .auth-wrapper {
-  min-height: calc(100vh - 68px);
+  min-height: 100vh;
+  background: #F7F8FA;
+  padding: 15px;
+
+  .main-form-wrapper {
+    display: flex;
+    margin-left: 53px;
+    margin-right: 134px;
+    padding: 32px;
+
+    h1 {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 45px;
+      color: #1B1A1A;
+    }
+
+    small {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 21px;
+      letter-spacing: 0.01em;
+      color: #1B1A1A;
+      opacity: 0.6;
+    }
+  }
+
+  .title-wrap {
+    display: flex;
+    margin-left: 53px;
+    margin-right: 134px;
+
+    h3 {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: bold;
+      font-size: 38px;
+      line-height: 57px;
+      color: #000000;
+    }
+
+    span {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.01em;
+      color: #161616;
+      opacity: 0.3;
+    }
+  }
+
+  a {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #1B1A1A;
+    opacity: 0.4;
+  }
+}
+
+.sign-up {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 24px;
+
+  span {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 22px;
+    color: #1B1A1A;
+    opacity: 0.4;
+  }
+
+  a {
+    font-family: 'Poppins';
+    margin-left: 4px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 22px;
+    color: #1B1A1A;
+    opacity: 0.6;
+  }
 }
 </style>
