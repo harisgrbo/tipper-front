@@ -5,8 +5,14 @@
   "Header": {
     "description": "Auto imported from components/Header.vue"
   },
+  "Notification": {
+    "description": "Auto imported from components/Notification.vue"
+  },
   "NuxtLogo": {
     "description": "Auto imported from components/NuxtLogo.vue"
+  },
+  "ReviewCard": {
+    "description": "Auto imported from components/ReviewCard.vue"
   },
   "Tutorial": {
     "description": "Auto imported from components/Tutorial.vue"

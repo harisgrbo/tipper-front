@@ -8,6 +8,8 @@ You can directly use them in pages and other components without the need to impo
 
 - `<GlobalButton>` | `<global-button>` (components/GlobalButton.vue)
 - `<Header>` | `<header>` (components/Header.vue)
+- `<Notification>` | `<notification>` (components/Notification.vue)
 - `<NuxtLogo>` | `<nuxt-logo>` (components/NuxtLogo.vue)
+- `<ReviewCard>` | `<review-card>` (components/ReviewCard.vue)
 - `<Tutorial>` | `<tutorial>` (components/Tutorial.vue)
 - `<InputsInputField>` | `<inputs-input-field>` (components/inputs/InputField.vue)

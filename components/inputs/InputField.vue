@@ -6,15 +6,17 @@
           :value="value"
           :placeholder="placeholder"
           autocomplete="off"
-          @key.up="$emit('keyup', $event.target.value)"
-          name="name">
+          @change="$emit('input', $event.target.value)"
+          name="name"
+          :style="{ 'background': bgColor }"
+      >
     <p v-if="error" class="mt-2 text-sm text-red-600" id="email-error">{{ error }}</p>
   </div>
 </template>
 <script>
 export default {
   name: "InputField",
-  props: ['type', 'error', 'label', 'placeholder', 'value'],
+  props: ['type', 'error', 'label', 'placeholder', 'value', 'bgColor'],
   data() {
     return {
     }

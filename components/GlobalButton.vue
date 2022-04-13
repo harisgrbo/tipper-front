@@ -1,5 +1,5 @@
 <template>
-  <button class="global-button" @click="handleButtonAction">
+  <button class="global-button" :style="{ 'background': bgColor, 'width': width }" @click="handleButtonAction">
     {{ placeholder }}
   </button>
 </template>
@@ -7,7 +7,7 @@
 <script>
 export default {
   name: "GlobalButton",
-  props: ['placeholder'],
+  props: ['placeholder', 'bgColor', 'width'],
   methods: {
     handleButtonAction() {
       this.$emit('handle-button-action');

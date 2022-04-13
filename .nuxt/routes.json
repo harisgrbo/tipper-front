@@ -1,10 +1,52 @@
 [
   {
+    "name": "employee-register",
+    "path": "/employee-register",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/employee-register.vue",
+    "chunkName": "pages/employee-register",
+    "_name": "_68005336"
+  },
+  {
+    "name": "employee-settings",
+    "path": "/employee-settings",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/employee-settings.vue",
+    "chunkName": "pages/employee-settings",
+    "_name": "_51a3a3e5"
+  },
+  {
+    "name": "employer-settings",
+    "path": "/employer-settings",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/employer-settings.vue",
+    "chunkName": "pages/employer-settings",
+    "_name": "_6c323e10"
+  },
+  {
     "name": "failed",
     "path": "/failed",
     "component": "/Users/harisgrbo/Desktop/tipper-front/pages/failed.vue",
     "chunkName": "pages/failed",
     "_name": "_796c6f4a"
+  },
+  {
+    "name": "index-employee",
+    "path": "/index-employee",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/index-employee.vue",
+    "chunkName": "pages/index-employee",
+    "_name": "_5525bd56"
+  },
+  {
+    "name": "index-employer",
+    "path": "/index-employer",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/index-employer.vue",
+    "chunkName": "pages/index-employer",
+    "_name": "_55dceee3"
+  },
+  {
+    "name": "notification",
+    "path": "/notification",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/notification.vue",
+    "chunkName": "pages/notification",
+    "_name": "_3f3e9138"
   },
   {
     "name": "password-reset",
@@ -19,6 +61,13 @@
     "component": "/Users/harisgrbo/Desktop/tipper-front/pages/register.vue",
     "chunkName": "pages/register",
     "_name": "_34ca7d70"
+  },
+  {
+    "name": "reviews",
+    "path": "/reviews",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/reviews.vue",
+    "chunkName": "pages/reviews",
+    "_name": "_18251e44"
   },
   {
     "name": "sign-in",

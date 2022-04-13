@@ -12,6 +12,13 @@ export default {
   components: {
     Header
   },
-  layout: 'standard'
+  layout: 'standard',
+  mounted() {
+    if(this.$auth.user && this.$auth.user.type === 'employer') {
+      this.$router.push('/index-employer');
+    } else {
+      this.$router.push('/index-employee');
+    }
+  }
 }
 </script>

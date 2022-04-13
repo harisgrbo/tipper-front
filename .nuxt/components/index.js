@@ -1,6 +1,8 @@
 export { default as GlobalButton } from '../../components/GlobalButton.vue'
 export { default as Header } from '../../components/Header.vue'
+export { default as Notification } from '../../components/Notification.vue'
 export { default as NuxtLogo } from '../../components/NuxtLogo.vue'
+export { default as ReviewCard } from '../../components/ReviewCard.vue'
 export { default as Tutorial } from '../../components/Tutorial.vue'
 export { default as InputsInputField } from '../../components/inputs/InputField.vue'
 
