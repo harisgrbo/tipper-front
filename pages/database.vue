@@ -1,49 +1,24 @@
 <template>
-  <div class="employer-wrapper">
-    <h2>Employee Dashboard</h2>
-    <div class="mb-16 grid grid-cols-3 gap-4">
-      <div class="block">
-        <h3>Current balance</h3>
-        <h2>$5345.20</h2>
-        <span>Amount Available for Transfer</span>
-        <small>Lorem ipsum dolor sit amet</small>
-      </div>
-      <div class="block">
-        <h3>Today Revenue</h3>
-        <h2>$100.00</h2>
-        <span>28 tips</span>
-        <small>Lorem ipsum dolor sit amet</small>
-      </div>
-      <div class="block">
-        <h3>Total Amount earned </h3>
-        <h2>$8735.70</h2>
-        <span>Total tips Amount</span>
-        <small>Lorem ipsum dolor sit amet</small>
-      </div>
-    </div>
-    <div class="flex flex-row items-center justify-between w-full">
-      <h2>Employee Status</h2>
-    </div>
+  <div class="database-wrapper">
+    <h2>Database</h2>
+
     <div class="review-cards-wrapper">
       <div class="bg-white table-header w-full p-md">
-        <div class="p-6 flex w-full flex-row items-center justify-between inner">
-          <div class="sm:flex-auto">
-            <h4>Recent Activity</h4>
-            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-          </div>
-        </div>
-        <div class="mt-6 flex flex-col employees-wrap">
+        <div class="flex flex-col employees-wrap">
           <div class="-overflow-x-auto">
             <div class="inline-block min-w-full py-2 align-middle">
               <div class="overflow-hidden">
                 <table class="min-w-full divide-y divide-gray-300">
                   <thead class="bg-white">
-                  <tr class="main">
+                  <tr class="main py-3">
                     <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6">Name</th>
-                    <th scope="col" class="px-3 py-3.5 text-left">Activity</th>
+                    <th scope="col" class="px-3 py-3.5 text-left">Job Title</th>
                     <th scope="col" class="px-3 py-3.5 text-left">Number of stars</th>
                     <th scope="col" class="px-3 py-3.5 text-left">Total Amount</th>
                     <th scope="col" class="px-3 py-3.5 text-left">Date</th>
+                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 md:pr-0">
+                      <span class="sr-only">Edit</span>
+                    </th>
                   </tr>
                   </thead>
                   <tbody class="divide-y bg-white">
@@ -58,7 +33,7 @@
                         </div>
                       </div>
                     </td>
-                    <td class="whitespace-nowrap px-3 py-4 username">Active</td>
+                    <td class="whitespace-nowrap px-3 py-4 username">Staff</td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <div class="flex flex-row items-center stars">
                         <img src="/star.png" v-for="star in 4" :key="star" class="mr-sm" alt="">
@@ -67,7 +42,9 @@
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 username">$40.00</td>
                     <td class="whitespace-nowrap px-3 py-4 username">02/05/2022</td>
-
+                    <td class="whitespace-nowrap px-3 py-4 username">
+                      <img src="/trash.svg" alt="">
+                    </td>
                   </tr>
                   </tbody>
                 </table>
@@ -85,91 +62,18 @@
 import GlobalButton from "~/components/GlobalButton";
 import ReviewCard from "~/components/ReviewCard";
 export default {
-  name: "index-employee",
+  name: "database",
   layout: 'standard',
   components: {GlobalButton, ReviewCard}
 }
 </script>
 
 <style scoped lang="scss">
-.employer-wrapper {
+.database-wrapper {
   width: 1240px;
   margin: 0 auto;
   min-height: 100vh;
   padding-bottom: 60px;
-
-  .block {
-    padding: 41px;
-    background: #fff;
-    height: 280px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    border-radius: 14px;
-
-    h3 {
-      font-family: 'Poppins';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 27px;
-      /* identical to box height */
-
-      letter-spacing: 0.01em;
-
-      color: #000000;
-
-      opacity: 0.6;
-    }
-
-    h2 {
-      font-family: 'Poppins';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 55px;
-      line-height: 82px;
-      /* identical to box height */
-
-      letter-spacing: 0.01em;
-
-      color: #000000;
-      margin-bottom: 0;
-      opacity: 0.8;
-    }
-
-    span {
-      font-family: 'Poppins';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 24px;
-      /* identical to box height */
-
-      letter-spacing: 0.01em;
-
-      color: #161616;
-
-      opacity: 0.3;
-      margin-bottom: 22px;
-    }
-
-    small {
-      font-family: 'Poppins';
-      font-style: normal;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 24px;
-      /* identical to box height */
-
-      letter-spacing: 0.01em;
-
-      color: #161616;
-
-      opacity: 0.3;
-    }
-  }
 
   h2 {
     font-family: 'Poppins';

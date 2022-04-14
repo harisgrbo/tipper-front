@@ -1,5 +1,12 @@
 [
   {
+    "name": "database",
+    "path": "/database",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/database.vue",
+    "chunkName": "pages/database",
+    "_name": "_7f3a3448"
+  },
+  {
     "name": "employee-register",
     "path": "/employee-register",
     "component": "/Users/harisgrbo/Desktop/tipper-front/pages/employee-register.vue",

@@ -1,6 +1,9 @@
 <template>
   <!-- This example requires Tailwind CSS v2.0+ -->
   <div>
+
+    <canvas ref="canvas" />
+
     <div class="md:flex md:items-center md:justify-between md:space-x-5 w-7xl max-w-7xl w-full mx-auto mt-6">
       <div class="flex items-start space-x-5">
         <div class="flex-shrink-0">
@@ -58,7 +61,7 @@
 
 <script>
 export default {
-  name: "_id",
+  name: "User",
   layout: 'standard',
   middleware: 'auth',
   data() {
@@ -73,6 +76,15 @@ export default {
   },
   async created() {
     await this.fetchAuthUserBalance();
+  },
+  async mounted() {
+    if (process.browser) {
+      let QRCode = require('qrcode');
+      QRCode.toCanvas(this.$refs.canvas, `https://tipper-front.herokuapp.com/user/${this.$route.params.id}`, function (error) {
+        if (error) console.error(error)
+        console.log('success!');
+      })
+    }
   },
   methods: {
     async fetchAuthUserBalance() {

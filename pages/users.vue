@@ -90,11 +90,15 @@
 </template>
 
 <script>
+// import QrcodeVue from 'qrcode.vue'
 export default {
+  components: {QrcodeVue},
   name: "users",
   layout: 'standard',
   data() {
     return {
+      value: 'https://example.com',
+      size: 300,
       users: [],
       showTipModal: false,
       payload: {
