@@ -1,6 +1,9 @@
 <template>
   <div class="flex flex-col w-full main-layout">
-    <Header></Header>
+    <div class="header">
+      <Header></Header>
+
+    </div>
     <nuxt></nuxt>
   </div>
 </template>
@@ -14,7 +17,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@mixin for-phone-only {
+  @media (max-width: 599px) {
+    @content;
+  }
+}
 .main-layout {
   background: #F7F8FA;
+}
+
+.header {
+  @include for-phone-only {
+    display: none;
+  }
 }
 </style>

@@ -20,7 +20,7 @@
         <button @click="handleClick">
           <img src="/settings.png" alt="">
         </button>
-        <button>
+        <button @click="$router.push('/user/' + $auth.user.id)">
           HG
         </button>
       </div>

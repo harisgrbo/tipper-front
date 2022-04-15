@@ -1,11 +1,11 @@
 <template>
   <!-- This example requires Tailwind CSS v2.0+ -->
-  <div>
+  <div class="flex flex-col items-center sm:w-full sm:p-4 test">
 
     <canvas ref="canvas" />
 
     <div class="md:flex md:items-center md:justify-between md:space-x-5 w-7xl max-w-7xl w-full mx-auto mt-6">
-      <div class="flex items-start space-x-5">
+      <div class="flex items-start spacerelative header-x-5">
         <div class="flex-shrink-0">
           <div class="relative">
             <img class="h-16 w-16 rounded-full" src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80" alt="">
@@ -80,7 +80,7 @@ export default {
   async mounted() {
     if (process.browser) {
       let QRCode = require('qrcode');
-      QRCode.toCanvas(this.$refs.canvas, `https://tipper-front.herokuapp.com/user/${this.$route.params.id}`, function (error) {
+      QRCode.toCanvas(this.$refs.canvas, `https://tipper-front.herokuapp.com/user/${this.$route.params.id}/tip`, function (error) {
         if (error) console.error(error)
         console.log('success!');
       })
@@ -149,5 +149,9 @@ export default {
       margin-top: 24px;
     }
   }
+}
+
+.test {
+  padding: 24px;
 }
 </style>

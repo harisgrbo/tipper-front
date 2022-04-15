@@ -56,6 +56,13 @@
     "_name": "_3f3e9138"
   },
   {
+    "name": "notification-settings",
+    "path": "/notification-settings",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/notification-settings.vue",
+    "chunkName": "pages/notification-settings",
+    "_name": "_47895f48"
+  },
+  {
     "name": "password-reset",
     "path": "/password-reset",
     "component": "/Users/harisgrbo/Desktop/tipper-front/pages/password-reset.vue",
@@ -99,10 +106,17 @@
   },
   {
     "name": "user-id",
-    "path": "/user/:id?",
-    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/user/_id.vue",
-    "chunkName": "pages/user/_id",
-    "_name": "_54dcea7a"
+    "path": "/user/:id",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/user/_id/index.vue",
+    "chunkName": "pages/user/_id/index",
+    "_name": "_1fedb306"
+  },
+  {
+    "name": "user-id-tip",
+    "path": "/user/:id?/tip",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/user/_id/tip/index.vue",
+    "chunkName": "pages/user/_id/tip/index",
+    "_name": "_3e81c492"
   },
   {
     "name": "index",
