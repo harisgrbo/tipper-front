@@ -74,9 +74,12 @@ export default {
     },
     async submit() {
       try {
-        let res = await this.$axios.post('/payout', {
-          amount: this.selected_tip_amount
+        let res = await this.$axios.post('/users/' + this.$route.params.id + '/tips', {
+          amount: this.selected_tip_amount,
+          currency: 'usd'
         });
+
+        location.href = res.data.redirect_uri;
 
         this.selected_tip_amount = 0;
 

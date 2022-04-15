@@ -4,6 +4,8 @@
 
     <canvas ref="canvas" />
 
+    <a :href="`https://tipper-front.herokuapp.com/user/${this.$route.params.id}/tip`">Test</a>
+
     <div class="md:flex md:items-center md:justify-between md:space-x-5 w-7xl max-w-7xl w-full mx-auto mt-6">
       <div class="flex items-start spacerelative header-x-5">
         <div class="flex-shrink-0">
