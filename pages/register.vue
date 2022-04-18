@@ -51,6 +51,13 @@ export default {
         password: '',
         address: '',
         confirm_password: ''
+      },
+      loginPayload: {
+        grant_type: 'password',
+        client_id: 2,
+        client_secret: 'il4dy3lNuKHlBWIh7AltaTaxhVC3idt1zEOsrKnD',
+        username: '',
+        password: '',
       }
     }
   },
@@ -61,15 +68,19 @@ export default {
       }
 
       try {
-        let res = await this.$axios.post('/employer/register', this.payload);
-
-        if(res.status === 200) {
-          window.location.href = res.data.redirect_uri;
-        }
+        let res = await this.$axios.post('/employer/register', this.payload).then(() => {
+          this.handlePostRegister();
+        })
 
       } catch(e) {
         console.log(e)
       }
+    },
+    async handlePostRegister() {
+      this.loginPayload.username = this.payload.email;
+      this.loginPayload.password = this.payload.password;
+
+      await this.$auth.loginWith("local", { data: this.loginPayload });
     }
   }
 }

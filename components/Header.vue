@@ -14,6 +14,9 @@
 
       </div>
       <div class="auth" v-if="$auth.user">
+        <button class="logout" @click="$auth.logout();">
+          Logout
+        </button>
         <button @click="$router.push('/notification')">
           <img src="/notification-bing.png" alt="">
         </button>
@@ -119,6 +122,12 @@ export default {
 
       &:last-child {
         margin-right: 0;
+      }
+
+      &.logout {
+        padding: 0 24px;
+        min-width: fit-content;
+        width: fit-content;
       }
     }
 

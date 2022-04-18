@@ -1,7 +1,6 @@
 <template>
   <div class="database-wrapper">
     <h2>Database</h2>
-
     <div class="review-cards-wrapper">
       <div class="bg-white table-header w-full p-md">
         <div class="flex flex-col employees-wrap">
@@ -53,7 +52,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -64,7 +62,23 @@ import ReviewCard from "~/components/ReviewCard";
 export default {
   name: "database",
   layout: 'standard',
-  components: {GlobalButton, ReviewCard}
+  components: {GlobalButton, ReviewCard},
+  data() {
+    return {
+      users: []
+    }
+  },
+  methods: {
+    async fetchUsers() {
+      try {
+        let res = await this.$axios.get('/user');
+
+        this.users = res.data.data;
+      } catch(e) {
+        console.log(e)
+      }
+    }
+  }
 }
 </script>
 

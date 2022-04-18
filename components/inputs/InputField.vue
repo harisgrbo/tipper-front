@@ -7,6 +7,7 @@
           :placeholder="placeholder"
           autocomplete="off"
           @change="$emit('input', $event.target.value)"
+          @keyup="$emit('show-suggests', $event.target.value)"
           name="name"
           :style="{ 'background': bgColor }"
       >
