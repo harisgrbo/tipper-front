@@ -14,6 +14,9 @@
 
       </div>
       <div class="auth" v-if="$auth.user">
+        <button v-if="$auth.user.type === 'employer'" class="logout" @click="$router.push('/pools')">
+          Pools
+        </button>
         <button class="logout" @click="$auth.logout();">
           Logout
         </button>

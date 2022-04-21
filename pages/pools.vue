@@ -294,7 +294,7 @@ tbody tr {
 }
 
 ::v-deep input {
-  background: #fff;
+  background: #fff !important;
 }
 
 .add-user-modal {
@@ -310,7 +310,7 @@ tbody tr {
     width: 500px;
     border-radius: 16px;
     padding: 24px;
-    background: #fff;
+    background: #f9f9f9;
   }
 }
 </style>
