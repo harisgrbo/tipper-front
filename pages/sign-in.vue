@@ -10,7 +10,7 @@
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
           </div>
 
-          <form class="mt-8 bg-white main-form-wrapper" @submit="login()">
+          <form class="mt-8 bg-white main-form-wrapper" @submit.prevent="login()">
             <div class="w-full">
               <div class="space-y-6">
                 <h1>Login</h1>
@@ -26,7 +26,7 @@
                 </div>
 
                 <div>
-                  <GlobalButton placeholder="Login" @handle-button-action="login"></GlobalButton>
+                  <GlobalButton placeholder="Login" @handle-button-action="login()"></GlobalButton>
                 </div>
                 <div class="sign-up">
                   <span>Not a member yet? </span>

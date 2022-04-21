@@ -14,13 +14,15 @@ const _55dceee3 = () => interopDefault(import('../pages/index-employer.vue' /* w
 const _3f3e9138 = () => interopDefault(import('../pages/notification.vue' /* webpackChunkName: "pages/notification" */))
 const _47895f48 = () => interopDefault(import('../pages/notification-settings.vue' /* webpackChunkName: "pages/notification-settings" */))
 const _7e109cac = () => interopDefault(import('../pages/password-reset.vue' /* webpackChunkName: "pages/password-reset" */))
-const _2e97995a = () => interopDefault(import('../pages/pools.vue' /* webpackChunkName: "pages/pools" */))
+const _31039746 = () => interopDefault(import('../pages/pools/index.vue' /* webpackChunkName: "pages/pools/index" */))
 const _34ca7d70 = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
 const _18251e44 = () => interopDefault(import('../pages/reviews.vue' /* webpackChunkName: "pages/reviews" */))
 const _06d402f8 = () => interopDefault(import('../pages/sign-in.vue' /* webpackChunkName: "pages/sign-in" */))
 const _563a88c6 = () => interopDefault(import('../pages/success.vue' /* webpackChunkName: "pages/success" */))
 const _a69d89ea = () => interopDefault(import('../pages/users.vue' /* webpackChunkName: "pages/users" */))
+const _513bd8c8 = () => interopDefault(import('../pages/pools/_id/index.vue' /* webpackChunkName: "pages/pools/_id/index" */))
 const _1fedb306 = () => interopDefault(import('../pages/user/_id/index.vue' /* webpackChunkName: "pages/user/_id/index" */))
+const _2ce33954 = () => interopDefault(import('../pages/pools/_id/tip/index.vue' /* webpackChunkName: "pages/pools/_id/tip/index" */))
 const _3e81c492 = () => interopDefault(import('../pages/user/_id/tip/index.vue' /* webpackChunkName: "pages/user/_id/tip/index" */))
 const _674760d5 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -77,7 +79,7 @@ export const routerOptions = {
     name: "password-reset"
   }, {
     path: "/pools",
-    component: _2e97995a,
+    component: _31039746,
     name: "pools"
   }, {
     path: "/register",
@@ -100,9 +102,17 @@ export const routerOptions = {
     component: _a69d89ea,
     name: "users"
   }, {
+    path: "/pools/:id",
+    component: _513bd8c8,
+    name: "pools-id"
+  }, {
     path: "/user/:id",
     component: _1fedb306,
     name: "user-id"
+  }, {
+    path: "/pools/:id/tip",
+    component: _2ce33954,
+    name: "pools-id-tip"
   }, {
     path: "/user/:id?/tip",
     component: _3e81c492,

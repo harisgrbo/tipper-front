@@ -1,27 +1,23 @@
 <template>
-  <div class="database-wrapper">
-    <div class="flex flex-row items-center justify-between w-full">
-      <h2>Pools</h2>
-      <div class="p-4 rounded-lg flex items-center justify-center bg-white cursor-pointer" @click="showPoolCreating = !showPoolCreating">{{ showPoolCreating ? 'Hide pool creating' : 'Create new pool'}}</div>
-    </div>
-    <div v-show="showPoolCreating" class="border-b border-gray-500 pb-6 mb-6">
-      <div class="flex flex-row items-center justify-between">
-        <InputField class="mr-4" v-model="payload.name" label="Enter Pool name"></InputField>
-        <InputField class="ml-4" v-model="payload.description" label="Enter Pool description"></InputField>
-      </div>
-      <GlobalButton placeholder="Create Pool" width="200px" bg-color="#fff" class="mt-4" @handle-button-action="createPool"></GlobalButton>
-
+  <div class="database-wrapper relative">
+    <div v-if="pool" class="flex flex-row items-center justify-between w-full">
+      <h2>{{ pool.name }}</h2>
     </div>
     <div class="review-cards-wrapper">
-      <div class="bg-white table-header w-full p-md" v-if="pools.length">
+      <div class="bg-white table-header w-full p-md" v-show="pool !== null">
         <div class="flex flex-col employees-wrap">
           <div class="-overflow-x-auto">
             <div class="inline-block min-w-full py-2 align-middle">
-              <div class="overflow-hidden bg-white" v-for="(pool, index) in pools">
-                <div class="w-full flex items-center justify-between">
-                  <h2>{{ pool.name }}</h2>
-                  <GlobalButton placeholder="Add user to pool" width="200px" bg-color="#fff" class="mt-4" @handle-button-action="showAddUserToPoolModal(pool)"></GlobalButton>
-                  <GlobalButton placeholder="TIP POOL" width="200px" bg-color="#ddd" class="mt-4" @handle-button-action="tipPool(pool)"></GlobalButton>
+              <div class="overflow-hidden bg-white">
+                <div class="w-full flex items-center justify-between px-4">
+                  <h2 v-if="pool">{{ pool.name }}</h2>
+                  <canvas ref="canvas" />
+
+                  <a :href="`https://tipper-front.herokuapp.com/pools/${this.$route.params.id}/tip`">Test</a>
+                  <div class="flex flex-row items-center">
+                    <GlobalButton placeholder="Add user to pool" width="200px" bg-color="#fff" @handle-button-action="showAddUserToPoolModal(pool)"></GlobalButton>
+                    <GlobalButton placeholder="TIP POOL" width="200px" bg-color="#ddd" @handle-button-action="tipPool(pool)"></GlobalButton>
+                  </div>
                 </div>
                 <table class="min-w-full divide-y divide-gray-300">
                   <thead class="bg-white">
@@ -37,14 +33,14 @@
                   </tr>
                   </thead>
                   <tbody class="divide-y bg-white">
-                  <tr v-for="(user, index) in pool.users" :key="index">
+                  <tr v-for="(user, index) in pool_users" :key="index">
                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                       <div class="flex items-center">
                         <div class="flex-shrink-0">
                           <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                         </div>
                         <div class="ml-4">
-                          <div class="username">Lindsay Walton</div>
+                          <div class="username">{{ user.username }}</div>
                         </div>
                       </div>
                     </td>
@@ -57,7 +53,7 @@
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 username">$40.00</td>
                     <td class="whitespace-nowrap px-3 py-4 username">02/05/2022</td>
-                    <td class="whitespace-nowrap px-3 py-4 username" @click="removeUserFromPool(user, pool)">
+                    <td class="whitespace-nowrap px-3 py-4 username cursor-pointer" @click="removeUserFromPool(user, $route.params.id)">
                       <img src="/trash.svg" alt="">
                     </td>
                   </tr>
@@ -71,15 +67,15 @@
     </div>
     <div v-if="showPoolModal" class="add-user-modal">
       <div class="main-modal">
-        <div class="flex flex-row items-center justify-between">
+        <div class="flex flex-row items-center justify-between border-b border-gray-300 pb-4">
           <span>Add users to {{ selectedPool.name }}</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" @click="selectedPool = null; showPoolModal = false">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </div>
-        <ul>
-          <li v-for="(user, i) in users" @click="addUserToPool(user)">
-            {{ user }}
+        <ul class="pt-4">
+          <li class="cursor-pointer w-full hover:bg-gray-100 hover:px-2 mb-3" v-for="(user, i) in users" @click="addUserToPool(user)">
+            {{ user.username }}
           </li>
         </ul>
       </div>
@@ -91,6 +87,7 @@
 import GlobalButton from "~/components/GlobalButton";
 import ReviewCard from "~/components/ReviewCard";
 import InputField from "@/components/inputs/InputField";
+import QRCode from "qrcode";
 export default {
   name: "pools",
   layout: 'standard',
@@ -100,7 +97,8 @@ export default {
       users: [],
       showPoolCreating: false,
       showPoolModal: false,
-      pools: [],
+      pool: null,
+      pool_users: [],
       payload: {
         name: '',
         description: ''
@@ -110,22 +108,58 @@ export default {
   },
   async created() {
     await this.fetchUsers();
+    await this.fetchPoolById();
+    await this.fetchPoolUsers();
+  },
+  async mounted() {
+    if (process.browser) {
+      let QRCode = require('qrcode');
+      QRCode.toCanvas(this.$refs.canvas, `https://tipper-front.herokuapp.com/pools/${this.$route.params.id}/tip`, function (error) {
+        if (error) console.error(error)
+        console.log('success!');
+      })
+    }
   },
   methods: {
     async fetchUsers() {
       try {
-        let res = await this.$axios.get('/users');
+        let res = await this.$axios.get('/my/employees');
 
         this.users = res.data.data;
       } catch(e) {
         console.log(e)
       }
     },
+    async fetchPoolById() {
+      try {
+        let res = await this.$axios.get('/pools/' + this.$route.params.id);
+
+        this.pool = res.data.data;
+
+        console.log(this.pool, 'pool')
+      } catch(e) {
+        console.log(e)
+      }
+    },
+    async fetchPoolUsers() {
+      try {
+        let res = await this.$axios.get('/pools/' + this.$route.params.id + '/users');
+
+        this.pool_users = res.data.data;
+
+        console.log(this.pool, 'pool')
+      } catch(e) {
+        console.log(e)
+      }
+    },
     async createPool() {
       try {
-        let res = await this.$axios.post('/groups', this.payload);
+        let res = await this.$axios.post('/pools', this.payload);
 
         this.pools.push(res.data.data)
+
+        this.payload.name = '';
+        this.payload.description = '';
       } catch(e) {
         console.log(e)
       }
@@ -136,6 +170,8 @@ export default {
 
         this.selectedPool = null;
         this.showPoolModal = false;
+
+        this.pool_users.push(u);
       } catch(e) {
         console.log(e)
       }
@@ -155,8 +191,11 @@ export default {
     },
     async removeUserFromPool(u, p) {
       try {
-        await this.$axios.delete(`/pools/${p.id}/users/${u.id}`);
+        await this.$axios.delete(`/pools/${p}/users/${u.id}`);
 
+        let index = this.pool_users.findIndex( user => u.id === user.id);
+
+        this.pool_users.splice(index, 1);
       } catch (e) {
         console.log(e)
       }
@@ -304,6 +343,12 @@ tbody tr {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+
 
   .main-modal {
     height: fit-content;

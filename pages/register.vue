@@ -10,7 +10,7 @@
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
           </div>
 
-          <form class="mt-8 bg-white main-form-wrapper" @submit="register">
+          <form class="mt-8 bg-white main-form-wrapper" @submit.prevent="register">
             <div class="w-full">
               <div class="space-y-6">
                 <h1>Create Account</h1>
