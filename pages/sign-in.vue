@@ -10,7 +10,7 @@
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
           </div>
 
-          <div class="mt-8 bg-white main-form-wrapper">
+          <form class="mt-8 bg-white main-form-wrapper" @submit="login()">
             <div class="w-full">
               <div class="space-y-6">
                 <h1>Login</h1>
@@ -34,7 +34,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

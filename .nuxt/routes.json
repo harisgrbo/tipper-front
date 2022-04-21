@@ -70,6 +70,13 @@
     "_name": "_7e109cac"
   },
   {
+    "name": "pools",
+    "path": "/pools",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/pools.vue",
+    "chunkName": "pages/pools",
+    "_name": "_2e97995a"
+  },
+  {
     "name": "register",
     "path": "/register",
     "component": "/Users/harisgrbo/Desktop/tipper-front/pages/register.vue",

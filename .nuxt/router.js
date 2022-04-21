@@ -14,6 +14,7 @@ const _55dceee3 = () => interopDefault(import('../pages/index-employer.vue' /* w
 const _3f3e9138 = () => interopDefault(import('../pages/notification.vue' /* webpackChunkName: "pages/notification" */))
 const _47895f48 = () => interopDefault(import('../pages/notification-settings.vue' /* webpackChunkName: "pages/notification-settings" */))
 const _7e109cac = () => interopDefault(import('../pages/password-reset.vue' /* webpackChunkName: "pages/password-reset" */))
+const _2e97995a = () => interopDefault(import('../pages/pools.vue' /* webpackChunkName: "pages/pools" */))
 const _34ca7d70 = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
 const _18251e44 = () => interopDefault(import('../pages/reviews.vue' /* webpackChunkName: "pages/reviews" */))
 const _06d402f8 = () => interopDefault(import('../pages/sign-in.vue' /* webpackChunkName: "pages/sign-in" */))
@@ -74,6 +75,10 @@ export const routerOptions = {
     path: "/password-reset",
     component: _7e109cac,
     name: "password-reset"
+  }, {
+    path: "/pools",
+    component: _2e97995a,
+    name: "pools"
   }, {
     path: "/register",
     component: _34ca7d70,
