@@ -10,10 +10,13 @@
             <div class="inline-block min-w-full py-2 align-middle">
               <div class="overflow-hidden bg-white">
                 <div class="w-full flex items-center justify-between px-4">
-                  <h2 v-if="pool">{{ pool.name }}</h2>
-                  <canvas ref="canvas" />
+                  <div class="flex flex-col">
+                    <h2 v-if="pool">{{ pool.name }}</h2>
+                    <canvas ref="canvas" />
 
-                  <a :href="`https://tipper-front.herokuapp.com/pools/${this.$route.params.id}/tip`">Test</a>
+                    <a :href="`https://tipper-front.herokuapp.com/pools/${this.$route.params.id}/tip`">Test</a>
+                  </div>
+
                   <div class="flex flex-row items-center">
                     <GlobalButton placeholder="Add user to pool" width="200px" bg-color="#fff" @handle-button-action="showAddUserToPoolModal(pool)"></GlobalButton>
                     <GlobalButton placeholder="TIP POOL" width="200px" bg-color="#ddd" @handle-button-action="tipPool(pool)"></GlobalButton>
