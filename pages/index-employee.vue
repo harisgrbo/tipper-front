@@ -6,7 +6,9 @@
         <h3>Current balance</h3>
         <h2>$5345.20</h2>
         <span>Amount Available for Transfer</span>
-        <small>Lorem ipsum dolor sit amet</small>
+        <button>
+          Transfer now
+        </button>
       </div>
       <div class="block">
         <h3>Today Revenue</h3>
@@ -108,11 +110,14 @@ export default {
     justify-content: center;
     align-items: flex-start;
     border-radius: 14px;
+    background-image: url("/pattern.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
 
     h3 {
       font-family: 'Poppins';
       font-style: normal;
-      font-weight: 400;
+      font-weight: 300;
       font-size: 18px;
       line-height: 27px;
       /* identical to box height */
@@ -127,14 +132,14 @@ export default {
     h2 {
       font-family: 'Poppins';
       font-style: normal;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 55px;
       line-height: 82px;
       /* identical to box height */
 
       letter-spacing: 0.01em;
 
-      color: #000000;
+      color: #C67D65;
       margin-bottom: 0;
       opacity: 0.8;
     }
@@ -142,7 +147,7 @@ export default {
     span {
       font-family: 'Poppins';
       font-style: normal;
-      font-weight: 400;
+      font-weight: 300;
       font-size: 16px;
       line-height: 24px;
       /* identical to box height */
@@ -151,7 +156,6 @@ export default {
 
       color: #161616;
 
-      opacity: 0.3;
       margin-bottom: 22px;
     }
 
@@ -168,6 +172,29 @@ export default {
       color: #161616;
 
       opacity: 0.3;
+    }
+
+    &:first-child {
+      background-color: rgba(198, 125, 101, 0.35);
+      h2 {
+        color: #000;
+      }
+
+      button {
+        height: 40px;
+        background: #FFFFFF;
+        border-radius: 10px;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        padding: 0 16px;
+        line-height: 24px;
+        /* identical to box height */
+
+
+        color: #C67D65;
+      }
     }
   }
 

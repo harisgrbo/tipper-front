@@ -11,7 +11,6 @@
     </div>
     <div class="settings-wrapper">
       <span>Setting Manually</span>
-
       <ul class="w-full">
         <li>
           <p>Sender send tip</p>
@@ -37,7 +36,6 @@
           <p>User removesd as employee</p>
           <input type="radio">
         </li>
-
       </ul>
     </div>
   </div>

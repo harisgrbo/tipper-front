@@ -1,7 +1,7 @@
 <template>
   <div class="tip-page-wrapper">
     <div class="tip-page-wrapper__header">
-      <h2>LOGO</h2>
+      <img @click="$router.push('/')" class="mb-5" src="/logo.svg" />
     </div>
     <div class="tip-page-wrapper__content">
       <span>Select tip amount</span>
@@ -134,17 +134,20 @@ export default {
       font-style: normal;
       font-weight: 500;
       font-size: 18px;
-      line-height: 27px;
+      line-height: 25px;
+      /* identical to box height */
+
       letter-spacing: 0.01em;
+
       color: #000000;
-      opacity: 0.4;
-      padding-bottom: 28px;
+
+      opacity: 0.9;
     }
 
     button {
       width: 77px;
       height: 77px;
-      background: #FFFFFF;
+      background: #fff;
       border-radius: 20px;
       display: flex;
       align-items: center;
@@ -163,12 +166,18 @@ export default {
 
       &.active {
         border: 1px solid rgba(0, 0, 0, 0.2);
+        background: #D8CDBC;
+
+
+        p {
+          opacity: 1;
+        }
       }
     }
 
     input {
       margin-top: 20px;
-      background: #fff;
+      background: rgba(216, 205, 188, 0.2);
       padding: 0 24px;
       height: 60px;
       border-radius: 14px;
@@ -278,9 +287,11 @@ export default {
   align-items: center;
   justify-content: center;
   height: 60px;
-  border-radius: 15px;
-  background: #fff;
   margin-top: 24px;
+  background: #C67D65;
+  border-radius: 14px;
+  color: #fff;
+
 
   p {
     font-family: 'Poppins';
@@ -288,13 +299,8 @@ export default {
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    /* identical to box height */
-
     letter-spacing: 0.02em;
-
-    color: #000000;
-
-    opacity: 0.4;
+    color: #fff;
   }
 }
 </style>

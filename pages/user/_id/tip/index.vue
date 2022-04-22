@@ -1,7 +1,7 @@
 <template>
   <div class="tip-page-wrapper">
     <div class="tip-page-wrapper__header">
-      <h2>LOGO</h2>
+      <img src="/logo.svg" class="logo" @click="$router.push('/')"/>
     </div>
     <div class="tip-page-wrapper__content">
       <span>Select tip amount</span>

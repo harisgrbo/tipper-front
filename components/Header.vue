@@ -2,7 +2,7 @@
   <!-- This example requires Tailwind CSS v2.0+ -->
   <div class="relative header">
     <div class="flex flex-row items-center">
-      <div class="logo" @click="$router.push('/')">LOGO</div>
+      <img src="/logo.svg" class="logo" @click="$router.push('/')"/>
       <div class="search-input">
         <img src="/search.png" alt="">
         <input type="text">
@@ -21,13 +21,13 @@
           Logout
         </button>
         <button @click="$router.push('/notification')">
-          <img src="/notification-bing.png" alt="">
+          <img src="/notification-bing.svg" alt="">
         </button>
         <button @click="handleClick">
-          <img src="/settings.png" alt="">
+          <img src="/group.svg" alt="">
         </button>
         <button @click="$router.push('/user/' + $auth.user.id)">
-          HG
+          <img src="/avatar.svg" alt="">
         </button>
       </div>
       <div class="auth logged-out" v-else>
@@ -83,7 +83,7 @@ export default {
 
   .search-input {
     height: 60px;
-    background: #FFFFFF;
+    background: rgba(216, 205, 188, 0.2);
     border-radius: 14px;
     padding: 0 21px;
     display: flex;
@@ -114,7 +114,7 @@ export default {
     align-items: center;
 
     button {
-      background: #FFFFFF;
+      background: rgba(216, 205, 188, 0.2);
       border-radius: 14px;
       height: 60px;
       width: 60px;

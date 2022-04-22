@@ -1,7 +1,9 @@
 <template>
   <div class="employer-wrapper">
     <h2>Employer Dashboard</h2>
-    <div class="bg-white rounded-md mb-16 h-40">Statistics</div>
+    <div class="bg-white rounded-md mb-16 h-40 statistic-img">
+
+    </div>
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="bg-white table-header p-md">
       <div class="p-6 flex w-full flex-row items-center justify-between inner">
@@ -15,7 +17,7 @@
       </div>
       <div class="mt-6 flex flex-col employees-wrap">
         <div class="-overflow-x-auto">
-          <div class="inline-block min-w-full py-2 align-middle">
+          <div class="inline-block min-w-full align-middle">
             <div class="overflow-hidden">
               <table class="min-w-full divide-y divide-gray-300">
                 <thead class="bg-white">
@@ -30,7 +32,7 @@
                   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                     <div class="flex items-center">
                       <div class="flex-shrink-0">
-                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                        <img class="h-10 w-10 rounded-full" src="/avatar.svg" alt="">
                       </div>
                       <div class="ml-4">
                         <div class="username">Lindsay Walton</div>
@@ -39,7 +41,7 @@
                   </td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     <div class="flex flex-row items-center stars">
-                      <img src="/star.png" v-for="star in 4" :key="star" class="mr-sm" alt="">
+                      <img src="/star.svg" v-for="star in 4" :key="star" class="mr-1" alt="">
                       <span class="username">4.5/5.00</span>
                     </div>
                   </td>
@@ -139,7 +141,7 @@ export default {
 
   button {
     height: 35px;
-    border: 1px solid rgba(48, 48, 48, 1);
+    border: 1px solid rgba(198, 125, 101, 0.2);
     border-radius: 90px;
     display: flex;
     align-items: center;
@@ -151,12 +153,11 @@ export default {
     font-size: 14px;
     line-height: 21px;
     text-align: right;
-    color: #303030;
+    color: #C67D65;
     margin-right: 24px;
 
     &.active {
-      background: rgba(48, 48, 48, 0.1);
-      color: rgba(48, 48, 48, 0.6);
+      background: rgba(198, 125, 101, 0.2);
       border: none;
 
     }
@@ -175,7 +176,6 @@ table thead {
   line-height: 21px;
   letter-spacing: 0.01em;
   color: #1B1A1A;
-  opacity: 0.4;
 }
 
 table img {
@@ -190,23 +190,36 @@ tr .username {
   font-size: 14px;
   line-height: 21px;
   color: #1B1A1A;
-  opacity: 0.3;
+  opacity: 0.6;
 }
 
 .stars img {
   height: 14px;
   width: 14px;
-  margin-right: 11px;
-  opacity: 0.6;
+  margin-right: 8px;
 }
 
-tbody tr {
-  background: #F6F8FA;
+tbody tr:nth-child(even) {
+  background: rgba(216, 205, 188, 0.15);
   border-radius: 10px;
-  border: none;
+  border: none !important;
+  box-shadow: none;
+}
 
-  &:nth-child(2n + 1) {
-    background: #fff;
-  }
+.statistic-img {
+  background-image: url("/statistic.png");
+  height: 471px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+tr.main th {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.01em;
+  color: rgba(27, 26, 26, 0.6);
 }
 </style>

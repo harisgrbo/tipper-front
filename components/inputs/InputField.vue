@@ -30,13 +30,17 @@ export default {
 input {
   min-height: 60px !important;
   height: 60px;
-  background: #F6F8FA;
-  border-radius: 10px;
+  background: rgba(216, 205, 188, 0.2);
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   padding: 0 24px;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 label {

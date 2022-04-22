@@ -1,12 +1,12 @@
 <template>
   <div class="w-full min-h-screen flex flex-col">
     <div class="min-h-full flex auth-wrapper">
-      <div class="flex flex-1 bg-white">
+      <div class="flex flex-1 bg-white image-bg">
       </div>
       <div class="flex-1 flex flex-col justify-center items-center">
         <div class="mx-auto w-full">
           <div class="flex flex-col justify-start items-start title-wrap">
-            <h3 @click="$router.push('/')">LOGO</h3>
+            <img src="/logo.svg" class="mb-4" @click="$router.push('/')"/>
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
           </div>
 
@@ -22,7 +22,7 @@
                 <InputField v-model="payload.address" label="Address" placeholder="Address"></InputField>
 
                 <div>
-                  <GlobalButton placeholder="Sign up" @handle-button-action="register"></GlobalButton>
+                  <GlobalButton placeholder="Sign up" @handle-button-action="register" bg-color="#C67D65" txt-color="#fff"></GlobalButton>
                 </div>
                 <div class="sign-up">
                   <span>Already Have An Account?</span>
@@ -123,6 +123,8 @@ export default {
     display: flex;
     margin-left: 53px;
     margin-right: 134px;
+    margin-top: 70px;
+
 
     h3 {
       font-family: 'Poppins';
@@ -169,8 +171,7 @@ export default {
     font-weight: 400;
     font-size: 15px;
     line-height: 22px;
-    color: #1B1A1A;
-    opacity: 0.4;
+    color: rgba(27, 26, 26, 0.4);
   }
 
   a {
@@ -180,8 +181,14 @@ export default {
     font-weight: 400;
     font-size: 15px;
     line-height: 22px;
-    color: #1B1A1A;
-    opacity: 0.6;
+    color: #C67D65;
   }
+}
+
+.image-bg {
+  background: url(/login-bg.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 </style>

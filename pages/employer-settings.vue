@@ -2,7 +2,7 @@
   <div class="review-wrapper">
     <div class="w-full flex flex-row items-center justify-start">
       <button @click="$router.go(-1)">
-        <img src="/arrow-left.png" alt="">
+        <img src="/arrow-left.svg" alt="">
       </button>
       <div>
         <h2>Employer Settings</h2>
@@ -11,11 +11,11 @@
     </div>
     <div class="settings-wrapper">
       <div class="form-wrapper">
-        <InputField placeholder="John Doe" label="Employer Name" bg-color="#fff" class="mb-6"></InputField>
-        <InputField placeholder="John Doe" label="Business Name" bg-color="#fff" class="mb-6"></InputField>
-        <InputField placeholder="John Doe" label="Email" bg-color="#fff" class="mb-6"></InputField>
-        <InputField placeholder="John Doe" label="Address" bg-color="#fff" class="mb-6"></InputField>
-        <InputField placeholder="John Doe" label="Password" bg-color="#fff"></InputField>
+        <InputField placeholder="John Doe" label="Employer Name" class="mb-6"></InputField>
+        <InputField placeholder="John Doe" label="Business Name" class="mb-6"></InputField>
+        <InputField placeholder="John Doe" label="Email" class="mb-6"></InputField>
+        <InputField placeholder="John Doe" label="Address" class="mb-6"></InputField>
+        <InputField placeholder="John Doe" label="Password"></InputField>
       </div>
       <div class="logo-wrapper">
         LOGO
@@ -46,7 +46,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(216, 205, 188, 0.3);
     box-sizing: border-box;
     border-radius: 15px;
     margin-right: 27px;

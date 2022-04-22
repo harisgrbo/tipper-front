@@ -1,7 +1,8 @@
 <template>
   <div class="success-page-wrapper">
     <div class="success-page-wrapper__header">
-      <h2>LOGO</h2>
+      <img src="/logo.svg"  @click="$router.push('/')" />
+
     </div>
     <div class="success-page-wrapper__content">
       <div class="image-wrapper"></div>
@@ -87,7 +88,7 @@ export default {
     h3 {
       font-family: 'Poppins';
       font-style: normal;
-      font-weight: 400;
+      font-weight: 500;
       font-size: 34px;
       line-height: 51px;
       /* identical to box height */

@@ -1,12 +1,12 @@
 <template>
   <div class="w-full min-h-screen flex flex-col">
     <div class="min-h-full flex auth-wrapper">
-      <div class="flex flex-1 bg-white">
+      <div class="flex flex-1 image-bg">
       </div>
       <div class="flex-1 flex flex-col justify-center items-center">
         <div class="mx-auto w-full">
           <div class="flex flex-col justify-start items-start title-wrap">
-            <h3 @click="$router.push('/')">LOGO</h3>
+            <img src="/logo.svg" class="mb-4" @click="$router.push('/')"/>
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
           </div>
 
@@ -19,18 +19,17 @@
                 <InputField v-model="payload.password" type="password" label="Password" placeholder="*********"></InputField>
 
                 <div class="flex items-center justify-end">
-
                   <div class="text-sm">
-                    <nuxt-link to="/password-reset" class="font-medium text-indigo-600 hover:text-indigo-500"> Forgot your password? </nuxt-link>
+                    <nuxt-link to="/password-reset" class="reset text-indigo-600 hover:text-indigo-500"> Forgot password? </nuxt-link>
                   </div>
                 </div>
 
                 <div>
-                  <GlobalButton placeholder="Login" @handle-button-action="login()"></GlobalButton>
+                  <GlobalButton placeholder="Login" @handle-button-action="login()" bg-color="#C67D65" txt-color="#fff"></GlobalButton>
                 </div>
                 <div class="sign-up">
                   <span>Not a member yet? </span>
-                  <nuxt-link to="/register" class="font-medium text-indigo-600 hover:text-indigo-500">Sign up</nuxt-link>
+                  <nuxt-link to="/register" class="font-medium text-indigo-600 link">Sign up</nuxt-link>
                 </div>
               </div>
             </div>
@@ -156,8 +155,7 @@ export default {
     font-weight: 400;
     font-size: 15px;
     line-height: 22px;
-    color: #1B1A1A;
-    opacity: 0.4;
+    color: rgba(27, 26, 26, 0.4);
   }
 
   a {
@@ -167,8 +165,21 @@ export default {
     font-weight: 400;
     font-size: 15px;
     line-height: 22px;
-    color: #1B1A1A;
-    opacity: 0.6;
+    color: #C67D65;
   }
+
+
+}
+
+.reset {
+  color: rgba(198, 125, 101, 0.91) !important;
+  font-weight: 400 !important;
+}
+
+.image-bg {
+  background: url(/login-bg.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <button class="global-button" :style="{ 'background': bgColor, 'width': width }" @click="handleButtonAction">
+  <button class="global-button" :style="{ 'background': bgColor, 'width': width, 'color': txtColor }" @click="handleButtonAction">
     {{ placeholder }}
   </button>
 </template>
@@ -7,7 +7,7 @@
 <script>
 export default {
   name: "GlobalButton",
-  props: ['placeholder', 'bgColor', 'width'],
+  props: ['placeholder', 'bgColor', 'width', 'txtColor'],
   methods: {
     handleButtonAction() {
       this.$emit('handle-button-action');
@@ -24,10 +24,9 @@ export default {
   width: 100%;
   font-family: 'Poppins';
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  opacity: 0.4;
   display: flex;
   align-items: center;
   justify-content: center;

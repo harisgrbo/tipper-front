@@ -1,12 +1,12 @@
 <template>
   <div class="w-full min-h-screen flex flex-col">
     <div class="min-h-full flex auth-wrapper">
-      <div class="flex flex-1 bg-white">
+      <div class="flex flex-1 bg-white forgot-bg">
       </div>
       <div class="flex-1 flex flex-col justify-center items-center">
         <div class="mx-auto w-full">
           <div class="flex flex-col justify-start items-start title-wrap">
-            <h3 @click="$router.push('/')">LOGO</h3>
+            <img src="/logo.svg" class="mb-4" @click="$router.push('/')"/>
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
           </div>
 
@@ -17,7 +17,7 @@
                 <small>Enter your email and we’ll send a link to reset it.</small>
                 <InputField v-model="payload.username" label="Enter email Address" placeholder="johndoe@gmail.com"></InputField>
                 <div>
-                  <GlobalButton placeholder="Reset" @handle-button-action="reset"></GlobalButton>
+                  <GlobalButton placeholder="Reset" @handle-button-action="reset" bg-color="#C67D65" txt-color="#fff"></GlobalButton>
                 </div>
                 <div class="sign-up">
                   <span>Not a member yet? </span>
@@ -162,5 +162,12 @@ export default {
 
 button {
   margin-top: 240px
+}
+
+.forgot-bg {
+  background: url(/forgot-bg.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
 }
 </style>
