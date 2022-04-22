@@ -63,7 +63,7 @@
                     <td class="whitespace-nowrap px-3 py-4 username">Active</td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <div class="flex flex-row items-center stars">
-                        <img src="/star.png" v-for="star in 4" :key="star" class="mr-sm" alt="">
+                        <img src="/star.svg" v-for="star in 4" :key="star" class="mr-sm" alt="">
                         <span class="username">4.5/5.00</span>
                       </div>
                     </td>
@@ -279,12 +279,11 @@ export default {
 table thead {
   font-family: 'Poppins';
   font-style: normal;
-  font-weight: 300;
+  font-weight: 500;
   font-size: 14px;
-  line-height: 21px;
+  line-height: 19px;
   letter-spacing: 0.01em;
-  color: #1B1A1A;
-  opacity: 0.4;
+  color: rgba(27, 26, 26, 0.6);
 }
 
 table img {
@@ -293,20 +292,18 @@ table img {
 }
 
 tr .username {
-  font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;
   color: #1B1A1A;
-  opacity: 0.3;
+  opacity: 0.6;
 }
 
 .stars img {
   height: 14px;
   width: 14px;
-  margin-right: 11px;
-  opacity: 0.6;
+  margin-right: 8px;
 }
 
 tbody tr {
@@ -317,5 +314,21 @@ tbody tr {
   &:nth-child(2n + 1) {
     background: #fff;
   }
+}
+
+tr.main th {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.01em;
+  color: rgba(27, 26, 26, 0.6);
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(216, 205, 188, 0.15);
+  border-radius: 10px;
+  border: none !important;
+  box-shadow: none;
 }
 </style>
