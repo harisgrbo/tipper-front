@@ -55,9 +55,9 @@
       </div>
     </div>
 
-    <div class="flex flex-row items-center justify-between w-full mt-16">
-      <h2>Reviews- last 5 reviews</h2>
-      <GlobalButton placeholder="View All Reviews" bg-color="rgba(196, 196, 196)" width="220px" @handle-button-action="$router.push('/reviews')"></GlobalButton>
+    <div class="flex flex-row items-center justify-between w-full mt-16 mb-8">
+      <h2 class="reviews">Reviews- last 5 reviews</h2>
+      <GlobalButton placeholder="View All Reviews" width="220px" @handle-button-action="$router.push('/reviews')" bg-color="#C67D65" txt-color="#fff"></GlobalButton>
     </div>
     <div class="review-cards-wrapper">
       <ReviewCard v-for="i in 5" :key="i"></ReviewCard>
@@ -100,6 +100,10 @@ export default {
     line-height: 45px;
     color: #1B1A1A;
     margin-bottom: 42px;
+
+    &.reviews {
+      margin-bottom: 0;
+    }
   }
 
   .review-cards-wrapper {
