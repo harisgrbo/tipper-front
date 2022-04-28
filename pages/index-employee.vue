@@ -88,7 +88,7 @@
              width="910"
              height="auto"
              @before-open="beforeOpen"
-             @before-close="beforeClose">>
+             @before-close="beforeClose">
         <div class="flex flex-col">
           <div class="modal-header">
             <div>
