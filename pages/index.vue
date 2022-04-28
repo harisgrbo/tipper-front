@@ -16,8 +16,10 @@ export default {
   mounted() {
     if(this.$auth.user && this.$auth.user.type === 'employer') {
       this.$router.push('/index-employer');
-    } else {
+    } else if(this.$auth.user && this.$auth.user.type === 'employee'){
       this.$router.push('/index-employee');
+    } else {
+      this.$router.push('/')
     }
   }
 }

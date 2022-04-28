@@ -15,20 +15,14 @@
               <div class="space-y-6">
                 <h1>Create Account</h1>
                 <small>Create a Tipper account to start receiving more in tips.</small>
-                <div class="employer-dropdown">
-                  <div @click="showDropdown = true">
-                    <InputField @show-suggests="showSuggests($event)" v-model="selectedEmployer" label="Choose Employer"></InputField>
-                  </div>
-                  <ul v-show="showDropdown">
-                    <li class="flex flex-row items-center justify-between w-full border-gray-300 border-b">
-                      <span class="font-bold text-md">List of employers</span>
-                      <svg @click="showDropdown = false" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </li>
-                    <li v-for="(employer, index) in employers" :key="index" @click="selectEmployer(employer)">{{ employer.username }}</li>
-                  </ul>
+                <div class="flex flex-col">
+                  <label>Select Pool</label>
+                  <select v-model="payload.pool_id">
+                    <option disabled value="">Please select one</option>
+                    <option v-for="(pool, index) in pools" :value="pool.id" :key="index">{{ pool.name }}</option>
+                  </select>
                 </div>
+
                 <InputField v-model="payload.email" label="Email Address" placeholder="johndoe@gmail.com"></InputField>
                 <InputField v-model="payload.username" label="Username" placeholder="johndoe@gmail.com"></InputField>
                 <InputField v-model="payload.password" type="password" label="Password" placeholder="*********"></InputField>
@@ -64,22 +58,33 @@ export default {
         username: '',
         password: '',
         confirm_password: '',
-        employer_id: 0,
+        employer_id: '',
+        pool_id: ''
       },
-      employers: [],
-      selectedEmployer: ''
+      pools: [],
+      selectedPoolId: '',
     }
   },
+  async created() {
+    await this.fetchDataByHash();
+  },
   methods: {
-    selectEmployer(e) {
-      console.log(e)
-      this.payload.employer_id = e.id;
-      this.selectedEmployer = e.username;
-      this.showDropdown = false;
+    async fetchDataByHash() {
+      try {
+        let res = await this.$axios.get('/email/invites/' + this.$route.params.hash);
+
+        this.payload.employer_id = res.data.data.employer_id;
+        this.pools = res.data.data.pools;
+      } catch(e) {
+        console.log(e)
+      }
     },
     async register() {
       if (this.payload.password !== this.payload.confirm_password) {
-        alert('Passwords dont match')
+        this.$toast.open({
+          message: 'Passwords dont match',
+          type: 'error',
+        });
       }
 
       try {
@@ -93,15 +98,6 @@ export default {
         console.log(e)
       }
     },
-    async showSuggests(e) {
-      try {
-        let res = await this.$axios.get(`/employers?q=${e}`);
-
-        this.employers = res.data.data;
-      } catch(e) {
-        console.log(e)
-      }
-    }
   }
 }
 </script>
@@ -250,5 +246,42 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+select {
+  min-height: 60px !important;
+  height: 60px;
+  background: rgba(216, 205, 188, 0.2);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 24px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+
+  &:focus {
+    outline: none;
+  }
+}
+
+label {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #1B1A1A;
+  opacity: 0.4;
+  margin-bottom: 10px;
+}
+
+::placeholder {
+  color: #b1b1b1;
 }
 </style>

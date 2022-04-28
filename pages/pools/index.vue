@@ -17,7 +17,7 @@
         <div class="flex flex-col employees-wrap">
           <div class="-overflow-x-auto">
             <div class="inline-block min-w-full py-2 align-middle">
-              <div class="overflow-hidden bg-white mb-4 py-4 rounded-md" v-for="(pool, index) in pools">
+              <div class="overflow-hidden bg-white mb-4 py-4 rounded-md" v-for="(pool, index) in pools" :key="index">
                 <div class="w-full flex items-center justify-between px-4">
                   <h2>{{ pool.name }}</h2>
                   <div class="flex flex-row items-center">
@@ -39,7 +39,7 @@
           </svg>
         </div>
         <ul>
-          <li v-for="(user, i) in users" @click="addUserToPool(user)">
+          <li v-for="(user, i) in users" @click="addUserToPool(user)" :key="i">
             {{ user }}
           </li>
         </ul>

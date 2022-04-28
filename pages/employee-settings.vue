@@ -2,7 +2,7 @@
   <div class="review-wrapper">
     <div class="w-full flex flex-row items-center justify-start">
       <button @click="$router.go(-1)">
-        <img src="/static/arrow-left.png" alt="">
+        <img src="/arrow-left.svg" alt="">
       </button>
       <div>
         <h2>Employee Settings</h2>
@@ -10,24 +10,20 @@
       </div>
     </div>
     <div class="settings-wrapper">
-      <div class="form-wrapper">
-        <InputField placeholder="John Doe" label="Employee Nickname" bg-color="#fff" class="mb-6"></InputField>
-        <InputField placeholder="John Doe" label="Job Title" bg-color="#fff" class="mb-6"></InputField>
-        <InputField placeholder="John Doe" label="Bank Account" bg-color="#fff" class="mb-6"></InputField>
-        <InputField placeholder="John Doe" label="Additional code" bg-color="#fff" class="mb-6"></InputField>
-      </div>
-      <div class="mb-6">
-        <h2>Payment Settings</h2>
-        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-      </div>
-      <div class="form-wrapper">
-        <InputField placeholder="John Doe" label="Card Number" bg-color="#fff" class="mb-6"></InputField>
-        <InputField placeholder="John Doe" label="Card Holder Name" bg-color="#fff" class="mb-6"></InputField>
-        <div class="grid grid-cols-2 gap-6">
-          <InputField placeholder="" label="Expires On" bg-color="#fff" class="mb-6"></InputField>
-          <InputField placeholder="John Doe" label="3 - Digit CVV" bg-color="#fff" class="mb-6"></InputField>
+      <div class="flex flex-row w-full">
+        <div class="form-wrapper">
+          <InputField placeholder="John Doe" label="Employee Nickname" v-model="userInfo.nickname" class="mb-6"></InputField>
+          <InputField placeholder="Johndoe@gmail.com" label="Email" v-model="userInfo.email" class="mb-6"></InputField>
+          <InputField type="password" placeholder="****" label="Password" v-model="userInfo.password"></InputField>
+        </div>
+        <div class="logo-wrapper" :style="{ 'backgroundImage': `url(\'${this.$auth.user.avatar_url !== null ? this.$auth.user.avatar_url : '/noimage.png'}\')`, 'backgroundRepeat': 'no-repeat', 'backgroundSize': 'cover', 'backgroundPosition': 'center' }">
+          <label for="file-upload" class="custom-file-upload">
+            Choose Image
+          </label>
+          <input id="file-upload" type="file" @change="updateAvatar"/>
         </div>
       </div>
+      <button @click="saveSettings()">Save settings</button>
     </div>
   </div>
 </template>
@@ -38,6 +34,69 @@ export default {
   name: "employee-settings",
   components: {InputField},
   layout: 'standard',
+  data() {
+    return {
+      avatarUrl: '',
+      userInfo: {
+        nickname: '',
+        job_title: '',
+        name: '',
+        password: '',
+        email: '',
+      }
+    }
+  },
+  created() {
+    this.userInfo.nickname = this.$auth.user.nickname !== null ? this.$auth.user.nickname : '';
+    this.userInfo.email = this.$auth.user.email;
+  },
+  methods: {
+    async updateAvatar(event) {
+      if (event.target.files.length) {
+        let image = event.target.files[0];
+        let formData = new FormData();
+        formData.append('avatar', image);
+
+        try {
+          await this.$axios.post('/avatar', formData, {
+            'headers': {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+
+          await this.$auth.fetchUser();
+
+          this.avatarUrl = this.$auth.user.avatar_url;
+        } catch (e) {
+          alert("Avatar nije moguce postaviti")
+        }
+      }
+    },
+    isObjectKeyValueEmpty(o) {
+
+    },
+    async saveSettings() {
+      try {
+        let payload = Object.assign({}, this.userInfo);
+
+        for (let key in Object.keys(payload)) {
+          if(payload[key] === '' || payload[key] === null) {
+            delete payload[key]
+          }
+        }
+
+        let res = await this.$axios.put('/me', payload);
+
+        this.$toast.open({
+          message: 'Settings saved successfully',
+          type: 'success',
+        });
+
+      } catch(e) {
+        console.log(e)
+      }
+    }
+  }
 }
 </script>
 
@@ -54,7 +113,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(216, 205, 188, 0.3);
     box-sizing: border-box;
     border-radius: 15px;
     margin-right: 27px;
@@ -86,13 +145,17 @@ export default {
     flex-direction: column;
     align-items: flex-start;
     margin-top: 44px;
+    background: #fff;
+    padding: 24px;
 
     .form-wrapper {
       display: flex;
       flex-direction: column;
-      width: 100%;
+      width: 766px;
       margin-right: 52px;
       min-width: 766px;
+
+
     }
 
     .logo-wrapper {
@@ -101,7 +164,7 @@ export default {
       align-items: center;
       justify-content: center;
       background: #F6F8FA;
-      border: 1px dashed rgba(0, 0, 0, 0.2);
+      border: 2px dashed rgba(0, 0, 0, 0.2);
       box-sizing: border-box;
       border-radius: 10px;
       font-family: 'Poppins';
@@ -111,7 +174,45 @@ export default {
       line-height: 57px;
       color: #000000;
       width: 100%;
+      position: relative;
+      margin-top: 12px;
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .custom-file-upload {
+        display: flex;
+        cursor: pointer;
+        position: absolute;
+        bottom: 24px;
+        left: 24px;
+        right: 24px;
+        backdrop-filter: blur(5px);
+        background: rgba(255, 255, 255, 0.42);
+        font-size: 15px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #C67D65;
+        border: 1px solid #C67D65;
+        border-radius: 30px;
+      }
     }
   }
+}
+
+button {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  border-radius: 15px;
+  margin-right: 27px;
+  min-width: fit-content;
+  padding: 0 24px;
 }
 </style>

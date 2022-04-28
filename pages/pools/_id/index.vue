@@ -77,7 +77,7 @@
           </svg>
         </div>
         <ul class="pt-4">
-          <li class="cursor-pointer w-full hover:bg-gray-100 hover:px-2 mb-3" v-for="(user, i) in users" @click="addUserToPool(user)">
+          <li class="cursor-pointer w-full hover:bg-gray-100 hover:px-2 mb-3" v-for="(user, i) in users" :key="i" @click="addUserToPool(user)">
             {{ user.username }}
           </li>
         </ul>

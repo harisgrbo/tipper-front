@@ -1,1 +1,53 @@
 body, html, #__nuxt, #__layout {height:100vh}
+
+.vm--overlay {
+  background: rgba(229, 229, 229, 0.6) !important;
+  backdrop-filter: blur(19px);
+}
+
+.vm--modal {
+  border-radius: 30px !important;
+  padding: 44px;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  h1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 41px;
+    color: #1B1A1A;
+    opacity: 0.8;
+  }
+
+  span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+    letter-spacing: 0.01em;
+
+    color: #161616;
+
+    opacity: 0.5;
+  }
+
+  button {
+    height: 60px;
+    width: 60px;
+    background: #F6F8FA;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none !important;
+    margin-right: 0 !important;
+  }
+}

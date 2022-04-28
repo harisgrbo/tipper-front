@@ -1,25 +1,20 @@
 <template>
   <div class="tip-page-wrapper">
-    <div class="tip-page-wrapper__header">
-      <img src="/logo.svg" class="logo" @click="$router.push('/')"/>
-    </div>
     <div class="tip-page-wrapper__content">
       <span>Select tip amount</span>
       <div class="grid grid-cols-4 gap-4 pt-4 pb-4">
-        <button v-for="(tip, index) in tip_amount" :class="selected_tip_amount === tip ? 'active' : ''" @click="selectTipAmount(tip)" >
+        <button v-for="(tip, index) in tip_amount" :key="index" :class="selected_tip_amount === tip ? 'active' : ''" @click="selectTipAmount(tip); fetchFee();" >
           <p>${{ tip }}</p>
         </button>
       </div>
       <span>Custom Amount</span>
-      <input type="number" v-model="selected_tip_amount">
-    </div>
-<!--    <div class="tip-page-wrapper__payment">-->
-<!--      <button>-->
-<!--        <p>Payment method</p>-->
+      <input type="number" v-model="selected_tip_amount" @input="fetchFee();">
+      <div class="stripe-payment">
+        Stripe Payment
 
-<!--        >-->
-<!--      </button>-->
-<!--    </div>-->
+        <img src="/stripe.svg" alt="">
+      </div>
+    </div>
     <div class="tip-page-wrapper__tip-info mt-4">
       <ul>
         <li>
@@ -27,35 +22,53 @@
           <span>{{ selected_tip_amount }}</span>
         </li>
         <li>
-          <span>People:</span>
-          <span>3</span>
-        </li>
-        <li>
           <span>Fee:</span>
-          <span>15%</span>
+          <span v-if="loadingFee">
+            <img src="/loader2.svg" alt="">
+          </span>
+          <span v-else>{{ fee.fee + 'USD' }}</span>
         </li>
         <li class="total">
           <span class="first">Total</span>
-          <span class="second" v-if="selected_tip_amount > 0">${{ parseInt(selected_tip_amount) + (parseInt(selected_tip_amount) * 0.15) }}</span>
+          <span class="second" v-if="selected_tip_amount > 0">${{ parseInt(selected_tip_amount) + fee.fee }}</span>
         </li>
       </ul>
     </div>
+    <div class="review-block">
+      <img src="/review.svg" alt="">
+      <star-rating :star-size="25" :increment="1" :inline="true" :rounded-corners="true" padding="2" inactive-color="#F0EBE4" :show-rating="false" active-color="#F9C52D" v-model="rating"></star-rating>
+      <h2>Give rating and review!</h2>
+      <InputField type="text" v-model="name" placeholder="Enter your name (optional)" class="mt-4"></InputField>
+      <textarea v-model="description" placeholder="Leave a text review" rows="10"></textarea>
+    </div>
     <button class="submit" @click="submit">
-      <p>Submit</p>
+      Next
     </button>
   </div>
 </template>
 
 <script>
+import InputField from "~/components/inputs/InputField";
 export default {
   name: "index.vue",
+  components: {InputField},
+
+  layout: 'standard',
   data() {
     return {
       tip_amount: [
           4, 6, 8, 10, 15, 20, 25, 50
       ],
       selected_tip_amount: 0,
+      fee: null,
+      loadingFee: false,
+      rating: 0,
+      name: '',
+      description: ''
     }
+  },
+  async created() {
+    await this.fetchFee();
   },
   methods: {
     selectTipAmount(t) {
@@ -72,16 +85,37 @@ export default {
         console.log(e)
       }
     },
+    async fetchFee() {
+      this.loadingFee = true;
+
+      try {
+        let res = await this.$axios.post('/fee', {
+          amount: this.selected_tip_amount
+        });
+
+        this.fee = res.data.data;
+
+        this.loadingFee = false;
+      } catch(e) {
+        console.log(e)
+      }
+    },
     async submit() {
       try {
         let res = await this.$axios.post('/users/' + this.$route.params.id + '/tips', {
           amount: this.selected_tip_amount,
-          currency: 'usd'
+          currency: 'usd',
+          rating: this.rating,
+          name: this.name,
+          description: this.description,
         });
 
         location.href = res.data.redirect_uri;
 
         this.selected_tip_amount = 0;
+        this.rating = 0;
+        this.name = '';
+        this.description = ''
 
         await this.fetchAuthUserBalance();
       } catch(e) {
@@ -101,11 +135,12 @@ export default {
 .tip-page-wrapper {
   display: flex;
   flex-direction: column;
-  width: 1240px;
+  width: 400px;
   margin: 0 auto;
   min-height: 100vh;
   padding-bottom: 60px;
-  background: #F7F8FA;
+  background: #fff;
+  padding: 36px;
 
   @include for-phone-only {
     width: 100%;
@@ -130,15 +165,12 @@ export default {
 
   &__content {
     span {
-      font-family: 'Poppins';
       font-style: normal;
-      font-weight: 500;
+      font-weight: 700;
       font-size: 18px;
-      line-height: 27px;
+      line-height: 25px;
       letter-spacing: 0.01em;
       color: #000000;
-      opacity: 0.4;
-      padding-bottom: 28px;
     }
 
     button {
@@ -149,6 +181,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+      border: 1px solid rgba(0, 0, 0, 0.2);
 
       p {
         font-family: 'Poppins';
@@ -162,17 +195,30 @@ export default {
       }
 
       &.active {
-        border: 1px solid rgba(0, 0, 0, 0.2);
+        background: #D8CDBC;
+        border: none;
       }
     }
 
     input {
       margin-top: 20px;
-      background: #fff;
       padding: 0 24px;
       height: 60px;
       border-radius: 14px;
       width: 100%;
+      min-height: 60px !important;
+      height: 60px;
+      background: rgba(216, 205, 188, 0.2);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0 24px;
+
+      &:focus {
+        outline: none;
+      }
     }
   }
 
@@ -213,6 +259,11 @@ export default {
        align-items: center;
        justify-content: space-between;
        padding: 8px 0;
+       height: 40px;
+
+       img {
+         height: 30px;
+       }
 
        span {
          font-family: 'Poppins';
@@ -230,14 +281,16 @@ export default {
        }
 
        &.total {
-         padding: 10px 0;
+         padding: 20px 0;
          border-top: 1px solid #ddd;
          border-bottom: 1px solid #ddd;
+         min-height: fit-content;
+         height: fit-content;
          span {
            &.first {
              font-family: 'Poppins';
              font-style: normal;
-             font-weight: 700;
+             font-weight: 500;
              font-size: 14px;
              line-height: 21px;
              /* identical to box height */
@@ -252,7 +305,7 @@ export default {
            &.second {
              font-family: 'Poppins';
              font-style: normal;
-             font-weight: 700;
+             font-weight: 500;
              font-size: 16px;
              line-height: 24px;
              /* identical to box height */
@@ -279,22 +332,80 @@ export default {
   justify-content: center;
   height: 60px;
   border-radius: 15px;
-  background: #fff;
+  background: #C67D65;
   margin-top: 24px;
 
-  p {
-    font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+}
+
+.review-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  img {
+    margin: 60px auto 20px auto;
+  }
+
+  h2 {
     font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    margin-top: 20px;
     /* identical to box height */
 
-    letter-spacing: 0.02em;
+    text-align: center;
+    letter-spacing: 0.01em;
 
-    color: #000000;
-
-    opacity: 0.4;
+    color: rgba(0, 0, 0, 0.60);
   }
+}
+
+.stripe-payment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 0 24px;
+  height: 60px;
+  min-height: 60px !important;
+  background: rgba(216, 205, 188, 0.2);
+  border-radius: 14px;
+  width: 100%;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+textarea {
+  margin-top: 20px;
+  height: 137px;
+  border-radius: 14px;
+  width: 100%;
+  min-height: 60px !important;
+  background: rgba(216, 205, 188, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+
+  &:focus {
+    outline: none
+  }
+}
+
+::placeholder {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.02em;
+  color: #D8CDBC;
 }
 </style>

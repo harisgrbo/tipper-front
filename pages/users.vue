@@ -24,7 +24,7 @@
               </tr>
               </thead>
               <tbody class="divide-y divide-gray-200 bg-white">
-              <tr v-for="(user, index) in users">
+              <tr v-for="(user, index) in users" :key="index">
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                   <div class="flex items-center">
                     <div class="h-10 w-10 flex-shrink-0">

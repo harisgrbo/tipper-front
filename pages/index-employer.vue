@@ -12,7 +12,11 @@
           <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
         </div>
         <div class="flex flex-row items-center">
-          <button v-for="(option, index) in options" :key="option" :class="current_option === index ? 'active' : ''" @click="current_option = index">{{ option }}</button>
+          <button v-for="(option, index) in options" :key="index" :class="current_option === index ? 'active' : ''" @click="current_option = index">{{ option }}</button>
+          <button class="mutation" @click="$modal.show('mutation')">
+            Export Tip Report
+            <img src="/mutation.svg" alt="">
+          </button>
         </div>
       </div>
       <div class="mt-6 flex flex-col employees-wrap">
@@ -25,27 +29,33 @@
                   <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6">List of Employees</th>
                   <th scope="col" class="px-3 py-3.5 text-left">Ratings</th>
                   <th scope="col" class="px-3 py-3.5 text-left">Reviews</th>
+                  <th scope="col" class="px-3 py-3.5 flex flex-row items-center justify-end">
+                    <button class="invite" @click="$modal.show('invite')">
+                      Invite Employess
+                    </button>
+                  </th>
                 </tr>
                 </thead>
                 <tbody class="divide-y bg-white">
-                <tr v-for="i in 5" :key="i">
+                <tr v-for="(employee, index) in myEmployees" :key="index">
                   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                     <div class="flex items-center">
                       <div class="flex-shrink-0">
                         <img class="h-10 w-10 rounded-full" src="/avatar.svg" alt="">
                       </div>
                       <div class="ml-4">
-                        <div class="username">Lindsay Walton</div>
+                        <div class="username">{{ employee.username }}</div>
                       </div>
                     </div>
                   </td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     <div class="flex flex-row items-center stars">
-                      <img src="/star.svg" v-for="star in 4" :key="star" class="mr-1" alt="">
-                      <span class="username">4.5/5.00</span>
+                      <star-rating :star-size="15" :increment="1" :inline="true" read-only="true" inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65" v-model="employee.rating"></star-rating>
+
                     </div>
                   </td>
                   <td class="whitespace-nowrap px-3 py-4 username">Very good</td>
+                  <td class="whitespace-nowrap px-3 py-4 username"></td>
                 </tr>
                 </tbody>
               </table>
@@ -60,18 +70,143 @@
       <GlobalButton placeholder="View All Reviews" width="220px" @handle-button-action="$router.push('/reviews')" bg-color="#C67D65" txt-color="#fff"></GlobalButton>
     </div>
     <div class="review-cards-wrapper">
-      <ReviewCard v-for="i in 5" :key="i"></ReviewCard>
+      <ReviewCard @open-review-card-modal="handleOpenReviewCardInModal(user)" :user="user" v-for="(user, index) in reviewUsers" :key="index"></ReviewCard>
     </div>
+    <modal name="mutation"
+           width="910"
+           height="auto"
+           @before-open="beforeOpen"
+           @before-close="beforeClose">
+      <div class="flex flex-col">
+        <div class="modal-header items-start">
+          <div>
+            <h1>Tip activity report mutation</h1>
+            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+          </div>
+          <button @click="$modal.hide('mutation')">
+            <img src="/close.svg" alt="">
+          </button>
+        </div>
+        <div class="modal-content">
+          <h3>Mutation period</h3>
+          <vc-date-picker
+              :disabled-dates="disabledDates"
+              :min-date="new Date()"
+              v-model="range"
+              :masks="masks"
+              locale="sr-Latn-RS"
+              is-range
+              is-inline
+              popover.visibility="visible"
+              :popover="{ visibility: 'click' }"
+          >
+            <template v-slot="{ inputValue, inputEvents, isDragging }">
+              <div class="flex flex-row justify-between items-center">
+                <div class="flex flex-col input-date-wrapper">
+                  <label class="text-xs text-gray-400 font-medium mb-2 uppercase">from date</label>
+                  <div class="relative flex-grow w-full">
+                    <input
+                        class="flex-grow pr-2 py-1 w-full date-input"
+                        :class="isDragging ? 'text-gray-600' : 'text-gray-900'"
+                        :value="inputValue.start"
+                        v-on="inputEvents.start"
+                    />
+                  </div>
+                </div>
+
+                <span class="flex-shrink-0 m-2 divider">
+                    <img src="/devider.svg" alt="">
+                  </span>
+                <div class="flex flex-col input-date-wrapper">
+                  <label class="text-xs text-gray-400 font-medium mb-2 uppercase">Till date</label>
+                  <div class="relative flex-grow w-full">
+                    <input
+                        class="flex-grow pr-2 py-1 w-full date-input"
+                        :class="isDragging ? 'text-gray-600' : 'text-gray-900'"
+                        :value="inputValue.end"
+                        v-on="inputEvents.end"
+                    />
+                  </div>
+                </div>
+              </div>
+            </template>
+          </vc-date-picker>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo porta ut amet ac vel at sed vulputate pellentesque. Vel mi gravida sodales diam.</p>
+          <div class="modal-buttons">
+            <button>Download in excel form</button>
+            <button>Download in pdf format</button>
+          </div>
+        </div>
+      </div>
+    </modal>
+    <modal name="invite"
+           width="910"
+           height="auto"
+           @before-open="beforeOpen"
+           @before-close="beforeClose">
+      <div class="flex flex-col">
+        <div class="modal-header items-start">
+          <div>
+            <h1>Invite Employees</h1>
+            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+          </div>
+          <button @click="$modal.hide('invite'); email = '';">
+            <img src="/close.svg" alt="">
+          </button>
+        </div>
+        <div class="modal-content">
+          <h3>Employees email</h3>
+          <InputField v-model="email" placeholder="johndoe@gmail.com"></InputField>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo porta ut amet ac vel at sed vulputate pellentesque. Vel mi gravida sodales diam.</p>
+          <div class="modal-buttons">
+            <button @click="inviteNewEmployee()">Invite</button>
+          </div>
+        </div>
+      </div>
+    </modal>
+    <modal name="review-card"
+           class="review"
+           width="910"
+           height="auto"
+           @before-open="beforeOpen"
+           @before-close="beforeClose">
+      <div class="flex flex-row-reverse" v-if="selectedUser !== null">
+        <div class="flex flex-col w-full justify-between">
+          <div class="modal-header w-full">
+            <div>
+              <h1>{{ selectedUser.name }}</h1>
+              <span>Developer</span>
+            </div>
+            <button @click="$modal.hide('review-card')">
+              <img src="/close.svg" alt="">
+            </button>
+          </div>
+          <div class="flex flex-col modal-content">
+            <star-rating :star-size="15" :increment="1" :inline="true" read-only="true" inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65" v-model="selectedUser.rating"></star-rating>
+
+            <div class="modal-buttons review">
+              <button>Change Department</button>
+              <button>Delete Employee</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-image-wrapper">
+          <img :src="selectedUser.avatar || '/noimage.png'" alt="">
+        </div>
+      </div>
+    </modal>
   </div>
 </template>
 
 <script>
 import GlobalButton from "~/components/GlobalButton";
 import ReviewCard from "~/components/ReviewCard";
+import InputField from "@/components/inputs/InputField";
 export default {
   name: "index-employer",
   layout: 'standard',
-  components: {GlobalButton, ReviewCard},
+  components: {InputField, GlobalButton, ReviewCard},
   data() {
     return {
       options: [
@@ -80,7 +215,75 @@ export default {
           'This Month',
           'This Year'
       ],
+      email: '',
       current_option: 0,
+      range: {
+        start: new Date(),
+        end: new Date(),
+      },
+      masks: {
+        input: 'DD-MM-YYYY',
+      },
+      reviewUsers: [],
+      selectedUser: null,
+      myEmployees: []
+    }
+  },
+  async created() {
+    await this.fetchMyEmployees();
+    await this.fetchReviews();
+  },
+  methods: {
+    beforeOpen() {
+      document.body.style.overflow = 'hidden';
+    },
+    beforeClose() {
+      document.body.style.overflow = 'auto';
+    },
+    handleOpenReviewCardInModal(u) {
+      this.selectedUser = u;
+
+      this.$modal.show('review-card');
+    },
+    async inviteNewEmployee() {
+      try {
+        let res = await this.$axios.post('/email/invite', {
+          email: this.email
+        });
+
+        console.log(res.data.data, 'res invite')
+        this.$toast.open({
+          message: 'Invite successfully sent to ' + this.email,
+          type: 'success',
+        });
+
+        this.email = ''
+        this.$modal.hide('invite');
+      } catch(e) {
+        console.log(e)
+      }
+    },
+    async fetchMyEmployees() {
+      try {
+        let res = await this.$axios.get('/my/employees');
+
+        this.myEmployees = res.data.data;
+
+        console.log(res.data.data)
+      } catch(e) {
+        console.log(e)
+      }
+    },
+    async fetchReviews() {
+      try {
+        let res = await this.$axios.get('/users/' + this.$auth.user.id + '/tips');
+
+        this.reviewUsers = res.data.data;
+
+        console.log(res.data.data)
+      } catch(e) {
+        console.log(e)
+      }
     }
   }
 }
@@ -110,6 +313,7 @@ export default {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 20px;
+    grid-row-gap: 20px;
   }
 }
 
@@ -158,7 +362,7 @@ export default {
     line-height: 21px;
     text-align: right;
     color: #C67D65;
-    margin-right: 24px;
+    margin-right: 12px;
 
     &.active {
       background: rgba(198, 125, 101, 0.2);
@@ -225,5 +429,161 @@ tr.main th {
   line-height: 19px;
   letter-spacing: 0.01em;
   color: rgba(27, 26, 26, 0.6);
+}
+
+.mutation {
+  height: 35px;
+  background: #C67D65;
+  border-radius: 90px;
+  width: fit-content;
+  border: none !important;
+  color: #fff !important;
+
+  img {
+    margin-left: 10px;
+  }
+}
+
+.modal-content {
+  p {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0.03em;
+    color: #161616;
+    opacity: 0.3;
+    margin-top: 23px;
+  }
+  h3 {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 30px;
+    color: #1B1A1A;
+    opacity: 0.8;
+    margin-top: 46px;
+    margin-bottom: 23px;
+  }
+
+  .input-date-wrapper {
+    background: rgba(216, 205, 188, 0.20);
+    border-radius: 14px;
+    padding: 8px 12px;
+    width: 100%;
+
+    label {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 14px;
+      /* identical to box height */
+
+
+      color: #000000;
+
+      opacity: 0.4;
+    }
+
+    input {
+      background: transparent;
+
+      &:focus {
+        outline: none
+      }
+    }
+  }
+
+  .divider {
+    margin: 0 40px;
+  }
+}
+
+.modal-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 56px;
+
+  &.review {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+      &:first-child {
+        margin-right: 0;
+        background: #C67D65;
+        color: #fff;
+        margin-bottom: 24px;
+      }
+    }
+  }
+  button {
+    background: rgba(198, 125, 101, 0.1);
+    border-radius: 15px;
+    height: 54px;
+    width: 270px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #C67D65;
+
+    &:first-child {
+      margin-right: 14px;
+    }
+  }
+}
+
+.modal-image-wrapper {
+  min-width: 420px;
+  min-height: 420px;
+  max-height: 420px;
+  max-width: 420px;
+  padding-right: 24px;
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+  }
+}
+
+
+.stars {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 12px;
+
+  img {
+    margin-right: 8px;
+  }
+}
+
+.modal-header {
+  align-items: flex-start;
+}
+
+.invite {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  min-width: fit-content;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #C67D65;
+  height: 33px;
+  background: rgba(198, 125, 101, 0.1);
+  border-radius: 90px;
+  width: fit-content;
 }
 </style>

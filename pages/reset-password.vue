@@ -1,7 +1,7 @@
 <template>
   <div class="w-full min-h-screen flex flex-col">
     <div class="min-h-full flex auth-wrapper">
-      <div class="flex flex-1 image-bg">
+      <div class="flex flex-1 bg-white forgot-bg">
       </div>
       <div class="flex-1 flex flex-col justify-center items-center">
         <div class="mx-auto w-full">
@@ -10,30 +10,22 @@
             <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
           </div>
 
-          <form class="mt-8 bg-white main-form-wrapper" @submit.prevent="login()">
+          <div class="mt-8 bg-white main-form-wrapper">
             <div class="w-full">
               <div class="space-y-6">
-                <h1>Login</h1>
-                <small>Tipper’s mission is to help workers make more money.</small>
-                <InputField v-model="payload.username" label="Email Address" placeholder="johndoe@gmail.com"></InputField>
-                <InputField v-model="payload.password" type="password" label="Password" placeholder="*********"></InputField>
-
-                <div class="flex items-center justify-end">
-                  <div class="text-sm">
-                    <nuxt-link to="/reset-password" class="reset text-indigo-600 hover:text-indigo-500"> Forgot password? </nuxt-link>
-                  </div>
-                </div>
-
+                <h1>Forgot Password</h1>
+                <small>Enter your email and we’ll send a link to reset it.</small>
+                <InputField v-model="email" label="Enter email Address" placeholder="johndoe@gmail.com"></InputField>
                 <div>
-                  <GlobalButton placeholder="Login" @handle-button-action="login()" bg-color="#C67D65" txt-color="#fff"></GlobalButton>
+                  <GlobalButton placeholder="Reset" @handle-button-action="reset" bg-color="#C67D65" txt-color="#fff"></GlobalButton>
                 </div>
                 <div class="sign-up">
                   <span>Not a member yet? </span>
-                  <nuxt-link to="/register" class="font-medium text-indigo-600 link">Sign up</nuxt-link>
+                  <nuxt-link to="/register" class="font-medium text-indigo-600 hover:text-indigo-500">Sign up</nuxt-link>
                 </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -41,29 +33,27 @@
 </template>
 
 <script>
+import Header from "~/components/Header";
 import InputField from "~/components/inputs/InputField";
 export default {
-  components: {InputField},
-  name: "sign-in",
+  components: {InputField, Header},
+  name: "password-reset",
   data() {
     return {
-      payload: {
-        grant_type: 'password',
-        client_id: 2,
-        client_secret: 'il4dy3lNuKHlBWIh7AltaTaxhVC3idt1zEOsrKnD',
-        username: '',
-        password: '',
-      }
+      email: ''
     }
   },
   methods: {
-    async login() {
+    async reset() {
       try {
-        let res = await this.$auth.loginWith("local", { data: this.payload });
+        await this.$axios.post('/send-password-reset', {
+          email: this.email
+        })
 
-        await this.$auth.fetchUser();
-
-        console.log(res)
+        this.$toast.open({
+          message: 'We have sent instructions for password reset. Please check your email',
+          type: 'success',
+        });
       } catch(e) {
         console.log(e)
       }
@@ -155,7 +145,8 @@ export default {
     font-weight: 400;
     font-size: 15px;
     line-height: 22px;
-    color: rgba(27, 26, 26, 0.4);
+    color: #1B1A1A;
+    opacity: 0.4;
   }
 
   a {
@@ -165,21 +156,19 @@ export default {
     font-weight: 400;
     font-size: 15px;
     line-height: 22px;
-    color: #C67D65;
+    color: #1B1A1A;
+    opacity: 0.6;
   }
-
-
 }
 
-.reset {
-  color: rgba(198, 125, 101, 0.91) !important;
-  font-weight: 400 !important;
+button {
+  margin-top: 240px
 }
 
-.image-bg {
-  background: url(/login-bg.svg);
+.forgot-bg {
+  background: url(/forgot-bg.svg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: top;
 }
 </style>

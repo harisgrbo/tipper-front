@@ -26,8 +26,8 @@
         <button @click="handleClick">
           <img src="/group.svg" alt="">
         </button>
-        <button @click="$router.push('/user/' + $auth.user.id)">
-          <img src="/avatar.svg" alt="">
+        <button @click="$router.push('/user/' + $auth.user.id)" class="avatar">
+          <img :src="$auth.user.avatar_url !== null ? $auth.user.avatar_url : '/noimage.png'" alt="">
         </button>
       </div>
       <div class="auth logged-out" v-else>
@@ -35,10 +35,7 @@
           Login
         </button>
         <button @click="$router.push('/register')">
-          Sign up as employer
-        </button>
-        <button @click="$router.push('/employee-register')">
-          Sign up as employee
+          Sign up
         </button>
       </div>
     </div>
@@ -73,12 +70,12 @@ export default {
   justify-content: space-between;
 
   .logo {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 800;
-    font-size: 38px;
-    line-height: 57px;
-    color: #000000;
+    cursor: pointer;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
   }
 
   .search-input {
@@ -122,6 +119,13 @@ export default {
       align-items: center;
       justify-content: center;
       margin-right: 14px;
+      overflow: hidden;
+
+      &.avatar {
+        img {
+          object-fit: cover;
+        }
+      }
 
       &:last-child {
         margin-right: 0;

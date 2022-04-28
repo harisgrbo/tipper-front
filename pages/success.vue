@@ -1,9 +1,5 @@
 <template>
   <div class="success-page-wrapper">
-    <div class="success-page-wrapper__header">
-      <img src="/logo.svg"  @click="$router.push('/')" />
-
-    </div>
     <div class="success-page-wrapper__content">
       <div class="image-wrapper"></div>
       <h3>Thank You</h3>
@@ -15,6 +11,7 @@
 <script>
 export default {
   name: "success",
+  layout: 'standard'
 }
 </script>
 
@@ -31,11 +28,11 @@ export default {
   margin: 0 auto;
   min-height: 100vh;
   padding-bottom: 60px;
-  background: #F7F8FA;
 
   @include for-phone-only {
     width: 100%;
     padding: 24px;
+    background: #F7F8FA;
   }
 
   &__header {

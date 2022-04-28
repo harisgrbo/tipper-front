@@ -1,21 +1,22 @@
 <template>
-  <div class="review-card">
+  <div class="review-card" @click="$emit('open-review-card-modal')">
     <div class="avatar-wrapper">
-      <img src="/avatar.svg" alt="">
+      <img :src="user.avatar || '/noimage.png'" alt="">
     </div>
-    <h2>Jacob Nampson</h2>
-    <span>Designer</span>
-    <h2>Perfect</h2>
-    <h3>Lorem ipsum amet, adipiscing elit. Libero aenean morbi.</h3>
+    <h2>{{ user.name }}</h2>
+    <span>Developer</span>
+    <h2>{{ user.description }}</h2>
+    <h3>{{ user.description }}</h3>
     <div class="stars">
-      <img v-for="i in 5" :key="i" src="/star.svg" class="mr-sm" alt="">
+      <star-rating :star-size="15" :increment="1" :inline="true" read-only="true" inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65" v-model="user.rating"></star-rating>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ReviewCard"
+  name: "ReviewCard",
+  props: ['user']
 }
 </script>
 
@@ -31,9 +32,14 @@ export default {
   background-image: url("/review-bg.png");
   background-color: rgba(198, 125, 101, 0.35);
 
+  &:hover {
+    cursor: pointer;
+  }
+
   .avatar-wrapper {
     height: 60px;
     width: 60px;
+    min-height: 60px;
     border-radius: 30px;
     background: #C4C4C4;
     overflow: hidden;

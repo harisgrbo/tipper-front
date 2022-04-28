@@ -1,14 +1,15 @@
 <template>
   <div class="notification-box-wrapper">
-    <img src="/wallet.png" alt="">
-    <b>You got the $10 tips</b>
-    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique risus iaculis ante habitant ut non ac in. Sed dapibus lorem porttitor.</span>
+    <img :src="notification.img" alt="">
+    <b>{{ notification.title }}</b>
+    <span>{{ notification.description }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Notification"
+  name: "Notification",
+  props: ['notification']
 }
 </script>
 
@@ -23,7 +24,10 @@ export default {
   border-radius: 10px;
   padding: 0 24px;
   max-height: 60px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+
 
   img {
     margin-right: 18px;
@@ -37,8 +41,8 @@ export default {
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.01em;
-    color: #000000;
-    opacity: 0.4;
+    color: #C67D65;
+    min-width: fit-content;
   }
 
   span {
@@ -48,8 +52,11 @@ export default {
     font-size: 14px;
     line-height: 21px;
     letter-spacing: 0.01em;
-    color: #161616;
-    opacity: 0.3;
+    color: #000;
+    opacity: 0.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 </style>

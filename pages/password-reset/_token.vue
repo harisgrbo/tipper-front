@@ -13,9 +13,10 @@
           <div class="mt-8 bg-white main-form-wrapper">
             <div class="w-full">
               <div class="space-y-6">
-                <h1>Forgot Password</h1>
-                <small>Enter your email and we’ll send a link to reset it.</small>
-                <InputField v-model="payload.username" label="Enter email Address" placeholder="johndoe@gmail.com"></InputField>
+                <h1>New Password</h1>
+                <small>Create a new password</small>
+                <InputField type="password" v-model="password_one" label="Enter email Address" placeholder="johndoe@gmail.com"></InputField>
+                <InputField type="password" v-model="password_two" label="Enter email Address" placeholder="johndoe@gmail.com"></InputField>
                 <div>
                   <GlobalButton placeholder="Reset" @handle-button-action="reset" bg-color="#C67D65" txt-color="#fff"></GlobalButton>
                 </div>
@@ -37,22 +38,37 @@ import Header from "~/components/Header";
 import InputField from "~/components/inputs/InputField";
 export default {
   components: {InputField, Header},
-  name: "password-reset",
+  name: "_token",
   data() {
     return {
-      payload: {
-        grant_type: 'password',
-        client_id: 2,
-        client_secret: 'il4dy3lNuKHlBWIh7AltaTaxhVC3idt1zEOsrKnD',
-        username: '',
-        password: '',
-      }
+      password_one: '',
+      password_two: '',
     }
   },
   methods: {
     async reset() {
       try {
-        console.log('reset')
+        if(this.password_one !== this.password_two) {
+          this.$toast.open({
+            message: 'Passwords dont match',
+            type: 'error',
+          });
+
+          return
+        }
+        await this.$axios.post('/password-reset', {
+          password: this.password_one,
+          token: this.$route.params.token
+        })
+
+        this.$toast.open({
+          message: 'You have successfully changed the password',
+          type: 'success',
+        });
+
+        setTimeout(()=>{
+          this.$router.push('/sign-in')
+        }, 2000)
       } catch(e) {
         console.log(e)
       }
