@@ -70,7 +70,7 @@
                     <td class="whitespace-nowrap px-3 py-4 username">Active</td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       <div class="flex flex-row items-center stars">
-                        <star-rating :star-size="15" :increment="1" :inline="true" read-only="true" inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65" v-model="tip.rating"></star-rating>
+                        <star-rating :star-size="15" :increment="1" :inline="true" :read-only="true" inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65" v-model="tip.rating"></star-rating>
                       </div>
                     </td>
                     <td class="whitespace-nowrap px-3 py-4 username">${{ tip.amount }}</td>
@@ -84,73 +84,75 @@
           </div>
         </div>
       </div>
-      <modal name="mutation"
-             width="910"
-             height="auto"
-             @before-open="beforeOpen"
-             @before-close="beforeClose">
-        <div class="flex flex-col">
-          <div class="modal-header">
-            <div>
-              <h1>Activity report mutation</h1>
-              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-            </div>
-            <button @click="$modal.hide('mutation')">
-              <img src="/close.svg" alt="">
-            </button>
-          </div>
-          <div class="modal-content">
-            <h3>Mutation period</h3>
-            <vc-date-picker
-                :disabled-dates="disabledDates"
-                :min-date="new Date()"
-                v-model="range"
-                :masks="masks"
-                locale="sr-Latn-RS"
-                is-range
-                is-inline
-                popover.visibility="visible"
-                :popover="{ visibility: 'click' }"
-            >
-              <template v-slot="{ inputValue, inputEvents, isDragging }">
-                <div class="flex flex-row justify-between items-center">
-                  <div class="flex flex-col input-date-wrapper">
-                    <label class="text-xs text-gray-400 font-medium mb-2 uppercase">from date</label>
-                    <div class="relative flex-grow w-full">
-                      <input
-                          class="flex-grow pr-2 py-1 w-full date-input"
-                          :class="isDragging ? 'text-gray-600' : 'text-gray-900'"
-                          :value="inputValue.start"
-                          v-on="inputEvents.start"
-                      />
+        <client-only>
+            <modal name="mutation"
+                   width="910"
+                   height="auto"
+                   @before-open="beforeOpen"
+                   @before-close="beforeClose">
+                <div class="flex flex-col">
+                    <div class="modal-header">
+                        <div>
+                            <h1>Activity report mutation</h1>
+                            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                        </div>
+                        <button @click="$modal.hide('mutation')">
+                            <img src="/close.svg" alt="">
+                        </button>
                     </div>
-                  </div>
+                    <div class="modal-content">
+                        <h3>Mutation period</h3>
+                        <vc-date-picker
+                            :disabled-dates="disabledDates"
+                            :min-date="new Date()"
+                            v-model="range"
+                            :masks="masks"
+                            locale="sr-Latn-RS"
+                            is-range
+                            is-inline
+                            popover.visibility="visible"
+                            :popover="{ visibility: 'click' }"
+                        >
+                            <template v-slot="{ inputValue, inputEvents, isDragging }">
+                                <div class="flex flex-row justify-between items-center">
+                                    <div class="flex flex-col input-date-wrapper">
+                                        <label class="text-xs text-gray-400 font-medium mb-2 uppercase">from date</label>
+                                        <div class="relative flex-grow w-full">
+                                            <input
+                                                class="flex-grow pr-2 py-1 w-full date-input"
+                                                :class="isDragging ? 'text-gray-600' : 'text-gray-900'"
+                                                :value="inputValue.start"
+                                                v-on="inputEvents.start"
+                                            />
+                                        </div>
+                                    </div>
 
-                  <span class="flex-shrink-0 m-2 divider">
+                                    <span class="flex-shrink-0 m-2 divider">
                     <img src="/devider.svg" alt="">
                   </span>
-                  <div class="flex flex-col input-date-wrapper">
-                    <label class="text-xs text-gray-400 font-medium mb-2 uppercase">Till date</label>
-                    <div class="relative flex-grow w-full">
-                      <input
-                          class="flex-grow pr-2 py-1 w-full date-input"
-                          :class="isDragging ? 'text-gray-600' : 'text-gray-900'"
-                          :value="inputValue.end"
-                          v-on="inputEvents.end"
-                      />
+                                    <div class="flex flex-col input-date-wrapper">
+                                        <label class="text-xs text-gray-400 font-medium mb-2 uppercase">Till date</label>
+                                        <div class="relative flex-grow w-full">
+                                            <input
+                                                class="flex-grow pr-2 py-1 w-full date-input"
+                                                :class="isDragging ? 'text-gray-600' : 'text-gray-900'"
+                                                :value="inputValue.end"
+                                                v-on="inputEvents.end"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </vc-date-picker>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo porta ut amet ac vel at sed vulputate pellentesque. Vel mi gravida sodales diam.</p>
+                        <div class="modal-buttons">
+                            <button>Download in excel form</button>
+                            <button>Download in pdf format</button>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </template>
-            </vc-date-picker>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo porta ut amet ac vel at sed vulputate pellentesque. Vel mi gravida sodales diam.</p>
-            <div class="modal-buttons">
-              <button>Download in excel form</button>
-              <button>Download in pdf format</button>
-            </div>
-          </div>
-        </div>
-      </modal>
+            </modal>
+        </client-only>
     </div>
   </div>
 </template>

@@ -15,8 +15,8 @@
               <div class="space-y-6">
                 <h1>New Password</h1>
                 <small>Create a new password</small>
-                <InputField type="password" v-model="password_one" label="Enter email Address" placeholder="johndoe@gmail.com"></InputField>
-                <InputField type="password" v-model="password_two" label="Enter email Address" placeholder="johndoe@gmail.com"></InputField>
+                <InputField type="password" v-model="password_one" label="New Password" placeholder="******"></InputField>
+                <InputField type="password" v-model="password_two" label="Confirm New Password" placeholder="******"></InputField>
                 <div>
                   <GlobalButton placeholder="Reset" @handle-button-action="reset" bg-color="#C67D65" txt-color="#fff"></GlobalButton>
                 </div>

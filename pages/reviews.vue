@@ -12,37 +12,39 @@
     <div class="review-cards-wrapper">
       <ReviewCard @open-review-card-modal="handleOpenReviewCardInModal(user)" :user="user" v-for="(user, index) in reviewUsers" :key="index"></ReviewCard>
     </div>
-    <modal name="review-card"
-           class="review"
-           width="910"
-           height="auto"
-           @before-open="beforeOpen"
-           @before-close="beforeClose">
-      <div class="flex flex-row-reverse" v-if="selectedUser !== null">
-        <div class="flex flex-col w-full justify-between">
-          <div class="modal-header w-full">
-            <div>
-              <h1>{{ selectedUser.name }}</h1>
-              <span>Developer</span>
-            </div>
-            <button @click="$modal.hide('review-card')">
-              <img src="/close.svg" alt="">
-            </button>
-          </div>
-          <div class="flex flex-col modal-content">
-            <star-rating :star-size="15" :increment="1" :inline="true" read-only="true" inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65" v-model="selectedUser.rating"></star-rating>
-            <div class="modal-buttons review">
-              <button>Change Department</button>
-              <button>Delete Employee</button>
-            </div>
-          </div>
-        </div>
+      <client-only>
+          <modal name="review-card"
+                 class="review"
+                 width="910"
+                 height="auto"
+                 @before-open="beforeOpen"
+                 @before-close="beforeClose">
+              <div class="flex flex-row-reverse" v-if="selectedUser !== null">
+                  <div class="flex flex-col w-full justify-between">
+                      <div class="modal-header w-full">
+                          <div>
+                              <h1>{{ selectedUser.name }}</h1>
+                              <span>Developer</span>
+                          </div>
+                          <button @click="$modal.hide('review-card')">
+                              <img src="/close.svg" alt="">
+                          </button>
+                      </div>
+                      <div class="flex flex-col modal-content">
+                          <star-rating :star-size="15" :increment="1" :inline="true" :read-only="true" inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65" v-model="selectedUser.rating"></star-rating>
+                          <div class="modal-buttons review">
+                              <button>Change Department</button>
+                              <button>Delete Employee</button>
+                          </div>
+                      </div>
+                  </div>
 
-        <div class="modal-image-wrapper">
-          <img :src="selectedUser.avatar || '/noimage.png'" alt="">
-        </div>
-      </div>
-    </modal>
+                  <div class="modal-image-wrapper">
+                      <img :src="selectedUser.avatar || '/noimage.png'" alt="">
+                  </div>
+              </div>
+          </modal>
+      </client-only>
   </div>
 </template>
 

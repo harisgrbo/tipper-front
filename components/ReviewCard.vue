@@ -8,7 +8,7 @@
     <h2>{{ user.description }}</h2>
     <h3>{{ user.description }}</h3>
     <div class="stars">
-      <star-rating :star-size="15" :increment="1" :inline="true" read-only="true" inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65" v-model="user.rating"></star-rating>
+      <star-rating :star-size="15" :increment="1" :inline="true" :read-only="true" inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65" v-model="user.rating"></star-rating>
     </div>
   </div>
 </template>

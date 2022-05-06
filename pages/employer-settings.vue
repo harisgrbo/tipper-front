@@ -79,25 +79,28 @@ export default {
 
     },
     async saveSettings() {
-      try {
-        let payload = Object.assign({}, this.userInfo);
+        try {
+            let payload = {};
+            for (let key in this.userInfo) {
+                if(this.userInfo[key] !== '' && this.userInfo[key] !== null) {
+                    payload[key] = this.userInfo[key];
+                }
+            }
+            await this.$axios.put('/me', payload);
 
-        for (let key in Object.keys(payload)) {
-          if(payload[key] === '' || payload[key] === null) {
-            delete payload[key]
-          }
+            this.$toast.open({
+                message: 'Settings saved successfully',
+                type: 'success',
+            });
+
+        } catch(e) {
+            console.log(e.response)
+            this.$toast.open({
+                message: Object.values(e.response.data.errors).join(" "),
+                type: 'error',
+            });
+
         }
-
-        let res = await this.$axios.put('/me', payload);
-
-        this.$toast.open({
-          message: 'Settings saved successfully',
-          type: 'success',
-        });
-
-      } catch(e) {
-        console.log(e)
-      }
     }
   }
 }

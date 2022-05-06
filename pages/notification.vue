@@ -19,25 +19,23 @@ export default {
   layout: 'standard',
   data() {
     return {
-      notifications: [
-        {
-          img: '/wallet.svg',
-          title: 'You got the $10 tips',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique risus iaculis ante habitant ut non ac in. Sed dapibus lorem porttitor.'
-        },
-        {
-          img: '/receipt-add.svg',
-          title: 'David invited John as a employee',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique risus iaculis ante habitant ut non ac in. Sed dapibus lorem porttitor.'
-        },
-        {
-          img: '/card-add.svg',
-          title: 'you have successfully added your account bank number',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique risus iaculis ante habitant ut non ac in. Sed dapibus lorem porttitor.'
-        }
-      ]
+      notifications: []
     }
-  }
+  },
+    async created() {
+      await this.fetchNotifications();
+    },
+    methods: {
+      async fetchNotifications() {
+          try {
+              let res = await this.$axios.get('/notifications')
+
+              this.notifications = res.data.data;
+          } catch(e) {
+              console.log(e)
+          }
+      }
+    }
 }
 </script>
 

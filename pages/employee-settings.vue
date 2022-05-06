@@ -72,20 +72,15 @@ export default {
         }
       }
     },
-    isObjectKeyValueEmpty(o) {
-
-    },
     async saveSettings() {
       try {
-        let payload = Object.assign({}, this.userInfo);
-
-        for (let key in Object.keys(payload)) {
-          if(payload[key] === '' || payload[key] === null) {
-            delete payload[key]
+        let payload = {};
+        for (let key in this.userInfo) {
+          if(this.userInfo[key] !== '' && this.userInfo[key] !== null) {
+            payload[key] = this.userInfo[key];
           }
         }
-
-        let res = await this.$axios.put('/me', payload);
+        await this.$axios.put('/me', payload);
 
         this.$toast.open({
           message: 'Settings saved successfully',
@@ -93,7 +88,12 @@ export default {
         });
 
       } catch(e) {
-        console.log(e)
+        console.log(e.response)
+          this.$toast.open({
+              message: Object.values(e.response.data.errors).join(" "),
+              type: 'error',
+          });
+
       }
     }
   }

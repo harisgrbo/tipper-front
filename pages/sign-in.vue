@@ -25,7 +25,7 @@
                 </div>
 
                 <div>
-                  <GlobalButton placeholder="Login" @handle-button-action="login()" bg-color="#C67D65" txt-color="#fff"></GlobalButton>
+                  <GlobalButton placeholder="Login" type="submit" bg-color="#C67D65" txt-color="#fff"></GlobalButton>
                 </div>
                 <div class="sign-up">
                   <span>Not a member yet? </span>
@@ -59,13 +59,13 @@ export default {
   methods: {
     async login() {
       try {
-        let res = await this.$auth.loginWith("local", { data: this.payload });
-
+        await this.$auth.loginWith("local", { data: this.payload });
         await this.$auth.fetchUser();
-
-        console.log(res)
       } catch(e) {
-        console.log(e)
+          this.$toast.open({
+              message: e.response.data.error_description,
+              type: 'error',
+          });
       }
     }
   }

@@ -23,7 +23,7 @@
           <p class="text-sm font-medium text-gray-500">{{ this.$auth.user.job_title }}</p>
         </div>
         <div class="bg-gray-100 rounded-md px-2 py-2" v-if="me !== null">
-          <h1 class="text-2xl font-bold text-gray-900">Balance available for payout: {{ (me.amount / 100) + ' ' + me.currency.toLocaleUpperCase() }}</h1>
+          <h1 class="text-2xl font-bold text-gray-900">Balance available for payout: {{ (me.amount / 100) + ' ' + me.currency }}</h1>
         </div>
       </div>
       <div class="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
@@ -51,7 +51,7 @@
           <div>
             <label for="cvc" class="block text-sm font-medium text-gray-700">Currency</label>
             <div class="mt-1">
-              <input type="text" disabled name="cvc" v-model="(currency).toLocaleUpperCase()" id="cvc" autocomplete="csc" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <input type="text" disabled name="cvc" v-model="currency" id="cvc" autocomplete="csc" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default {
     return {
       me: null,
       showTipModal: false,
-      currency: 'usd',
+      currency: 'USD',
       payload: {
         amount: 0,
       }

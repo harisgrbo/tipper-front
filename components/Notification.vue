@@ -1,8 +1,8 @@
 <template>
   <div class="notification-box-wrapper">
-    <img :src="notification.img" alt="">
-    <b>{{ notification.title }}</b>
-    <span>{{ notification.description }}</span>
+    <img :src="notification.img + '.svg'" alt="">
+    <b>{{ notification.amount + ' ' + notification.currency }}</b>
+    <span>{{ notification.text }}</span>
   </div>
 </template>
 
