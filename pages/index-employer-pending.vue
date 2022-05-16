@@ -1,17 +1,21 @@
 <template>
     <div class="employer-wrapper">
-        <div class="flex items-center justify-between">
-            <h2>Employer Dashboard</h2>
-            <button class="pending-button" @click="$router.push('/index-employer-pending')">Check invitation statuses</button>
+        <h2>Employer Dashboard</h2>
+        <div class="bg-white rounded-md p-24 flex flex-col items-center justify-center">
+            <img src="/no-employees.svg" class="mb-6" alt="">
+            <h2 class="start">
+                Start Inviting Employees
+            </h2>
+            <span class="sub-start">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+            <button class="new-inv mt-6" @click="$router.push('/invite/employees')">Invite</button>
         </div>
-        <div>
+        <div class="mt-8">
+            <!-- This example requires Tailwind CSS v2.0+ -->
             <div class="bg-white table-header p-md">
                 <div class="p-6 flex w-full flex-row items-center justify-between inner">
-                    <div class="sm:flex-auto flex flex-row items-center justify-between">
-                        <div>
-                            <h4>Employees List</h4>
-                            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                        </div>
+                    <div class="sm:flex-auto">
+                        <h4>Inviting Employee</h4>
+                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
                     </div>
                     <div class="flex flex-row items-center">
                         <button v-for="(option, index) in options" :key="index"
@@ -31,20 +35,17 @@
                                 <table class="min-w-full divide-y divide-gray-300">
                                     <thead class="bg-white">
                                     <tr class="main">
-                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6">List of Employees
+                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/3">List of Employees
                                         </th>
-                                        <th scope="col" class="px-3 py-3.5 text-left">Ratings</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left">Reviews</th>
-                                        <th scope="col" class="px-3 py-3.5 flex flex-row items-center justify-end">
-                                            <button class="invite" @click="$router.push('/invite/employees')">
-                                                Invite Employees
-                                            </button>
+                                        <th scope="col" class="px-3 py-3.5 text-left w-full">Date</th>
+                                        <th scope="col" class="px-3 py-3.5 text-right">
+                                          Status
                                         </th>
                                     </tr>
                                     </thead>
                                     <tbody class="divide-y bg-white">
                                     <tr v-for="(employee, index) in myEmployees" :key="index">
-                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 w-1/3">
                                             <div class="flex items-center">
                                                 <div class="flex-shrink-0">
                                                     <img class="h-10 w-10 rounded-full" src="/avatar.svg" alt="">
@@ -52,22 +53,15 @@
                                                 <div class="ml-4">
                                                     <div class="username"
                                                          @click="$router.push('/employee/' + employee.id)">
-                                                        {{ employee.username }}
+                                                        {{ employee.email }}
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            <div class="flex flex-row items-center stars">
-                                                <star-rating :star-size="15" :increment="1" :inline="true"
-                                                             :read-only="true" inactive-color="#F0EBE4"
-                                                             :show-rating="true" active-color="#C67D65"
-                                                             v-model="employee.rating"></star-rating>
-
-                                            </div>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-full">
+                                           {{ $moment(employee.created_at).format('ddd DD MMMM') }}
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 username">Very good</td>
-                                        <td class="whitespace-nowrap px-3 py-4 username"></td>
+                                        <td class="whitespace-nowrap px-3 py-4 username text-right">Pending</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -76,124 +70,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="flex flex-row items-center justify-between w-full mt-16 mb-8">
-                <h2 class="reviews">Reviews- last 5 reviews</h2>
-                <GlobalButton placeholder="View All Reviews" width="220px"
-                              @handle-button-action="$router.push('/reviews')" bg-color="#C67D65"
-                              txt-color="#fff"></GlobalButton>
-            </div>
-            <div class="review-cards-wrapper">
-                <ReviewCard @open-review-card-modal="handleOpenReviewCardInModal(user)" :user="user"
-                            v-for="(user, index) in reviewUsers" :key="index"></ReviewCard>
-            </div>
-            <client-only>
-                <modal name="mutation"
-                       width="910"
-                       height="auto"
-                       @before-open="beforeOpen"
-                       @before-close="beforeClose">
-                    <div class="flex flex-col">
-                        <div class="modal-header items-start">
-                            <div>
-                                <h1>Tip activity report mutation</h1>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                            </div>
-                            <button @click="$modal.hide('mutation')">
-                                <img src="/close.svg" alt="">
-                            </button>
-                        </div>
-                        <div class="modal-content">
-                            <h3>Mutation period</h3>
-                            <vc-date-picker
-                                :disabled-dates="disabledDates"
-                                :min-date="new Date()"
-                                v-model="range"
-                                :masks="masks"
-                                locale="sr-Latn-RS"
-                                is-range
-                                is-inline
-                                popover.visibility="visible"
-                                :popover="{ visibility: 'click' }"
-                            >
-                                <template v-slot="{ inputValue, inputEvents, isDragging }">
-                                    <div class="flex flex-row justify-between items-center">
-                                        <div class="flex flex-col input-date-wrapper">
-                                            <label class="text-xs text-gray-400 font-medium mb-2 uppercase">from
-                                                date</label>
-                                            <div class="relative flex-grow w-full">
-                                                <input
-                                                    class="flex-grow pr-2 py-1 w-full date-input"
-                                                    :class="isDragging ? 'text-gray-600' : 'text-gray-900'"
-                                                    :value="inputValue.start"
-                                                    v-on="inputEvents.start"
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <span class="flex-shrink-0 m-2 divider">
-                    <img src="/devider.svg" alt="">
-                  </span>
-                                        <div class="flex flex-col input-date-wrapper">
-                                            <label class="text-xs text-gray-400 font-medium mb-2 uppercase">Till
-                                                date</label>
-                                            <div class="relative flex-grow w-full">
-                                                <input
-                                                    class="flex-grow pr-2 py-1 w-full date-input"
-                                                    :class="isDragging ? 'text-gray-600' : 'text-gray-900'"
-                                                    :value="inputValue.end"
-                                                    v-on="inputEvents.end"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </template>
-                            </vc-date-picker>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo porta ut amet ac vel at
-                                sed vulputate pellentesque. Vel mi gravida sodales diam.</p>
-                            <div class="modal-buttons">
-                                <button>Download in excel form</button>
-                                <button>Download in pdf format</button>
-                            </div>
-                        </div>
-                    </div>
-                </modal>
-                <modal name="review-card"
-                       class="review"
-                       width="910"
-                       height="auto"
-                       @before-open="beforeOpen"
-                       @before-close="beforeClose">
-                    <div class="flex flex-row-reverse" v-if="selectedUser !== null">
-                        <div class="flex flex-col w-full justify-between">
-                            <div class="modal-header w-full">
-                                <div>
-                                    <h1>{{ selectedUser.name }}</h1>
-                                    <span>Developer</span>
-                                </div>
-                                <button @click="$modal.hide('review-card')">
-                                    <img src="/close.svg" alt="">
-                                </button>
-                            </div>
-                            <div class="flex flex-col modal-content">
-                                <star-rating :star-size="15" :increment="1" :inline="true" :read-only="true"
-                                             inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65"
-                                             v-model="selectedUser.rating"></star-rating>
-
-                                <div class="modal-buttons review">
-                                    <button>Change Department</button>
-                                    <button>Delete Employee</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modal-image-wrapper">
-                            <img :src="selectedUser.avatar || '/noimage.png'" alt="">
-                        </div>
-                    </div>
-                </modal>
-            </client-only>
         </div>
+
     </div>
 </template>
 
@@ -230,7 +108,6 @@ export default {
     },
     async created() {
         await this.fetchMyEmployees();
-        await this.fetchReviews();
     },
     methods: {
         beforeOpen() {
@@ -263,25 +140,15 @@ export default {
         },
         async fetchMyEmployees() {
             try {
-                let res = await this.$axios.get('/my/employees');
+                let res = await this.$axios.get('/email/invites');
 
                 this.myEmployees = res.data.data;
 
+                console.log(this.myEmployees)
             } catch (e) {
                 console.log(e)
             }
         },
-        async fetchReviews() {
-            try {
-                let res = await this.$axios.get('/users/' + this.$auth.user.id + '/tips');
-
-                this.reviewUsers = res.data.data;
-
-                console.log(res.data.data)
-            } catch (e) {
-                console.log(e)
-            }
-        }
     }
 }
 </script>
@@ -625,14 +492,5 @@ tr.main th {
     flex: none;
     order: 0;
     flex-grow: 0;
-}
-
-.pending-button {
-    height: 54px;
-    background: #B45F4B;
-    border-radius: 14px;
-    color: #fff;
-    width: fit-content;
-    padding: 0 24px;
 }
 </style>

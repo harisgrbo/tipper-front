@@ -25,7 +25,8 @@
                                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                                             <div class="flex items-center">
                                                 <div class="flex-shrink-0">
-                                                    <img class="h-10 w-10 rounded-full" :src="user.avatar_url || '/noimage.png'" alt="">
+                                                    <img class="h-10 w-10 rounded-full"
+                                                         :src="user.avatar_url || '/noimage.png'" alt="">
                                                 </div>
                                                 <div class="ml-4">
                                                     <div class="username">{{ user.username }}</div>
@@ -34,10 +35,14 @@
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 username">{{ user.type || 'User' }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            <star-rating :star-size="15" :increment="1" :inline="true" :read-only="true" inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65" v-model="rating"></star-rating>
+                                            <star-rating :star-size="15" :increment="1" :inline="true" :read-only="true"
+                                                         inactive-color="#F0EBE4" :show-rating="true"
+                                                         active-color="#C67D65" v-model="rating"></star-rating>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 username">$40.00</td>
-                                        <td class="whitespace-nowrap px-3 py-4 username">{{ $moment(user.created_at).format('DD/MM/YYYY') }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 username">
+                                            {{ $moment(user.created_at).format('DD/MM/YYYY') }}
+                                        </td>
                                         <td class="whitespace-nowrap px-3 py-4 username">
                                             <img src="/static/trash.svg" alt="">
                                         </td>
@@ -56,6 +61,7 @@
 <script>
 import GlobalButton from "@/components/GlobalButton";
 import ReviewCard from "@/components/ReviewCard";
+
 export default {
     name: "admin",
     layout: 'standard',
@@ -67,7 +73,7 @@ export default {
         }
     },
     mounted() {
-        if(this.$auth.user.type === 'admin') {
+        if (this.$auth.user.type === 'admin') {
             return
         } else {
             this.$router.push('/')
@@ -84,7 +90,7 @@ export default {
                 this.users = res.data.data;
 
                 console.log(this.users)
-            } catch(e) {
+            } catch (e) {
                 console.log(e)
             }
         }
@@ -123,6 +129,7 @@ export default {
     .inner {
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
+
     h4 {
         font-family: 'Poppins';
         font-style: normal;
