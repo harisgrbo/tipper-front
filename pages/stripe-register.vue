@@ -12,8 +12,8 @@ export default {
         }
     },
     async created() {
-        this.code = this.$route.params.query.code;
-        this.state = this.$route.params.query.state;
+        this.code = this.$route.query.code;
+        this.state = this.$route.query.state;
 
         if(this.code.length && this.state.length) {
             await this.sendRequest();
