@@ -79,14 +79,11 @@ export default {
     },
     created() {
         Object.assign(this.notificationSettings, this.$auth.user.settings.notifications)
-
-        console.log(this.notificationSettings, 'settings')
     },
     methods: {
         async saveNotificationSettings() {
             try {
                 let res = await this.$axios.put('/settings/notifications', this.notificationSettings);
-                console.log(res, 'res')
 
                 this.$toast.open({
                     message: 'Settings saved successfully',

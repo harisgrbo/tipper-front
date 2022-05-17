@@ -19,9 +19,12 @@ const _34ca7d70 = () => interopDefault(import('../pages/register.vue' /* webpack
 const _bd985d34 = () => interopDefault(import('../pages/reset-password.vue' /* webpackChunkName: "pages/reset-password" */))
 const _18251e44 = () => interopDefault(import('../pages/reviews.vue' /* webpackChunkName: "pages/reviews" */))
 const _06d402f8 = () => interopDefault(import('../pages/sign-in.vue' /* webpackChunkName: "pages/sign-in" */))
+const _7fa4b5e6 = () => interopDefault(import('../pages/stripe-register.vue' /* webpackChunkName: "pages/stripe-register" */))
 const _563a88c6 = () => interopDefault(import('../pages/success.vue' /* webpackChunkName: "pages/success" */))
 const _a69d89ea = () => interopDefault(import('../pages/users.vue' /* webpackChunkName: "pages/users" */))
 const _57d8b562 = () => interopDefault(import('../pages/invite/employees/index.vue' /* webpackChunkName: "pages/invite/employees/index" */))
+const _5b1f9ebb = () => interopDefault(import('../pages/admin/business/_id/index.vue' /* webpackChunkName: "pages/admin/business/_id/index" */))
+const _0de00d29 = () => interopDefault(import('../pages/admin/employee/_id/index.vue' /* webpackChunkName: "pages/admin/employee/_id/index" */))
 const _d9a3dfb4 = () => interopDefault(import('../pages/employee/_id.vue' /* webpackChunkName: "pages/employee/_id" */))
 const _12b4adb4 = () => interopDefault(import('../pages/invite/_hash.vue' /* webpackChunkName: "pages/invite/_hash" */))
 const _2242dcaf = () => interopDefault(import('../pages/password-reset/_token.vue' /* webpackChunkName: "pages/password-reset/_token" */))
@@ -104,6 +107,10 @@ export const routerOptions = {
     component: _06d402f8,
     name: "sign-in"
   }, {
+    path: "/stripe-register",
+    component: _7fa4b5e6,
+    name: "stripe-register"
+  }, {
     path: "/success",
     component: _563a88c6,
     name: "success"
@@ -115,6 +122,14 @@ export const routerOptions = {
     path: "/invite/employees",
     component: _57d8b562,
     name: "invite-employees"
+  }, {
+    path: "/admin/business/:id",
+    component: _5b1f9ebb,
+    name: "admin-business-id"
+  }, {
+    path: "/admin/employee/:id",
+    component: _0de00d29,
+    name: "admin-employee-id"
   }, {
     path: "/employee/:id?",
     component: _d9a3dfb4,

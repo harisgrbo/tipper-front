@@ -39,7 +39,6 @@ export default {
 
                 this.balance = res.data.data;
 
-                console.log(this.balance)
             } catch (e) {
                 console.log(e)
             }
@@ -50,7 +49,6 @@ export default {
 
                 this.tips = res.data.data;
 
-                console.log(this.tips)
             } catch (e) {
                 console.log(e)
             }

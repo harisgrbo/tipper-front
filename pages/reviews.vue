@@ -84,8 +84,6 @@ export default {
                 let res = await this.$axios.get('/users/' + this.$auth.user.id + '/tips');
 
                 this.reviewUsers = res.data.data;
-
-                console.log(res.data.data)
             } catch (e) {
                 console.log(e)
             }

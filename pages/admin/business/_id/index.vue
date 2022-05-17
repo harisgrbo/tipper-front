@@ -1,8 +1,38 @@
 <template>
     <div class="database-wrapper">
         <Loader v-if="!loaded"></Loader>
-        <div class="flex flex-col" v-else>
-            <h2>Database Business</h2>
+        <div v-else>
+            <div class="w-full flex flex-row items-center justify-start top-wrap mb-6">
+                <button class="back" @click="$router.go(-1)">
+                    <img src="/arrow-left.svg" alt="">
+                </button>
+                <div>
+                    <h2>{{ user.username }}</h2>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                </div>
+            </div>
+            <div class="business-wrapper mb-6">
+                <div class="flex flex-row items-center w-full justify-between">
+                    <div class="flex flex-row">
+                        <img :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
+                        <div class="flex flex-col justify-between">
+                            <dd>{{ user.username }}</dd>
+                            <dd class="sub" v-if="user.address_1 !== null">{{ user.address_1 + ', ' + user.state }}</dd>
+                            <dd class="sub" v-else>Address placeholder, State placeholder</dd>
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <span v-if="user.firstname && user.lastname">{{ user.firstname + ' ' + user.lastname }}</span>
+                        <span v-else>FirstName & LastName placeholder</span>
+                        <div class="flex flex-row items-center justify-between mt-2">
+                            <dd class="sub mr-4">
+                                <img src="/email.svg" class="mr-1" alt="">{{ user.email }}</dd>
+                            <dd class="sub">
+                                <img src="/call.svg" class="mr-1" alt="">+1 342 3212 3212</dd>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="review-cards-wrapper">
                 <div class="bg-white table-header w-full p-md">
                     <div class="flex flex-col employees-wrap">
@@ -12,20 +42,16 @@
                                     <table class="min-w-full divide-y divide-gray-300">
                                         <thead class="bg-white">
                                         <tr class="main py-3">
-                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6">Bussiness Name</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left">Tips sent today</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left">Reviews</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left">Today's income</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left">Avg tip amount</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left">Date</th>
-                                            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 md:pr-0">
-                                                <span class="sr-only">Edit</span>
+                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/3">Name</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left w-1/3">Date</th>
+                                            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 text-right w-full pr-2">
+                                                <span class="add-user">Add User</span>
                                             </th>
                                         </tr>
                                         </thead>
                                         <tbody class="divide-y bg-white">
                                         <tr v-for="(user, index) in users" :key="index">
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 cursor-pointer" @click="$router.push('/admin/business/' + user.id)">
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 cursor-pointer" @click="$router.push('/admin/employee/' + user.id)">
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0">
                                                         <img class="h-10 w-10 rounded-full"
@@ -36,18 +62,11 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-4 username">{{ user.type || 'User' }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <star-rating :star-size="15" :increment="1" :inline="true" :read-only="true"
-                                                             inactive-color="#F0EBE4" :show-rating="true"
-                                                             active-color="#C67D65" v-model="rating"></star-rating>
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 username">$40.00</td>
-                                            <td class="whitespace-nowrap px-3 py-4 username">
-                                                $12.00
-                                            </td>
                                             <td class="whitespace-nowrap px-3 py-4 username">
                                                 {{ $moment(user.created_at).format('DD/MM/YYYY') }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 username text-right">
+                                                delete
                                             </td>
                                         </tr>
                                         </tbody>
@@ -66,7 +85,6 @@
 import GlobalButton from "@/components/GlobalButton";
 import ReviewCard from "@/components/ReviewCard";
 import Loader from "@/components/Loader"
-
 export default {
     name: "admin",
     layout: 'standard',
@@ -74,6 +92,7 @@ export default {
     data() {
         return {
             users: [],
+            user: null,
             rating: 4,
             loaded: false
         }
@@ -86,17 +105,27 @@ export default {
         }
     },
     async created() {
+        this.loaded = false;
         await this.fetchUsers();
+        await this.fetchUser();
+        this.loaded = true;
     },
     methods: {
-        async fetchUsers() {
-            this.loaded = false;
+        async fetchUser() {
             try {
-                let res = await this.$axios.get('/admin/employers');
+                let res = await this.$axios.get('/users/' + this.$route.params.id);
+
+                this.user = res.data.data;
+            } catch (e) {
+                console.log(e)
+            }
+        },
+        async fetchUsers() {
+            try {
+                let res = await this.$axios.get('/admin/users/' + this.$route.params.id + '/employees');
 
                 this.users = res.data.data;
 
-                this.loaded = true;
             } catch (e) {
                 console.log(e)
             }
@@ -246,6 +275,117 @@ tr.main th {
 
     color: #1B1A1A;
 
+    opacity: 1 !important;
+}
+
+button.back {
+    height: 54px;
+    width: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    margin-right: 27px;
+}
+
+.top-wrap {
+    h2 {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 45px;
+        color: #1B1A1A;
+        margin-bottom: 0;
+    }
+
+    span {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 8px;
+        letter-spacing: 0.01em;
+        color: #161616;
+        opacity: 0.3;
+    }
+}
+
+.business-wrapper {
+    background: #fff;
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+        height: 46px;
+        width: 46px;
+        border-radius: 23px;
+        overflow: hidden;
+        margin-right: 18px;
+    }
+
+    dd {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: 0.01em;
+        color: #000000;
+        opacity: 0.8;
+
+        &.sub {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+            letter-spacing: 0.01em;
+            color: rgba(0, 0, 0, 0.62);
+            display: flex;
+            flex-direction: row;
+            align-items: center ;
+
+            img {
+                width: 20px;
+                height: auto !important;
+                border-radius: 0 !important;
+                margin-right: 10px !important;
+            }
+        }
+    }
+
+    span {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 25px;
+        /* identical to box height */
+
+        letter-spacing: 0.01em;
+
+        color: #000000;
+
+        opacity: 0.8;
+    }
+}
+
+.add-user {
+    height: 33px;
+    width: 98px;
+    border-radius: 90px;
+    padding: 7px 14px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: right;
+    color: #B45F4B !important;
     opacity: 1 !important;
 }
 </style>

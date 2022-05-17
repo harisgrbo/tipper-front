@@ -1,26 +1,30 @@
 <template>
-    <div class="w-full flex flex-col">
-        <div class="max-w-7xl mx-auto">
+    <div class="w-full flex flex-col index-wrapper">
+        <div class="max-w-7xl mx-auto" v-if="loaded">
             index
         </div>
+        <Loader v-else></Loader>
     </div>
 </template>
 
 <script>
 import Header from "@/components/Header"
+import Loader from "@/components/Loader"
 
 export default {
     components: {
-        Header
+        Header,
+        Loader
     },
     layout: 'standard',
     data() {
         return {
-            myEmployees: []
+            myEmployees: [],
+            loaded: false,
         }
     },
     async mounted() {
-        console.log(this.$router, 'router')
+        this.laded = false;
         if (this.$auth.user && this.$auth.user.type === 'employer') {
             await this.fetchMyEmployees();
 
@@ -31,9 +35,13 @@ export default {
             }
         } else if (this.$auth.user && this.$auth.user.type === 'employee') {
             await this.$router.push('/index-employee');
+        } else if (this.$auth.user && this.$auth.user.type === 'admin') {
+            await this.$router.push('/admin')
         } else {
-            await this.$router.push('/')
+            await this.$router.push('/sign-in')
         }
+
+        this.loaded = true;
     },
     methods: {
         async fetchMyEmployees() {

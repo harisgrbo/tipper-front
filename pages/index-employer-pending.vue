@@ -61,7 +61,7 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-full">
                                            {{ $moment(employee.created_at).format('ddd DD MMMM') }}
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 username text-right">Pending</td>
+                                        <td class="whitespace-nowrap px-3 py-4 username text-right capitalize">{{ employee.status }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -144,7 +144,6 @@ export default {
 
                 this.myEmployees = res.data.data;
 
-                console.log(this.myEmployees)
             } catch (e) {
                 console.log(e)
             }

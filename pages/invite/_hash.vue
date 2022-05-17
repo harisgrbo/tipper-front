@@ -13,17 +13,17 @@
                     <form class="mt-8 bg-white main-form-wrapper" @submit.prevent="register">
                         <div class="w-full">
                             <div class="space-y-6">
-                                <h1>Create Account</h1>
+                                <h1>Create Stripe Account</h1>
                                 <small>Create a Tipper account to start receiving more in tips.</small>
 
-                                <InputField v-model="payload.username" label="Username"
-                                            placeholder="johndoe@gmail.com"></InputField>
-                                <InputField v-model="payload.password" type="password" label="Password"
-                                            placeholder="*********"></InputField>
-                                <InputField v-model="payload.confirm_password" type="password" label="Confirm Password"
-                                            placeholder="*********"></InputField>
+<!--                                <InputField v-model="payload.username" label="Username"-->
+<!--                                            placeholder="johndoe@gmail.com"></InputField>-->
+<!--                                <InputField v-model="payload.password" type="password" label="Password"-->
+<!--                                            placeholder="*********"></InputField>-->
+<!--                                <InputField v-model="payload.confirm_password" type="password" label="Confirm Password"-->
+<!--                                            placeholder="*********"></InputField>-->
                                 <div>
-                                    <GlobalButton placeholder="Sign up" type="submit" bg-color="#C67D65"
+                                    <GlobalButton placeholder="Sign up with stripe" type="submit" bg-color="#C67D65"
                                                   txt-color="#fff"></GlobalButton>
                                 </div>
                                 <div class="sign-up">
@@ -64,24 +64,12 @@ export default {
     },
     methods: {
         async register() {
-            if (this.payload.password !== this.payload.confirm_password) {
-                this.$toast.open({
-                    message: 'Passwords dont match',
-                    type: 'error',
-                });
-            }
-
             try {
-                let res = await this.$axios.post('/employee/register', {
-                    username: this.payload.username,
-                    password: this.payload.password,
-                    uuid: this.$route.params.hash
-                });
+                let res = await this.$axios.get(`/email/invites/${this.$route.params.hash}/stripe-url`);
 
                 if (res.status === 200) {
-                    window.location.href = res.data.redirect_uri;
+                    window.location.href = res.data.data.url;
                 }
-
             } catch (e) {
                 console.log(e)
             }

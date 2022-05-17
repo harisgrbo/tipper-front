@@ -79,8 +79,6 @@ export default {
                 let res = await this.$axios.get('/balance');
 
                 this.me = res.data.data.balance[0];
-
-                console.log(this.me)
             } catch (e) {
                 console.log(e)
             }

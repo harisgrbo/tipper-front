@@ -2,7 +2,7 @@
     <div class="employer-wrapper">
         <div class="flex items-center justify-between">
             <h2>Employer Dashboard</h2>
-            <button class="pending-button" @click="$router.push('/index-employer-pending')">Check invitation statuses</button>
+            <button class="pending-button" @click="$router.push('/index-employer-pending')">Check invitation status</button>
         </div>
         <div>
             <div class="bg-white table-header p-md">
@@ -35,6 +35,7 @@
                                         </th>
                                         <th scope="col" class="px-3 py-3.5 text-left">Ratings</th>
                                         <th scope="col" class="px-3 py-3.5 text-left">Reviews</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left">Department</th>
                                         <th scope="col" class="px-3 py-3.5 flex flex-row items-center justify-end">
                                             <button class="invite" @click="$router.push('/invite/employees')">
                                                 Invite Employees
@@ -67,6 +68,7 @@
                                             </div>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 username">Very good</td>
+                                        <td class="whitespace-nowrap px-3 py-4 username">{{ employee.department.name }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 username"></td>
                                     </tr>
                                     </tbody>
@@ -77,7 +79,7 @@
                 </div>
             </div>
 
-            <div class="flex flex-row items-center justify-between w-full mt-16 mb-8">
+            <div class="flex flex-row items-center justify-between w-full mt-16 mb-8" v-show="reviewUsers.length">
                 <h2 class="reviews">Reviews- last 5 reviews</h2>
                 <GlobalButton placeholder="View All Reviews" width="220px"
                               @handle-button-action="$router.push('/reviews')" bg-color="#C67D65"
@@ -266,7 +268,6 @@ export default {
                 let res = await this.$axios.get('/my/employees');
 
                 this.myEmployees = res.data.data;
-
             } catch (e) {
                 console.log(e)
             }
@@ -277,7 +278,6 @@ export default {
 
                 this.reviewUsers = res.data.data;
 
-                console.log(res.data.data)
             } catch (e) {
                 console.log(e)
             }

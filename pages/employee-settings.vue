@@ -1,64 +1,69 @@
 <template>
     <div class="review-wrapper">
-        <div class="w-full flex flex-row items-center justify-start">
-            <button class="back" @click="$router.go(-1)">
-                <img src="/arrow-left.svg" alt="">
-            </button>
-            <div>
-                <h2>Employee Settings</h2>
-                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+        <div v-if="loaded">
+            <div class="w-full flex flex-row items-center justify-start">
+                <button class="back" @click="$router.go(-1)">
+                    <img src="/arrow-left.svg" alt="">
+                </button>
+                <div>
+                    <h2>Employee Settings</h2>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                </div>
             </div>
-        </div>
-        <div class="settings-wrapper">
-            <div class="flex flex-row w-full">
-                <div class="form-wrapper">
-                    <div class="flex flex-row items-center mb-6">
-                        <InputField v-model="userInfo.firstname" label="First Name" placeholder="John"
-                                    class="mr-4"></InputField>
-                        <InputField v-model="userInfo.lastname" label="Last Name" placeholder="Doe"
-                                    class="ml-4"></InputField>
-                    </div>
-                    <InputField placeholder="John Doe" label="Nickname" v-model="userInfo.name"
-                                class="mb-6"></InputField>
-                    <label class="department-label">Department</label>
-                    <div class="dropdown-wrapper">
-                        <div class="dropdown-selected">
-                            {{ $auth.user.department !== null ? $auth.user.department.name : 'Choose Department' }}
+            <div class="settings-wrapper">
+                <div class="flex flex-row w-full">
+                    <div class="form-wrapper">
+                        <div class="flex flex-row items-center mb-6">
+                            <InputField v-model="userInfo.firstname" label="First Name" placeholder="John"
+                                        class="mr-4"></InputField>
+                            <InputField v-model="userInfo.lastname" label="Last Name" placeholder="Doe"
+                                        class="ml-4"></InputField>
                         </div>
-                        <p class="department">
-                            To change department, click here to email your admin.
-                        </p>
+                        <InputField placeholder="John Doe" label="Nickname" v-model="userInfo.name"
+                                    class="mb-6"></InputField>
+                        <label class="department-label">Department</label>
+                        <div class="dropdown-wrapper">
+                            <div class="dropdown-selected">
+                                {{ $auth.user.department !== null ? $auth.user.department.name : 'Choose Department' }}
+                            </div>
+                            <p class="department">
+                                To change department, click here to email your admin.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="logo-wrapper">
+                        <h4 v-if="$auth.user.avatar_url === null">Profile Photo</h4>
+                        <img v-else :src="$auth.user.avatar_url" alt="">
+                        <label for="file-upload" class="custom-file-upload">
+                            Change Profile Photo
+                        </label>
+                        <input id="file-upload" type="file" @change="updateAvatar"/>
                     </div>
                 </div>
-                <div class="logo-wrapper">
-                    <h4 v-if="$auth.user.avatar_url === null">Profile Photo</h4>
-                    <img v-else :src="$auth.user.avatar_url" alt="">
-                    <label for="file-upload" class="custom-file-upload">
-                        Change Profile Photo
-                    </label>
-                    <input id="file-upload" type="file" @change="updateAvatar"/>
+                <div class="buttons-wrapper">
+                    <button @click="saveSettings()">Save settings</button>
+                    <nuxt-link class="reset" to="/reset-password">Reset Password</nuxt-link>
                 </div>
             </div>
-            <div class="buttons-wrapper">
-                <button @click="saveSettings()">Save settings</button>
-                <nuxt-link class="reset" to="/reset-password">Reset Password</nuxt-link>
-            </div>
         </div>
+        <Loader v-else></Loader>
     </div>
 </template>
 
 <script>
 import InputField from "~/components/inputs/InputField";
 import {mixin as clickaway} from 'vue-clickaway';
+import Loader from "@/components/Loader"
 
 export default {
     name: "employee-settings",
     mixins: [clickaway],
-    components: {InputField},
+    components: {InputField, Loader},
     layout: 'standard',
     data() {
         return {
             avatarUrl: '',
+            loaded: false,
             userInfo: {
                 firstname: '',
                 lastname: '',
@@ -74,7 +79,7 @@ export default {
         }
     },
     created() {
-        console.log(this.$auth.user)
+        this.loaded = false;
         this.userInfo.firstname = this.$auth.user.firstname;
         this.userInfo.lastname = this.$auth.user.lastname;
         this.userInfo.name = this.$auth.user.username;
@@ -85,6 +90,7 @@ export default {
         this.userInfo.zip_code = this.$auth.user.zip_code;
         this.userInfo.street = this.$auth.user.street;
         this.userInfo.email = this.$auth.user.email;
+        this.loaded = true;
     },
     methods: {
         async updateAvatar(event) {
@@ -126,7 +132,6 @@ export default {
                 await this.$auth.fetchUser();
 
             } catch (e) {
-                console.log(e.response)
                 this.$toast.open({
                     message: Object.values(e.response.data.errors).join(" "),
                     type: 'error',

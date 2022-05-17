@@ -5,7 +5,7 @@
             <div class="bg-white table-header w-full p-md">
                 <div class="flex flex-col employees-wrap">
                     <div class="-overflow-x-auto">
-                        <div class="inline-block min-w-full py-2 align-middle">
+                        <div class="inline-block min-w-full align-middle">
                             <div class="overflow-hidden">
                                 <table class="min-w-full divide-y divide-gray-300">
                                     <thead class="bg-white">

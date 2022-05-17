@@ -12,7 +12,7 @@
         <div class="modal-content bg-white rounded-2xl p-6 mt-6">
             <h3>Employees email</h3>
             <p class="subtitle">Enter 1 email at a time or enter multiple emails separated by a comma.</p>
-            <InputField v-model="email" placeholder="johndoe@gmail.com"></InputField>
+            <InputField v-model="emails" placeholder="johndoe@gmail.com"></InputField>
             <div class="dropdown-wrapper mt-6" v-on-clickaway="away">
                 <div class="dropdown-selected" @click="showPoolList = true;">
                     {{ selectedPool !== null ? selectedPool.name : 'Choose Pool' }}
@@ -45,7 +45,7 @@ export default {
     components: {InputField},
     data() {
         return {
-            email: '',
+            emails: '',
             pools: [],
             showPoolList: false,
             selectedPool: null,
@@ -63,23 +63,27 @@ export default {
             this.showPoolList = false;
         },
         async inviteNewEmployee() {
-            try {
-                console.log(this.selectedPool.uuid)
-                let res = await this.$axios.post('/email/invite', {
-                    email: this.email,
-                    pool_id: this.selectedPool.id
-                });
+            let new_arr = this.emails.split(',');
 
-                console.log(res.data.data, 'res invite')
-                this.$toast.open({
-                    message: 'Invite successfully sent to ' + this.email,
-                    type: 'success',
-                });
+            for (let i = 0; i < new_arr.length; i++) {
+                let item = new_arr[i];
+                try {
+                    let res = await this.$axios.post('/email/invite', {
+                        email: item,
+                        pool_id: this.selectedPool.id
+                    });
 
-                this.email = ''
-            } catch (e) {
-                console.log(e)
+                    this.$toast.open({
+                        message: 'Invite successfully sent to ' + item,
+                        type: 'success',
+                    });
+
+                    this.emails = ''
+                } catch (e) {
+                    console.log(e)
+                }
             }
+
         },
         async fetchPools() {
             try {

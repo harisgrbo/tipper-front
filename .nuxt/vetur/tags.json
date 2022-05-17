@@ -5,6 +5,9 @@
   "Header": {
     "description": "Auto imported from components/Header.vue"
   },
+  "Loader": {
+    "description": "Auto imported from components/Loader.vue"
+  },
   "Notification": {
     "description": "Auto imported from components/Notification.vue"
   },

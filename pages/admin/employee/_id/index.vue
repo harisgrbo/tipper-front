@@ -1,89 +1,94 @@
 <template>
     <div class="notification-wrapper">
-        <div class="w-full flex flex-row items-center justify-start">
-            <button @click="$router.go(-1)" class="back">
-                <img src="/arrow-left.svg" alt="">
-            </button>
-            <div>
-                <h2>Employee Details</h2>
-                <span class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+        <div v-if="loaded">
+            <div class="w-full flex flex-row items-center justify-start">
+                <button @click="$router.go(-1)" class="back">
+                    <img src="/arrow-left.svg" alt="">
+                </button>
+                <div>
+                    <h2>Employee Details</h2>
+                    <span class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                </div>
             </div>
-        </div>
-        <div class="notification-list-wrapper" v-if="employee">
-            <div class="flex flex-row-reverse w-full">
-                <div class="flex flex-col w-full justify-between">
-                    <div class="modal-header w-full">
-                        <div class="w-full flex flex-col">
-                            <h1 class="username">{{ employee !== null ? employee.username : '' }}</h1>
-                            <div class="flex flex-row items-center justify-between w-full mt-8 rating-stars">
-                                <client-only>
-                                    <star-rating :star-size="22" :increment="1" :inline="true" :read-only="true"
-                                                 inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65"
-                                                 v-model="rating"></star-rating>
-                                </client-only>
-                                <p>Very Good</p>
-                            </div>
-                            <div class="flex flex-row items-center justify-between w-full mt-8 rating-stars">
-                                <span>Total Tips Earned</span>
-                                <span class="total">$1920.00</span>
-                            </div>
-                            <div class="dropdown-wrapper mt-8" v-on-clickaway="away">
-                                <div class="dropdown-selected" @click="showPoolList = true;">
-                                    {{ employee.department.name !== null ? employee.department.name : 'Choose Pool' }}
+            <div class="notification-list-wrapper" v-if="employee">
+                <div class="flex flex-row-reverse w-full">
+                    <div class="flex flex-col w-full justify-between">
+                        <div class="modal-header w-full">
+                            <div class="w-full flex flex-col">
+                                <h1 class="username">{{ employee !== null ? employee.username : '' }}</h1>
+                                <div class="flex flex-row items-center justify-between w-full mt-8 rating-stars">
+                                    <client-only>
+                                        <star-rating :star-size="22" :increment="1" :inline="true" :read-only="true"
+                                                     inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65"
+                                                     v-model="rating"></star-rating>
+                                    </client-only>
+                                    <p>Very Good</p>
                                 </div>
-                                <div class="dropdown-list" v-show="showPoolList">
-                                    <ul>
-                                        <li v-for="(pool, index) in pools" :key="index"
-                                            @click="changeEmployeesPool(pool)">
-                                            {{ pool.name }}
-                                        </li>
-                                    </ul>
+                                <div class="flex flex-row items-center justify-between w-full mt-8 rating-stars">
+                                    <span>Total Tips Earned</span>
+                                    <span class="total">$1920.00</span>
+                                </div>
+                                <div class="dropdown-wrapper mt-8" v-on-clickaway="away">
+                                    <div class="dropdown-selected" @click="showPoolList = true;">
+                                        {{ employee.department.name !== null ? employee.department.name : 'Choose Pool' }}
+                                    </div>
+                                    <div class="dropdown-list" v-show="showPoolList">
+                                        <ul>
+                                            <li v-for="(pool, index) in pools" :key="index"
+                                                @click="changeEmployeesPool(pool)">
+                                                {{ pool.name }}
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="flex flex-col modal-content">
-                        <!--                        <star-rating :star-size="15" :increment="1" :inline="true" :read-only="true" inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65" v-model="5"></star-rating>-->
-                        <div class="modal-buttons-second review">
-                            <!--                            <button>Change Department</button>-->
-                            <button @click="$modal.show('delete')">Delete Employee</button>
+                        <div class="flex flex-col modal-content">
+                            <!--                        <star-rating :star-size="15" :increment="1" :inline="true" :read-only="true" inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65" v-model="5"></star-rating>-->
+                            <div class="modal-buttons-second review">
+                                <!--                            <button>Change Department</button>-->
+                                <button @click="$modal.show('delete')">Delete Employee</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-image-wrapper">
-                    <img src="/noimage.png" alt="">
-                </div>
-            </div>
-        </div>
-        <client-only>
-            <modal name="delete"
-                   width="476"
-                   height="auto"
-                   @before-open="beforeOpen"
-                   @before-close="beforeClose">
-                <div class="flex flex-col">
-                    <h1 class="text-center">Are you sure you want to delete</h1>
-                    <div class="modal-content">
+                    <div class="modal-image-wrapper">
                         <img src="/noimage.png" alt="">
-                        <h2>{{ employee !== null ? employee.username : '' }}</h2>
-                    </div>
-                    <div class="modal-buttons">
-                        <button @click="$modal.hide('delete')">No</button>
-                        <button @click="deleteEmployee">Yes</button>
                     </div>
                 </div>
-            </modal>
-        </client-only>
+            </div>
+            <client-only>
+                <modal name="delete"
+                       width="476"
+                       height="auto"
+                       @before-open="beforeOpen"
+                       @before-close="beforeClose">
+                    <div class="flex flex-col">
+                        <h1 class="text-center">Are you sure you want to delete</h1>
+                        <div class="modal-content">
+                            <img src="/noimage.png" alt="">
+                            <h2>{{ employee !== null ? employee.username : '' }}</h2>
+                        </div>
+                        <div class="modal-buttons">
+                            <button @click="$modal.hide('delete')">No</button>
+                            <button @click="deleteEmployee">Yes</button>
+                        </div>
+                    </div>
+                </modal>
+            </client-only>
+        </div>
+        <Loader v-else></Loader>
     </div>
 </template>
 
 <script>
 import {mixin as clickaway} from 'vue-clickaway';
+import Loader from "@/components/Loader"
 
 export default {
     name: "_id",
     layout: 'standard',
     mixins: [clickaway],
+    components: {Loader},
     data() {
         return {
             range: {
@@ -100,12 +105,17 @@ export default {
             tips: [],
             employee: null,
             employee_meta: null,
-            pools: []
+            pools: [],
+            loaded: false,
+            employer_id: 0,
         }
     },
     async created() {
+        this.loaded = false;
         await this.fetchEmployee();
         await this.fetchPools();
+
+        this.loaded = true;
     },
     methods: {
         async changeEmployeesPool(p) {
@@ -131,14 +141,18 @@ export default {
                 let res = await this.$axios.get('/users/' + this.$route.params.id);
 
                 this.employee = res.data.data;
+                this.employer_id = res.data.data.department.employer_id;
                 this.employee_meta = res.data.meta;
+
+                console.log(res.data.data, 'sta je ovo')
+
             } catch (e) {
                 console.log(e)
             }
         },
         async fetchPools() {
             try {
-                let res = await this.$axios.get('/pools');
+                let res = await this.$axios.get('/admin/users/' + this.employer_id + '/pools');
 
                 this.pools = res.data.data;
             } catch (e) {
@@ -156,7 +170,7 @@ export default {
         },
         async deleteEmployee() {
             try {
-                let res = await this.$axios.delete('/employees/' + this.$route.params.id);
+                let res = await this.$axios.delete('/admin/users/' + this.$route.params.id);
 
                 await this.$router.push('/')
             } catch (e) {

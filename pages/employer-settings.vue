@@ -1,86 +1,91 @@
 <template>
     <div class="review-wrapper">
-        <div class="w-full flex flex-row items-center justify-start">
-            <button class="back" @click="$router.go(-1)">
-                <img src="/arrow-left.svg" alt="">
-            </button>
-            <div>
-                <h2>Employer Settings</h2>
-                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+        <div v-if="loaded">
+            <div class="w-full flex flex-row items-center justify-start">
+                <button class="back" @click="$router.go(-1)">
+                    <img src="/arrow-left.svg" alt="">
+                </button>
+                <div>
+                    <h2>Employer Settings</h2>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                </div>
             </div>
-        </div>
-        <div class="settings-wrapper">
-            <div class="flex flex-row w-full">
-                <div class="form-wrapper">
-                    <div class="flex flex-row items-center mb-6">
-                        <InputField v-model="userInfo.firstname" label="First Name" placeholder="John"
-                                    class="mr-4"></InputField>
-                        <InputField v-model="userInfo.lastname" label="Last Name" placeholder="Doe"
-                                    class="ml-4"></InputField>
-                    </div>
-                    <InputField placeholder="John Doe" label="Business Name" v-model="userInfo.name"
-                                class="mb-6"></InputField>
-                    <InputField placeholder="Johndoe@gmail.com" label="Email" v-model="userInfo.email"
-                                class="mb-6"></InputField>
-                    <InputField placeholder="John Doe Address 12" label="Address" v-model="userInfo.address_1"
-                                class="mb-6"></InputField>
-                    <InputField placeholder="John Doe Address 12" label="Address" v-model="userInfo.address_2"
-                                class="mb-6"></InputField>
-                    <InputField type="password" placeholder="****" label="Password" v-model="userInfo.password"
-                                class="mb-6"></InputField>
-                    <div class="flex flex-row items-center mb-6">
-                        <InputField v-model="userInfo.street" label="Street" placeholder="******"
-                                    class="mr-4"></InputField>
-                        <InputField v-model="userInfo.city" label="City" placeholder="******" class="ml-4"></InputField>
-                    </div>
-                    <div class="flex flex-row items-center mb-6">
-                        <div class="dropdown-wrapper" v-on-clickaway="away">
-                            <label class="state-label">State</label>
-                            <div class="dropdown-selected" @click="showStates = true;">
-                                {{ userInfo.state.length ? userInfo.state : 'Choose State' }}
-                            </div>
-                            <div class="dropdown-list" v-show="showStates">
-                                <ul>
-                                    <li v-for="(state, index) in states" :key="index"
-                                        @click="userInfo.state = state; showStates = false;">
-                                        {{ state }}
-                                    </li>
-                                </ul>
-                            </div>
+            <div class="settings-wrapper">
+                <div class="flex flex-row w-full">
+                    <div class="form-wrapper">
+                        <div class="flex flex-row items-center mb-6">
+                            <InputField v-model="userInfo.firstname" label="First Name" placeholder="John"
+                                        class="mr-4"></InputField>
+                            <InputField v-model="userInfo.lastname" label="Last Name" placeholder="Doe"
+                                        class="ml-4"></InputField>
                         </div>
-                        <InputField v-model="userInfo.zip_code" label="Zip Code" placeholder="******"
-                                    class="ml-4"></InputField>
+                        <InputField placeholder="John Doe" label="Business Name" v-model="userInfo.name"
+                                    class="mb-6"></InputField>
+                        <InputField placeholder="Johndoe@gmail.com" label="Email" v-model="userInfo.email"
+                                    class="mb-6"></InputField>
+                        <InputField placeholder="John Doe Address 12" label="Address" v-model="userInfo.address_1"
+                                    class="mb-6"></InputField>
+                        <InputField placeholder="John Doe Address 12" label="Address" v-model="userInfo.address_2"
+                                    class="mb-6"></InputField>
+                        <InputField type="password" placeholder="****" label="Password" v-model="userInfo.password"
+                                    class="mb-6"></InputField>
+                        <div class="flex flex-row items-center mb-6">
+                            <InputField v-model="userInfo.street" label="Street" placeholder="******"
+                                        class="mr-4"></InputField>
+                            <InputField v-model="userInfo.city" label="City" placeholder="******" class="ml-4"></InputField>
+                        </div>
+                        <div class="flex flex-row items-center mb-6">
+                            <div class="dropdown-wrapper" v-on-clickaway="away">
+                                <label class="state-label">State</label>
+                                <div class="dropdown-selected" @click="showStates = true;">
+                                    {{ userInfo.state.length ? userInfo.state : 'Choose State' }}
+                                </div>
+                                <div class="dropdown-list" v-show="showStates">
+                                    <ul>
+                                        <li v-for="(state, index) in states" :key="index"
+                                            @click="userInfo.state = state; showStates = false;">
+                                            {{ state }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <InputField v-model="userInfo.zip_code" label="Zip Code" placeholder="******"
+                                        class="ml-4"></InputField>
+                        </div>
+                    </div>
+                    <div class="logo-wrapper">
+                        <h4 v-if="$auth.user.avatar_url === null">Profile Photo</h4>
+                        <img v-else :src="$auth.user.avatar_url" alt="">
+                        <label for="file-upload" class="custom-file-upload">
+                            Change Profile Photo
+                        </label>
+                        <input id="file-upload" type="file" @change="updateAvatar"/>
                     </div>
                 </div>
-                <div class="logo-wrapper">
-                    <h4 v-if="$auth.user.avatar_url === null">Profile Photo</h4>
-                    <img v-else :src="$auth.user.avatar_url" alt="">
-                    <label for="file-upload" class="custom-file-upload">
-                        Change Profile Photo
-                    </label>
-                    <input id="file-upload" type="file" @change="updateAvatar"/>
+                <div class="buttons-wrapper">
+                    <button class="save" @click="saveSettings()">Save</button>
                 </div>
             </div>
-            <div class="buttons-wrapper">
-                <button class="save" @click="saveSettings()">Save</button>
-            </div>
         </div>
+        <Loader v-else></Loader>
     </div>
 </template>
 
 <script>
 import InputField from "~/components/inputs/InputField";
+import Loader from "@/components/Loader"
 import {mixin as clickaway} from 'vue-clickaway';
 
 export default {
     name: "employer-settings",
-    components: {InputField},
+    components: {InputField, Loader},
     layout: 'standard',
     mixins: [clickaway],
     data() {
         return {
             showStates: false,
             states: [],
+            loaded: false,
             avatarUrl: '',
             userInfo: {
                 firstname: '',
@@ -97,6 +102,7 @@ export default {
         }
     },
     async created() {
+        this.loaded = false;
         await this.fetchStates();
         this.userInfo.firstname = this.$auth.user.firstname;
         this.userInfo.lastname = this.$auth.user.lastname;
@@ -108,6 +114,8 @@ export default {
         this.userInfo.zip_code = this.$auth.user.zip_code;
         this.userInfo.street = this.$auth.user.street;
         this.userInfo.email = this.$auth.user.email;
+
+        this.loaded = true;
     },
     methods: {
         away() {
@@ -139,8 +147,6 @@ export default {
                 let res = await this.$axios.get('/us/states');
 
                 this.states = res.data.data;
-
-                console.log(res.data.data)
             } catch (e) {
                 console.log(e)
             }
@@ -164,7 +170,6 @@ export default {
 
 
             } catch (e) {
-                console.log(e.response)
                 this.$toast.open({
                     message: Object.values(e.response.data.errors).join(" "),
                     type: 'error',

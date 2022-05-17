@@ -7,7 +7,7 @@
             <div class="bg-white table-header w-full p-md" v-show="pool !== null">
                 <div class="flex flex-col employees-wrap">
                     <div class="-overflow-x-auto">
-                        <div class="inline-block min-w-full py-2 align-middle">
+                        <div class="inline-block min-w-full align-middle">
                             <div class="overflow-hidden bg-white">
                                 <div class="w-full flex items-center justify-between px-4">
                                     <div class="flex flex-col">
@@ -126,7 +126,6 @@ export default {
             let QRCode = require('qrcode');
             QRCode.toCanvas(this.$refs.canvas, `https://tipper-front.herokuapp.com/pools/${this.$route.params.id}/tip`, function (error) {
                 if (error) console.error(error)
-                console.log('success!');
             })
         }
     },
@@ -145,8 +144,6 @@ export default {
                 let res = await this.$axios.get('/pools/' + this.$route.params.id);
 
                 this.pool = res.data.data;
-
-                console.log(this.pool, 'pool')
             } catch (e) {
                 console.log(e)
             }
@@ -156,8 +153,6 @@ export default {
                 let res = await this.$axios.get('/pools/' + this.$route.params.id + '/users');
 
                 this.pool_users = res.data.data;
-
-                console.log(this.pool, 'pool')
             } catch (e) {
                 console.log(e)
             }
@@ -193,8 +188,6 @@ export default {
         async tipPool(p) {
             try {
                 let res = await this.$axios.post(`/pools/${p.id}/tips`);
-
-                console.log(res.data.data)
             } catch (e) {
                 console.log(e)
             }

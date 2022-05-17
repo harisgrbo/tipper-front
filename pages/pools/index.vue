@@ -20,7 +20,7 @@
             <div class="table-header w-full p-md" v-if="pools.length">
                 <div class="flex flex-col employees-wrap">
                     <div class="-overflow-x-auto">
-                        <div class="inline-block min-w-full py-2 align-middle">
+                        <div class="inline-block min-w-full align-middle">
                             <div class="overflow-hidden bg-white mb-4 py-4 rounded-md" v-for="(pool, index) in pools"
                                  :key="index">
                                 <div class="w-full flex items-center justify-between px-4">
@@ -129,8 +129,6 @@ export default {
         async tipPool(p) {
             try {
                 let res = await this.$axios.post(`/pools/${p.id}/tips`);
-
-                console.log(res.data.data)
             } catch (e) {
                 console.log(e)
             }

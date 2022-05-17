@@ -3,31 +3,45 @@
     <div class="relative header">
         <div class="flex flex-row items-center">
             <img src="/logo.svg" class="logo" @click="$router.push('/')"/>
-            <div class="search-input">
-                <img src="/search.png" alt="">
-                <input type="text">
-            </div>
         </div>
 
         <div class="flex flex-row items-center">
             <div class="date">
 
             </div>
-            <div class="auth" v-if="$auth.user">
-                <button v-if="$auth.user.type === 'employer'" class="logout" @click="$router.push('/pools')">
-                    Pools
-                </button>
-                <button class="logout" @click="$auth.logout();">
-                    Logout
-                </button>
+            <div class="auth relative" v-if="$auth.user">
                 <button @click="$router.push('/notification')">
                     <img src="/notification-bing.svg" alt="">
                 </button>
-                <button @click="handleClick">
+                <button @click="handleClick" v-if="$auth.user.type !== 'admin'">
                     <img src="/group.svg" alt="">
                 </button>
-                <button @click="$router.push('/user/' + $auth.user.id)" class="avatar">
-                    <img :src="$auth.user.avatar_url !== null ? $auth.user.avatar_url : '/noimage.png'" alt="">
+                <button class="avatar">
+                    <div class="h-full" v-on-clickaway="away">
+                        <img :src="$auth.user.avatar_url !== null ? $auth.user.avatar_url : '/noimage.png'" alt="" @click="showMainDropdown = !showMainDropdown">
+                        <div class="main-dropdown" v-show="showMainDropdown">
+                            <ul>
+                                <li @click="$router.push('/user/' + $auth.user.id)" v-if="$auth.user.type !== 'admin'">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    {{ $auth.user.username }}
+                                </li>
+                                <li v-if="$auth.user.type === 'employer'" @click="$router.push('/pools')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                                    </svg>
+                                    Departments
+                                </li>
+                                <li @click="$auth.logout()">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                    </svg>
+                                    Logout
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </button>
             </div>
             <div class="auth logged-out" v-else>
@@ -44,8 +58,15 @@
 </template>
 
 <script>
+import {mixin as clickaway} from 'vue-clickaway';
 export default {
     name: "Header",
+    mixins: [clickaway],
+    data() {
+      return {
+          showMainDropdown: false
+      }
+    },
     methods: {
         handleClick() {
             if (this.$auth.user && this.$auth.user.type === 'employer') {
@@ -53,6 +74,9 @@ export default {
             } else {
                 this.$router.push('/employee-settings');
             }
+        },
+        away() {
+            this.showMainDropdown = false;
         }
     }
 }
@@ -78,34 +102,6 @@ export default {
         user-drag: none;
     }
 
-    .search-input {
-        height: 60px;
-        background: rgba(216, 205, 188, 0.2);
-        border-radius: 14px;
-        padding: 0 21px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 334px;
-        margin-left: 60px;
-
-        img {
-            height: 20px;
-            width: 20px;
-        }
-
-        input {
-            height: 100%;
-            width: 100%;
-            background: transparent;
-            margin-left: 14px;
-
-            &:focus {
-                outline: none
-            }
-        }
-    }
-
     .auth {
         display: flex;
         align-items: center;
@@ -123,7 +119,9 @@ export default {
 
             &.avatar {
                 img {
-                    object-fit: cover;
+                    object-fit: cover !important;
+                    width: 100%;
+                    height: 100%;
                 }
             }
 
@@ -145,6 +143,46 @@ export default {
                 min-width: fit-content;
                 padding: 0 24px;
             }
+        }
+    }
+}
+
+.main-dropdown {
+    position: absolute;
+    top: 66px;
+    left: inherit;
+    width: 300px;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    max-height: 150px;
+    overflow: scroll;
+    flex-direction: column;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+
+    ul {
+        padding: 5px;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+
+        li {
+            height: 42px;
+            color: #D8CDBC;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0 9px;
+            cursor: pointer;
+
+            &:hover {
+                background: #F7F5F2;
+                border-radius: 10px;
+                color: #C67D65;
+            }
+
         }
     }
 }

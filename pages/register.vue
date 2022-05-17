@@ -27,6 +27,7 @@
                                             hint-text="At least 8 characters and require at least 1 digit or special character"
                                             type="password" label="Password" placeholder="*********"></InputField>
                                 <InputField v-model="payload.confirm_password" type="password" label="Confirm Password"
+                                            hint-text="At least 8 characters and require at least 1 digit or special character"
                                             placeholder="*********"></InputField>
                                 <InputField v-model="payload.business_name" label="Business name"
                                             hint-text="This is the name that will be shown to your tippers"
@@ -146,8 +147,6 @@ export default {
                 let res = await this.$axios.get('/us/states');
 
                 this.states = res.data.data;
-
-                console.log(res.data.data)
             } catch (e) {
                 console.log(e)
             }
