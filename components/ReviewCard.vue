@@ -3,8 +3,8 @@
         <div class="avatar-wrapper">
             <img :src="user.avatar || '/noimage.png'" alt="">
         </div>
-        <h2>{{ user.name }}</h2>
-        <span>Developer</span>
+        <h2>Anonimous user</h2>
+        <span>Anonimous department</span>
         <h3>"{{ user.description }}"</h3>
         <div class="stars">
             <star-rating :star-size="18" :increment="1" :read-only="true" inactive-color="#F0EBE4"

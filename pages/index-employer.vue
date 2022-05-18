@@ -34,8 +34,9 @@
                                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6">List of Employees
                                         </th>
                                         <th scope="col" class="px-3 py-3.5 text-left">Ratings</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left">Reviews</th>
                                         <th scope="col" class="px-3 py-3.5 text-left">Department</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left">Total tips</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left">Date</th>
                                         <th scope="col" class="px-3 py-3.5 flex flex-row items-center justify-end">
                                             <button class="invite" @click="$router.push('/invite/employees')">
                                                 Invite Employees
@@ -53,7 +54,7 @@
                                                 <div class="ml-4">
                                                     <div class="username"
                                                          @click="$router.push('/employee/' + employee.id)">
-                                                        {{ employee.username }}
+                                                        {{ employee.firstname + ' ' + employee.lastname }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -67,8 +68,9 @@
 
                                             </div>
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 username">Very good</td>
                                         <td class="whitespace-nowrap px-3 py-4 username">{{ employee.department.name }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 username">${{ employee.total_earned_amount }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 username">{{ $moment(employee.created_at).format('ddd DD MMMM')  }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 username"></td>
                                     </tr>
                                     </tbody>
@@ -268,6 +270,8 @@ export default {
                 let res = await this.$axios.get('/my/employees');
 
                 this.myEmployees = res.data.data;
+
+                console.log(this.myEmployees)
             } catch (e) {
                 console.log(e)
             }

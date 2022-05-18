@@ -14,6 +14,7 @@ const _55dceee3 = () => interopDefault(import('../pages/index-employer.vue' /* w
 const _465b6bad = () => interopDefault(import('../pages/index-employer-pending.vue' /* webpackChunkName: "pages/index-employer-pending" */))
 const _3f3e9138 = () => interopDefault(import('../pages/notification.vue' /* webpackChunkName: "pages/notification" */))
 const _47895f48 = () => interopDefault(import('../pages/notification-settings.vue' /* webpackChunkName: "pages/notification-settings" */))
+const _129d6fa8 = () => interopDefault(import('../pages/onboarding.vue' /* webpackChunkName: "pages/onboarding" */))
 const _31039746 = () => interopDefault(import('../pages/pools/index.vue' /* webpackChunkName: "pages/pools/index" */))
 const _34ca7d70 = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
 const _bd985d34 = () => interopDefault(import('../pages/reset-password.vue' /* webpackChunkName: "pages/reset-password" */))
@@ -33,6 +34,8 @@ const _f1263c28 = () => interopDefault(import('../pages/report/_id.vue' /* webpa
 const _1fedb306 = () => interopDefault(import('../pages/user/_id/index.vue' /* webpackChunkName: "pages/user/_id/index" */))
 const _2ce33954 = () => interopDefault(import('../pages/pools/_id/tip/index.vue' /* webpackChunkName: "pages/pools/_id/tip/index" */))
 const _3e81c492 = () => interopDefault(import('../pages/user/_id/tip/index.vue' /* webpackChunkName: "pages/user/_id/tip/index" */))
+const _2311e7f8 = () => interopDefault(import('../pages/user/_id/tipping/index.vue' /* webpackChunkName: "pages/user/_id/tipping/index" */))
+const _4df6c5f0 = () => interopDefault(import('../pages/user/_id/tipping/pools/_idPool.vue' /* webpackChunkName: "pages/user/_id/tipping/pools/_idPool" */))
 const _674760d5 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -86,6 +89,10 @@ export const routerOptions = {
     path: "/notification-settings",
     component: _47895f48,
     name: "notification-settings"
+  }, {
+    path: "/onboarding",
+    component: _129d6fa8,
+    name: "onboarding"
   }, {
     path: "/pools",
     component: _31039746,
@@ -162,6 +169,14 @@ export const routerOptions = {
     path: "/user/:id?/tip",
     component: _3e81c492,
     name: "user-id-tip"
+  }, {
+    path: "/user/:id?/tipping",
+    component: _2311e7f8,
+    name: "user-id-tipping"
+  }, {
+    path: "/user/:id?/tipping/pools/:idPool?",
+    component: _4df6c5f0,
+    name: "user-id-tipping-pools-idPool"
   }, {
     path: "/",
     component: _674760d5,

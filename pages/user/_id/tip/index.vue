@@ -1,61 +1,82 @@
 <template>
-    <div class="tip-page-wrapper">
-        <div class="tip-page-wrapper__content">
-            <span>Select tip amount</span>
-            <div class="grid grid-cols-4 gap-4 pt-4 pb-4">
-                <button v-for="(tip, index) in tip_amount" :key="index"
-                        :class="selected_tip_amount === tip ? 'active' : ''" @click="selectTipAmount(tip); fetchFee();">
-                    <p>${{ tip }}</p>
+    <div class="tipping-wrapper">
+        <div class="flex flex-col" v-if="loaded">
+            <div class="flex flex-row items-center justify-start mb-6">
+                <button @click="$router.go(-1)" class="back">
+                    <img src="/arrow-left.svg" alt="">
                 </button>
+                <img src="/logo.svg" class="logo" @click="$router.push('/')"/>
             </div>
-            <span>Custom Amount</span>
-            <input type="number" v-model="selected_tip_amount" @input="fetchFee();">
-        </div>
-        <div class="tip-page-wrapper__tip-info mt-4">
-            <ul>
-                <li>
-                    <span>Tip:</span>
-                    <span>{{ selected_tip_amount }}</span>
-                </li>
-                <li>
-                    <span>Fee:</span>
-                    <span v-if="loadingFee">
+            <h3>Sending tip to</h3>
+
+            <div class="staff-block">
+                <img class="avatar" src="/noimage.png" alt="">
+                <div class="flex flex-col items-start w-full justify-start">
+                    <p>{{ user.username || user.name }}</p>
+                    <p class="sub" v-if="user.department">
+                        {{ user.department.name }}
+                    </p>
+                </div>
+            </div>
+            <div class="tipping-wrapper-content">
+                <h3>Select tip amount</h3>
+                <div class="grid grid-cols-4 gap-4 pt-4 pb-4">
+                    <button v-for="(tip, index) in tip_amount" :key="index"
+                            :class="selected_tip_amount === tip ? 'active' : ''" @click="selectTipAmount(tip); fetchFee();">
+                        <p>${{ tip }}</p>
+                    </button>
+                </div>
+                <h3>Custom Amount</h3>
+                <input type="number" v-model="selected_tip_amount" @input="fetchFee();">
+            </div>
+            <div class="tipping-wrapper-info mt-4">
+                <ul>
+                    <li>
+                        <span>Tip:</span>
+                        <span>{{ selected_tip_amount }}</span>
+                    </li>
+                    <li>
+                        <span>Fee:</span>
+                        <span v-if="loadingFee">
             <img src="/loader2.svg" alt="">
           </span>
-                    <span v-else>{{ fee.fee + 'USD' }}</span>
-                </li>
-                <li class="total">
-                    <span class="first">Total</span>
-                    <span class="second" v-if="selected_tip_amount > 0">${{
-                            parseInt(selected_tip_amount) + fee.fee
-                        }}</span>
-                </li>
-            </ul>
+                        <span v-else>{{ fee.fee + 'USD' }}</span>
+                    </li>
+                    <li class="total">
+                        <span class="first">Total</span>
+                        <span class="second" v-if="selected_tip_amount > 0">${{
+                                parseInt(selected_tip_amount) + fee.fee
+                            }}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="review-block">
+                <img src="/review.svg" alt="">
+                <star-rating :star-size="25" :increment="1" :inline="true" :rounded-corners="true" padding="2"
+                             inactive-color="#F0EBE4" :show-rating="false" active-color="#F9C52D"
+                             v-model="rating"></star-rating>
+                <h2>Give rating and review!</h2>
+                <textarea v-model="description" placeholder="Leave a text review" rows="10"></textarea>
+            </div>
+            <button class="submit" @click="submit">
+                Next
+            </button>
         </div>
-        <div class="review-block">
-            <img src="/review.svg" alt="">
-            <star-rating :star-size="25" :increment="1" :inline="true" :rounded-corners="true" padding="2"
-                         inactive-color="#F0EBE4" :show-rating="false" active-color="#F9C52D"
-                         v-model="rating"></star-rating>
-            <h2>Give rating and review!</h2>
-            <textarea v-model="description" placeholder="Leave a text review" rows="10"></textarea>
-        </div>
-        <button class="submit" @click="submit">
-            Next
-        </button>
+        <Loader v-else></Loader>
     </div>
 </template>
 
 <script>
+import Loader from "@/components/Loader"
 import InputField from "~/components/inputs/InputField";
 
 export default {
     name: "index.vue",
-    components: {InputField},
-
+    components: {InputField, Loader},
     layout: 'standard',
     data() {
         return {
+            loaded: false,
             tip_amount: [
                 4, 6, 8, 10, 15, 20, 25, 50
             ],
@@ -64,15 +85,42 @@ export default {
             loadingFee: false,
             rating: 0,
             name: '',
-            description: ''
+            description: '',
+            user: null
         }
     },
     async created() {
+        this.loaded = false;
         await this.fetchFee();
+        await this.fetchUser();
+
+        this.loaded = true;
     },
     methods: {
         selectTipAmount(t) {
             this.selected_tip_amount = t;
+        },
+        async fetchUser() {
+            if(this.$route.query.type === 'user') {
+                try {
+                    let res = await this.$axios.get('/users/' + this.$route.query.id)
+
+                    this.user = res.data.data;
+                    console.log(this.user)
+                } catch(e) {
+                    console.log(e)
+                }
+            } else if(this.$route.query.type === 'pool'){
+                try {
+                    let res = await this.$axios.get('/pools/' + this.$route.query.id)
+
+                    this.user = res.data.data;
+                    console.log(this.user)
+                } catch(e) {
+                    console.log(e)
+                }
+            }
+
         },
         async fetchAuthUserBalance() {
             try {
@@ -99,26 +147,49 @@ export default {
             }
         },
         async submit() {
-            try {
-                let res = await this.$axios.post('/users/' + this.$route.params.id + '/tips', {
-                    amount: this.selected_tip_amount,
-                    currency: 'usd',
-                    rating: this.rating,
-                    name: this.name,
-                    description: this.description,
-                });
+          if(this.$route.query.type === 'user') {
+              try {
+                  let res = await this.$axios.post('/users/' + this.$route.query.id + '/tips', {
+                      amount: this.selected_tip_amount,
+                      currency: 'usd',
+                      rating: this.rating,
+                      name: this.name,
+                      description: this.description,
+                  });
 
-                location.href = res.data.redirect_uri;
+                  location.href = res.data.redirect_uri;
 
-                this.selected_tip_amount = 0;
-                this.rating = 0;
-                this.name = '';
-                this.description = ''
+                  this.selected_tip_amount = 0;
+                  this.rating = 0;
+                  this.name = '';
+                  this.description = ''
 
-                await this.fetchAuthUserBalance();
-            } catch (e) {
-                console.log(e)
-            }
+                  await this.fetchAuthUserBalance();
+              } catch (e) {
+                  console.log(e)
+              }
+          } else {
+              try {
+                  let res = await this.$axios.post('/pools/' + this.$route.query.id + '/tips', {
+                      amount: this.selected_tip_amount,
+                      currency: 'usd',
+                      rating: this.rating,
+                      name: this.name,
+                      description: this.description,
+                  });
+
+                  location.href = res.data.redirect_uri;
+
+                  this.selected_tip_amount = 0;
+                  this.rating = 0;
+                  this.name = '';
+                  this.description = ''
+
+                  await this.fetchAuthUserBalance();
+              } catch (e) {
+                  console.log(e)
+              }
+          }
         }
     }
 }
@@ -131,16 +202,16 @@ export default {
     }
 }
 
-.tip-page-wrapper {
+.tipping-wrapper {
     display: flex;
-    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background: #fff;
     width: 400px;
     margin: 0 auto;
-    min-height: 100vh;
-    padding-bottom: 60px;
-    background: #fff;
-    padding: 36px;
-
+    min-height: fit-content;
+    padding: 20px;
+    flex-direction: column;
     @include for-phone-only {
         width: 100%;
         padding: 24px;
@@ -162,7 +233,7 @@ export default {
         }
     }
 
-    &__content {
+    .tipping-wrapper-content {
         span {
             font-style: normal;
             font-weight: 700;
@@ -194,8 +265,13 @@ export default {
             }
 
             &.active {
-                background: #D8CDBC;
+                background: #B45F4B;
                 border: none;
+
+                p {
+                    color: #fff !important;
+                    opacity: 1 !important;
+                }
             }
         }
 
@@ -248,7 +324,7 @@ export default {
         }
     }
 
-    &__tip-info {
+    .tipping-wrapper-info {
         ul {
             width: 100%;
             display: flex;
@@ -408,5 +484,82 @@ textarea {
     line-height: 19px;
     letter-spacing: 0.02em;
     color: #D8CDBC;
+}
+
+.back {
+    height: 54px;
+    width: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    border-radius: 15px;
+    margin-right: 27px;
+}
+
+.staff-block {
+    border: 1px solid #F6F3F0;
+    border-radius: 14px;
+    height: 97px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: 0.3s all ease;
+    margin-bottom: 12px;
+
+    &:hover {
+        box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.05);
+    }
+
+
+    p {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 0.01em;
+        color: #000000;
+
+        &.sub {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 16px;
+            letter-spacing: 0.03em;
+            color: #000000;
+            opacity: 0.8;
+        }
+    }
+
+    img {
+        &.avatar {
+            height: 57px;
+            width: 57px;
+            border: 2px solid #fff;
+            border-radius: 25px;
+            overflow: hidden;
+            min-width: 57px;
+            margin-right: 20px;
+        }
+
+        &.staff {
+            margin-left: 20px;
+        }
+    }
+}
+
+h3 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    letter-spacing: 0.01em;
+    color: #000000;
+    opacity: 0.8;
+    margin: 31px 0;
 }
 </style>

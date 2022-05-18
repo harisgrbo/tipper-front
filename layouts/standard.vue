@@ -27,6 +27,7 @@ export default {
 .main-layout {
     background: #F7F8FA;
     padding-bottom: 120px;
+    min-height: 100vh;
 }
 
 .header {
