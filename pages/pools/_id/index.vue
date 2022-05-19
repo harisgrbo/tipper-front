@@ -14,7 +14,7 @@
                                         <h2 v-if="pool">{{ pool.name }}</h2>
                                         <canvas ref="canvas"/>
 
-                                        <a :href="`https://tipper-front.herokuapp.com/pools/${this.$route.params.id}/tip`">Test</a>
+<!--                                        <a :href="`https://tipper-front.herokuapp.com/pools/${this.$route.params.id}/tip`">Test</a>-->
                                     </div>
 
                                     <div class="flex flex-row items-center">

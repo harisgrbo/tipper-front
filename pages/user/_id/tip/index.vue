@@ -12,7 +12,7 @@
             <div class="staff-block">
                 <img class="avatar" src="/noimage.png" alt="">
                 <div class="flex flex-col items-start w-full justify-start">
-                    <p>{{ user.type === 'employer' ? user.username : (user.firstname + ' ' + user.lastname) }}</p>
+                    <p>{{ user.username || user.name || (user.firstname + ' ' + user.lastname) }}</p>
                     <p class="sub" v-if="user.department">
                         {{ user.department.name }}
                     </p>
