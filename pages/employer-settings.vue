@@ -27,8 +27,6 @@
                                     class="mb-6"></InputField>
                         <InputField placeholder="John Doe Address 12" label="Address" v-model="userInfo.address_2"
                                     class="mb-6"></InputField>
-                        <InputField type="password" placeholder="****" label="Password" v-model="userInfo.password"
-                                    class="mb-6"></InputField>
                         <div class="flex flex-row items-center mb-6">
                             <InputField v-model="userInfo.street" label="Street" placeholder="******"
                                         class="mr-4"></InputField>

@@ -1,15 +1,17 @@
 <template>
     <div class="notification-box-wrapper">
-        <img :src="notification.img + '.svg'" alt="">
-        <b>{{ notification.amount + ' ' + notification.currency }}</b>
-        <span>{{ notification.text }}</span>
+        <img :src="notification.data.icon + '.svg'" alt="">
+        <span class="mr-2">{{ notification.data.text }}</span>
+        <b>{{ '$' + notification.data.amount + ' ' + notification.data.currency.toUpperCase() }}</b>
     </div>
 </template>
 
 <script>
 export default {
     name: "Notification",
-    props: ['notification']
+    props: ['notification'],
+    created() {
+    }
 }
 </script>
 

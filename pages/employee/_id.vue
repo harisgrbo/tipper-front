@@ -14,18 +14,18 @@
                 <div class="flex flex-col w-full justify-between">
                     <div class="modal-header w-full">
                         <div class="w-full flex flex-col">
-                            <h1 class="username">{{ employee !== null ? employee.username : '' }}</h1>
+                            <h1 class="username">{{ employee !== null ? employee.firstname + ' ' + employee.lastname : '' }}</h1>
                             <div class="flex flex-row items-center justify-between w-full mt-8 rating-stars">
                                 <client-only>
                                     <star-rating :star-size="22" :increment="1" :inline="true" :read-only="true"
                                                  inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65"
-                                                 v-model="rating"></star-rating>
+                                                 v-model="employee.rating"></star-rating>
                                 </client-only>
                                 <p>Very Good</p>
                             </div>
                             <div class="flex flex-row items-center justify-between w-full mt-8 rating-stars">
                                 <span>Total Tips Earned</span>
-                                <span class="total">$1920.00</span>
+                                <span class="total">${{ employee.total_earned_amount }}</span>
                             </div>
                             <div class="dropdown-wrapper mt-8" v-on-clickaway="away">
                                 <div class="dropdown-selected" @click="showPoolList = true;">
@@ -132,6 +132,8 @@ export default {
 
                 this.employee = res.data.data;
                 this.employee_meta = res.data.meta;
+
+                console.log(res)
             } catch (e) {
                 console.log(e)
             }

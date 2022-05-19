@@ -10,8 +10,9 @@
 
             </div>
             <div class="auth relative" v-if="$auth.user">
-                <button @click="$router.push('/notification')">
+                <button @click="$router.push('/notification')" class="relative">
                     <img src="/notification-bing.svg" alt="">
+                    <span class="notification" v-show="count > 0">{{ count }}</span>
                 </button>
                 <button @click="handleClick" v-if="$auth.user.type !== 'admin'">
                     <img src="/group.svg" alt="">
@@ -21,19 +22,19 @@
                         <img :src="$auth.user.avatar_url !== null ? $auth.user.avatar_url : '/noimage.png'" alt="" @click="showMainDropdown = !showMainDropdown">
                         <div class="main-dropdown" v-show="showMainDropdown">
                             <ul>
-                                <li @click="$router.push('/user/' + $auth.user.id)" v-if="$auth.user.type !== 'admin'">
+                                <li @click="$router.push('/user/' + $auth.user.id); away();" v-if="$auth.user.type !== 'admin'">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
-                                    {{ $auth.user.username }}
+                                    {{ $auth.user.type === 'employer' ? $auth.user.username : $auth.user.firstname + ' ' + $auth.user.lastname }}
                                 </li>
-                                <li v-if="$auth.user.type === 'employer'" @click="$router.push('/pools')">
+                                <li v-if="$auth.user.type === 'employer'" @click="$router.push('/pools'); away();">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                                     </svg>
                                     Departments
                                 </li>
-                                <li @click="$auth.logout()">
+                                <li @click="$auth.logout(); away();">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                     </svg>
@@ -64,10 +65,27 @@ export default {
     mixins: [clickaway],
     data() {
       return {
-          showMainDropdown: false
+          showMainDropdown: false,
+          count: 0
       }
     },
+    async created() {
+        if(this.$auth.user) {
+            await this.fetchNotificationCount()
+        }
+
+        this.$nuxt.$on('clear-notifications', this.fetchNotificationCount);
+    },
     methods: {
+        async fetchNotificationCount() {
+            try {
+                let res = await this.$axios.get('/notifications/unread/count')
+
+                this.count = res.data.data.count;
+            } catch(e) {
+                console.log(e)
+            }
+        },
         handleClick() {
             if (this.$auth.user && this.$auth.user.type === 'employer') {
                 this.$router.push('/employer-settings');
@@ -115,9 +133,9 @@ export default {
             align-items: center;
             justify-content: center;
             margin-right: 14px;
-            overflow: hidden;
 
             &.avatar {
+                overflow: hidden;
                 img {
                     object-fit: cover !important;
                     width: 100%;
@@ -185,5 +203,23 @@ export default {
 
         }
     }
+}
+
+span.notification {
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    background: #B45F4B;
+    top: -4px;
+    right: -4px;
+    border: 1px solid #fff;
 }
 </style>

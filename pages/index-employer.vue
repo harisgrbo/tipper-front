@@ -367,8 +367,9 @@ export default {
         margin-right: 12px;
 
         &.active {
-            background: rgba(198, 125, 101, 0.2);
+            background: rgb(198, 125, 101);
             border: none;
+            color: #fff;
 
         }
 
@@ -633,7 +634,7 @@ tr.main th {
 
 .pending-button {
     height: 54px;
-    background: #B45F4B;
+    background: rgb(198, 125, 101);
     border-radius: 14px;
     color: #fff;
     width: fit-content;

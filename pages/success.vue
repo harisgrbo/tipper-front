@@ -11,7 +11,12 @@
 <script>
 export default {
     name: "success",
-    layout: 'standard'
+    layout: 'standard',
+    async created() {
+        if(this.$route.query.tip) {
+            await this.$axios.post('/tips/' + this.$route.query.tip + '/complete');
+        }
+    }
 }
 </script>
 
