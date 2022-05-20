@@ -1,18 +1,21 @@
 <template>
     <div class="review-wrapper">
-        <div class="w-full flex flex-row items-center justify-start">
-            <button @click="$router.go(-1)">
-                <img src="/arrow-left.png" alt="">
-            </button>
-            <div>
-                <h2>Reviews</h2>
-                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+        <div v-if="loaded">
+            <div class="w-full flex flex-row items-center justify-start">
+                <button @click="$router.go(-1)">
+                    <img src="/arrow-left.png" alt="">
+                </button>
+                <div>
+                    <h2>Reviews</h2>
+                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                </div>
+            </div>
+            <div class="review-cards-wrapper">
+                <ReviewCard @open-review-card-modal="handleOpenReviewCardInModal(user)" :user="user"
+                            v-for="(user, index) in reviewUsers" :key="index"></ReviewCard>
             </div>
         </div>
-        <div class="review-cards-wrapper">
-            <ReviewCard @open-review-card-modal="handleOpenReviewCardInModal(user)" :user="user"
-                        v-for="(user, index) in reviewUsers" :key="index"></ReviewCard>
-        </div>
+        <Loader v-else></Loader>
         <client-only>
             <modal name="review-card"
                    class="review"
@@ -53,15 +56,16 @@
 
 <script>
 import ReviewCard from "~/components/ReviewCard";
-
+import Loader from "@/components/Loader";
 export default {
     name: "reviews",
     layout: 'standard',
-    components: {ReviewCard},
+    components: {ReviewCard, Loader},
     data() {
         return {
             reviewUsers: [],
             selectedUser: null,
+            loaded: false
         }
     },
     async created() {
@@ -80,10 +84,13 @@ export default {
             this.$modal.show('review-card');
         },
         async fetchReviews() {
+            this.loaded = false;
             try {
                 let res = await this.$axios.get('/users/' + this.$auth.user.id + '/tips');
 
                 this.reviewUsers = res.data.data;
+
+                this.loaded = true;
             } catch (e) {
                 console.log(e)
             }

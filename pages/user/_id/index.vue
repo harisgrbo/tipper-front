@@ -41,7 +41,7 @@
                                     </dd>
                                 </div>
                                 <div class="mt-6 flex space-x-3 md:mt-0 md:ml-4">
-                                    <button v-if="$auth.user.type === 'employer'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500" @click="$router.push('/invite/employees')">Add users to pool</button>
+                                    <button v-if="$auth.user && $auth.user.type === 'employer'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500" @click="$router.push('/invite/employees')">Add users to pool</button>
                                     <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500" @click="showTipModal = true">Payout</button>
                                     <button @click="$router.push('/user/' + user.id + '/tipping')" v-if="user && user.type ==='employer'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">Tip</button>
                                 </div>
@@ -52,7 +52,7 @@
                     <div v-if="$auth.user && $auth.user.id === $route.params.id" class="mt-8">
                         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <h2 class="text-lg leading-6 font-medium text-gray-900">Overview</h2>
-                            <div class="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                            <div class="mt-2 grid grid-cols-3 gap-4">
                                 <div class="bg-white overflow-hidden shadow rounded-lg">
                                     <div class="p-5">
                                         <div class="flex items-center">
@@ -63,9 +63,28 @@
                                             </div>
                                             <div class="ml-5 w-0 flex-1">
                                                 <dl>
-                                                    <dt class="text-sm font-medium text-gray-500 truncate">Account balance</dt>
+                                                    <dt class="text-sm font-medium text-gray-500 truncate">Account balance ready for payout</dt>
                                                     <dd>
                                                         <div class="text-lg font-medium text-gray-900">${{ $auth.user.wallet.balance }}</div>
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white overflow-hidden shadow rounded-lg">
+                                    <div class="p-5">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0">
+                                                <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                                                </svg>
+                                            </div>
+                                            <div class="ml-5 w-0 flex-1">
+                                                <dl>
+                                                    <dt class="text-sm font-medium text-gray-500 truncate">Total earned amount</dt>
+                                                    <dd>
+                                                        <div class="text-lg font-medium text-gray-900">${{ $auth.user.total_earned_amount}}</div>
                                                     </dd>
                                                 </dl>
                                             </div>

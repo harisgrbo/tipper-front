@@ -160,7 +160,7 @@ export default {
                     description: this.description,
                 });
 
-                location.href = res.data.redirect_uri;
+                // location.href = res.data.redirect_uri;
 
                 this.selected_tip_amount = 0;
                 this.rating = 0;
