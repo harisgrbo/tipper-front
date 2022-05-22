@@ -88,7 +88,6 @@ export default {
         this.userInfo.city = this.$auth.user.city;
         this.userInfo.state = this.$auth.user.state;
         this.userInfo.zip_code = this.$auth.user.zip_code;
-        this.userInfo.street = this.$auth.user.street;
         this.userInfo.email = this.$auth.user.email;
         this.loaded = true;
     },
@@ -110,7 +109,7 @@ export default {
 
                     this.avatarUrl = this.$auth.user.avatar_url;
                 } catch (e) {
-                    alert("Avatar nije moguce postaviti")
+                    alert("Error")
                 }
             }
         },
@@ -169,7 +168,6 @@ export default {
         margin-top: 8px;
         letter-spacing: 0.01em;
         color: #161616;
-        opacity: 0.3;
     }
 
     .settings-wrapper {
@@ -346,7 +344,7 @@ button.back {
 
             li {
                 height: 42px;
-                color: #D8CDBC;
+                color: #484848;
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;

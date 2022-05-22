@@ -467,7 +467,7 @@ h1 {
 
             li {
                 height: 42px;
-                color: #D8CDBC;
+                color: #484848;
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;

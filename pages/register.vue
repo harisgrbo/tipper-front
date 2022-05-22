@@ -33,14 +33,11 @@
                                             hint-text="This is the name that will be shown to your tippers"
                                             placeholder="Business name"></InputField>
                                 <InputField v-model="payload.address_1" label="Address 1"
-                                            placeholder="******"></InputField>
+                                            placeholder="Address one"></InputField>
                                 <InputField v-model="payload.address_2" label="Address 2"
-                                            placeholder="******"></InputField>
+                                            placeholder="Address two"></InputField>
                                 <div class="flex flex-row items-center">
-                                    <InputField v-model="payload.street" label="Street" placeholder="******"
-                                                class="mr-4"></InputField>
-                                    <InputField v-model="payload.city" label="City" placeholder="******"
-                                                class="ml-4"></InputField>
+                                    <InputField v-model="payload.city" label="City" placeholder="City"></InputField>
                                 </div>
                                 <div class="flex flex-row items-center">
                                     <div class="dropdown-wrapper" v-on-clickaway="away">
@@ -57,7 +54,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <InputField v-model="payload.zip_code" label="Zip Code" placeholder="******"
+                                    <InputField v-model="payload.zip_code" label="Zip Code" placeholder="12345"
                                                 class="ml-4"></InputField>
                                 </div>
                                 <div>
@@ -65,7 +62,7 @@
                                                   txt-color="#fff"></GlobalButton>
                                 </div>
                                 <div class="sign-up">
-                                    <span>Log In?</span>
+                                    <span>Already a member. Log in?</span>
                                     <nuxt-link to="/sign-in" class="font-medium text-indigo-600 hover:text-indigo-500">
                                         Login
                                     </nuxt-link>
@@ -224,7 +221,6 @@ export default {
             line-height: 24px;
             letter-spacing: 0.01em;
             color: #161616;
-            opacity: 0.3;
         }
     }
 
@@ -328,7 +324,7 @@ export default {
 
             li {
                 height: 42px;
-                color: #D8CDBC;
+                color: #484848;
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;

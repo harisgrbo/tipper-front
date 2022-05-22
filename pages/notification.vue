@@ -85,7 +85,6 @@ export default {
         margin-top: 8px;
         letter-spacing: 0.01em;
         color: #161616;
-        opacity: 0.3;
     }
 
     .notification-list-wrapper {

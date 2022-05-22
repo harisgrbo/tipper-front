@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="notification-list-wrapper">
-            <div class="flex flex-col bg-white p-6 rounded-2xl">
+            <div class="flex flex-col bg-white p-6 rounded-2xl w-full">
                 <div class="modal-header">
                     <div class="mb-7">
                         <h1>Report Period</h1>
@@ -145,11 +145,10 @@ export default {
         font-family: 'Poppins';
         font-style: normal;
         font-weight: 400;
-        font-size: 16px;
+        font-size: 14px;
         line-height: 28px;
         letter-spacing: 0.03em;
         color: #161616;
-        opacity: 0.3;
         margin-top: 23px;
     }
 
@@ -270,6 +269,5 @@ span.subtitle {
     margin-top: 8px;
     letter-spacing: 0.01em;
     color: #161616;
-    opacity: 0.3;
 }
 </style>

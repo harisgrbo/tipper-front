@@ -206,9 +206,8 @@ export default {
 
         letter-spacing: 0.01em;
 
-        color: #161616;
+        color: #343434;
 
-        opacity: 0.3;
     }
 
     button {

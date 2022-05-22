@@ -7,7 +7,7 @@
                 <div class="mx-auto w-full">
                     <div class="flex flex-col justify-start items-start title-wrap">
                         <img src="/logo.svg" class="mb-4" @click="$router.push('/')"/>
-                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                        <span>Tipper’s community is growing every day</span>
                     </div>
 
                     <form class="mt-8 bg-white main-form-wrapper" @submit.prevent="login()">
@@ -134,7 +134,6 @@ export default {
             line-height: 24px;
             letter-spacing: 0.01em;
             color: #161616;
-            opacity: 0.3;
         }
     }
 

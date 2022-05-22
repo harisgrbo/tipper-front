@@ -1,57 +1,129 @@
 <template>
-    <div class="database-wrapper">
-        <div class="flex flex-row items-center justify-between w-full">
-            <h2>Pools</h2>
-            <div class="p-4 rounded-lg flex items-center justify-center bg-white cursor-pointer"
-                 @click="showPoolCreating = !showPoolCreating">
-                {{ showPoolCreating ? 'Hide pool creating' : 'Create new pool' }}
+    <div class="flex flex-col">
+        <div v-if="loaded" class="notification-wrapper">
+            <div class="w-full flex flex-row items-center justify-between">
+                <div class="flex flex-row">
+                    <button class="back" @click="$router.go(-1)">
+                        <img src="/arrow-left.svg" alt="">
+                    </button>
+                    <h2>Pool Settings</h2>
+                </div>
+                <button class="settings-button" @click="$modal.show('create-pool')">Create new Pool</button>
             </div>
-        </div>
-        <div v-show="showPoolCreating" class="border-b border-gray-500 pb-6 mb-6">
-            <div class="flex flex-row items-center justify-between">
-                <InputField class="mr-4" v-model="payload.name" label="Enter Pool name"></InputField>
-                <InputField class="ml-4" v-model="payload.description" label="Enter Pool description"></InputField>
-            </div>
-            <GlobalButton placeholder="Create Pool" width="200px" bg-color="#fff" class="mt-4"
-                          @handle-button-action="createPool"></GlobalButton>
-
-        </div>
-        <div class="review-cards-wrapper">
-            <div class="table-header w-full p-md" v-if="pools.length">
-                <div class="flex flex-col employees-wrap">
+            <div class="notification-list-wrapper">
+                <div class="mt-6 flex flex-col w-full bg-white">
                     <div class="-overflow-x-auto">
                         <div class="inline-block min-w-full align-middle">
-                            <div class="overflow-hidden bg-white mb-4 py-4 rounded-md" v-for="(pool, index) in pools"
-                                 :key="index">
-                                <div class="w-full flex items-center justify-between px-4">
-                                    <h2>{{ pool.name }}</h2>
-                                    <div class="flex flex-row items-center">
-                                        <GlobalButton placeholder="Go to pool" width="200px" bg-color="#fff"
-                                                      @handle-button-action="$router.push('/pools/' + pool.id)"></GlobalButton>
+                            <div class="overflow-hidden">
+                                <div class="bg-white table-header p-md">
+                                    <div class="p-6 flex w-full flex-row items-center justify-between inner">
+                                        <div class="sm:flex-auto flex flex-row items-center justify-between">
+                                            <div>
+                                                <h4>List of Pools</h4>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-row items-center">
+                                            <button @click="$router.push('/invite/employees')">
+                                                Invite Employees
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
+                                <table class="min-w-full divide-y divide-gray-300">
+                                    <thead class="bg-white">
+                                    <tr class="main">
+                                        <th scope="col" class="px-3 py-3.5 text-left">Pool name</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left">Number of employees in Pool</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left">Created Date</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="divide-y bg-white">
+                                    <tr v-for="(pool, index) in pools" :key="index">
+                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0">
+                                                    <img class="h-10 w-10 rounded-full" src="/avatar.svg" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="username">
+                                                        {{ pool.name }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                            {{ pool.employments_count }}
+                                        </td>
+                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                            {{ $moment(pool.created_at).format('DD/MM/YYYY') }}
+                                        </td>
+                                        <td class="whitespace-nowrap py-4 text-right pl-4 pr-3 text-sm sm:pl-6" @click="fetchPoolEmployees(pool.id); selectedNewPool = pool; $modal.show('pool-employees');">
+                                            <div class="flex flex-row items-center justify-end">
+                                                <button class="show">
+                                                    Show Pool Employees
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <client-only>
+                <modal name="create-pool"
+                       width="600"
+                       height="auto"
+                       @before-open="beforeOpen"
+                       @before-close="beforeClose">
+                    <div class="flex flex-col">
+                        <div class="flex flex-row items-center justify-between w-full mb-6">
+                            <h2>Create new Pool</h2>
+                            <svg @click="$modal.hide('create-pool')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </div>
+                        <div class="modal-content w-full">
+                            <div class="flex flex-row items-center justify-between">
+                                <InputField v-model="payload.name" label="Enter Pool name"></InputField>
+                            </div>
+                            <GlobalButton placeholder="Create Pool" width="100%" bg-color="#B45F4B" txt-color="#fff" class="mt-6"
+                                          @handle-button-action="createPool"></GlobalButton>
+
+                        </div>
+                    </div>
+                </modal>
+            </client-only>
+            <client-only>
+                <modal name="pool-employees"
+                       width="600"
+                       height="auto"
+                       @before-open="beforeOpen"
+                       @before-close="beforeClose">
+                    <div class="flex flex-col" v-if="selectedNewPool !== null">
+                        <div class="flex flex-row items-center justify-between w-full mb-6">
+                            <h2 class="modal-title">List of {{ selectedNewPool.name }} Pool employees</h2>
+                            <svg @click="$modal.hide('pool-employees'); selectedNewPool = null;" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </div>
+                        <div class="modal-content w-full">
+                           <ul v-show="pool_users.length">
+                               <li v-for="(user, index) in pool_users">
+                                   {{ user.username }}
+                               </li>
+                           </ul>
+                            <div v-show="!pool_users.length" class="my-6">
+                                You don't have Employees in this pool
+                            </div>
+                        </div>
+                    </div>
+                </modal>
+            </client-only>
         </div>
-        <div v-if="showPoolModal" class="add-user-modal">
-            <div class="main-modal">
-                <div class="flex flex-row items-center justify-between">
-                    <span>Add users to {{ selectedPool.name }}</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                         stroke="currentColor" stroke-width="2" @click="selectedPool = null; showPoolModal = false">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                    </svg>
-                </div>
-                <ul>
-                    <li v-for="(user, i) in users" @click="addUserToPool(user)" :key="i">
-                        {{ user }}
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <Loader v-else></Loader>
     </div>
 </template>
 
@@ -59,44 +131,54 @@
 import GlobalButton from "~/components/GlobalButton";
 import ReviewCard from "~/components/ReviewCard";
 import InputField from "@/components/inputs/InputField";
-
+import Loader from "@/components/Loader";
 export default {
     name: "pools",
     layout: 'standard',
-    components: {InputField, GlobalButton, ReviewCard},
+    components: {InputField, GlobalButton, ReviewCard, Loader},
     data() {
         return {
             users: [],
+            loaded: false,
             showPoolCreating: false,
             showPoolModal: false,
+            selectedNewPool: null,
             pools: [],
             payload: {
                 name: '',
-                description: ''
             },
-            selectedPool: null
+            selectedPool: null,
+            pool_users: []
         }
     },
     async created() {
-        await this.fetchUsers();
         await this.fetchPools();
     },
     methods: {
-        async fetchUsers() {
-            try {
-                let res = await this.$axios.get('/users');
-
-                this.users = res.data.data;
-            } catch (e) {
-                console.log(e)
-            }
+        beforeOpen() {
+            document.body.style.overflow = 'hidden';
+        },
+        beforeClose() {
+            document.body.style.overflow = 'auto';
         },
         async fetchPools() {
+            this.loaded = false;
             try {
                 let res = await this.$axios.get('/pools');
 
                 this.pools = res.data.data;
+
+                this.loaded = true;
             } catch (e) {
+                console.log(e)
+            }
+        },
+        async fetchPoolEmployees(id) {
+            try {
+                let res = await this.$axios.get(`/pools/${id}/employees`);
+
+                this.pool_users = res.data.data;
+            } catch(e) {
                 console.log(e)
             }
         },
@@ -108,6 +190,8 @@ export default {
 
                 this.payload.name = '';
                 this.payload.description = '';
+
+                this.$modal.hide('create-pool')
             } catch (e) {
                 console.log(e)
             }
@@ -274,10 +358,6 @@ tbody tr {
     }
 }
 
-::v-deep input {
-    background: #fff !important;
-}
-
 .add-user-modal {
     position: fixed;
     overflow: hidden;
@@ -299,5 +379,138 @@ tbody tr {
     h2 {
         margin-bottom: 0;
     }
+}
+
+
+
+.notification-wrapper {
+    width: 1240px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding-bottom: 60px;
+
+    h2 {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 45px;
+        color: #1B1A1A;
+    }
+
+    span {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 8px;
+        letter-spacing: 0.01em;
+        color: #161616;
+        opacity: 0.3;
+    }
+
+    .notification-list-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 44px;
+        width: 100%;
+    }
+}
+
+.settings-button {
+    height: 54px;
+    border: 1.5px solid rgba(198, 125, 101, 0.3);
+    box-sizing: border-box;
+    border-radius: 15px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(0, 0, 0, 0.40);
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+table thead {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    color: #1B1A1A;
+}
+
+table img {
+    height: 30px;
+    width: 30px;
+}
+
+tr .username {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #1B1A1A;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+tr.main th {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+    letter-spacing: 0.01em;
+
+    color: #1B1A1A;
+
+    opacity: 1 !important;
+}
+
+.back {
+    height: 54px;
+    width: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    margin-right: 27px;
+}
+
+h2.modal-title {
+    font-size: 24px;
+}
+
+.show {
+    height: 35px;
+    border: 1px solid rgba(48, 48, 48, 1);
+    border-radius: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: right;
+    color: #303030;
+    margin-right: 24px;
 }
 </style>

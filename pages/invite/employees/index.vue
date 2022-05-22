@@ -6,12 +6,11 @@
             </button>
             <div>
                 <h2>Invite Employees</h2>
-                <span class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
             </div>
         </div>
         <div class="modal-content bg-white rounded-2xl p-6 mt-6">
-            <h3>Employees email</h3>
-            <p class="subtitle">Enter 1 email at a time or enter multiple emails separated by a comma.</p>
+            <h3>Employees Email</h3>
+            <p class="subtitle">Enter one email or multiple emails separated by a comma</p>
             <InputField v-model="emails" placeholder="johndoe@gmail.com"></InputField>
             <div class="dropdown-wrapper mt-6" v-on-clickaway="away">
                 <div class="dropdown-selected" @click="showPoolList = true;">
@@ -25,12 +24,36 @@
                     </ul>
                 </div>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo porta ut amet ac vel at sed vulputate
-                pellentesque. Vel mi gravida sodales diam.</p>
+            <p>Select the pool the employee(s) being invited to.</p>
             <div class="modal-buttons">
+                <button @click="$modal.show('create-pool')">Create new Pool</button>
                 <button @click="inviteNewEmployee()">Invite</button>
             </div>
         </div>
+        <client-only>
+            <modal name="create-pool"
+                   width="600"
+                   height="auto"
+                   @before-open="beforeOpen"
+                   @before-close="beforeClose">
+                <div class="flex flex-col">
+                    <div class="flex flex-row items-center justify-between w-full mb-6">
+                        <h2>Create new Pool</h2>
+                        <svg @click="$modal.hide('create-pool')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                    <div class="modal-content w-full">
+                        <div class="flex flex-row items-center justify-between">
+                            <InputField v-model="payload.name" label="Enter Pool name"></InputField>
+                        </div>
+                        <GlobalButton placeholder="Create Pool" width="100%" bg-color="#B45F4B" txt-color="#fff" class="mt-6"
+                                      @handle-button-action="createPool"></GlobalButton>
+
+                    </div>
+                </div>
+            </modal>
+        </client-only>
     </div>
 </template>
 
@@ -49,14 +72,36 @@ export default {
             pools: [],
             showPoolList: false,
             selectedPool: null,
+            payload: {
+                name: ''
+            }
         }
     },
     async created() {
         await this.fetchPools();
     },
     methods: {
+        async createPool() {
+            try {
+                let res = await this.$axios.post('/pools', this.payload);
+
+                this.pools.push(res.data.data)
+
+                this.payload.name = '';
+
+                this.$modal.hide('create-pool')
+            } catch (e) {
+                console.log(e)
+            }
+        },
         away() {
             this.showPoolList = false;
+        },
+        beforeOpen() {
+            document.body.style.overflow = 'hidden';
+        },
+        beforeClose() {
+            document.body.style.overflow = 'auto';
         },
         selectPool(p) {
             this.selectedPool = p;
@@ -164,7 +209,6 @@ export default {
         line-height: 28px;
         letter-spacing: 0.03em;
         color: #161616;
-        opacity: 0.3;
         margin-top: 23px;
 
         &.subtitle {
@@ -328,7 +372,7 @@ button.back {
 
             li {
                 height: 42px;
-                color: #D8CDBC;
+                color: #484848;
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;

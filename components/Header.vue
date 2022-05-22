@@ -32,7 +32,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                                     </svg>
-                                    Departments
+                                    Pool settings
                                 </li>
                                 <li @click="$auth.logout(); away();">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -188,7 +188,7 @@ export default {
 
         li {
             height: 42px;
-            color: #D8CDBC;
+            color: #484848;
             display: flex;
             align-items: center;
             justify-content: flex-start;
