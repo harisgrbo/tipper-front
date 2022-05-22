@@ -24,7 +24,7 @@
                     </ul>
                 </div>
             </div>
-            <p>Select the pool the employee(s) being invited to.</p>
+            <p>Select the pool the employee(s) being invited is a part of.</p>
             <div class="modal-buttons">
                 <button @click="$modal.show('create-pool')">Create new Pool</button>
                 <button @click="inviteNewEmployee()">Invite</button>

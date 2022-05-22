@@ -110,14 +110,21 @@
                             </svg>
                         </div>
                         <div class="modal-content w-full">
-                           <ul v-show="pool_users.length">
-                               <li v-for="(user, index) in pool_users">
-                                   {{ user.username }}
-                               </li>
-                           </ul>
-                            <div v-show="!pool_users.length" class="my-6">
-                                You don't have Employees in this pool
+                            <Loader v-if="!usersLoaded"></Loader>
+                            <div v-else>
+                                <ul v-show="pool_users.length" class="pool-users">
+                                    <li v-for="(user, index) in pool_users">
+                                        <div class="flex-shrink-0">
+                                            <img class="h-10 w-10 mr-3 rounded-full" :src="user.avatar_url ? user.avatar_url : '/avatar.svg'" alt="">
+                                        </div>
+                                        {{ user.username }}
+                                    </li>
+                                </ul>
+                                <div v-show="!pool_users.length" class="my-6">
+                                    You don't have Employees in this pool
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </modal>
@@ -148,7 +155,8 @@ export default {
                 name: '',
             },
             selectedPool: null,
-            pool_users: []
+            pool_users: [],
+            usersLoaded: false
         }
     },
     async created() {
@@ -174,10 +182,14 @@ export default {
             }
         },
         async fetchPoolEmployees(id) {
+            this.usersLoaded = false;
             try {
-                let res = await this.$axios.get(`/pools/${id}/employees`);
+                let res = await this.$axios.get(`/pools/${id}/users`);
 
                 this.pool_users = res.data.data;
+
+                console.log(this.pool_users)
+                this.usersLoaded = true;
             } catch(e) {
                 console.log(e)
             }
@@ -512,5 +524,29 @@ h2.modal-title {
     text-align: right;
     color: #303030;
     margin-right: 24px;
+}
+
+.modal-content {
+    ::v-deep .loader-wrapper {
+        height: 200px;
+    }
+}
+
+.pool-users {
+    display: flex;
+    flex-direction: column;
+
+    li {
+        padding: 12px 0;
+        font-size: 14px;
+        font-weight: 500;
+        border-bottom: 1px solid #f1f1f1;
+        display: flex;
+        align-items: center;
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
 }
 </style>
