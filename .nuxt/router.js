@@ -4,39 +4,39 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _dec4ba06 = () => interopDefault(import('../pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */))
-const _42568fc0 = () => interopDefault(import('../pages/database.vue' /* webpackChunkName: "pages/database" */))
-const _dbb819e6 = () => interopDefault(import('../pages/employee-settings.vue' /* webpackChunkName: "pages/employee-settings" */))
-const _0a673020 = () => interopDefault(import('../pages/employer-settings.vue' /* webpackChunkName: "pages/employer-settings" */))
-const _59060922 = () => interopDefault(import('../pages/failed.vue' /* webpackChunkName: "pages/failed" */))
-const _e85801a4 = () => interopDefault(import('../pages/index-employee.vue' /* webpackChunkName: "pages/index-employee" */))
-const _e6e99e8a = () => interopDefault(import('../pages/index-employer.vue' /* webpackChunkName: "pages/index-employer" */))
-const _68f65585 = () => interopDefault(import('../pages/index-employer-pending.vue' /* webpackChunkName: "pages/index-employer-pending" */))
-const _f8792de0 = () => interopDefault(import('../pages/notification.vue' /* webpackChunkName: "pages/notification" */))
-const _b9044b20 = () => interopDefault(import('../pages/notification-settings.vue' /* webpackChunkName: "pages/notification-settings" */))
-const _14b34500 = () => interopDefault(import('../pages/onboarding.vue' /* webpackChunkName: "pages/onboarding" */))
-const _65930185 = () => interopDefault(import('../pages/pools/index.vue' /* webpackChunkName: "pages/pools/index" */))
-const _d735fd70 = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
-const _503bd984 = () => interopDefault(import('../pages/reset-password.vue' /* webpackChunkName: "pages/reset-password" */))
-const _07871206 = () => interopDefault(import('../pages/reviews.vue' /* webpackChunkName: "pages/reviews" */))
-const _1a6da420 = () => interopDefault(import('../pages/sign-in.vue' /* webpackChunkName: "pages/sign-in" */))
-const _1ebeaf0e = () => interopDefault(import('../pages/stripe-register.vue' /* webpackChunkName: "pages/stripe-register" */))
-const _69d429ee = () => interopDefault(import('../pages/success.vue' /* webpackChunkName: "pages/success" */))
-const _59110633 = () => interopDefault(import('../pages/users.vue' /* webpackChunkName: "pages/users" */))
-const _12a2e1b2 = () => interopDefault(import('../pages/invite/employees/index.vue' /* webpackChunkName: "pages/invite/employees/index" */))
-const _42a77293 = () => interopDefault(import('../pages/admin/business/_id/index.vue' /* webpackChunkName: "pages/admin/business/_id/index" */))
-const _15303dfe = () => interopDefault(import('../pages/admin/employee/_id/index.vue' /* webpackChunkName: "pages/admin/employee/_id/index" */))
-const _509a3004 = () => interopDefault(import('../pages/employee/_id.vue' /* webpackChunkName: "pages/employee/_id" */))
-const _5739858c = () => interopDefault(import('../pages/invite/_hash.vue' /* webpackChunkName: "pages/invite/_hash" */))
-const _7e3757d7 = () => interopDefault(import('../pages/password-reset/_token.vue' /* webpackChunkName: "pages/password-reset/_token" */))
-const _1f545c20 = () => interopDefault(import('../pages/pools/_id/index.vue' /* webpackChunkName: "pages/pools/_id/index" */))
-const _6a75cfc4 = () => interopDefault(import('../pages/report/_id.vue' /* webpackChunkName: "pages/report/_id" */))
-const _569bf4de = () => interopDefault(import('../pages/user/_id/index.vue' /* webpackChunkName: "pages/user/_id/index" */))
-const _4e8c5e7c = () => interopDefault(import('../pages/pools/_id/tip/index.vue' /* webpackChunkName: "pages/pools/_id/tip/index" */))
-const _0e0b5a6a = () => interopDefault(import('../pages/user/_id/tip/index.vue' /* webpackChunkName: "pages/user/_id/tip/index" */))
-const _1111f5dc = () => interopDefault(import('../pages/user/_id/tipping/index.vue' /* webpackChunkName: "pages/user/_id/tipping/index" */))
-const _cd535070 = () => interopDefault(import('../pages/user/_id/tipping/pools/_idPool.vue' /* webpackChunkName: "pages/user/_id/tipping/pools/_idPool" */))
-const _13a72bfd = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _1288d5d5 = () => interopDefault(import('../pages/admin/index.vue' /* webpackChunkName: "pages/admin/index" */))
+const _7f3a3448 = () => interopDefault(import('../pages/database.vue' /* webpackChunkName: "pages/database" */))
+const _51a3a3e5 = () => interopDefault(import('../pages/employee-settings.vue' /* webpackChunkName: "pages/employee-settings" */))
+const _6c323e10 = () => interopDefault(import('../pages/employer-settings.vue' /* webpackChunkName: "pages/employer-settings" */))
+const _796c6f4a = () => interopDefault(import('../pages/failed.vue' /* webpackChunkName: "pages/failed" */))
+const _5525bd56 = () => interopDefault(import('../pages/index-employee.vue' /* webpackChunkName: "pages/index-employee" */))
+const _55dceee3 = () => interopDefault(import('../pages/index-employer.vue' /* webpackChunkName: "pages/index-employer" */))
+const _465b6bad = () => interopDefault(import('../pages/index-employer-pending.vue' /* webpackChunkName: "pages/index-employer-pending" */))
+const _3f3e9138 = () => interopDefault(import('../pages/notification.vue' /* webpackChunkName: "pages/notification" */))
+const _47895f48 = () => interopDefault(import('../pages/notification-settings.vue' /* webpackChunkName: "pages/notification-settings" */))
+const _129d6fa8 = () => interopDefault(import('../pages/onboarding.vue' /* webpackChunkName: "pages/onboarding" */))
+const _31039746 = () => interopDefault(import('../pages/pools/index.vue' /* webpackChunkName: "pages/pools/index" */))
+const _34ca7d70 = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
+const _bd985d34 = () => interopDefault(import('../pages/reset-password.vue' /* webpackChunkName: "pages/reset-password" */))
+const _18251e44 = () => interopDefault(import('../pages/reviews.vue' /* webpackChunkName: "pages/reviews" */))
+const _06d402f8 = () => interopDefault(import('../pages/sign-in.vue' /* webpackChunkName: "pages/sign-in" */))
+const _7fa4b5e6 = () => interopDefault(import('../pages/stripe-register.vue' /* webpackChunkName: "pages/stripe-register" */))
+const _563a88c6 = () => interopDefault(import('../pages/success.vue' /* webpackChunkName: "pages/success" */))
+const _a69d89ea = () => interopDefault(import('../pages/users.vue' /* webpackChunkName: "pages/users" */))
+const _57d8b562 = () => interopDefault(import('../pages/invite/employees/index.vue' /* webpackChunkName: "pages/invite/employees/index" */))
+const _5b1f9ebb = () => interopDefault(import('../pages/admin/business/_id/index.vue' /* webpackChunkName: "pages/admin/business/_id/index" */))
+const _0de00d29 = () => interopDefault(import('../pages/admin/employee/_id/index.vue' /* webpackChunkName: "pages/admin/employee/_id/index" */))
+const _d9a3dfb4 = () => interopDefault(import('../pages/employee/_id.vue' /* webpackChunkName: "pages/employee/_id" */))
+const _12b4adb4 = () => interopDefault(import('../pages/invite/_hash.vue' /* webpackChunkName: "pages/invite/_hash" */))
+const _2242dcaf = () => interopDefault(import('../pages/password-reset/_token.vue' /* webpackChunkName: "pages/password-reset/_token" */))
+const _513bd8c8 = () => interopDefault(import('../pages/pools/_id/index.vue' /* webpackChunkName: "pages/pools/_id/index" */))
+const _f1263c28 = () => interopDefault(import('../pages/report/_id.vue' /* webpackChunkName: "pages/report/_id" */))
+const _1fedb306 = () => interopDefault(import('../pages/user/_id/index.vue' /* webpackChunkName: "pages/user/_id/index" */))
+const _2ce33954 = () => interopDefault(import('../pages/pools/_id/tip/index.vue' /* webpackChunkName: "pages/pools/_id/tip/index" */))
+const _3e81c492 = () => interopDefault(import('../pages/user/_id/tip/index.vue' /* webpackChunkName: "pages/user/_id/tip/index" */))
+const _2311e7f8 = () => interopDefault(import('../pages/user/_id/tipping/index.vue' /* webpackChunkName: "pages/user/_id/tipping/index" */))
+const _4df6c5f0 = () => interopDefault(import('../pages/user/_id/tipping/pools/_idPool.vue' /* webpackChunkName: "pages/user/_id/tipping/pools/_idPool" */))
+const _674760d5 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -51,135 +51,135 @@ export const routerOptions = {
 
   routes: [{
     path: "/admin",
-    component: _dec4ba06,
+    component: _1288d5d5,
     name: "admin"
   }, {
     path: "/database",
-    component: _42568fc0,
+    component: _7f3a3448,
     name: "database"
   }, {
     path: "/employee-settings",
-    component: _dbb819e6,
+    component: _51a3a3e5,
     name: "employee-settings"
   }, {
     path: "/employer-settings",
-    component: _0a673020,
+    component: _6c323e10,
     name: "employer-settings"
   }, {
     path: "/failed",
-    component: _59060922,
+    component: _796c6f4a,
     name: "failed"
   }, {
     path: "/index-employee",
-    component: _e85801a4,
+    component: _5525bd56,
     name: "index-employee"
   }, {
     path: "/index-employer",
-    component: _e6e99e8a,
+    component: _55dceee3,
     name: "index-employer"
   }, {
     path: "/index-employer-pending",
-    component: _68f65585,
+    component: _465b6bad,
     name: "index-employer-pending"
   }, {
     path: "/notification",
-    component: _f8792de0,
+    component: _3f3e9138,
     name: "notification"
   }, {
     path: "/notification-settings",
-    component: _b9044b20,
+    component: _47895f48,
     name: "notification-settings"
   }, {
     path: "/onboarding",
-    component: _14b34500,
+    component: _129d6fa8,
     name: "onboarding"
   }, {
     path: "/pools",
-    component: _65930185,
+    component: _31039746,
     name: "pools"
   }, {
     path: "/register",
-    component: _d735fd70,
+    component: _34ca7d70,
     name: "register"
   }, {
     path: "/reset-password",
-    component: _503bd984,
+    component: _bd985d34,
     name: "reset-password"
   }, {
     path: "/reviews",
-    component: _07871206,
+    component: _18251e44,
     name: "reviews"
   }, {
     path: "/sign-in",
-    component: _1a6da420,
+    component: _06d402f8,
     name: "sign-in"
   }, {
     path: "/stripe-register",
-    component: _1ebeaf0e,
+    component: _7fa4b5e6,
     name: "stripe-register"
   }, {
     path: "/success",
-    component: _69d429ee,
+    component: _563a88c6,
     name: "success"
   }, {
     path: "/users",
-    component: _59110633,
+    component: _a69d89ea,
     name: "users"
   }, {
     path: "/invite/employees",
-    component: _12a2e1b2,
+    component: _57d8b562,
     name: "invite-employees"
   }, {
     path: "/admin/business/:id",
-    component: _42a77293,
+    component: _5b1f9ebb,
     name: "admin-business-id"
   }, {
     path: "/admin/employee/:id",
-    component: _15303dfe,
+    component: _0de00d29,
     name: "admin-employee-id"
   }, {
     path: "/employee/:id?",
-    component: _509a3004,
+    component: _d9a3dfb4,
     name: "employee-id"
   }, {
     path: "/invite/:hash?",
-    component: _5739858c,
+    component: _12b4adb4,
     name: "invite-hash"
   }, {
     path: "/password-reset/:token?",
-    component: _7e3757d7,
+    component: _2242dcaf,
     name: "password-reset-token"
   }, {
     path: "/pools/:id",
-    component: _1f545c20,
+    component: _513bd8c8,
     name: "pools-id"
   }, {
     path: "/report/:id?",
-    component: _6a75cfc4,
+    component: _f1263c28,
     name: "report-id"
   }, {
     path: "/user/:id",
-    component: _569bf4de,
+    component: _1fedb306,
     name: "user-id"
   }, {
     path: "/pools/:id/tip",
-    component: _4e8c5e7c,
+    component: _2ce33954,
     name: "pools-id-tip"
   }, {
     path: "/user/:id?/tip",
-    component: _0e0b5a6a,
+    component: _3e81c492,
     name: "user-id-tip"
   }, {
     path: "/user/:id?/tipping",
-    component: _1111f5dc,
+    component: _2311e7f8,
     name: "user-id-tipping"
   }, {
     path: "/user/:id?/tipping/pools/:idPool?",
-    component: _cd535070,
+    component: _4df6c5f0,
     name: "user-id-tipping-pools-idPool"
   }, {
     path: "/",
-    component: _13a72bfd,
+    component: _674760d5,
     name: "index"
   }],
 
