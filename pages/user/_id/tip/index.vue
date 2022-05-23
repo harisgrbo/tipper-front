@@ -105,7 +105,6 @@ export default {
                     let res = await this.$axios.get('/users/' + this.$route.query.id)
 
                     this.user = res.data.data;
-                    console.log(this.user, 'imal ga')
                 } catch(e) {
                     console.log(e)
                 }

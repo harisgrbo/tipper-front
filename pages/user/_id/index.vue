@@ -37,7 +37,7 @@
                                     <dd class="mt-4">
                                         <canvas ref="canvas"/>
 
-                                        <a :href="`https://tipper-front.herokuapp.com/user/${this.$route.params.id}/tip?type=user&id=${this.$route.params.id}`">Scan QR code to tip</a>
+                                        <a :href="url">Scan QR code to tip</a>
                                     </dd>
                                 </div>
                                 <div class="mt-6 flex space-x-3 md:mt-0 md:ml-4">
@@ -151,22 +151,34 @@ export default {
             payload: {
                 amount: 0,
             },
-            user: null
+            user: null,
+            url: ''
         }
     },
     async created() {
-        this.loaded = false;
         if(this.$auth.user && this.$auth.user.id === this.$route.params.id) {
             await this.fetchAuthUserBalance();
         }
-
-        await this.fetchUser();
-        this.loaded = true;
     },
     async mounted() {
+      this.loaded = false;
+      await this.fetchUser();
+      this.loaded = true;
+
         if (process.browser) {
             let QRCode = require('qrcode');
-            QRCode.toCanvas(this.$refs.canvas, `https://tipper-front.herokuapp.com/user/${this.$route.params.id}/tip?type=user&id=${this.$route.params.id}`, function (error) {
+
+            let url = `https://tipper-front.herokuapp.com/user/${this.$route.params.id}/`;
+
+            if (this.user.type === 'employee') {
+              url += `/tip?type=user&id=${this.$route.params.id}`;
+            } else {
+              url += 'tipping';
+            }
+
+            this.url = url;
+
+            QRCode.toCanvas(this.$refs.canvas, url, function (error) {
                 if (error) console.error(error)
             })
         }
