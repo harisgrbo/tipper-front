@@ -9,7 +9,7 @@
             </div>
             <h3>Sending tip to</h3>
 
-            <div class="staff-block">
+            <div class="staff-block" v-if="user">
                 <img class="avatar" src="/noimage.png" alt="">
                 <div class="flex flex-col items-start w-full justify-start">
                     <p>{{ user.username || user.name || (user.firstname + ' ' + user.lastname) }}</p>
@@ -93,7 +93,6 @@ export default {
         this.loaded = false;
         await this.fetchFee();
         await this.fetchUser();
-
         this.loaded = true;
     },
     methods: {
@@ -106,7 +105,7 @@ export default {
                     let res = await this.$axios.get('/users/' + this.$route.query.id)
 
                     this.user = res.data.data;
-                    console.log(this.user)
+                    console.log(this.user, 'imal ga')
                 } catch(e) {
                     console.log(e)
                 }
@@ -115,7 +114,7 @@ export default {
                     let res = await this.$axios.get('/pools/' + this.$route.query.id)
 
                     this.user = res.data.data;
-                    console.log(this.user)
+                    console.log(this.user, 'imal ga')
                 } catch(e) {
                     console.log(e)
                 }

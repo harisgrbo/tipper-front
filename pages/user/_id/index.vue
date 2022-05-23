@@ -37,7 +37,7 @@
                                     <dd class="mt-4">
                                         <canvas ref="canvas"/>
 
-                                        <a :href="`https://tipper-front.herokuapp.com/user/${this.$route.params.id}/tip`">Scan QR code to tip</a>
+                                        <a :href="`https://tipper-front.herokuapp.com/user/${this.$route.params.id}/tip?type=user&id=${this.$route.params.id}`">Scan QR code to tip</a>
                                     </dd>
                                 </div>
                                 <div class="mt-6 flex space-x-3 md:mt-0 md:ml-4">
@@ -166,7 +166,7 @@ export default {
     async mounted() {
         if (process.browser) {
             let QRCode = require('qrcode');
-            QRCode.toCanvas(this.$refs.canvas, `https://tipper-front.herokuapp.com/user/${this.$route.params.id}/tip`, function (error) {
+            QRCode.toCanvas(this.$refs.canvas, `https://tipper-front.herokuapp.com/user/${this.$route.params.id}/tip?type=user&id=${this.$route.params.id}`, function (error) {
                 if (error) console.error(error)
             })
         }
