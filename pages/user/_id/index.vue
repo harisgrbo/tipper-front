@@ -171,7 +171,7 @@ export default {
             let url = `https://tipper-front.herokuapp.com/user/${this.$route.params.id}/`;
 
             if (this.user.type === 'employee') {
-              url += `/tip?type=user&id=${this.$route.params.id}`;
+              url += `tip?type=user&id=${this.$route.params.id}`;
             } else {
               url += 'tipping';
             }
