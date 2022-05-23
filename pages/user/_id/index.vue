@@ -37,13 +37,13 @@
                                     <dd class="mt-4">
                                         <canvas ref="canvas"/>
 
-                                        <a :href="`https://tipper-front.herokuapp.com/user/${this.$route.params.id}/tipping`">Scan QR code to tip</a>
+                                        <a :href="`https://tipper-front.herokuapp.com/user/${this.$route.params.id}/tip`">Scan QR code to tip</a>
                                     </dd>
                                 </div>
                                 <div class="mt-6 flex space-x-3 md:mt-0 md:ml-4">
                                     <button v-if="$auth.user && $auth.user.type === 'employer'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500" @click="$router.push('/invite/employees')">Add users to pool</button>
                                     <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500" @click="showTipModal = true">Payout</button>
-                                    <button @click="$router.push('/user/' + user.id + '/tipping')" v-if="user && user.type ==='employer'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">Tip</button>
+                                    <button @click="$router.push('/user/' + user.id + '/tip')" v-if="user && user.type ==='employer'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">Tip</button>
                                 </div>
                             </div>
                         </div>
