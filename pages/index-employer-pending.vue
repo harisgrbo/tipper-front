@@ -6,7 +6,6 @@
             <h2 class="start">
                 Start Inviting Employees
             </h2>
-            <span class="sub-start">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
             <button class="new-inv mt-6" @click="$router.push('/invite/employees')">Invite</button>
         </div>
         <div class="mt-8">

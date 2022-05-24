@@ -7,14 +7,13 @@
                 <div class="mx-auto w-full">
                     <div class="flex flex-col justify-start items-start title-wrap">
                         <img src="/logo.svg" class="mb-4" @click="$router.push('/')"/>
-                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                        <span>Sign up and help your employees start making more money right away</span>
                     </div>
 
                     <form class="mt-8 bg-white main-form-wrapper" @submit.prevent="register">
                         <div class="w-full">
                             <div class="space-y-6">
                                 <h1>Create Account</h1>
-                                <small>Create a Tipper account to start receiving more in tips.</small>
                                 <div class="flex flex-row items-center">
                                     <InputField v-model="payload.firstname" label="First Name" placeholder="******"
                                                 class="mr-4"></InputField>
