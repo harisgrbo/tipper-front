@@ -8,7 +8,6 @@
                 </button>
                 <div>
                     <h2>{{ user.username }}</h2>
-                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
                 </div>
             </div>
             <div class="business-wrapper mb-6">
@@ -63,7 +62,7 @@
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 username">
-                                                {{ $moment(user.created_at).format('DD/MM/YYYY') }}
+                                                {{ $moment(user.created_at).format('MM/DD/YYYY') }}
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 username text-right">
                                                 delete

@@ -1,76 +1,74 @@
 <template>
     <div class="employer-wrapper">
-        <h2>Employer Dashboard</h2>
-        <div class="bg-white rounded-md p-24 flex flex-col items-center justify-center">
-            <img src="/no-employees.svg" class="mb-6" alt="">
-            <h2 class="start">
-                Start Inviting Employees
-            </h2>
-            <button class="new-inv mt-6" @click="$router.push('/invite/employees')">Invite</button>
-        </div>
-        <div class="mt-8">
-            <!-- This example requires Tailwind CSS v2.0+ -->
-            <div class="bg-white table-header p-md">
-                <div class="p-6 flex w-full flex-row items-center justify-between inner">
-                    <div class="sm:flex-auto">
-                        <h4>Inviting Employee</h4>
-                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                    </div>
-                    <div class="flex flex-row items-center">
-                        <button v-for="(option, index) in options" :key="index"
-                                :class="current_option === index ? 'active' : ''" @click="current_option = index">
-                            {{ option }}
-                        </button>
-                        <button class="mutation" @click="$router.push('/report/' + 1)">
-                            Export Tip Report
-                            <img src="/mutation.svg" alt="">
-                        </button>
-                    </div>
+        <div class="flex flex-col" v-if="loaded">
+            <div class="w-full flex flex-row items-center justify-start mb-6">
+                <button @click="$router.go(-1)" class="back">
+                    <img src="/arrow-left.svg" alt="">
+                </button>
+                <div>
+                    <h2>Employer Dashboard</h2>
                 </div>
-                <div class="mt-6 flex flex-col employees-wrap">
-                    <div class="-overflow-x-auto">
-                        <div class="inline-block min-w-full align-middle">
-                            <div class="overflow-hidden">
-                                <table class="min-w-full divide-y divide-gray-300">
-                                    <thead class="bg-white">
-                                    <tr class="main">
-                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/3">List of Employees
-                                        </th>
-                                        <th scope="col" class="px-3 py-3.5 text-left w-full">Date</th>
-                                        <th scope="col" class="px-3 py-3.5 text-right">
-                                          Status
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="divide-y bg-white">
-                                    <tr v-for="(employee, index) in myEmployees" :key="index">
-                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 w-1/3">
-                                            <div class="flex items-center">
-                                                <div class="flex-shrink-0">
-                                                    <img class="h-10 w-10 rounded-full" src="/avatar.svg" alt="">
-                                                </div>
-                                                <div class="ml-4">
-                                                    <div class="username"
-                                                         @click="$router.push('/employee/' + employee.id)">
-                                                        {{ employee.email }}
+            </div>
+            <div class="bg-white rounded-md p-24 flex flex-col items-center justify-center">
+                <img src="/no-employees.svg" class="mb-6" alt="">
+                <h2 class="start">
+                    {{ myEmployees.length ? 'Invite Employees' : 'Start Inviting Employees' }}
+                </h2>
+                <button class="new-inv mt-6" @click="$router.push('/invite/employees')">Invite</button>
+            </div>
+            <div class="mt-8">
+                <!-- This example requires Tailwind CSS v2.0+ -->
+                <div class="bg-white table-header p-md">
+                    <div class="p-6 flex w-full flex-row items-center justify-between inner">
+                        <div class="sm:flex-auto">
+                            <h4>Employee Invited</h4>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex flex-col employees-wrap">
+                        <div class="-overflow-x-auto">
+                            <div class="inline-block min-w-full align-middle">
+                                <div class="overflow-hidden">
+                                    <table class="min-w-full divide-y divide-gray-300">
+                                        <thead class="bg-white">
+                                        <tr class="main">
+                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/3">List of Employees
+                                            </th>
+                                            <th scope="col" class="px-3 py-3.5 text-left w-full">Date</th>
+                                            <th scope="col" class="px-3 py-3.5 text-right">
+                                                Status
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="divide-y bg-white">
+                                        <tr v-for="(employee, index) in myEmployees" :key="index">
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 w-1/3">
+                                                <div class="flex items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <img class="h-10 w-10 rounded-full" src="/avatar.svg" alt="">
+                                                    </div>
+                                                    <div class="ml-4">
+                                                        <div class="username"
+                                                             @click="$router.push('/employee/' + employee.id)">
+                                                            {{ employee.email }}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-full">
-                                           {{ $moment(employee.created_at).format('ddd DD MMMM') }}
-                                        </td>
-                                        <td class="whitespace-nowrap px-3 py-4 username text-right capitalize">{{ employee.status }}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-full">
+                                                {{ $moment(employee.created_at).format('ddd DD MMMM') }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 username text-right capitalize">{{ employee.status }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+        <Loader v-else></Loader>
     </div>
 </template>
 
@@ -78,11 +76,12 @@
 import GlobalButton from "~/components/GlobalButton";
 import ReviewCard from "~/components/ReviewCard";
 import InputField from "@/components/inputs/InputField";
+import Loader from "@/components/Loader";
 
 export default {
     name: "index-employer",
     layout: 'standard',
-    components: {InputField, GlobalButton, ReviewCard},
+    components: {InputField, GlobalButton, ReviewCard, Loader},
     data() {
         return {
             options: [
@@ -92,6 +91,7 @@ export default {
                 'This Year'
             ],
             email: '',
+            loaded: false,
             current_option: 0,
             range: {
                 start: new Date(),
@@ -138,11 +138,13 @@ export default {
             }
         },
         async fetchMyEmployees() {
+            this.loaded = false;
             try {
                 let res = await this.$axios.get('/email/invites');
 
                 this.myEmployees = res.data.data;
 
+                this.loaded = true;
             } catch (e) {
                 console.log(e)
             }
@@ -164,7 +166,6 @@ export default {
         font-size: 30px;
         line-height: 45px;
         color: #1B1A1A;
-        margin-bottom: 42px;
 
         &.reviews {
             margin-bottom: 0;
@@ -489,5 +490,17 @@ tr.main th {
     flex: none;
     order: 0;
     flex-grow: 0;
+}
+
+.back {
+    height: 54px;
+    width: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    border-radius: 15px;
+    margin-right: 27px;
 }
 </style>

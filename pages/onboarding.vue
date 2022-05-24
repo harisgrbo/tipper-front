@@ -6,7 +6,6 @@
             </div>
             <h3>SUCCESS</h3>
             <h2 class="mb-2">You will be redirected on login page in 3 seconds</h2>
-            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Blandit auctor purus tempus</span>
         </div>
     </div>
 </template>

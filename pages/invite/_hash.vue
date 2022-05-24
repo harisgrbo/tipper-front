@@ -7,7 +7,6 @@
                 <div class="mx-auto w-full">
                     <div class="flex flex-col justify-start items-start title-wrap">
                         <img src="/logo.svg" class="mb-4" @click="$router.push('/')"/>
-                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
                     </div>
 
                     <form class="mt-8 bg-white main-form-wrapper" @submit.prevent="register">

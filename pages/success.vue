@@ -3,7 +3,6 @@
         <div class="success-page-wrapper__content">
             <div class="image-wrapper"></div>
             <h3>Thank You</h3>
-            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Blandit auctor purus tempus</span>
         </div>
     </div>
 </template>

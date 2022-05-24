@@ -7,7 +7,6 @@
                 </button>
                 <div>
                     <h2>Employee Settings</h2>
-                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
                 </div>
             </div>
             <div class="settings-wrapper">

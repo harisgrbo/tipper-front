@@ -57,7 +57,7 @@
                                             {{ pool.employments_count }}
                                         </td>
                                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                                            {{ $moment(pool.created_at).format('DD/MM/YYYY') }}
+                                            {{ $moment(pool.created_at).format('MM/DD/YYYY') }}
                                         </td>
                                         <td class="whitespace-nowrap py-4 text-right pl-4 pr-3 text-sm sm:pl-6" @click="fetchPoolEmployees(pool.id); selectedNewPool = pool; $modal.show('pool-employees');">
                                             <div class="flex flex-row items-center justify-end">

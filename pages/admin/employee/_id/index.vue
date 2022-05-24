@@ -7,7 +7,6 @@
                 </button>
                 <div>
                     <h2>Employee Details</h2>
-                    <span class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
                 </div>
             </div>
             <div class="notification-list-wrapper" v-if="employee">
@@ -99,7 +98,7 @@ export default {
             selectedPool: null,
             rating: 4,
             masks: {
-                input: 'DD/MM/YYYY',
+                input: 'MM/DD/YYYY',
             },
             balance: null,
             tips: [],

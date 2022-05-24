@@ -3,7 +3,6 @@
         <div class="w-full flex flex-row items-center justify-between">
             <div>
                 <h2>Notifications</h2>
-                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
             </div>
             <button class="settings-button" @click="$router.push('/notification-settings')">Settings</button>
         </div>

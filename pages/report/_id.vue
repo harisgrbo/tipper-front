@@ -6,7 +6,6 @@
             </button>
             <div>
                 <h2>Export Tip Report</h2>
-                <span class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
             </div>
         </div>
         <div class="notification-list-wrapper">
@@ -59,8 +58,7 @@
                             </div>
                         </template>
                     </vc-date-picker>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo porta ut amet ac vel at sed
-                        vulputate pellentesque. Vel mi gravida sodales diam.</p>
+                    <span class="sub-text">Choose the date range you’d like to see activity for all of your employees</span>
                     <div class="modal-buttons">
                         <button>Download in excel form</button>
                         <button>Download in pdf format</button>
@@ -82,7 +80,7 @@ export default {
                 end: new Date(),
             },
             masks: {
-                input: 'DD/MM/YYYY',
+                input: 'MM/DD/YYYY',
             },
             balance: null,
             tips: []
@@ -269,5 +267,11 @@ span.subtitle {
     margin-top: 8px;
     letter-spacing: 0.01em;
     color: #161616;
+}
+
+.sub-text {
+    font-size: 14px !important;
+    margin-top: 24px !important;
+    color: #484848 !important
 }
 </style>

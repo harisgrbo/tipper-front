@@ -14,7 +14,6 @@
                         <div class="w-full">
                             <div class="space-y-6">
                                 <h1>Login</h1>
-                                <small>Tipper’s mission is to help workers make more money.</small>
                                 <InputField v-model="payload.username" label="Email Address"
                                             placeholder="johndoe@gmail.com"></InputField>
                                 <InputField v-model="payload.password" type="password" label="Password"
@@ -65,6 +64,22 @@ export default {
     },
     methods: {
         async login() {
+            if(!this.payload.username.length) {
+                this.$toast.open({
+                    message: 'Please enter your Email Address',
+                    type: 'error',
+                });
+
+                return
+            }
+            if(!this.payload.password.length) {
+                this.$toast.open({
+                    message: 'Please enter your Password',
+                    type: 'error',
+                });
+
+                return
+            }
             try {
                 await this.$auth.loginWith("local", {data: this.payload});
                 await this.$auth.fetchUser();

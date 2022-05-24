@@ -7,7 +7,6 @@
                 </button>
                 <div>
                     <h2>Reviews</h2>
-                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
                 </div>
             </div>
             <div class="review-cards-wrapper">

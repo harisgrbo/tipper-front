@@ -6,7 +6,6 @@
             </button>
             <div>
                 <h2>Notification Settings</h2>
-                <span class="first">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
             </div>
         </div>
         <div class="settings-wrapper">

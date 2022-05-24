@@ -7,7 +7,6 @@
                 </button>
                 <div>
                     <h2>Employer Settings</h2>
-                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
                 </div>
             </div>
             <div class="settings-wrapper">
@@ -45,7 +44,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <InputField v-model="userInfo.zip_code" label="Zip Code" placeholder="******"
+                            <InputField v-model="userInfo.zip_code" label="Zip Code" placeholder="12345"
                                         class="ml-4"></InputField>
                         </div>
                     </div>

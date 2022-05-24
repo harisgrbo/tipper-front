@@ -15,9 +15,9 @@
                             <div class="space-y-6">
                                 <h1>Create Account</h1>
                                 <div class="flex flex-row items-center">
-                                    <InputField v-model="payload.firstname" label="First Name" placeholder="******"
+                                    <InputField v-model="payload.firstname" label="First Name" placeholder="John"
                                                 class="mr-4"></InputField>
-                                    <InputField v-model="payload.lastname" label="Last Name" placeholder="******"
+                                    <InputField v-model="payload.lastname" label="Last Name" placeholder="Doe"
                                                 class="ml-4"></InputField>
                                 </div>
                                 <InputField v-model="payload.email" label="Enter email Address"

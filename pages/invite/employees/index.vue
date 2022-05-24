@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="modal-content bg-white rounded-2xl p-6 mt-6">
-            <h3>Employees Email</h3>
+            <h3>Employee's Email</h3>
             <p class="subtitle">Enter one email or multiple emails separated by a comma</p>
             <InputField v-model="emails" placeholder="johndoe@gmail.com"></InputField>
             <div class="dropdown-wrapper mt-6" v-on-clickaway="away">

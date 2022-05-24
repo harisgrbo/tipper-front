@@ -47,7 +47,7 @@
                                                 $12.00
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 username">
-                                                {{ $moment(user.created_at).format('DD/MM/YYYY') }}
+                                                {{ $moment(user.created_at).format('MM/DD/YYYY') }}
                                             </td>
                                         </tr>
                                         </tbody>

@@ -11,7 +11,6 @@
                         <div class="sm:flex-auto flex flex-row items-center justify-between">
                             <div>
                                 <h4>Employees List</h4>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
                             </div>
                         </div>
                         <div class="flex flex-row items-center">
@@ -102,7 +101,6 @@
                             <div class="modal-header items-start">
                                 <div>
                                     <h1>Tip activity report mutation</h1>
-                                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
                                 </div>
                                 <button @click="$modal.hide('mutation')">
                                     <img src="/close.svg" alt="">
@@ -154,8 +152,6 @@
                                         </div>
                                     </template>
                                 </vc-date-picker>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Justo porta ut amet ac vel at
-                                    sed vulputate pellentesque. Vel mi gravida sodales diam.</p>
                                 <div class="modal-buttons">
                                     <button>Download in excel form</button>
                                     <button>Download in pdf format</button>
