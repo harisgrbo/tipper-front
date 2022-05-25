@@ -1,8 +1,12 @@
 <template>
     <div class="success-page-wrapper">
         <div class="success-page-wrapper__content">
-            <div class="image-wrapper"></div>
+            <div class="image-wrapper">
+                <img src="/inner.svg" alt="">
+            </div>
             <h3>Thank You</h3>
+            <p>Our staff hope everything was to your satisfaction and appreciate your recognition!</p>
+            <nuxt-link class="tip-again" :to="'/user/' + this.id + '/tipping'">Tip Again?</nuxt-link>
         </div>
     </div>
 </template>
@@ -11,9 +15,16 @@
 export default {
     name: "success",
     layout: 'standard',
+    data() {
+      return {
+          id: 0,
+      }
+    },
     async created() {
         if(this.$route.query.tip) {
-            await this.$axios.post('/tips/' + this.$route.query.tip + '/complete');
+            let res = await this.$axios.post('/tips/' + this.$route.query.tip + '/complete');
+
+            this.id = this.$route.query .employer;
         }
     }
 }
@@ -70,6 +81,10 @@ export default {
             background: #fff;
             border-radius: 78px;
             margin-bottom: 56px;
+            background-image: url("/outter.svg");
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         span {
@@ -101,5 +116,38 @@ export default {
             color: #000000;
         }
     }
+}
+
+.tip-again {
+    width: 366px;
+    margin-top: 24px;
+    height: 60px;
+    background: #B45F4B;
+    border-radius: 14px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+}
+
+p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    /* or 167% */
+
+    text-align: center;
+    letter-spacing: 0.02em;
+
+    color: #000000;
+
+    opacity: 0.4;
 }
 </style>

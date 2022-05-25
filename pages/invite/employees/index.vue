@@ -27,7 +27,7 @@
             <p>Select the pool the employee(s) being invited is a part of.</p>
             <div class="modal-buttons">
                 <button @click="$modal.show('create-pool')">Create new Pool</button>
-                <button @click="inviteNewEmployee()">Invite</button>
+                <button :class="selectedPool === null ? 'disabled': ''" @click="inviteNewEmployee()" :disabled="selectedPool === null">Invite</button>
             </div>
         </div>
         <client-only>
@@ -125,7 +125,11 @@ export default {
 
                     this.emails = ''
                 } catch (e) {
-                    console.log(e)
+                    this.$toast.open({
+                        message: e.response.data.data.message,
+                        type: 'error',
+                    });
+
                 }
             }
 
@@ -306,6 +310,12 @@ export default {
         &:first-child {
             margin-right: 14px;
         }
+
+        &.disabled {
+            background: #f1f1f1;
+            cursor: not-allowed;
+            color: #969696;
+        }
     }
 }
 
@@ -388,5 +398,9 @@ button.back {
             }
         }
     }
+}
+
+.feha {
+    color: red !important;;
 }
 </style>

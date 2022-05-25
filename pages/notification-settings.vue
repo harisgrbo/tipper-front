@@ -9,15 +9,14 @@
             </div>
         </div>
         <div class="settings-wrapper">
-            <span class="second">Setting Manually</span>
             <ul class="w-full">
-                <li>
-                    <p>Sender send tip</p>
-                    <label class="switch">
-                        <input type="checkbox" v-model="notificationSettings.sender_send_tip">
-                        <span class="slider round"></span>
-                    </label>
-                </li>
+<!--                <li>-->
+<!--                    <p>Sender send tip</p>-->
+<!--                    <label class="switch">-->
+<!--                        <input type="checkbox" v-model="notificationSettings.sender_send_tip">-->
+<!--                        <span class="slider round"></span>-->
+<!--                    </label>-->
+<!--                </li>-->
                 <li>
                     <p>Employee received tip</p>
                     <label class="switch">
@@ -26,38 +25,38 @@
                         <span class="slider round"></span>
                     </label>
                 </li>
-                <li>
-                    <p>Add bank account</p>
-                    <label class="switch">
-                        <input type="checkbox" v-model="notificationSettings.add_bank_account"
-                               @change="saveNotificationSettings()">
-                        <span class="slider round"></span>
-                    </label>
-                </li>
-                <li>
-                    <p>Remove bank account</p>
-                    <label class="switch">
-                        <input type="checkbox" v-model="notificationSettings.remove_bank_account"
-                               @change="saveNotificationSettings()">
-                        <span class="slider round"></span>
-                    </label>
-                </li>
-                <li>
-                    <p>Welcome email</p>
-                    <label class="switch">
-                        <input type="checkbox" v-model="notificationSettings.welcome_email"
-                               @change="saveNotificationSettings()">
-                        <span class="slider round"></span>
-                    </label>
-                </li>
-                <li>
-                    <p>User removed as employee</p>
-                    <label class="switch">
-                        <input type="checkbox" v-model="notificationSettings.user_removed_as_employee"
-                               @change="saveNotificationSettings()">
-                        <span class="slider round"></span>
-                    </label>
-                </li>
+<!--                <li>-->
+<!--                    <p>Add bank account</p>-->
+<!--                    <label class="switch">-->
+<!--                        <input type="checkbox" v-model="notificationSettings.add_bank_account"-->
+<!--                               @change="saveNotificationSettings()">-->
+<!--                        <span class="slider round"></span>-->
+<!--                    </label>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <p>Remove bank account</p>-->
+<!--                    <label class="switch">-->
+<!--                        <input type="checkbox" v-model="notificationSettings.remove_bank_account"-->
+<!--                               @change="saveNotificationSettings()">-->
+<!--                        <span class="slider round"></span>-->
+<!--                    </label>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <p>Welcome email</p>-->
+<!--                    <label class="switch">-->
+<!--                        <input type="checkbox" v-model="notificationSettings.welcome_email"-->
+<!--                               @change="saveNotificationSettings()">-->
+<!--                        <span class="slider round"></span>-->
+<!--                    </label>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <p>User removed as employee</p>-->
+<!--                    <label class="switch">-->
+<!--                        <input type="checkbox" v-model="notificationSettings.user_removed_as_employee"-->
+<!--                               @change="saveNotificationSettings()">-->
+<!--                        <span class="slider round"></span>-->
+<!--                    </label>-->
+<!--                </li>-->
             </ul>
         </div>
     </div>

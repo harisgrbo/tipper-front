@@ -25,9 +25,11 @@
                             <div class="dropdown-selected">
                                 {{ $auth.user.department !== null ? $auth.user.department.name : 'Choose Department' }}
                             </div>
-                            <p class="department">
-                                To change department, click here to email your admin.
-                            </p>
+                            <a href="mailto:help@thetippercompany.com?subject=Help with Tipper">
+                                <p class="department">
+                                    To change department, click here to email your admin.
+                                </p>
+                            </a>
                         </div>
                     </div>
                     <div class="logo-wrapper">

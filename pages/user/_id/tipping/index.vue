@@ -4,9 +4,8 @@
             <div class="profile-block">
                 <img :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
                 <div class="flex flex-col justify-between">
-                    <h2>{{ user.username || user.firstname }}</h2>
+                    <h2>{{ user.username || (user.firstname + ' ' + user.lastname ) }}</h2>
                     <span v-if="user.address_1 && user.state">{{ user.address_1 + ' ' + user.state }}</span>
-                    <span v-else>Placeholder address & state</span>
                 </div>
             </div>
 

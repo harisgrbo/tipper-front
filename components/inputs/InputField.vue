@@ -64,4 +64,8 @@ label {
 //  bottom: 20px;
 //  opacity: 0.5;
 //}
+
+input:focus::placeholder {
+    color: transparent;
+}
 </style>

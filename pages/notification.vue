@@ -6,7 +6,10 @@
             </div>
             <button class="settings-button" @click="$router.push('/notification-settings')">Settings</button>
         </div>
-        <div class="notification-list-wrapper">
+        <div v-show="!notifications.length" class="p-6 bg-white mt-6 rounded-xl text-semibold text-lg">
+            <h3>No notifications yet! They will appear once you get your first tip.</h3>
+        </div>
+        <div class="notification-list-wrapper" v-show="notifications.length">
             <Notification v-for="(notification, index) in notifications" :notification="notification"
                           :key="index"></Notification>
         </div>

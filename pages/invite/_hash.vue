@@ -14,6 +14,10 @@
                             <div class="space-y-6">
                                 <h1>Create Stripe Account</h1>
                                 <small>Create a Tipper account to start receiving more in tips.</small>
+                                <InputField v-model="payload.first_name" label="First name"
+                                            placeholder="John"></InputField>
+                                <InputField v-model="payload.last_name" label="Last name"
+                                            placeholder="Doe"></InputField>
                                 <InputField v-model="payload.password" type="password" label="Password"
                                             placeholder="*********"></InputField>
                                 <InputField v-model="payload.confirm_password" type="password" label="Confirm Password"
@@ -50,6 +54,8 @@ export default {
             password_two: '',
             payload: {
                 email: '',
+                first_name: '',
+                last_name: '',
                 username: '',
                 password: '',
                 confirm_password: '',

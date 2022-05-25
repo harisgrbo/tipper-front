@@ -89,6 +89,8 @@ export default {
 
                 this.reviewUsers = res.data.data;
 
+                console.log(this.reviewUsers, 'review')
+
                 this.loaded = true;
             } catch (e) {
                 console.log(e)

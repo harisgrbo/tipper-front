@@ -12,7 +12,9 @@
             <div class="staff-block" v-if="user">
                 <img class="avatar" src="/noimage.png" alt="">
                 <div class="flex flex-col items-start w-full justify-start">
-                    <p>{{ user.username || user.name || (user.firstname + ' ' + user.lastname) }}</p>
+                    <p v-if="user.type === 'employee'">{{ user.firstname + ' ' + user.lastname }}</p>
+                    <p v-else>{{ user.username }}</p>
+                    <p v-if="$route.query.type === 'pool'">{{ user.name }}</p>
                     <p class="sub" v-if="user.department">
                         {{ user.department.name }}
                     </p>
@@ -56,7 +58,7 @@
                              inactive-color="#F0EBE4" :show-rating="false" active-color="#F9C52D"
                              v-model="rating"></star-rating>
                 <h2>Give rating and review!</h2>
-                <textarea v-model="description" placeholder="Leave a text review" rows="10"></textarea>
+                <textarea v-model="description" placeholder="Leave a review (Optional)" rows="10"></textarea>
             </div>
             <button class="submit" @click="submit">
                 Next

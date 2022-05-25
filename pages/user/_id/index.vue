@@ -16,14 +16,7 @@
                                                 <img class="h-16 w-16 rounded-full sm:hidden" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80" alt="">
                                                 <h1 class="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">{{ user.username }}</h1>
                                             </div>
-                                            <dl class="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
-                                                <dd class="flex items-center text-sm text-gray-500 font-medium capitalize sm:mr-6">
-                                                    <!-- Heroicon name: solid/office-building -->
-                                                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                        <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd" />
-                                                    </svg>
-                                                    {{ user.address_1 }}
-                                                </dd>
+                                            <dl class="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap" v-if="user.type === 'employer'">
                                                 <dd class="flex items-center text-sm text-gray-500 font-medium capitalize sm:mr-6">
                                                     <!-- Heroicon name: solid/office-building -->
                                                     <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -37,21 +30,20 @@
                                     <dd class="mt-4">
                                         <canvas ref="canvas"/>
 
-                                        <a :href="url">Scan QR code to tip</a>
+                                        <button @click="downloadQR">Download QR code image</button>
                                     </dd>
                                 </div>
                                 <div class="mt-6 flex space-x-3 md:mt-0 md:ml-4">
                                     <button v-if="$auth.user && $auth.user.type === 'employer'" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500" @click="$router.push('/invite/employees')">Add users to pool</button>
-                                    <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500" @click="showTipModal = true">Payout</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div v-if="$auth.user && $auth.user.id === $route.params.id" class="mt-8">
-                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div v-if="$auth.user && ($auth.user.id === $route.params.id || ! $route.params.id)" class="mt-8">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"  v-if="$auth.user.type !== 'employer'">
                             <h2 class="text-lg leading-6 font-medium text-gray-900">Overview</h2>
-                            <div class="mt-2 grid grid-cols-3 gap-4">
+                            <div class="mt-2 grid grid-cols-2 gap-4">
                                 <div class="bg-white overflow-hidden shadow rounded-lg">
                                     <div class="p-5">
                                         <div class="flex items-center">
@@ -68,6 +60,8 @@
                                                     </dd>
                                                 </dl>
                                             </div>
+                                            <button type="button" :class="['inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 ml-4', $auth.user.wallet.balance > 0 ? '' : 'disabled']" :disabled="$auth.user.wallet.balance < 1"  @click="showTipModal = true">Payout</button>
+
                                         </div>
                                     </div>
                                 </div>
@@ -108,8 +102,11 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </div>
-                <div class="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
-
+                <div class="flex flex-col">
+                    <div class="flex flex-col my-6">
+                        <label class="block text-sm font-medium text-gray-700 text-semibold">Transferd money will go to: **** **** **** {{ stripeDetailes.last4 }}</label>
+                        <span></span>
+                    </div>
                     <div class="col-span-3">
                         <label class="block text-sm font-medium text-gray-700">Amount</label>
                         <div class="mt-1">
@@ -128,7 +125,7 @@
                 </div>
                 <button type="button"
                         class="inline-flex items-center px-4 py-2 border border-transparent text-center w-full font-medium rounded-md shadow-sm text-white bg-gray-900 min-w-full hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        @click="payout">Tip User
+                        @click="payout">Transfer Funds
                 </button>
             </div>
         </div>
@@ -151,12 +148,17 @@ export default {
                 amount: 0,
             },
             user: null,
-            url: ''
+            url: '',
+            stripeDetailes: null
         }
     },
     async created() {
-        if(this.$auth.user && this.$auth.user.id === this.$route.params.id) {
+        if(this.$auth.user && (this.$auth.user.id === this.$route.params.id || ! this.$route.params.id)) {
             await this.fetchAuthUserBalance();
+        }
+
+        if(this.$auth.user.type === 'employee') {
+            await this.fetchStripeDetails();
         }
     },
     async mounted() {
@@ -167,10 +169,10 @@ export default {
         if (process.browser) {
             let QRCode = require('qrcode');
 
-            let url = `https://tipper-front.herokuapp.com/user/${this.$route.params.id}/`;
+            let url = `https://tipper-front.herokuapp.com/user/${this.user.id}/`;
 
             if (this.user.type === 'employee') {
-              url += `tip?type=user&id=${this.$route.params.id}`;
+              url += `tip?type=user&id=${this.user.id}`;
             } else {
               url += 'tipping';
             }
@@ -183,9 +185,31 @@ export default {
         }
     },
     methods: {
-        async fetchUser() {
+        async fetchStripeDetails() {
             try {
-                let res = await this.$axios.get('/users/' + this.$route.params.id);
+                let res = await this.$axios.get('/my/accounts');
+
+                this.stripeDetailes = res.data.data.data[0];
+
+                console.log(this.stripeDetailes)
+            }  catch (e) {
+                console.log(e)
+            }
+        },
+        downloadQR() {
+            if (this.$refs.canvas) {
+                window.location.href = this.$refs.canvas.toDataURL().replace("image/png", "image/octet-stream");;
+            }
+        },
+        async fetchUser() {
+            if (this.$auth.user && (this.$auth.user.id === this.$route.params.id || ! this.$route.params.id)) {
+                this.user = Object.assign({}, this.$auth.user);
+
+                return;
+            }
+
+            try {
+                let res = await this.$axios.get('/users/' + this.user.id);
 
                 this.user = res.data.data;
                 console.log(this.user)
@@ -210,6 +234,11 @@ export default {
                 this.showTipModal = false;
 
                 await this.fetchAuthUserBalance();
+
+                this.$toast.open({
+                    message: 'Success, status pending.',
+                    type: 'success',
+                });
             } catch (e) {
                 console.log(e)
             }
@@ -262,5 +291,11 @@ export default {
 canvas {
     height: 80px !important;
     width: 80px !important;
+}
+
+.disabled {
+    background: #f1f1f1;
+    cursor: not-allowed;
+    color: #969696;
 }
 </style>

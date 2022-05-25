@@ -15,8 +15,10 @@
                                 <h1>New Password</h1>
                                 <small>Create a new password</small>
                                 <InputField type="password" v-model="password_one" label="New Password"
+                                            hint-text="At least 8 characters and require at least 1 digit or special character"
                                             placeholder="******"></InputField>
                                 <InputField type="password" v-model="password_two" label="Confirm New Password"
+                                            hint-text="At least 8 characters and require at least 1 digit or special character"
                                             placeholder="******"></InputField>
                                 <div>
                                     <GlobalButton placeholder="Reset" @handle-button-action="reset" bg-color="#C67D65"
@@ -76,6 +78,10 @@ export default {
                 }, 2000)
             } catch (e) {
                 console.log(e)
+                this.$toast.open({
+                    message: Object.values(e.response.data.errors).join(" "),
+                    type: 'error',
+                });
             }
         }
     }

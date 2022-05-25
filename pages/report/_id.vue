@@ -17,8 +17,6 @@
                 </div>
                 <div class="modal-content">
                     <vc-date-picker
-                        :disabled-dates="disabledDates"
-                        :min-date="new Date()"
                         v-model="range"
                         :masks="masks"
                         locale="sr-Latn-RS"
@@ -26,6 +24,7 @@
                         is-inline
                         popover.visibility="visible"
                         :popover="{ visibility: 'click' }"
+                        @input="transformedDates"
                     >
                         <template v-slot="{ inputValue, inputEvents, isDragging }">
                             <div class="flex flex-row justify-between items-center">
@@ -60,8 +59,8 @@
                     </vc-date-picker>
                     <span class="sub-text">Choose the date range you’d like to see activity for all of your employees</span>
                     <div class="modal-buttons">
-                        <button>Download in excel form</button>
-                        <button>Download in pdf format</button>
+                        <button @click="exportSelectedDates()">Download in excel form</button>
+                        <button @click="exportSelectedDatesInPdf()">Download in pdf format</button>
                     </div>
                 </div>
             </div>
@@ -73,6 +72,7 @@
 export default {
     name: "_id",
     layout: 'standard',
+    middleware: ['auth'],
     data() {
         return {
             range: {
@@ -83,9 +83,90 @@ export default {
                 input: 'MM/DD/YYYY',
             },
             balance: null,
-            tips: []
+            tips: [],
+            from: '',
+            to: ''
         }
     },
+    created() {
+        switch (this.$route.params.id) {
+            case 'today':
+                this.range.start = this.$moment().format('MM-DD-YYYY');
+                this.range.end = this.$moment().format('MM-DD-YYYY');
+                break;
+            case 'week':
+                this.range.start = this.$moment().startOf('week').format('MM-DD-YYYY');
+                this.range.end = this.$moment().endOf('week').format('MM-DD-YYYY');
+                break;
+            case 'month':
+                this.range.start = this.$moment().startOf('month').format('MM-DD-YYYY');
+                this.range.end = this.$moment().endOf('month').format('MM-DD-YYYY');
+                break;
+            case 'year':
+                this.range.start = this.$moment().startOf('year').format('MM-DD-YYYY');
+                this.range.end = this.$moment().endOf('year').format('MM-DD-YYYY');
+                break;
+        }
+
+        this.transformedDates();
+    },
+    methods: {
+        transformedDates() {
+            this.from = this.$moment(this.range.start).format('DD-MM-Y')
+            this.to = this.$moment(this.range.end).format('DD-MM-Y')
+        },
+        async exportSelectedDates() {
+            try {
+                let res = await this.$axios.get(`/tips/export/excel?from=${this.from}&to=${this.to}`, {
+                    responseType: 'blob'
+                });
+
+                const url = window.URL.createObjectURL(new Blob([res.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'export.xlsx'); //or any other extension
+                document.body.appendChild(link);
+                link.click();
+
+                this.$toast.open({
+                    message: 'You have successfully downloaded the file from date' + this.from + ' - ' + this.to,
+                    type: 'success',
+                });
+            } catch(e) {
+                console.log(e)
+                this.$toast.open({
+                    message: 'Download failed, please try again',
+                    type: 'error',
+                });
+            }
+        },
+        async exportSelectedDatesInPdf() {
+            try {
+                let res = await this.$axios.get(`/tips/export/pdf?from=${this.from}&to=${this.to}`, {
+                    responseType: 'blob'
+                });
+
+                const url = window.URL.createObjectURL(new Blob([res.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'export.pdf'); //or any other extension
+                document.body.appendChild(link);
+                link.click();
+
+                this.$toast.open({
+                    message: 'You have successfully downloaded the file from date' + this.from + ' - ' + this.to,
+                    type: 'success',
+                });
+            } catch(e) {
+                console.log(e)
+                this.$toast.open({
+                    message: 'Download failed, please try again',
+                    type: 'error',
+                });
+            }
+        }
+
+    }
 }
 </script>
 

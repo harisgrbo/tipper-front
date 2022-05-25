@@ -15,10 +15,10 @@
                         </div>
                         <div class="flex flex-row items-center">
                             <button v-for="(option, index) in options" :key="index"
-                                    :class="current_option === index ? 'active' : ''" @click="current_option = index">
-                                {{ option }}
+                                    :class="current_option === option.key ? 'active' : ''" @click="setCurrentOption(option)">
+                                {{ option.name }}
                             </button>
-                            <button class="mutation" @click="$router.push('/report/' + 1)">
+                            <button class="mutation" @click="$router.push('/report/' + current_option)">
                                 Export Tip Report
                                 <img src="/mutation.svg" alt="">
                             </button>
@@ -212,13 +212,25 @@ export default {
     data() {
         return {
             options: [
-                'Today',
-                'This Week',
-                'This Month',
-                'This Year'
+                {
+                    name: 'Today',
+                    key: 'today'
+                },
+                {
+                    name: 'This Week',
+                    key: 'week'
+                },
+                {
+                    name: 'This Month',
+                    key: 'month'
+                },
+                {
+                    name: 'This Year',
+                    key: 'Year'
+                }
             ],
             email: '',
-            current_option: 0,
+            current_option: 'today',
             range: {
                 start: new Date(),
                 end: new Date(),
@@ -239,6 +251,11 @@ export default {
         this.loaded = true
     },
     methods: {
+        setCurrentOption(o) {
+            this.current_option = o.key;
+
+            this.$router.push('/report/' + o.key)
+        },
         beforeOpen() {
             document.body.style.overflow = 'hidden';
         },

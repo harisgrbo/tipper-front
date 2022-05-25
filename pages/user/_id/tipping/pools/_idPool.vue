@@ -13,7 +13,7 @@
                 <div class="flex flex-col items-start justify-start">
                     <p>Entire {{ pool.name }} Staff</p>
                     <p class="sub">
-                        send one tip to be evenly split among entire staff.
+                        Send one tip to be evenly split among entire staff.
                     </p>
                 </div>
                 <img class="staff" src="/staff.svg" alt="">

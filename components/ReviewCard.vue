@@ -1,10 +1,9 @@
 <template>
     <div class="review-card" @click="$emit('open-review-card-modal')">
         <div class="avatar-wrapper">
-            <img :src="user.avatar || '/noimage.png'" alt="">
+            <img :src="user.user !== null ? (user.user.avatar_url !== null ? user.user.avatar_url : '/noimage.png') : '/noimage.png'" alt="">
         </div>
-        <h2>Anonimous user</h2>
-        <span>Anonimous department</span>
+        <h2>{{ user.pool_tip ? user.pool.name : (user.user.type === 'employer' ? 'Entire Staff' : user.user.firstname + ' ' + user.user.lastname) }}</h2>
         <h3>"{{ user.description }}"</h3>
         <div class="stars">
             <star-rating :star-size="18" :increment="1" :read-only="true" inactive-color="#F0EBE4"
@@ -16,7 +15,10 @@
 <script>
 export default {
     name: "ReviewCard",
-    props: ['user']
+    props: ['user'],
+    created() {
+        console.log(this.user)
+    }
 }
 </script>
 
@@ -42,8 +44,15 @@ export default {
         width: 60px;
         min-height: 60px;
         border-radius: 30px;
-        background: #C4C4C4;
+        background: #f1f1f1;
         overflow: hidden;
+
+        img {
+            max-width: 100%;
+            height: 60px;
+            width: 60px;
+            object-fit: contain;
+        }
     }
 
     h2 {
