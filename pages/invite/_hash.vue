@@ -75,6 +75,8 @@ export default {
 
             try {
                 let res = await this.$axios.post('/employee/register', {
+                    firstname: this.payload.first_name,
+                    lastname: this.payload.last_name,
                     password: this.payload.password,
                     uuid: this.$route.params.hash
                 });
