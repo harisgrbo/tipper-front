@@ -35,7 +35,7 @@
                 <ul>
                     <li>
                         <span>Tip:</span>
-                        <span>{{ selected_tip_amount }}</span>
+                        <span>{{ selected_tip_amount + '.00' }}</span>
                     </li>
                     <li>
                         <span>Fee:</span>
