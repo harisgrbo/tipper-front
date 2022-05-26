@@ -5,7 +5,7 @@
                 <img :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
                 <div class="flex flex-col justify-between">
                     <h2>{{ user.username || (user.firstname + ' ' + user.lastname ) }}</h2>
-                    <span v-if="user.address_1 && user.state">{{ user.address_1 + ' ' + user.state }}</span>
+                    <span v-if="user.address_1 && user.state">{{ user.address_1 + ' ' + user.state + ' ' + user.zip_code }}</span>
                 </div>
             </div>
 
@@ -148,7 +148,7 @@ export default {
         flex-direction: column;
 
         .staff-block {
-            border: 1px solid #F6F3F0;
+            border: 1px solid #d7d7d7;
             cursor: pointer;
             border-radius: 14px;
             height: 97px;

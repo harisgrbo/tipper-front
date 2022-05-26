@@ -12,7 +12,8 @@
             <h3>Employee's Email</h3>
             <p class="subtitle">Enter one email or multiple emails separated by a comma</p>
             <InputField v-model="emails" placeholder="johndoe@gmail.com"></InputField>
-            <div class="dropdown-wrapper mt-6" v-on-clickaway="away">
+            <p class="subtitle mt-4">Creating at least one pool is required</p>
+            <div class="dropdown-wrapper mt-2" v-on-clickaway="away">
                 <div class="dropdown-selected" @click="showPoolList = true;">
                     {{ selectedPool !== null ? selectedPool.name : 'Choose Pool' }}
                 </div>
@@ -223,7 +224,7 @@ export default {
             letter-spacing: 0.03em;
             color: #161616;
             opacity: 0.6;
-            margin-bottom: 30px;
+            margin-bottom: 0px;
         }
     }
 

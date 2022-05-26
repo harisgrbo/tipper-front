@@ -530,7 +530,8 @@ textarea {
         flex-direction: column;
 
         .staff-block {
-            border: 1px solid #F6F3F0;
+            border: 1px solid #d7d7d7;
+
             border-radius: 14px;
             height: 97px;
             padding: 20px;
