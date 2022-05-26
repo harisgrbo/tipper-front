@@ -2,9 +2,6 @@
     <div class="employer-wrapper">
         <div class="flex flex-col" v-if="loaded">
             <div class="w-full flex flex-row items-center justify-start mb-6">
-                <button @click="$router.go(-1)" class="back">
-                    <img src="/arrow-left.svg" alt="">
-                </button>
                 <div>
                     <h2>Employer Dashboard</h2>
                 </div>

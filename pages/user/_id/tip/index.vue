@@ -10,7 +10,7 @@
             <h3>Sending tip to</h3>
 
             <div class="staff-block" v-if="user">
-                <img class="avatar" src="/noimage.png" alt="">
+                <img class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
                 <div class="flex flex-col items-start w-full justify-start">
                     <p v-if="user.type === 'employee'">{{ user.firstname + ' ' + user.lastname }}</p>
                     <p v-else>{{ user.username }}</p>
@@ -96,7 +96,7 @@ export default {
         return {
             loaded: false,
             tip_amount: [
-                4, 6, 8, 10, 15, 20, 25, 50
+                5, 10, 15, 20
             ],
             selected_tip_amount: 0,
             fee: null,

@@ -17,6 +17,7 @@
                                 <InputField v-model="payload.username" label="Email Address"
                                             placeholder="johndoe@gmail.com"></InputField>
                                 <InputField v-model="payload.password" type="password" label="Password"
+                                            hint-text="At least 8 characters and require at least 1 digit or special character"
                                             placeholder="*********"></InputField>
 
                                 <div class="flex items-center justify-end">

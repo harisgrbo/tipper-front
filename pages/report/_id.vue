@@ -19,7 +19,6 @@
                     <vc-date-picker
                         v-model="range"
                         :masks="masks"
-                        locale="sr-Latn-RS"
                         is-range
                         is-inline
                         popover.visibility="visible"

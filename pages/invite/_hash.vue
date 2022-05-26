@@ -12,15 +12,17 @@
                     <form class="mt-8 bg-white main-form-wrapper" @submit.prevent="register">
                         <div class="w-full">
                             <div class="space-y-6">
-                                <h1>Create Stripe Account</h1>
-                                <small>Create a Tipper account to start receiving more in tips.</small>
+                                <h1>Create Your Tipper Account</h1>
+                                <small>Start making more tips today.</small>
                                 <InputField v-model="payload.first_name" label="First name"
                                             placeholder="John"></InputField>
                                 <InputField v-model="payload.last_name" label="Last name"
                                             placeholder="Doe"></InputField>
                                 <InputField v-model="payload.password" type="password" label="Password"
+                                            hint-text="At least 8 characters and require at least 1 digit or special character"
                                             placeholder="*********"></InputField>
                                 <InputField v-model="payload.confirm_password" type="password" label="Confirm Password"
+                                            hint-text="At least 8 characters and require at least 1 digit or special character"
                                             placeholder="*********"></InputField>
                                 <div>
                                     <GlobalButton placeholder="Sign up" type="submit" bg-color="#C67D65"

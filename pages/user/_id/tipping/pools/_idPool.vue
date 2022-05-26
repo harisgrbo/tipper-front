@@ -9,7 +9,6 @@
             </div>
             <h3>{{ pool.name }}</h3>
             <div class="staff-block" @click="$router.push(`/user/${$route.params.id}/tip?id=${pool.id}&type=pool`)">
-                <img class="avatar" src="/noimage.png" alt="">
                 <div class="flex flex-col items-start justify-start">
                     <p>Entire {{ pool.name }} Staff</p>
                     <p class="sub">
@@ -22,7 +21,7 @@
 
             <div class="staff-wrapper">
                 <div v-for="(user, index) in pool_users" :key="index" class="staff-block" @click="$router.push(`/user/${user.id}/tip?id=${user.id}&type=user`)">
-                    <img class="avatar" src="/noimage.png" alt="">
+                    <img class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
                     <div class="flex flex-col items-start w-full justify-start">
                         <p>{{ user.firstname + ' ' + user.lastname }}</p>
                         <p class="sub">{{ pool.name }}</p>
@@ -78,6 +77,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@mixin for-phone-only {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
+
 .tipping-wrapper {
     display: flex;
     align-items: flex-start;
@@ -89,6 +94,9 @@ export default {
     padding: 20px;
     flex-direction: column;
 
+    @include for-phone-only {
+        width: 100%;
+    }
     .profile-block {
         display: flex;
         background: #B45F4B;

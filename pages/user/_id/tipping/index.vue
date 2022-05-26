@@ -5,7 +5,7 @@
                 <img :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
                 <div class="flex flex-col justify-between">
                     <h2>{{ user.username || (user.firstname + ' ' + user.lastname ) }}</h2>
-                    <span v-if="user.address_1 && user.state">{{ user.address_1 + ' ' + user.state + ' ' + user.zip_code }}</span>
+                    <span v-if="user.address_1 && user.state">{{ user.address_1 + ' ' + user.zip_code }}</span>
                 </div>
             </div>
 
@@ -13,17 +13,16 @@
 
             <div class="staff-wrapper">
                 <div class="staff-block" @click="$router.push(`/user/${user.id}/tip?id=${user.id}&type=user`)">
-                    <img class="avatar" src="/noimage.png" alt="">
+                    <img class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
                     <div class="flex flex-col items-start justify-start">
                         <p>Entire {{ user.username }} Staff</p>
                         <p class="sub">
-                            send one tip to be evenly split among entire staff.
+                            Send one tip to be evenly split among entire staff.
                         </p>
                     </div>
                     <img class="staff" src="/staff.svg" alt="">
                 </div>
                 <div v-for="(pool, index) in pools" :key="index" class="staff-block" @click="$router.push(`/user/${user.id}/tipping/pools/${pool.id}`)">
-                    <img class="avatar" src="/noimage.png" alt="">
                     <div class="flex flex-col items-start w-full justify-start">
                         <p>{{ pool.name }}</p>
                     </div>
@@ -80,6 +79,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@mixin for-phone-only {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
+
 .tipping-wrapper {
     display: flex;
     align-items: flex-start;
@@ -90,6 +95,10 @@ export default {
     min-height: fit-content;
     padding: 20px;
     flex-direction: column;
+
+    @include for-phone-only {
+        width: 100%;
+    }
 
     .profile-block {
         display: flex;

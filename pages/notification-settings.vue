@@ -18,7 +18,7 @@
 <!--                    </label>-->
 <!--                </li>-->
                 <li>
-                    <p>Employee received tip</p>
+                    <p>Received tip</p>
                     <label class="switch">
                         <input type="checkbox" v-model="notificationSettings.employee_received_tip"
                                @change="saveNotificationSettings()">

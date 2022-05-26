@@ -192,7 +192,7 @@ button {
 }
 
 .forgot-bg {
-    background: url(/forgot-bg.svg);
+    background: url(/new-bg.svg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top;
