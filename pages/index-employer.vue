@@ -252,8 +252,6 @@ export default {
     methods: {
         setCurrentOption(o) {
             this.current_option = o.key;
-
-            this.$router.push('/report/' + o.key)
         },
         beforeOpen() {
             document.body.style.overflow = 'hidden';
