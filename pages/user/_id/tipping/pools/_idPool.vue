@@ -156,7 +156,7 @@ export default {
     }
 
     .staff-block {
-        border: 1px solid #d7d7d7;
+        border: 1px solid #B45F4B;
         border-radius: 14px;
         height: 97px;
         padding: 20px;

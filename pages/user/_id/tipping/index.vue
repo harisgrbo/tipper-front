@@ -158,7 +158,7 @@ export default {
         flex-direction: column;
 
         .staff-block {
-            border: 1px solid #d7d7d7;
+            border: 1px solid #B45F4B;
             cursor: pointer;
             border-radius: 14px;
             height: 97px;
