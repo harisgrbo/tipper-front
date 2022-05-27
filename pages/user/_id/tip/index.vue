@@ -7,7 +7,7 @@
                 </button>
                 <img src="/logo.svg" class="logo" @click="$router.push('/')"/>
             </div>
-            <h3>Sending tip to</h3>
+            <h3>Sending tip to, </h3>
 
             <div class="staff-block" v-if="user">
                 <img class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
