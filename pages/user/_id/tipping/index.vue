@@ -23,7 +23,8 @@
                     <img class="staff" src="/staff.svg" alt="">
                 </div>
                 <div v-for="(pool, index) in pools" :key="index" class="staff-block" @click="$router.push(`/user/${user.id}/tipping/pools/${pool.id}`)">
-                    <div class="flex flex-col items-start w-full justify-start">
+                  <img class="avatar" src="/noimage.png" alt="">
+                  <div class="flex flex-col items-start w-full justify-start">
                         <p>{{ pool.name }}</p>
                     </div>
                     <img class="staff" src="/staff-right.svg" alt="">
