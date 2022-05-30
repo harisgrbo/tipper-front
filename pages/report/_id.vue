@@ -56,7 +56,7 @@
                             </div>
                         </template>
                     </vc-date-picker>
-                    <span class="sub-text">Choose the date range you’d like to see activity for all of your employees</span>
+                    <span class="sub-text">Choose the date range you’d like to see activity for all of your employees.</span>
                     <div class="modal-buttons">
                         <button @click="exportSelectedDates()">Download in excel form</button>
                         <button @click="exportSelectedDatesInPdf()">Download in pdf format</button>

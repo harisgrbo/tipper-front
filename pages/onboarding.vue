@@ -5,7 +5,7 @@
                 <img src="/review.svg" alt="">
             </div>
             <h3>SUCCESS</h3>
-<!--            <h2 class="mb-2">You will be redirected to login page in 3 seconds</h2>-->
+            <h2 class="mb-2">You will be redirected to login page in 3 seconds</h2>
         </div>
     </div>
 </template>
@@ -26,9 +26,9 @@ export default {
 
         await this.$auth.setUserToken(this.$route.query.access_token);
 
-        // setTimeout(()=>{
-        //     this.$router.push('/sign-in')
-        // }, 3000)
+        setTimeout(()=>{
+            this.$router.push('/sign-in')
+        }, 3000)
     },
 }
 </script>

@@ -168,8 +168,9 @@
                             <div class="flex flex-col w-full justify-between">
                                 <div class="modal-header w-full">
                                     <div>
-                                        <h1>{{ selectedUser.name }}</h1>
-                                        <span>Developer</span>
+                                        <h1 v-if="selectedUser.user !== null">{{ selectedUser.user.firstname + ' ' + selectedUser.user.lastname }}</h1>
+                                        <h1 v-else>{{ selectedUser.pool.name }}</h1>
+                                        <span v-if="selectedUser.user !== null">Developer</span>
                                     </div>
                                     <button @click="$modal.hide('review-card')">
                                         <img src="/close.svg" alt="">
@@ -180,7 +181,7 @@
                                                  inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65"
                                                  v-model="selectedUser.rating"></star-rating>
 
-                                    <div class="modal-buttons review">
+                                    <div class="modal-buttons review" v-if="selectedUser.user !== null">
                                         <button>Change Department</button>
                                         <button>Delete Employee</button>
                                     </div>
@@ -188,7 +189,7 @@
                             </div>
 
                             <div class="modal-image-wrapper">
-                                <img :src="selectedUser.avatar || '/noimage.png'" alt="">
+                                <img :src="selectedUser.user !== null ? selectedUser.user.avatar_url : '/noimage.png'" alt="">
                             </div>
                         </div>
                     </modal>
@@ -261,6 +262,8 @@ export default {
         },
         handleOpenReviewCardInModal(u) {
             this.selectedUser = u;
+
+            console.log(this.selectedUser, 'userr')
 
             this.$modal.show('review-card');
         },

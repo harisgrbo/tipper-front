@@ -13,7 +13,7 @@
                         <div class="w-full">
                             <div class="space-y-6">
                                 <h1>New Password</h1>
-                                <small>Create a new password</small>
+                                <small>Create a new password.</small>
                                 <InputField type="password" v-model="password_one" label="New Password"
                                             hint-text="At least 8 characters and require at least 1 digit or special character"
                                             placeholder="******"></InputField>

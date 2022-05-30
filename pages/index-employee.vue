@@ -1,56 +1,239 @@
 <template>
     <div class="employer-wrapper">
-        <h2>Employee Dashboard</h2>
-        <div class="bg-white p-8 rounded-2xl text-lg font-semibold w-full flex items-center justify-center">
-            You are ready to receive Tips!
+        <div class="flex flex-col w-full" v-show="loaded">
+            <h2>Employee Dashboard</h2>
+
+            <div class="user-info">
+                <div class="flex flex-row items-center">
+                    <div class="user-avatar">
+                        <img class="user-avatar" :src="$auth.user.avatar_url || '/noimage.png' " alt="">
+                        <div class="upload" @click="$modal.show('image-upload')">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex flex-col" v-if="myEmployer">
+                        <h1>{{ $auth.user.firstname + ' ' + $auth.user.lastname }}</h1>
+                        <p>{{ myEmployer.username || 'employer' }}</p>
+                        <p class="sub">{{ $auth.user.address_1 + ', ' + $auth.user.state }}</p>
+                    </div>
+                </div>
+                <div class="flex flex-row items-end">
+                    <p class="download" @click="downloadQR">Download QR code Image -></p>
+                    <div>
+                        <canvas ref="canvas"/>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Overview</h2>
+
+            <div class="grid grid-cols-2 gap-6">
+                <div class="p-6 bg-white flex flex-row justify-between items-center">
+                    <div class="flex flex-row items-center">
+                        <div class="svg-wrap">
+                            <img src="/receipt-text.svg" alt="">
+                        </div>
+                        <div class="flex flex-col">
+                            <span>Account balance ready for payout</span>
+                            <b>${{ $auth.user.wallet.balance }}</b>
+                        </div>
+                    </div>
+                    <button class="payout" @click="$modal.show('payout')">Payout</button>
+                </div>
+                <div class="p-6 bg-white flex flex-row justify-between items-center">
+                    <div class="flex flex-row items-center">
+                        <div class="svg-wrap">
+                            <img src="/receipt-text.svg" alt="">
+                        </div>
+                        <div class="flex flex-col">
+                            <span>Total Earned Amount</span>
+                            <b>${{ $auth.user.total_earned_amount }}</b>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="image-wrapper">
+                <div class="image-wrapper-inner">
+                    <div class="flex flex-col justify-center">
+                        <h2>Access your Stripe Dashboard</h2>
+                        <p>
+                            Tipper utilizes Stripe for all payments. Check your Stripe Dashboard for more information on your tips.
+                        </p>
+                        <button class="access">Access Here</button>
+                    </div>
+
+                    <img src="/stripe-logo.svg" alt="">
+                </div>
+            </div>
         </div>
+        <Loader v-show="!loaded"></Loader>
+        <client-only>
+            <modal name="image-upload"
+                   width="476"
+                   height="400"
+                   @before-open="beforeOpen"
+                   @before-close="beforeClose">
+                <div class="flex flex-col">
+                    <div class="flex flex-row items-center justify-between">
+                        <h1 class="text-left modal-title">Change Profile Photo</h1>
+                        <svg @click="$modal.hide('image-upload')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                    <div class="modal-content">
+                        <h4 v-if="$auth.user.avatar_url === null">Profile Photo</h4>
+                        <img v-else :src="$auth.user.avatar_url" alt="">
+                        <label for="file-upload" class="custom-file-upload">
+                            Change Profile Photo
+                        </label>
+                        <input id="file-upload" type="file" @change="updateAvatar"/>
+                    </div>
+                </div>
+            </modal>
+        </client-only>
+        <client-only>
+            <modal name="payout"
+                   width="476"
+                   height="auto"
+                   @before-open="beforeOpen"
+                   @before-close="beforeClose">
+                <div class="flex flex-col">
+                    <div class="flex flex-row items-center justify-between">
+                        <h1 class="text-left modal-title">Change Profile Photo</h1>
+                        <svg @click="$modal.hide('payout')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                    <div class="modal-content">
+                        <div class="flex flex-col w-full">
+                            <div class="flex flex-col">
+                                <label class="block text-sm font-medium text-gray-700 text-semibold bg-gray-50 rounded-4 p-2" v-if="stripeDetails !== null">Transferd money will go to: **** **** **** {{ stripeDetails.last4 }}</label>
+                            </div>
+                            <div class="w-full mt-4">
+                                <InputField v-model="payload.amount" label="Amount in USD"
+                                            placeholder="120"></InputField>
+                            </div>
+                        </div>
+                        <button type="button"
+                                class="transfer"
+                                @click="payout">Transfer Funds
+                        </button>
+                    </div>
+                </div>
+            </modal>
+        </client-only>
     </div>
 </template>
 
 <script>
 import GlobalButton from "~/components/GlobalButton";
-import ReviewCard from "~/components/ReviewCard";
+import Loader from "@/components/Loader";
+import InputField from "@/components/inputs/InputField";
 
 export default {
     name: "index-employee",
     layout: 'standard',
-    components: {GlobalButton, ReviewCard},
+    components: {GlobalButton, Loader, InputField},
     data() {
         return {
-            range: {
-                start: new Date(),
-                end: new Date(),
-            },
-            masks: {
-                input: 'DD-MM-YYYY',
-            },
-            balance: null,
-            tips: []
+            myEmployer: null,
+            loaded: false,
+            stripeDetails: null,
+            currency: 'USD',
+            me: null,
+            avatarUrl: '',
+            payload: {
+                amount: 0,
+            }
         }
     },
     async created() {
-        await this.fetchUserData();
-        await this.fetchUsersWhoTippedMe();
+        this.loaded = false;
+        await this.fetchMyEmployer();
+        await this.fetchAuthUserBalance();
+        await this.fetchStripeDetails();
+        this.loaded = true;
+    },
+    mounted() {
+        if (process.browser) {
+            let QRCode = require('qrcode');
+
+            let url = `https://tipper-front.herokuapp.com/user/${this.$auth.user.id}/`;
+
+            if (this.$auth.user.type === 'employee') {
+                url += `tip?type=user&id=${this.$auth.user.id}`;
+            } else {
+                url += 'tipping';
+            }
+
+            this.url = url;
+
+            QRCode.toCanvas(this.$refs.canvas, url, function (error) {
+                if (error) console.error(error)
+            })
+        }
     },
     methods: {
-        async fetchUserData() {
+        async payout() {
             try {
-                let res = await this.$axios.get('/balance')
+                let res = await this.$axios.post('/payout', this.payload);
 
-                this.balance = res.data.data;
+                this.payload.amount = 0;
+                this.$modal.hide('payout');
 
+                await this.fetchAuthUserBalance();
+
+                this.$toast.open({
+                    message: 'Success, status pending.',
+                    type: 'success',
+                });
             } catch (e) {
                 console.log(e)
             }
         },
-        async fetchUsersWhoTippedMe() {
+        async fetchAuthUserBalance() {
             try {
-                let res = await this.$axios.get('/users/' + this.$auth.user.id + '/tips')
+                let res = await this.$axios.get('/balance');
 
-                this.tips = res.data.data;
-
+                this.me = res.data.data.balance[0];
             } catch (e) {
                 console.log(e)
+            }
+        },
+        async fetchStripeDetails() {
+            try {
+                let res = await this.$axios.get('/my/accounts');
+
+                this.stripeDetails = res.data.data.data[0];
+
+                console.log(this.stripeDetails, 'stripe')
+            }  catch (e) {
+                console.log(e)
+            }
+        },
+        async updateAvatar(event) {
+            if (event.target.files.length) {
+                let image = event.target.files[0];
+                let formData = new FormData();
+                formData.append('avatar', image);
+
+                try {
+                    await this.$axios.post('/avatar', formData, {
+                        'headers': {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+
+                    await this.$auth.fetchUser();
+
+                    this.avatarUrl = this.$auth.user.avatar_url;
+                } catch (e) {
+                    alert("Error")
+                }
             }
         },
         beforeOpen() {
@@ -58,6 +241,28 @@ export default {
         },
         beforeClose() {
             document.body.style.overflow = 'auto';
+        },
+        downloadQR() {
+            if (this.$refs.canvas) {
+                let url = this.$refs.canvas.toDataURL().replace("image/png", "image/octet-stream");
+
+                // const url = window.URL.createObjectURL(new Blob([res.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'qrcode.png'); //or any other extension
+                document.body.appendChild(link);
+                link.click();
+            }
+        },
+        async fetchMyEmployer() {
+            try {
+               let res = await this.$axios.get('/my/employer')
+               this.myEmployer = res.data.data;
+
+                console.log(this.myEmployer, 'employer')
+            } catch(e) {
+                console.log(e)
+            }
         }
     }
 }
@@ -70,121 +275,6 @@ export default {
     min-height: 100vh;
     padding-bottom: 60px;
 
-    .block {
-        padding: 41px;
-        background: #fff;
-        height: 280px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        border-radius: 14px;
-        background-image: url("/pattern.svg");
-        background-repeat: no-repeat;
-        background-size: cover;
-
-        h3 {
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 300;
-            font-size: 18px;
-            line-height: 27px;
-            /* identical to box height */
-
-            letter-spacing: 0.01em;
-
-            color: #000000;
-
-            opacity: 0.6;
-        }
-
-        h2 {
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 500;
-            font-size: 55px;
-            line-height: 82px;
-            /* identical to box height */
-
-            letter-spacing: 0.01em;
-
-            color: #C67D65;
-            margin-bottom: 0;
-            opacity: 0.8;
-        }
-
-        h4 {
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 500;
-            font-size: 30px;
-            line-height: 82px;
-            /* identical to box height */
-
-            letter-spacing: 0.01em;
-
-            color: #000;
-            margin-bottom: 0;
-            opacity: 0.8;
-        }
-
-        span {
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 300;
-            font-size: 16px;
-            line-height: 24px;
-            /* identical to box height */
-
-            letter-spacing: 0.01em;
-
-            color: #161616;
-
-            margin-bottom: 22px;
-        }
-
-        small {
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 24px;
-            /* identical to box height */
-
-            letter-spacing: 0.01em;
-
-            color: #161616;
-
-            opacity: 0.3;
-        }
-
-        &:first-child {
-            background-color: rgba(198, 125, 101, 0.35);
-
-            h2 {
-                color: #000;
-            }
-
-            button {
-                height: 40px;
-                min-height: 40px;
-                background: #FFFFFF;
-                border-radius: 10px;
-                font-family: 'Poppins';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 16px;
-                padding: 0 16px;
-                line-height: 24px;
-                /* identical to box height */
-
-
-                color: #C67D65;
-            }
-        }
-    }
-
     h2 {
         font-family: 'Poppins';
         font-style: normal;
@@ -192,229 +282,260 @@ export default {
         font-size: 30px;
         line-height: 45px;
         color: #1B1A1A;
-        margin-bottom: 42px;
+        margin-bottom: 26px;
     }
 
-    .review-cards-wrapper {
-        display: flex;
-        width: 100%;
-        border-radius: 14px;
-        overflow: hidden;
-    }
-}
-
-
-.table-header {
-
-    .inner {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    }
-
-    h4 {
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 22px;
-        line-height: 33px;
-        color: #1B1A1A;
-    }
-
-    span {
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 24px;
-        /* identical to box height */
-
-        letter-spacing: 0.01em;
-
-        color: #161616;
-
-        opacity: 0.3;
-    }
-
-    button {
-        height: 35px;
-        border: 1px solid rgba(48, 48, 48, 1);
-        border-radius: 90px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 14px;
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 21px;
-        text-align: right;
-        color: #303030;
-        margin-right: 24px;
-
-        &.active {
-            background: rgba(48, 48, 48, 0.1);
-            color: rgba(48, 48, 48, 0.6);
-            border: none;
-
-        }
-
-        &:last-child {
-            margin-right: 0;
-        }
-    }
-}
-
-table thead {
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 19px;
-    letter-spacing: 0.01em;
-    color: rgba(27, 26, 26, 0.6);
-}
-
-table img {
-    height: 30px;
-    width: 30px;
-}
-
-tr .username {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 21px;
-    color: #1B1A1A;
-    opacity: 0.6;
-}
-
-.stars img {
-    height: 14px;
-    width: 14px;
-    margin-right: 8px;
-}
-
-tbody tr {
-    background: #F6F8FA;
-    border-radius: 10px;
-    border: none;
-
-    &:nth-child(2n + 1) {
+    .user-info {
         background: #fff;
-    }
-}
+        padding: 38px;
+        margin-bottom: 36px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
 
-tr.main th {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 19px;
-    letter-spacing: 0.01em;
-    color: rgba(27, 26, 26, 0.6);
-}
+        h1 {
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 33px;
+            color: #1B1A1A;
+            opacity: 0.8;
+        }
 
-tbody tr:nth-child(even) {
-    background: rgba(216, 205, 188, 0.15);
-    border-radius: 10px;
-    border: none !important;
-    box-shadow: none;
-}
-
-.mutation {
-    height: 35px;
-    background: #C67D65;
-    border-radius: 90px;
-    width: 120px;
-    border: none !important;
-    color: #fff !important;
-
-    img {
-        margin-left: 10px;
-    }
-}
-
-.modal-content {
-    p {
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 28px;
-        letter-spacing: 0.03em;
-        color: #161616;
-        opacity: 0.3;
-        margin-top: 23px;
-    }
-
-    h3 {
-        font-style: normal;
-        font-weight: 500;
-        font-size: 22px;
-        line-height: 30px;
-        color: #1B1A1A;
-        opacity: 0.8;
-        margin-top: 46px;
-        margin-bottom: 23px;
-    }
-
-    .input-date-wrapper {
-        background: rgba(216, 205, 188, 0.20);
-        border-radius: 14px;
-        padding: 8px 12px;
-        width: 100%;
-
-        label {
+        p {
             font-style: normal;
             font-weight: 400;
-            font-size: 10px;
-            line-height: 14px;
-            /* identical to box height */
-
-
+            font-size: 18px;
+            line-height: 25px;
             color: #000000;
+            opacity: 0.6;
 
-            opacity: 0.4;
+            &.sub {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 19px;
+                margin-top: 8px;
+                color: #000000;
+                opacity: 0.4;
+            }
         }
 
-        input {
-            background: transparent;
+        .user-avatar {
+            height: 84px;
+            width: 84px;
+            border-radius: 42px;
+            margin-right: 26px;
+            position: relative;
 
-            &:focus {
-                outline: none
+            .upload {
+                display: none;
+                position: absolute;
+                bottom: 0;
+                height: 42px;
+                width: 84px;
+                border-bottom-left-radius: 42px;
+                border-bottom-right-radius: 42px;
+                align-items: center;
+                justify-content: center;
+                z-index: 1;
+                background: #fff;
+                cursor: pointer;
+            }
+
+            &:hover {
+                .upload {
+                    display: flex;
+
+                }
             }
         }
     }
 
-    .divider {
-        margin: 0 40px;
-    }
-}
-
-.modal-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 100%;
-    margin-top: 56px;
-
-    button {
+    .payout {
+        width: 106px;
+        height: 54px;
         background: rgba(198, 125, 101, 0.1);
         border-radius: 15px;
-        height: 54px;
-        width: 270px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         font-family: 'Poppins';
         font-style: normal;
         font-weight: 500;
         font-size: 16px;
         line-height: 24px;
-        color: #C67D65;
+        color: #B45F4B;
+    }
 
-        &:first-child {
-            margin-right: 14px;
+    .svg-wrap {
+        height: 64px;
+        width: 64px;
+        background: #F6F8FA;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 32px;
+        margin-right: 16px;
+    }
+
+    .download {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        color: #000000;
+        opacity: 0.6;
+        margin-right: 6px;
+    }
+
+    span {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        color: #000000;
+        opacity: 0.6;
+    }
+
+    b {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 22px;
+        color: #1B1A1A;
+        opacity: 0.8;
+    }
+
+    canvas {
+        height: 100px !important;
+        width: 100px !important;
+    }
+
+    .image-wrapper {
+        margin-top: 36px;
+        background: url("/employee-bg.png"), #B45F4B;
+        height: 204px;
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        padding: 36px 0;
+
+        .image-wrapper-inner {
+            margin-left: 420px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            width: auto;
+            padding-right: 40px;
+            justify-content: space-between;
+
+            h2 {
+                font-style: normal;
+                font-weight: 700;
+                font-size: 26px;
+                line-height: 35px;
+                letter-spacing: 0.02em;
+                color: #FFFFFF;
+                margin-bottom: 8px;
+            }
+
+            p {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 20px;
+                letter-spacing: 0.02em;
+                color: #FFFFFF;
+                opacity: 0.8;
+                max-width: 400px;
+            }
+
+            .access {
+                width: 120px;
+                height: 37px;
+                background: #FFFFFF;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 21px;
+                color: #B45F4B;
+                margin-top: 20px;
+            }
         }
     }
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+        font-style: normal;
+        font-weight: 500 !important;
+        font-size: 30px;
+        line-height: 41px;
+        color: #1B1A1A;
+        opacity: 0.8;
+        margin: 24px auto;
+    }
+
+    img {
+        height: 144px;
+        width: 144px;
+        border-radius: 72px;
+        min-width: 144px;
+        margin-top: 50px;
+        overflow: hidden !important;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .custom-file-upload {
+        display: flex;
+        margin-top: 24px;
+        cursor: pointer;
+        position: absolute;
+        bottom: 24px;
+        left: 24px;
+        right: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: 0.02em;
+        color: #B45F4B;
+    }
+}
+
+.modal-title {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 45px;
+    color: #1B1A1A;
+    margin-bottom: 0;
+    margin-bottom: 24px;
+}
+
+.transfer {
+    width: 100%;
+    height: 53px;
+    background: #C67D65;
+    border-radius: 16px;
+    border: none !important;
+    color: #fff !important;
+    margin-top: 24px;
 }
 </style>

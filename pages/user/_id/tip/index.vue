@@ -47,7 +47,7 @@
                     <li class="total">
                         <span class="first">Total</span>
                         <span class="second" v-if="selected_tip_amount > 0">${{
-                                parseInt(selected_tip_amount) + fee.fee
+                                (parseInt(selected_tip_amount) + fee.fee).toFixed()
                             }}</span>
                     </li>
                 </ul>
