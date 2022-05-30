@@ -5,7 +5,7 @@
                 <img src="/review.svg" alt="">
             </div>
             <h3>SUCCESS</h3>
-            <h2 class="mb-2">You will be redirected to login page in 3 seconds</h2>
+            <h2 class="mb-2">You will be logged in and redirected to dashboard in 3 seconds</h2>
         </div>
     </div>
 </template>
@@ -25,9 +25,10 @@ export default {
         let res = await this.$axios.post(`/users/${this.user}/sync`);
 
         await this.$auth.setUserToken(this.$route.query.access_token);
+        await this.$auth.fetchUser();
 
         setTimeout(()=>{
-            this.$router.push('/sign-in')
+            this.$router.push('/index-employee')
         }, 3000)
     },
 }

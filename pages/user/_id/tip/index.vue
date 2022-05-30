@@ -12,7 +12,7 @@
             <div class="staff-block" v-if="user">
                 <img class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
                 <div class="flex flex-col items-start w-full justify-start">
-                    <p v-if="user.type === 'employee'">{{ user.firstname + ' ' + user.lastname }}</p>
+                    <p v-if="user.type === 'employee'">{{ user.display_name }}</p>
                     <p v-else>{{ user.username }}</p>
                     <p v-if="$route.query.type === 'pool'">{{ user.name }}</p>
                     <p class="sub" v-if="user.department">

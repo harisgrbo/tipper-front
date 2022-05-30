@@ -54,7 +54,7 @@
                                                     <div class="ml-4">
                                                         <div class="username"
                                                              @click="$router.push('/employee/' + employee.id)">
-                                                            {{ employee.firstname + ' ' + employee.lastname }}
+                                                            {{ employee.display_name }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -168,7 +168,7 @@
                             <div class="flex flex-col w-full justify-between">
                                 <div class="modal-header w-full">
                                     <div>
-                                        <h1 v-if="selectedUser.user !== null">{{ selectedUser.user.firstname + ' ' + selectedUser.user.lastname }}</h1>
+                                        <h1 v-if="selectedUser.user !== null">{{ selectedUser.user.display_name }}</h1>
                                         <h1 v-else>{{ selectedUser.pool.name }}</h1>
                                         <span v-if="selectedUser.user !== null">Developer</span>
                                     </div>

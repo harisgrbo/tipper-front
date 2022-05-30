@@ -1,35 +1,40 @@
 <template>
     <div class="tipping-wrapper">
-        <div class="flex flex-col" v-if="loaded">
-            <div class="profile-block">
-                <img :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
-                <div class="flex flex-col justify-between">
-                    <h2>{{ user.username || (user.firstname + ' ' + user.lastname ) }}</h2>
-                    <span v-if="user.address_1 && user.state">{{ user.address_1 + ' ' + user.zip_code }}</span>
-                </div>
-            </div>
+        <div class="flex flex-col w-full" v-if="loaded">
+           <div class="flex flex-col">
+               <div class="profile-block">
+                   <img :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
+                   <div class="flex flex-col justify-between">
+                       <h2>{{ user.username || (user.firstname + ' ' + user.lastname ) }}</h2>
+                       <span v-if="user.address_1 && user.state">{{ user.address_1 + ' ' + user.zip_code }}</span>
+                   </div>
+               </div>
 
-            <h3>Send a tip to . . .</h3>
+               <h3>Send a tip to . . .</h3>
 
-            <div class="staff-wrapper">
-                <div class="staff-block" @click="$router.push(`/user/${user.id}/tip?id=${user.id}&type=user`)">
-                    <img class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
-                    <div class="flex flex-col items-start justify-start">
-                        <p>Entire {{ user.username }} Staff</p>
-                        <p class="sub">
-                            Send one tip to be evenly split among entire staff.
-                        </p>
-                    </div>
-                    <img class="staff" src="/staff.svg" alt="">
-                </div>
-                <div v-for="(pool, index) in pools" :key="index" class="staff-block" @click="$router.push(`/user/${user.id}/tipping/pools/${pool.id}`)">
-                  <img class="avatar" src="/noimage.png" alt="">
-                  <div class="flex flex-col items-start w-full justify-start">
-                        <p>{{ pool.name }}</p>
-                    </div>
-                    <img class="staff" src="/staff-right.svg" alt="">
-                </div>
-            </div>
+               <div class="staff-wrapper">
+                   <div class="staff-block" @click="$router.push(`/user/${user.id}/tip?id=${user.id}&type=user`)" v-if="userMeta.employee_count > 0">
+                       <img class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
+                       <div class="flex flex-col items-start justify-start">
+                           <p>Entire {{ user.username }} Staff</p>
+                           <p class="sub">
+                               Send one tip to be evenly split among entire staff.
+                           </p>
+                       </div>
+                       <img class="staff" src="/staff.svg" alt="">
+                   </div>
+                   <div v-else class="bg-gray-50 p-4 rounded-4 w-full">
+                       No employees yet.
+                   </div>
+                   <div v-for="(pool, index) in pools" :key="index" class="staff-block" @click="$router.push(`/user/${user.id}/tipping/pools/${pool.id}`)">
+                       <img class="avatar" src="/noimage.png" alt="">
+                       <div class="flex flex-col items-start w-full justify-start">
+                           <p>{{ pool.name }}</p>
+                       </div>
+                       <img class="staff" src="/staff-right.svg" alt="">
+                   </div>
+               </div>
+           </div>
         </div>
        <Loader v-else></Loader>
     </div>
@@ -45,7 +50,8 @@ export default {
         return {
             user: null,
             loaded: false,
-            pools: []
+            pools: [],
+            userMeta: null
         }
     },
     async created() {
@@ -59,8 +65,7 @@ export default {
                 let res = await this.$axios.get('/users/' + this.$route.params.id);
 
                 this.user = res.data.data;
-
-                console.log(this.user, 'user')
+                this.userMeta = res.data.meta;
                 this.loaded = true
             } catch (e) {
                 console.log(e)
