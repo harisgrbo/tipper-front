@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="flex flex-row items-end">
-                    <p class="download" @click="downloadQR">Download QR code Image -></p>
+                    <p class="download cursor-pointer" @click="downloadQR">Download QR code Image -></p>
                     <div>
                         <canvas ref="canvas"/>
                     </div>

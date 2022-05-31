@@ -30,7 +30,7 @@
                                     <dd class="mt-4">
                                         <canvas ref="canvas"/>
 
-                                        <button @click="downloadQR">Download QR code image</button>
+                                        <button @click="downloadQR" class="cursor-pointer">Download QR code image</button>
                                     </dd>
                                 </div>
                                 <div class="mt-6 flex space-x-3 md:mt-0 md:ml-4">
