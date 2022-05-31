@@ -1,30 +1,36 @@
 <template>
     <div class="notification-wrapper">
-        <div class="w-full flex flex-row items-center justify-between">
-            <div>
-                <h2>Notifications</h2>
+        <div class="flex flex-col" v-if="loaded">
+            <div class="w-full flex flex-row items-center justify-between">
+                <div>
+                    <h2>Notifications</h2>
+                </div>
+                <button class="settings-button" @click="$router.push('/notification-settings')">Settings</button>
             </div>
-            <button class="settings-button" @click="$router.push('/notification-settings')">Settings</button>
+            <div v-show="!notifications.length" class="p-6 bg-white mt-6 rounded-xl text-semibold text-lg">
+                <h3 v-if="$auth.user.type === 'employee'">No notifications yet! They will appear once you get your first tip.</h3>
+                <h3 v-else>Notifications will appear here once employees start receiving tips!</h3>
+            </div>
+            <div class="notification-list-wrapper" v-show="notifications.length">
+                <Notification v-for="(notification, index) in notifications" :notification="notification"
+                              :key="index"></Notification>
+            </div>
+            <button class="clear" v-show="notifications.length" @click="clearNotifications">Clear notifications</button>
         </div>
-        <div v-show="!notifications.length" class="p-6 bg-white mt-6 rounded-xl text-semibold text-lg">
-            <h3 v-if="$auth.user.type === 'employee'">No notifications yet! They will appear once you get your first tip.</h3>
-            <h3 v-else>Notifications will appear here once employees start receiving tips!</h3>
-        </div>
-        <div class="notification-list-wrapper" v-show="notifications.length">
-            <Notification v-for="(notification, index) in notifications" :notification="notification"
-                          :key="index"></Notification>
-        </div>
-        <button class="clear" v-show="notifications.length" @click="clearNotifications">Clear notifications</button>
+        <Loader v-else></Loader>
     </div>
 </template>
 
 <script>
+import Loader from "@/components/Loader";
 export default {
     name: "notification",
+    components: {Loader},
     layout: 'standard',
     data() {
         return {
-            notifications: []
+            notifications: [],
+            loaded: false,
         }
     },
     async created() {
@@ -48,13 +54,13 @@ export default {
             }
         },
         async fetchNotifications() {
+            this.loaded = false;
             try {
                 let res = await this.$axios.get('/notifications')
 
                 this.notifications = res.data.data;
 
-
-                console.log(this.notifications)
+                this.loaded = true;
             } catch (e) {
                 console.log(e)
             }

@@ -7,7 +7,7 @@
                 </button>
                 <img src="/logo.svg" class="logo" @click="$router.push('/')"/>
             </div>
-            <h3>Sending tip to, </h3>
+            <h3>Send Tip to:</h3>
 
             <div class="staff-block" v-if="user">
                 <img class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
@@ -29,13 +29,16 @@
                     </button>
                 </div>
                 <h3>Custom Amount</h3>
-                <input type="number" v-model="selected_tip_amount" @input="fetchFee();">
+                <div class="input-wrapper">
+                    <p>$</p>
+                    <input type="number" v-model="selected_tip_amount" @input="fetchFee();">
+                </div>
             </div>
             <div class="tipping-wrapper-info mt-4">
                 <ul>
                     <li>
                         <span>Tip:</span>
-                        <span>{{ selected_tip_amount + '.00' }}</span>
+                        <span>${{ selected_tip_amount + '.00' }}</span>
                     </li>
                     <li>
                         <span>Fee:</span>
@@ -47,7 +50,7 @@
                     <li class="total">
                         <span class="first">Total</span>
                         <span class="second" v-if="selected_tip_amount > 0">${{
-                                (parseInt(selected_tip_amount) + fee.fee).toFixed()
+                                (parseInt(selected_tip_amount) + fee.fee).toFixed(2)
                             }}</span>
                     </li>
                 </ul>
@@ -73,11 +76,11 @@
                 By continuing, you confirm that you have read and agreed to our
 
 
-                <a href="#">Terms and Conditions</a>
+                <a href="https://www.thetippercompany.com/terms-and-conditions" target="_blank">Terms and Conditions</a>
 
                 and
 
-                <a href="#">Privacy Policy.</a>
+                <a href="https://www.thetippercompany.com/privacy-policy">Privacy Policy.</a>
             </div>
         </div>
         <Loader v-else></Loader>
@@ -267,7 +270,7 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(0, 0, 0, 0.2);
+            border: 1px solid #B45F4B;
 
             p {
                 font-family: 'Poppins';
@@ -291,7 +294,11 @@ export default {
             }
         }
 
-        input {
+        .input-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
             margin-top: 20px;
             padding: 0 24px;
             height: 60px;
@@ -307,8 +314,15 @@ export default {
             width: 100%;
             padding: 0 24px;
 
-            &:focus {
-                outline: none;
+            input {
+                width: 100%;
+                margin-left: 4px;
+                height: 100%;
+                background: transparent;
+
+                &:focus {
+                    outline: none;
+                }
             }
         }
     }

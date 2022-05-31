@@ -7,7 +7,7 @@
                 <div class="mx-auto w-full">
                     <div class="flex flex-col justify-start items-start title-wrap">
                         <img src="/logo.svg" class="mb-4" @click="$router.push('/')"/>
-                        <span>Sign up and help your employees start making more money right away</span>
+                        <span>Sign up and help your employees start making more money right away.</span>
                     </div>
 
                     <form class="mt-8 bg-white main-form-wrapper" @submit.prevent="register">
@@ -61,7 +61,7 @@
                                                   txt-color="#fff"></GlobalButton>
                                 </div>
                                 <div class="sign-up">
-                                    <span>Already a member. Log in?</span>
+                                    <span>Already a member? Log in.</span>
                                     <nuxt-link to="/sign-in" class="font-medium text-indigo-600 hover:text-indigo-500">
                                         Login
                                     </nuxt-link>

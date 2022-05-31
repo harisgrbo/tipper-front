@@ -18,7 +18,7 @@
                 <div class="bg-white table-header p-md">
                     <div class="p-6 flex w-full flex-row items-center justify-between inner">
                         <div class="sm:flex-auto">
-                            <h4>Employee Invited</h4>
+                            <h4>Employees Invited</h4>
                         </div>
                     </div>
                     <div class="mt-6 flex flex-col employees-wrap">
@@ -44,15 +44,14 @@
                                                         <img class="h-10 w-10 rounded-full" src="/avatar.svg" alt="">
                                                     </div>
                                                     <div class="ml-4">
-                                                        <div class="username"
-                                                             @click="$router.push('/employee/' + employee.id)">
+                                                        <div class="username">
                                                             {{ employee.email }}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-full">
-                                                {{ $moment(employee.created_at).format('ddd DD MMMM') }}
+                                                {{ $moment(employee.created_at).format('MM/DD/YYYY') }}
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 username text-right capitalize">{{ employee.status }}</td>
                                         </tr>
@@ -259,7 +258,6 @@ tr .username {
     line-height: 21px;
     color: #1B1A1A;
     opacity: 0.6;
-    cursor: pointer;
 }
 
 .stars img {

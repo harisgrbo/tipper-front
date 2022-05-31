@@ -29,7 +29,7 @@
                                                   txt-color="#fff"></GlobalButton>
                                 </div>
                                 <div class="sign-up">
-                                    <span>Already a member. Log in?</span>
+                                    <span>Already a member? Log in.</span>
                                     <nuxt-link to="/sign-in" class="font-medium text-indigo-600 hover:text-indigo-500">
                                         Login
                                     </nuxt-link>

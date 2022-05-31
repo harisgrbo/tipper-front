@@ -23,7 +23,7 @@
                        </div>
                        <img class="staff" src="/staff.svg" alt="">
                    </div>
-                   <div v-else class="bg-gray-50 p-4 rounded-4 w-full">
+                   <div v-else class="bg-gray-50 p-4 rounded-4 w-full mb-4">
                        No employees yet.
                    </div>
                    <div v-for="(pool, index) in pools" :key="index" class="staff-block" @click="$router.push(`/user/${user.id}/tipping/pools/${pool.id}`)">

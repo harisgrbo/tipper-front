@@ -83,7 +83,7 @@ export default {
         this.loaded = false;
         this.userInfo.firstname = this.$auth.user.firstname;
         this.userInfo.lastname = this.$auth.user.lastname;
-        this.userInfo.name = this.$auth.user.username;
+        this.userInfo.name = this.$auth.user.nickname;
         this.userInfo.address_1 = this.$auth.user.address_1;
         this.userInfo.address_2 = this.$auth.user.address_2;
         this.userInfo.city = this.$auth.user.city;

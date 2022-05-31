@@ -34,7 +34,7 @@
                     <div class="flex flex-col" v-if="myEmployer">
                         <h1>{{ $auth.user.firstname + ' ' + $auth.user.lastname }}</h1>
                         <p>{{ myEmployer.username || 'employer' }}</p>
-                        <p class="sub">{{ $auth.user.address_1 + ', ' + $auth.user.state }}</p>
+                        <p class="sub">{{ $auth.user.address_1 !== null ? $auth.user.address_1 : '' + ', ' + $auth.user.state !== null ? $auth.user.state : '' }}</p>
                     </div>
                 </div>
                 <div class="flex flex-row items-end">
@@ -121,7 +121,7 @@
                    @before-close="beforeClose">
                 <div class="flex flex-col">
                     <div class="flex flex-row items-center justify-between">
-                        <h1 class="text-left modal-title">Change Profile Photo</h1>
+                        <h1 class="text-left modal-title">Transfer Money</h1>
                         <svg @click="$modal.hide('payout')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -129,7 +129,7 @@
                     <div class="modal-content">
                         <div class="flex flex-col w-full">
                             <div class="flex flex-col">
-                                <label class="block text-sm font-medium text-gray-700 text-semibold bg-gray-50 rounded-4 p-2" v-if="stripeDetails">Transferd money will go to: **** **** **** {{ stripeDetails.last4 }}</label>
+                                <label class="block text-sm font-medium text-gray-700 text-semibold bg-gray-50 rounded-4 p-2" v-if="stripeDetails">Transferred money will go to: **** **** **** {{ stripeDetails.last4 }}</label>
                             </div>
                             <div class="w-full mt-4">
                                 <InputField v-model="payload.amount" label="Amount in USD"
@@ -362,9 +362,10 @@ export default {
             border-radius: 42px;
             margin-right: 26px;
             position: relative;
+            border: 1px solid #f1f1f1;
 
             .upload {
-                display: none;
+                display: flex;
                 position: absolute;
                 bottom: 0;
                 height: 42px;
@@ -525,6 +526,9 @@ export default {
         min-width: 144px;
         margin-top: 50px;
         overflow: hidden !important;
+        object-fit: contain;
+        background: #f9f9f9;
+        object-position: center;
     }
 
     input[type="file"] {
