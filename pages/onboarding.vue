@@ -22,7 +22,7 @@ export default {
     async created() {
         this.user = this.$route.query.user
 
-        let res = await this.$axios.post(`/users/${this.user}/sync`);
+        await this.$axios.post(`/users/${this.user}/sync`);
 
         await this.$auth.setUserToken(this.$route.query.access_token);
         await this.$auth.fetchUser();
