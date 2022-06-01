@@ -28,11 +28,11 @@
     "_name": "_6c323e10"
   },
   {
-    "name": "failed",
-    "path": "/failed",
-    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/failed.vue",
-    "chunkName": "pages/failed",
-    "_name": "_796c6f4a"
+    "name": "fail",
+    "path": "/fail",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/fail.vue",
+    "chunkName": "pages/fail",
+    "_name": "_1c8892eb"
   },
   {
     "name": "index-employee",

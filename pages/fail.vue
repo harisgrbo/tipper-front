@@ -2,7 +2,7 @@
     <div class="w-full h-full flex items-center justify-center h-screen bg-gray-100">
         <div class="shadow-md bg-white w-1/2 mx-auto rounded-md">
             <div class="text-center flex flex-col items-center py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-                <h2 class="text-3xl font-extrabold tracking-tight text-red-600 sm:text-4xl">
+                <h2 class="text-xl font-normal tracking-tight text-red-600 sm:text-4xl">
                     <span class="block mb-2">Transaction failed</span>
                     <span class="block">Please try again.</span>
                 </h2>

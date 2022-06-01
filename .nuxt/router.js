@@ -8,7 +8,7 @@ const _1288d5d5 = () => interopDefault(import('../pages/admin/index.vue' /* webp
 const _7f3a3448 = () => interopDefault(import('../pages/database.vue' /* webpackChunkName: "pages/database" */))
 const _51a3a3e5 = () => interopDefault(import('../pages/employee-settings.vue' /* webpackChunkName: "pages/employee-settings" */))
 const _6c323e10 = () => interopDefault(import('../pages/employer-settings.vue' /* webpackChunkName: "pages/employer-settings" */))
-const _796c6f4a = () => interopDefault(import('../pages/failed.vue' /* webpackChunkName: "pages/failed" */))
+const _1c8892eb = () => interopDefault(import('../pages/fail.vue' /* webpackChunkName: "pages/fail" */))
 const _5525bd56 = () => interopDefault(import('../pages/index-employee.vue' /* webpackChunkName: "pages/index-employee" */))
 const _55dceee3 = () => interopDefault(import('../pages/index-employer.vue' /* webpackChunkName: "pages/index-employer" */))
 const _465b6bad = () => interopDefault(import('../pages/index-employer-pending.vue' /* webpackChunkName: "pages/index-employer-pending" */))
@@ -66,9 +66,9 @@ export const routerOptions = {
     component: _6c323e10,
     name: "employer-settings"
   }, {
-    path: "/failed",
-    component: _796c6f4a,
-    name: "failed"
+    path: "/fail",
+    component: _1c8892eb,
+    name: "fail"
   }, {
     path: "/index-employee",
     component: _5525bd56,
