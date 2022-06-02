@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="flex flex-row items-end">
-                    <p class="download cursor-pointer" @click="downloadQR">Download QR code Image -></p>
+                    <p class="download cursor-pointer" @click="downloadQR">Download QR code Image</p>
                     <div>
                         <canvas ref="canvas"/>
                     </div>
@@ -58,7 +58,7 @@
                             <b>${{ $auth.user.wallet.balance }}</b>
                         </div>
                     </div>
-                    <button class="payout" @click="$modal.show('payout')">Payout</button>
+                    <button :class="['payout', $auth.user.wallet.balance <= 0 ? 'disabled' : '']" :disabled="$auth.user.wallet.balance <= 0" @click="$modal.show('payout')">Payout</button>
                 </div>
                 <div class="p-6 bg-white flex flex-row justify-between items-center">
                     <div class="flex flex-row items-center">
@@ -166,7 +166,8 @@ export default {
             avatarUrl: '',
             payload: {
                 amount: 0,
-            }
+            },
+            test: 0,
         }
     },
     async created() {
@@ -222,7 +223,12 @@ export default {
                     type: 'success',
                 });
             } catch (e) {
-                console.log(e)
+                this.$toast.open({
+                    message: e.response.data.message,
+                    type: 'error',
+                });
+
+                this.$modal.hide('payout')
             }
         },
         async fetchAuthUserBalance() {
@@ -399,6 +405,11 @@ export default {
         font-size: 16px;
         line-height: 24px;
         color: #B45F4B;
+
+        &.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     }
 
     .svg-wrap {

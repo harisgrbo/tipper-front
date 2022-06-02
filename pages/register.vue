@@ -33,7 +33,7 @@
                                             placeholder="Business name"></InputField>
                                 <InputField v-model="payload.address_1" label="Address 1"
                                             placeholder="Address one"></InputField>
-                                <InputField v-model="payload.address_2" label="Address 2"
+                                <InputField v-model="payload.address_2" label="Address 2 (optional)"
                                             placeholder="Address two"></InputField>
                                 <div class="flex flex-row items-center">
                                     <InputField v-model="payload.city" label="City" placeholder="City"></InputField>

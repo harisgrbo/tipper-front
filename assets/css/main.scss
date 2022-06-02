@@ -51,3 +51,7 @@ body, html, #__nuxt, #__layout {height:100vh}
     margin-right: 0 !important;
   }
 }
+
+.vue-star-rating-star {
+  display: flex !important;
+}

@@ -24,7 +24,7 @@
                                     class="mb-6"></InputField>
                         <InputField placeholder="John Doe Address 12" label="Address" v-model="userInfo.address_1"
                                     class="mb-6"></InputField>
-                        <InputField placeholder="John Doe Address 12" label="Address" v-model="userInfo.address_2"
+                        <InputField placeholder="John Doe Address 12" label="Address 2 (optional)" v-model="userInfo.address_2"
                                     class="mb-6"></InputField>
                         <div class="flex flex-row items-center mb-6">
                             <InputField v-model="userInfo.city" label="City" placeholder="City"></InputField>
@@ -329,6 +329,8 @@ h4 {
         display: flex;
         flex-direction: column;
         border-radius: 15px;
+        max-height: 200px;
+        overflow-y: scroll;
         background: #fff;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
 

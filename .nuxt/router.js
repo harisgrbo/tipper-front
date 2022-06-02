@@ -32,7 +32,6 @@ const _2242dcaf = () => interopDefault(import('../pages/password-reset/_token.vu
 const _513bd8c8 = () => interopDefault(import('../pages/pools/_id/index.vue' /* webpackChunkName: "pages/pools/_id/index" */))
 const _f1263c28 = () => interopDefault(import('../pages/report/_id.vue' /* webpackChunkName: "pages/report/_id" */))
 const _1fedb306 = () => interopDefault(import('../pages/user/_id/index.vue' /* webpackChunkName: "pages/user/_id/index" */))
-const _2ce33954 = () => interopDefault(import('../pages/pools/_id/tip/index.vue' /* webpackChunkName: "pages/pools/_id/tip/index" */))
 const _3e81c492 = () => interopDefault(import('../pages/user/_id/tip/index.vue' /* webpackChunkName: "pages/user/_id/tip/index" */))
 const _2311e7f8 = () => interopDefault(import('../pages/user/_id/tipping/index.vue' /* webpackChunkName: "pages/user/_id/tipping/index" */))
 const _4df6c5f0 = () => interopDefault(import('../pages/user/_id/tipping/pools/_idPool.vue' /* webpackChunkName: "pages/user/_id/tipping/pools/_idPool" */))
@@ -161,10 +160,6 @@ export const routerOptions = {
     path: "/user/:id",
     component: _1fedb306,
     name: "user-id"
-  }, {
-    path: "/pools/:id/tip",
-    component: _2ce33954,
-    name: "pools-id-tip"
   }, {
     path: "/user/:id?/tip",
     component: _3e81c492,

@@ -14,10 +14,10 @@
                             </div>
                         </div>
                         <div class="flex flex-row items-center">
-                            <button v-for="(option, index) in options" :key="index"
-                                    :class="current_option === option.key ? 'active' : ''" @click="setCurrentOption(option)">
-                                {{ option.name }}
-                            </button>
+<!--                            <button v-for="(option, index) in options" :key="index"-->
+<!--                                    :class="current_option === option.key ? 'active' : ''" @click="setCurrentOption(option)">-->
+<!--                                {{ option.name }}-->
+<!--                            </button>-->
                             <button class="mutation" @click="$router.push('/report/' + current_option)">
                                 Export Tip Report
                                 <img src="/mutation.svg" alt="">
@@ -33,11 +33,10 @@
                                         <tr class="main">
                                             <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6">List of Employees
                                             </th>
-                                            <th scope="col" class="px-3 py-3.5 text-left">Ratings</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left">Department</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left">Total tips</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left">Date</th>
-                                            <th scope="col" class="px-3 py-3.5 flex flex-row items-center justify-end">
+                                            <th scope="col" class="px-3 py-3.5 text-left w-1/5">Ratings</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left w-1/5">Department</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left w-1/5">Total tips</th>
+                                            <th scope="col" class="px-3 py-3.5 text-right w-1/5">
                                                 <button class="invite" @click="$router.push('/invite/employees')">
                                                     Invite Employees
                                                 </button>
@@ -46,7 +45,7 @@
                                         </thead>
                                         <tbody class="divide-y bg-white">
                                         <tr v-for="(employee, index) in myEmployees" :key="index">
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 w-1/5">
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0">
                                                         <img class="h-10 w-10 rounded-full" :src="employee.avatar_url !== null ? employee.avatar_url : '/noimage.png'" alt="">
@@ -59,19 +58,19 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-1/5">
                                                 <div class="flex flex-row items-center stars">
                                                     <star-rating :star-size="15" :increment="1" :inline="true"
                                                                  :read-only="true" inactive-color="#F0EBE4"
                                                                  :show-rating="true" active-color="#C67D65"
-                                                                 v-model="employee.rating"></star-rating>
+                                                                 v-model="employee.rating"
+                                                                 fixed-points="1"></star-rating>
 
                                                 </div>
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-4 username">{{ employee.department.name }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 username">${{ employee.total_earned_amount }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 username">{{ $moment(employee.created_at).format('ddd DD MMMM')  }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 username"></td>
+                                            <td class="whitespace-nowrap px-3 py-4 username w-1/5">{{ employee.department.name }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 username w-1/5">${{ employee.total_earned_amount }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 username w-1/5"></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -300,6 +299,8 @@ export default {
                 let res = await this.$axios.get('/users/' + this.$auth.user.id + '/tips');
 
                 this.reviewUsers = res.data.data;
+
+                console.log(this.reviewUsers, 'review')
 
             } catch (e) {
                 console.log(e)
@@ -586,7 +587,6 @@ tr.main th {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-top: 12px;
 
     img {
         margin-right: 8px;
@@ -612,6 +612,7 @@ tr.main th {
     background: rgba(198, 125, 101, 0.1);
     border-radius: 90px;
     width: fit-content;
+    min-width: fit-content;
 }
 
 .start {

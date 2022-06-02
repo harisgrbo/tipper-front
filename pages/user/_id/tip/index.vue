@@ -38,7 +38,7 @@
                 <ul>
                     <li>
                         <span>Tip:</span>
-                        <span>${{ selected_tip_amount + '.00' }}</span>
+                        <span>${{ parseInt(selected_tip_amount).toFixed(2) }}</span>
                     </li>
                     <li>
                         <span>Fee:</span>
@@ -60,7 +60,7 @@
                 <star-rating :star-size="25" :increment="1" :inline="true" :rounded-corners="true" padding="2"
                              inactive-color="#F0EBE4" :show-rating="false" active-color="#F9C52D"
                              v-model="rating"></star-rating>
-                <h2>Give rating and review!</h2>
+                <h2>Leave a Review!</h2>
                 <textarea v-model="description" placeholder="Leave a review (Optional)" rows="10"></textarea>
             </div>
             <button class="submit" @click="submit">
@@ -265,12 +265,13 @@ export default {
         button {
             width: 77px;
             height: 77px;
-            background: #FFFFFF;
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 1px solid #B45F4B;
+            background: rgba(216, 205, 188, 0.2);
+
 
             p {
                 font-family: 'Poppins';
