@@ -1,9 +1,35 @@
 <template>
     <div class="employer-wrapper">
-        <div v-if="loaded">
+        <div v-show="loaded">
             <div class="flex items-center justify-between">
                 <h2>Employer Dashboard</h2>
                 <button class="pending-button" @click="$router.push('/index-employer-pending')">Check invitation status</button>
+            </div>
+            <div class="user-info">
+                <div class="flex flex-row items-center">
+                    <div class="user-avatar">
+                        <img class="user-avatar" :src="$auth.user.avatar_url || '/noimage.png' " alt="">
+                        <div class="upload" @click="$modal.show('image-upload')">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <h1>{{ $auth.user.firstname + ' ' + $auth.user.lastname }}</h1>
+                        <div class="flex flex-row items-center">
+                            <p class="sub">{{ $auth.user.address_1 ? $auth.user.address_1 + ', ' : '' }}</p>
+                            <p class="sub">{{ $auth.user.state ? $auth.user.state + ', ' : ' ' }} </p>
+                            <p class="sub">{{ $auth.user.zip_code ? $auth.user.zip_code : ' ' }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-row items-end">
+                    <p class="download cursor-pointer" @click="downloadQR">Download QR code Image</p>
+                    <div>
+                        <canvas ref="canvas"/>
+                    </div>
+                </div>
             </div>
             <div>
                 <div class="bg-white table-header p-md">
@@ -193,9 +219,33 @@
                         </div>
                     </modal>
                 </client-only>
+                <client-only>
+                    <modal name="image-upload"
+                           width="476"
+                           height="400"
+                           @before-open="beforeOpen"
+                           @before-close="beforeClose">
+                        <div class="flex flex-col">
+                            <div class="flex flex-row items-center justify-between">
+                                <h1 class="text-left modal-title">Change Profile Photo</h1>
+                                <svg @click="$modal.hide('image-upload')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </div>
+                            <div class="modal-content">
+                                <h4 v-if="$auth.user.avatar_url === null">Profile Photo</h4>
+                                <img v-else :src="$auth.user.avatar_url" alt="">
+                                <label for="file-upload" class="custom-file-upload">
+                                    Change Profile Photo
+                                </label>
+                                <input id="file-upload" type="file" @change="updateAvatar"/>
+                            </div>
+                        </div>
+                    </modal>
+                </client-only>
             </div>
         </div>
-        <Loader v-else></Loader>
+        <Loader v-show="!loaded"></Loader>
     </div>
 </template>
 
@@ -204,12 +254,14 @@ import GlobalButton from "~/components/GlobalButton";
 import ReviewCard from "~/components/ReviewCard";
 import InputField from "@/components/inputs/InputField";
 import Loader from "@/components/Loader";
+import QRCode from "qrcode";
 export default {
     name: "index-employer",
     layout: 'standard',
     components: {InputField, GlobalButton, ReviewCard, Loader},
     data() {
         return {
+            avatarUrl: '',
             options: [
                 {
                     name: 'Today',
@@ -249,7 +301,38 @@ export default {
         await this.fetchReviews();
         this.loaded = true
     },
+    mounted() {
+        if (process.browser) {
+            let QRCode = require('qrcode');
+
+            let url = `https://tipper-front.herokuapp.com/user/${this.$auth.user.id}/`;
+
+            if (this.$auth.user.type === 'employee') {
+                url += `tip?type=user&id=${this.$auth.user.id}`;
+            } else {
+                url += 'tipping';
+            }
+
+            this.url = url;
+
+            QRCode.toCanvas(this.$refs.canvas, url, function (error) {
+                if (error) console.error(error)
+            })
+        }
+    },
     methods: {
+        downloadQR() {
+            if (this.$refs.canvas) {
+                let url = this.$refs.canvas.toDataURL().replace("image/png", "image/octet-stream");
+
+                // const url = window.URL.createObjectURL(new Blob([res.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'qrcode.png'); //or any other extension
+                document.body.appendChild(link);
+                link.click();
+            }
+        },
         setCurrentOption(o) {
             this.current_option = o.key;
         },
@@ -281,6 +364,27 @@ export default {
                 this.$modal.hide('invite');
             } catch (e) {
                 console.log(e)
+            }
+        },
+        async updateAvatar(event) {
+            if (event.target.files.length) {
+                let image = event.target.files[0];
+                let formData = new FormData();
+                formData.append('avatar', image);
+
+                try {
+                    await this.$axios.post('/avatar', formData, {
+                        'headers': {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+
+                    await this.$auth.fetchUser();
+
+                    this.avatarUrl = this.$auth.user.avatar_url;
+                } catch (e) {
+                    alert("Error")
+                }
             }
         },
         async fetchMyEmployees() {
@@ -659,5 +763,143 @@ tr.main th {
     color: #fff;
     width: fit-content;
     padding: 0 24px;
+}
+
+.user-info {
+    background: #fff;
+    padding: 38px;
+    margin-bottom: 36px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 33px;
+        color: #1B1A1A;
+        opacity: 0.8;
+    }
+
+    p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 25px;
+        color: #000000;
+        opacity: 0.6;
+
+        &.sub {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+            margin-top: 8px;
+            color: #000000;
+            opacity: 0.4;
+        }
+    }
+
+    .user-avatar {
+        height: 84px;
+        width: 84px;
+        border-radius: 42px;
+        margin-right: 26px;
+        position: relative;
+        border: 1px solid #f1f1f1;
+
+        .upload {
+            display: flex;
+            position: absolute;
+            bottom: 0;
+            height: 42px;
+            width: 84px;
+            border-bottom-left-radius: 42px;
+            border-bottom-right-radius: 42px;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        &:hover {
+            .upload {
+                display: flex;
+
+            }
+        }
+    }
+}
+
+canvas {
+    height: 100px !important;
+    width: 100px !important;
+}
+
+.modal-title {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 45px;
+    color: #1B1A1A;
+    margin-bottom: 0;
+    margin-bottom: 24px;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+        font-style: normal;
+        font-weight: 500 !important;
+        font-size: 30px;
+        line-height: 41px;
+        color: #1B1A1A;
+        opacity: 0.8;
+        margin: 24px auto;
+    }
+
+    img {
+        height: 144px;
+        width: 144px;
+        border-radius: 72px;
+        min-width: 144px;
+        margin-top: 50px;
+        overflow: hidden !important;
+        object-fit: contain;
+        background: #f9f9f9;
+        object-position: center;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .custom-file-upload {
+        display: flex;
+        margin-top: 24px;
+        cursor: pointer;
+        position: absolute;
+        bottom: 24px;
+        left: 24px;
+        right: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 30px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: 0.02em;
+        color: #B45F4B;
+    }
 }
 </style>
