@@ -1,12 +1,14 @@
 <template>
     <div class="loader-wrapper">
         <img src="/loader.svg" alt="">
+        <h2 v-if="text">You will be redirected to Stripe. Please wait.</h2>
     </div>
 </template>
 
 <script>
 export default {
-    name: "Loader"
+    name: "Loader",
+    props: ['text']
 }
 </script>
 

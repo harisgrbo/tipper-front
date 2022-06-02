@@ -123,6 +123,8 @@ export default {
                     message: 'Passwords dont match',
                     type: 'error',
                 });
+
+                return
             }
 
             try {

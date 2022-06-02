@@ -8,8 +8,8 @@
                        <h2>{{ user.username || (user.firstname + ' ' + user.lastname ) }}</h2>
                        <div class="flex flex-row items-center">
                            <span>{{ user.address_1 ? user.address_1 + ', ' : '' }}</span>
-                           <span>{{ user.state ? user.state + ', ' : ' ' }} </span>
-                           <span>{{ user.zip_code ? user.zip_code : ' ' }}</span>
+                           <span>{{ user.city ? user.city + ', '  : '' }}</span>
+                           <span>{{ user.state ? user.state: ' ' }} </span>
                        </div>
                    </div>
                </div>

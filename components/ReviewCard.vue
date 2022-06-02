@@ -4,6 +4,7 @@
             <img :src="user.user !== null ? (user.user.avatar_url !== null ? user.user.avatar_url : '/noimage.png') : '/noimage.png'" alt="">
         </div>
         <h2>{{ user.pool_tip ? user.pool.name : (user.user.type === 'employer' ? 'Entire Staff' : user.user.display_name) }}</h2>
+        <h4 class="text-gray-500 text-sm">{{ user.user !== null ? user.user.department.name : '' }}</h4>
         <h3>"{{ user.description }}"</h3>
         <div class="stars">
             <star-rating :star-size="18" :increment="1" :read-only="true" inactive-color="#F0EBE4"
@@ -83,7 +84,7 @@ export default {
         letter-spacing: 0.03em;
         color: #000000;
         opacity: 0.8;
-        margin: 32px 0;
+        margin: 16px 0;
     }
 
     .stars {

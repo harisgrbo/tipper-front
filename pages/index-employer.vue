@@ -19,8 +19,8 @@
                         <h1>{{ $auth.user.firstname + ' ' + $auth.user.lastname }}</h1>
                         <div class="flex flex-row items-center">
                             <p class="sub">{{ $auth.user.address_1 ? $auth.user.address_1 + ', ' : '' }}</p>
+                            <p class="sub">{{ $auth.user.city ? $auth.user.city : ' ' }}</p>
                             <p class="sub">{{ $auth.user.state ? $auth.user.state + ', ' : ' ' }} </p>
-                            <p class="sub">{{ $auth.user.zip_code ? $auth.user.zip_code : ' ' }}</p>
                         </div>
                     </div>
                 </div>
