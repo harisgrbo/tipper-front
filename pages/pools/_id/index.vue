@@ -124,7 +124,7 @@ export default {
     async mounted() {
         if (process.browser) {
             let QRCode = require('qrcode');
-            QRCode.toCanvas(this.$refs.canvas, `https://tipper-front.herokuapp.com/pools/${this.$route.params.id}/tip`, function (error) {
+            QRCode.toCanvas(this.$refs.canvas, `https://thetippercompany.com/pools/${this.$route.params.id}/tip`, function (error) {
                 if (error) console.error(error)
             })
         }

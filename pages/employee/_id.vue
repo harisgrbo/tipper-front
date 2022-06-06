@@ -14,7 +14,7 @@
                     <div class="flex flex-col w-full justify-between">
                         <div class="modal-header w-full">
                             <div class="w-full flex flex-col">
-                                <h1 class="username">{{ employee !== null ? employee.firstname + ' ' + employee.lastname : '' }}</h1>
+                                <h1 class="username">{{employee.display_name }}</h1>
                                 <div class="flex flex-row items-center justify-between w-full mt-8 rating-stars">
                                     <client-only>
                                         <star-rating :star-size="22" :increment="1" :inline="true" :read-only="true"
@@ -51,31 +51,32 @@
                         </div>
                     </div>
                     <div class="modal-image-wrapper">
-                        <img src="/noimage.png" alt="">
+                        <img :src="employee.avatar_url && employee.avatar_url !== null ? employee.avatar_url : '/noimage.png'" alt="">
                     </div>
                 </div>
             </div>
+            <client-only>
+                <modal name="delete"
+                       width="476"
+                       height="auto"
+                       @before-open="beforeOpen"
+                       @before-close="beforeClose">
+                    <div class="flex flex-col">
+                        <h1 class="text-center">Are you sure you want to delete?</h1>
+                        <div class="modal-content">
+                            <img :src="employee.avatar_url && employee.avatar_url !== null ? employee.avatar_url : '/noimage.png'" alt="">
+                            <h2>{{ employee.display_name }}</h2>
+                        </div>
+                        <div class="modal-buttons">
+                            <button @click="$modal.hide('delete')">No</button>
+                            <button @click="deleteEmployee">Yes</button>
+                        </div>
+                    </div>
+                </modal>
+            </client-only>
+
         </div>
         <Loader v-else></Loader>
-        <client-only>
-            <modal name="delete"
-                   width="476"
-                   height="auto"
-                   @before-open="beforeOpen"
-                   @before-close="beforeClose">
-                <div class="flex flex-col">
-                    <h1 class="text-center">Are you sure you want to delete</h1>
-                    <div class="modal-content">
-                        <img src="/noimage.png" alt="">
-                        <h2>{{ employee !== null ? employee.username : '' }}</h2>
-                    </div>
-                    <div class="modal-buttons">
-                        <button @click="$modal.hide('delete')">No</button>
-                        <button @click="deleteEmployee">Yes</button>
-                    </div>
-                </div>
-            </modal>
-        </client-only>
     </div>
 </template>
 

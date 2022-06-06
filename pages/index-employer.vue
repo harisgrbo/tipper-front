@@ -18,9 +18,9 @@
                     <div class="flex flex-col">
                         <h1>{{ $auth.user.firstname + ' ' + $auth.user.lastname }}</h1>
                         <div class="flex flex-row items-center">
-                            <p class="sub">{{ $auth.user.address_1 ? $auth.user.address_1 + ', ' : '' }}</p>
-                            <p class="sub">{{ $auth.user.city ? $auth.user.city : ' ' }}</p>
-                            <p class="sub">{{ $auth.user.state ? $auth.user.state + ', ' : ' ' }} </p>
+                            <p class="sub">{{ $auth.user.address_1 ? $auth.user.address_1 + ',&nbsp' : '' }}</p>
+                            <p class="sub">{{ $auth.user.city ? $auth.user.city + ',&nbsp' : ' ' }}</p>
+                            <p class="sub">{{ $auth.user.state ? $auth.user.state  : ' ' }} </p>
                         </div>
                     </div>
                 </div>
@@ -44,6 +44,9 @@
 <!--                                    :class="current_option === option.key ? 'active' : ''" @click="setCurrentOption(option)">-->
 <!--                                {{ option.name }}-->
 <!--                            </button>-->
+                            <button class="invite" @click="$router.push('/invite/employees')">
+                                Invite Employees
+                            </button>
                             <button class="mutation" @click="$router.push('/report/' + current_option)">
                                 Export Tip Report
                                 <img src="/mutation.svg" alt="">
@@ -62,11 +65,7 @@
                                             <th scope="col" class="px-3 py-3.5 text-left w-1/5">Ratings</th>
                                             <th scope="col" class="px-3 py-3.5 text-left w-1/5">Department</th>
                                             <th scope="col" class="px-3 py-3.5 text-left w-1/5">Total tips</th>
-                                            <th scope="col" class="px-3 py-3.5 text-right w-1/5">
-                                                <button class="invite" @click="$router.push('/invite/employees')">
-                                                    Invite Employees
-                                                </button>
-                                            </th>
+                                            <th scope="col" class="px-3 py-3.5 text-right w-1/5">Delete</th>
                                         </tr>
                                         </thead>
                                         <tbody class="divide-y bg-white">
@@ -96,7 +95,9 @@
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 username w-1/5">{{ employee.department.name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 username w-1/5">${{ employee.total_earned_amount }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 username w-1/5"></td>
+                                            <td class="whitespace-nowrap px-3 py-4 username w-auto"><svg xmlns="http://www.w3.org/2000/svg" @click="deleteEmployee(employee)" class="h-5 w-5 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -114,6 +115,7 @@
                 </div>
                 <div class="review-cards-wrapper">
                     <ReviewCard @open-review-card-modal="handleOpenReviewCardInModal(user)" :user="user"
+                                v-show="user.description.length"
                                 v-for="(user, index) in reviewUsers.slice(0, 5)" :key="index"></ReviewCard>
                 </div>
                 <client-only>
@@ -195,13 +197,13 @@
                                     <div>
                                         <h1 v-if="selectedUser.user !== null">{{ selectedUser.user.display_name }}</h1>
                                         <h1 v-else>{{ selectedUser.pool.name }}</h1>
-                                        <span v-if="selectedUser.user !== null">Developer</span>
+                                        <span v-if="selectedUser.user !== null">{{ selectedUser.user.department.name }}</span>
                                     </div>
                                     <button @click="$modal.hide('review-card')">
                                         <img src="/close.svg" alt="">
                                     </button>
                                 </div>
-                                <div class="flex flex-col modal-content">
+                                <div class="flex flex-col items-start justify-start modal-content">
                                     <star-rating :star-size="15" :increment="1" :inline="true" :read-only="true"
                                                  inactive-color="#F0EBE4" :show-rating="true" active-color="#C67D65"
                                                  v-model="selectedUser.rating"></star-rating>
@@ -214,7 +216,7 @@
                             </div>
 
                             <div class="modal-image-wrapper">
-                                <img :src="selectedUser.user !== null ? selectedUser.user.avatar_url : '/noimage.png'" alt="">
+                                <img :src="selectedUser.user !== null && selectedUser.user.avatar_url !== null ? selectedUser.user.avatar_url : '/noimage.png'" alt="">
                             </div>
                         </div>
                     </modal>
@@ -234,7 +236,9 @@
                             </div>
                             <div class="modal-content">
                                 <h4 v-if="$auth.user.avatar_url === null">Profile Photo</h4>
-                                <img v-else :src="$auth.user.avatar_url" alt="">
+                                <div v-else class="img-wrapper-modal">
+                                    <img :src="$auth.user.avatar_url" alt="">
+                                </div>
                                 <label for="file-upload" class="custom-file-upload">
                                     Change Profile Photo
                                 </label>
@@ -305,7 +309,7 @@ export default {
         if (process.browser) {
             let QRCode = require('qrcode');
 
-            let url = `https://tipper-front.herokuapp.com/user/${this.$auth.user.id}/`;
+            let url = `https://thetippercompany.com/user/${this.$auth.user.id}/`;
 
             if (this.$auth.user.type === 'employee') {
                 url += `tip?type=user&id=${this.$auth.user.id}`;
@@ -385,6 +389,21 @@ export default {
                 } catch (e) {
                     alert("Error")
                 }
+            }
+        },
+        async deleteEmployee(u) {
+            try {
+                await this.$axios.delete('/employees/' + u.id);
+
+                let index = this.myEmployees.findIndex(item => item.id === u.id);
+                this.myEmployees.splice(index, 1);
+
+                this.$toast.open({
+                    message: 'You have successfully deleted an employee',
+                    type: 'success',
+                });
+            } catch (e) {
+                console.log(e)
             }
         },
         async fetchMyEmployees() {
@@ -811,7 +830,7 @@ tr.main th {
         border: 1px solid #f1f1f1;
 
         .upload {
-            display: flex;
+            display: none;
             position: absolute;
             bottom: 0;
             height: 42px;
@@ -866,16 +885,21 @@ canvas {
         margin: 24px auto;
     }
 
-    img {
+    .img-wrapper-modal {
         height: 144px;
         width: 144px;
         border-radius: 72px;
         min-width: 144px;
         margin-top: 50px;
         overflow: hidden !important;
-        object-fit: contain;
         background: #f9f9f9;
-        object-position: center;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-position: center;
+            object-fit: cover;
+        }
     }
 
     input[type="file"] {
@@ -901,5 +925,11 @@ canvas {
         letter-spacing: 0.02em;
         color: #B45F4B;
     }
+}
+
+.username.w-auto {
+    width: auto;
+    display: flex;
+    justify-content: flex-end;
 }
 </style>

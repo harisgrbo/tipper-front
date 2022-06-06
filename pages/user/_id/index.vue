@@ -173,7 +173,7 @@ export default {
         if (process.browser) {
             let QRCode = require('qrcode');
 
-            let url = `https://tipper-front.herokuapp.com/user/${this.user.id}/`;
+            let url = `https://thetippercompany.com/user/${this.user.id}/`;
 
             if (this.user.type === 'employee') {
               url += `tip?type=user&id=${this.user.id}`;

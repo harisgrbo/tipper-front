@@ -34,27 +34,28 @@
                     <input type="number" v-model="selected_tip_amount" @input="fetchFee();">
                 </div>
             </div>
-            <div class="tipping-wrapper-info mt-4">
+            <div class="tipping-wrapper-info mt-4" v-if="selected_tip_amount >= 1">
                 <ul>
                     <li>
                         <span>Tip:</span>
-                        <span>${{ parseInt(selected_tip_amount).toFixed(2) }}</span>
+                        <span>${{ parseFloat(selected_tip_amount).toFixed(2) }}</span>
                     </li>
                     <li>
                         <span>Fee:</span>
                         <span v-if="loadingFee">
-            <img src="/loader2.svg" alt="">
-          </span>
-                        <span v-else>{{ '$' + fee.fee }}</span>
+                            <img src="/loader2.svg" alt="">
+                          </span>
+                        <span v-else>{{ '$' + parseFloat(fee.fee).toFixed(2) }}</span>
                     </li>
                     <li class="total">
                         <span class="first">Total</span>
                         <span class="second" v-if="selected_tip_amount > 0">${{
-                                (parseInt(selected_tip_amount) + fee.fee).toFixed(2)
+                                (parseFloat(selected_tip_amount) + fee.fee).toFixed(2)
                             }}</span>
                     </li>
                 </ul>
             </div>
+            <p v-else class="text-red-600 text-sm mt-2">Minimum tip value is $1.00</p>
             <div class="review-block">
                 <img src="/review.svg" alt="">
                 <star-rating :star-size="25" :increment="1" :inline="true" :rounded-corners="true" padding="2"

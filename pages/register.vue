@@ -166,6 +166,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@mixin for-phone-only {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
 .auth-wrapper {
     min-height: 100vh;
     background: #F7F8FA;
@@ -176,6 +181,12 @@ export default {
         margin-left: 53px;
         margin-right: 134px;
         padding: 32px;
+
+        @include for-phone-only {
+            margin-left: 0;
+            margin-right: 0;
+            padding: 24px;
+        }
 
         h1 {
             font-family: 'Poppins';
@@ -204,6 +215,10 @@ export default {
         margin-right: 134px;
         margin-top: 70px;
 
+        @include for-phone-only {
+            margin-left: 0;
+            margin-right: 0;
+        }
 
         h3 {
             font-family: 'Poppins';
@@ -269,6 +284,10 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+
+    @include for-phone-only {
+        display: none;
+    }
 }
 
 .dropdown-wrapper {

@@ -1,5 +1,5 @@
 <template>
-    <div class="review-card" @click="$emit('open-review-card-modal')">
+    <div class="review-card">
         <div class="avatar-wrapper">
             <img :src="user.user !== null ? (user.user.avatar_url !== null ? user.user.avatar_url : '/noimage.png') : '/noimage.png'" alt="">
         </div>

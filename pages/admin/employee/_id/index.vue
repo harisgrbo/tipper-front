@@ -62,7 +62,7 @@
                        @before-open="beforeOpen"
                        @before-close="beforeClose">
                     <div class="flex flex-col">
-                        <h1 class="text-center">Are you sure you want to delete</h1>
+                        <h1 class="text-center">Are you sure you want to delete?</h1>
                         <div class="modal-content">
                             <img src="/noimage.png" alt="">
                             <h2>{{ employee !== null ? employee.username : '' }}</h2>

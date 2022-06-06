@@ -182,7 +182,7 @@ export default {
         if (process.browser) {
             let QRCode = require('qrcode');
 
-            let url = `https://tipper-front.herokuapp.com/user/${this.$auth.user.id}/`;
+            let url = `https://thetippercompany.com/user/${this.$auth.user.id}/`;
 
             if (this.$auth.user.type === 'employee') {
                 url += `tip?type=user&id=${this.$auth.user.id}`;
@@ -371,7 +371,7 @@ export default {
             border: 1px solid #f1f1f1;
 
             .upload {
-                display: flex;
+                display: none;
                 position: absolute;
                 bottom: 0;
                 height: 42px;
