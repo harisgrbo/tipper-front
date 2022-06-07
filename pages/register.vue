@@ -53,7 +53,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <InputField v-model="payload.zip_code" label="Zip Code" placeholder="12345"
+                                    <InputField v-model="payload.zip_code" label="Zip Code" type="tel" length="5" placeholder="12345"
                                                 class="ml-4"></InputField>
                                 </div>
                                 <div>

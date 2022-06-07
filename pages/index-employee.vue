@@ -55,7 +55,7 @@
                         </div>
                         <div class="flex flex-col">
                             <span>Account balance ready for payout</span>
-                            <b>${{ $auth.user.wallet.balance }}</b>
+                            <b>${{ parseFloat(me).toFixed(2) }}</b>
                         </div>
                     </div>
                     <button :class="['payout', $auth.user.wallet.balance <= 0 ? 'disabled' : '']" :disabled="$auth.user.wallet.balance <= 0" @click="$modal.show('payout')">Payout</button>
@@ -222,6 +222,10 @@ export default {
                     message: 'Success, status pending.',
                     type: 'success',
                 });
+
+                await this.$auth.fetchUser();
+
+                window.location.reload();
             } catch (e) {
                 this.$toast.open({
                     message: e.response.data.message,
@@ -235,7 +239,9 @@ export default {
             try {
                 let res = await this.$axios.get('/balance');
 
-                this.me = res.data.data.balance[0];
+                this.me = res.data.data.payout && res.data.data.payout.length ? res.data.data.payout[0].amount: 0;
+
+                console.log(this.me, 'me')
             } catch (e) {
                 console.log(e)
             }
@@ -369,6 +375,7 @@ export default {
             margin-right: 26px;
             position: relative;
             border: 1px solid #f1f1f1;
+            object-fit: cover;
 
             .upload {
                 display: none;
@@ -537,9 +544,9 @@ export default {
         min-width: 144px;
         margin-top: 50px;
         overflow: hidden !important;
-        object-fit: contain;
         background: #f9f9f9;
         object-position: center;
+        object-fit: cover !important;
     }
 
     input[type="file"] {

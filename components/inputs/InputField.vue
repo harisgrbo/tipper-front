@@ -5,6 +5,7 @@
             :type="type"
             :value="value"
             :placeholder="placeholder"
+            :maxlength="length"
             autocomplete="off"
             @change="$emit('input', $event.target.value)"
             @keyup="$emit('show-suggests', $event.target.value)"
@@ -17,7 +18,7 @@
 <script>
 export default {
     name: "InputField",
-    props: ['type', 'error', 'label', 'placeholder', 'value', 'bgColor', 'hintText'],
+    props: ['type', 'error', 'label', 'placeholder', 'value', 'bgColor', 'hintText', 'length'],
     data() {
         return {}
     }

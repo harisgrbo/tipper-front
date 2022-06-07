@@ -828,6 +828,7 @@ tr.main th {
         margin-right: 26px;
         position: relative;
         border: 1px solid #f1f1f1;
+        object-fit: cover;
 
         .upload {
             display: none;
