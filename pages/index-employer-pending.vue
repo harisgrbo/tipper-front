@@ -28,17 +28,20 @@
                                     <table class="min-w-full divide-y divide-gray-300">
                                         <thead class="bg-white">
                                         <tr class="main">
-                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/3">List of Employees
+                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/4">List of Employees
                                             </th>
-                                            <th scope="col" class="px-3 py-3.5 text-left w-full">Date</th>
-                                            <th scope="col" class="px-3 py-3.5 text-right">
+                                            <th scope="col" class="px-3 py-3.5 text-left w-full w-1/4">Date</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left w-1/4">
                                                 Status
+                                            </th>
+                                            <th scope="col" class="px-3 py-3.5 text-left w-1/4">
+                                                Remove invitation
                                             </th>
                                         </tr>
                                         </thead>
                                         <tbody class="divide-y bg-white">
                                         <tr v-for="(employee, index) in myEmployees" :key="index">
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 w-1/3">
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 w-1/4 max-w-1/4">
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0">
                                                         <img class="h-10 w-10 rounded-full" src="/avatar.svg" alt="">
@@ -50,10 +53,15 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-full">
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-1/4 max-w-1/4">
                                                 {{ $moment(employee.created_at).format('MM/DD/YYYY') }}
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-4 username text-right capitalize">{{ employee.status }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 w-1/4 capitalize">{{ employee.status }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 w-1/4 capitalize text-right">
+                                                <svg v-show="employee.status === 'pending'" @click="removeInvitation(employee.id)" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer hover:text-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -105,6 +113,21 @@ export default {
         await this.fetchMyEmployees();
     },
     methods: {
+        async removeInvitation(id) {
+          try {
+              let res = await this.$axios.delete('/email/invites/' + id);
+
+              let index = this.myEmployees.findIndex((item) => item.id === id);
+              this.myEmployees.splice(1, index);
+
+              this.$toast.open({
+                  message: 'Invite successfully removed',
+                  type: 'success',
+              });
+          } catch(e) {
+              console.log(e)
+          }
+        },
         beforeOpen() {
             document.body.style.overflow = 'hidden';
         },
@@ -139,6 +162,8 @@ export default {
                 let res = await this.$axios.get('/email/invites');
 
                 this.myEmployees = res.data.data;
+
+                console.log(this.myEmployees, 'asdasd')
 
                 this.loaded = true;
             } catch (e) {
@@ -497,5 +522,11 @@ tr.main th {
     box-sizing: border-box;
     border-radius: 15px;
     margin-right: 27px;
+}
+
+tr th {
+    max-width: 25% !important;
+    width: 25% !important;
+    min-width: 25% !important;
 }
 </style>
