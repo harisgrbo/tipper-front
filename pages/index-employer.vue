@@ -116,7 +116,7 @@
                 <div class="review-cards-wrapper">
                     <ReviewCard @open-review-card-modal="handleOpenReviewCardInModal(user)" :user="user"
                                 v-for="(user, index) in reviewUsers.slice(0, 5)" :key="index"
-                                v-show="user.description.length"
+                                v-show="user.description && user.description.length"
                     ></ReviewCard>
                 </div>
                 <client-only>
