@@ -21,16 +21,14 @@
                         <InputField placeholder="John Doe" label="Nickname" v-model="userInfo.name"
                                     class="mb-6"></InputField>
                         <label class="department-label">Department</label>
-                        <div class="dropdown-wrapper">
+                        <a class="dropdown-wrapper" href="mailto:help@thetippercompany.com?subject=Help with Tipper">
                             <div class="dropdown-selected">
                                 {{ $auth.user.department !== null ? $auth.user.department.name : 'Choose Department' }}
                             </div>
-                            <a href="mailto:help@thetippercompany.com?subject=Help with Tipper">
-                                <p class="department">
-                                    To change department, click here to email your admin.
-                                </p>
-                            </a>
-                        </div>
+                            <p class="department">
+                                To change department, click here to email your admin.
+                            </p>
+                        </a>
                     </div>
                     <div class="logo-wrapper">
                         <h4 v-if="$auth.user.avatar_url === null">Profile Photo</h4>

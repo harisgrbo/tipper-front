@@ -43,7 +43,7 @@
                         <div class="ml-3 w-full">
                             <h5 class="text-sm font-medium text-yellow-800">Attention needed</h5>
                             <div class="mt-2 text-sm text-yellow-700">
-                                <span>There is no employees in selected Pool.</span>
+                                <span>No employees from this department have been added yet</span>
                             </div>
                         </div>
                     </div>
@@ -69,18 +69,18 @@ export default {
         }
     },
     async created() {
+        this.loaded = false;
         await this.fetchPool();
         await this.fetchPoolUsers()
+        this.loaded = true
     },
     methods: {
         async fetchPool() {
-            this.loaded = false;
             try {
                 let res = await this.$axios.get('/pools/' + this.$route.params.idPool);
 
                 this.pool = res.data.data;
 
-                this.loaded = true
             } catch (e) {
                 console.log(e)
             }
@@ -89,9 +89,6 @@ export default {
             let res = await this.$axios.get('/pools/' + this.$route.params.idPool + '/users');
 
             this.pool_users = res.data.data;
-
-            console.log(this.pool_users)
-            this.loaded = true
         }
     }
 }

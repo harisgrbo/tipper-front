@@ -58,7 +58,7 @@
                             <b>${{ parseFloat(me).toFixed(2) }}</b>
                         </div>
                     </div>
-                    <button :class="['payout', $auth.user.wallet.balance <= 0 ? 'disabled' : '']" :disabled="$auth.user.wallet.balance <= 0" @click="$modal.show('payout')">Payout</button>
+                    <button :class="['payout', me <= 0 ? 'disabled' : '']" :disabled="me <= 0" @click="$modal.show('payout')">Payout</button>
                 </div>
                 <div class="p-6 bg-white flex flex-row justify-between items-center">
                     <div class="flex flex-row items-center">
@@ -240,8 +240,6 @@ export default {
                 let res = await this.$axios.get('/balance');
 
                 this.me = res.data.data.payout && res.data.data.payout.length ? res.data.data.payout[0].amount: 0;
-
-                console.log(this.me, 'me')
             } catch (e) {
                 console.log(e)
             }
