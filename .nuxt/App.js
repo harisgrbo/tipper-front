@@ -10,10 +10,11 @@ import '../node_modules/@nuxtjs/tailwindcss/dist/runtime/tailwind.css'
 
 import '../assets/css/main.scss'
 
+import _2d2495d5 from '../layouts/home.vue'
 import _b429569a from '../layouts/standard.vue'
 import _6f6c098b from './layouts/default.vue'
 
-const layouts = { "_standard": sanitizeComponent(_b429569a),"_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_home": sanitizeComponent(_2d2495d5),"_standard": sanitizeComponent(_b429569a),"_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {

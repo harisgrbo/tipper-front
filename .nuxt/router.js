@@ -9,6 +9,7 @@ const _7f3a3448 = () => interopDefault(import('../pages/database.vue' /* webpack
 const _51a3a3e5 = () => interopDefault(import('../pages/employee-settings.vue' /* webpackChunkName: "pages/employee-settings" */))
 const _6c323e10 = () => interopDefault(import('../pages/employer-settings.vue' /* webpackChunkName: "pages/employer-settings" */))
 const _1c8892eb = () => interopDefault(import('../pages/fail.vue' /* webpackChunkName: "pages/fail" */))
+const _62e39daf = () => interopDefault(import('../pages/home/index.vue' /* webpackChunkName: "pages/home/index" */))
 const _5525bd56 = () => interopDefault(import('../pages/index-employee.vue' /* webpackChunkName: "pages/index-employee" */))
 const _55dceee3 = () => interopDefault(import('../pages/index-employer.vue' /* webpackChunkName: "pages/index-employer" */))
 const _465b6bad = () => interopDefault(import('../pages/index-employer-pending.vue' /* webpackChunkName: "pages/index-employer-pending" */))
@@ -23,6 +24,8 @@ const _06d402f8 = () => interopDefault(import('../pages/sign-in.vue' /* webpackC
 const _7fa4b5e6 = () => interopDefault(import('../pages/stripe-register.vue' /* webpackChunkName: "pages/stripe-register" */))
 const _563a88c6 = () => interopDefault(import('../pages/success.vue' /* webpackChunkName: "pages/success" */))
 const _a69d89ea = () => interopDefault(import('../pages/users.vue' /* webpackChunkName: "pages/users" */))
+const _c3b1699a = () => interopDefault(import('../pages/home/faq.vue' /* webpackChunkName: "pages/home/faq" */))
+const _2454100e = () => interopDefault(import('../pages/home/footer.vue' /* webpackChunkName: "pages/home/footer" */))
 const _57d8b562 = () => interopDefault(import('../pages/invite/employees/index.vue' /* webpackChunkName: "pages/invite/employees/index" */))
 const _5b1f9ebb = () => interopDefault(import('../pages/admin/business/_id/index.vue' /* webpackChunkName: "pages/admin/business/_id/index" */))
 const _0de00d29 = () => interopDefault(import('../pages/admin/employee/_id/index.vue' /* webpackChunkName: "pages/admin/employee/_id/index" */))
@@ -68,6 +71,10 @@ export const routerOptions = {
     path: "/fail",
     component: _1c8892eb,
     name: "fail"
+  }, {
+    path: "/home",
+    component: _62e39daf,
+    name: "home"
   }, {
     path: "/index-employee",
     component: _5525bd56,
@@ -124,6 +131,14 @@ export const routerOptions = {
     path: "/users",
     component: _a69d89ea,
     name: "users"
+  }, {
+    path: "/home/faq",
+    component: _c3b1699a,
+    name: "home-faq"
+  }, {
+    path: "/home/footer",
+    component: _2454100e,
+    name: "home-footer"
   }, {
     path: "/invite/employees",
     component: _57d8b562,

@@ -1,7 +1,12 @@
 <template>
     <div class="review-card">
-        <div class="avatar-wrapper">
+        <div class="avatar-wrapper" v-if="user.user !== null">
             <img :src="user.user !== null ? (user.user.avatar_url !== null ? user.user.avatar_url : '/noimage.png') : '/noimage.png'" alt="">
+        </div>
+        <div v-else class="avatar-wrapper svg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
         </div>
         <h2>{{ user.pool_tip ? user.pool.name : (user.user.type === 'employer' ? 'Entire Staff' : user.user.display_name) }}</h2>
         <h4 class="text-gray-500 text-sm">{{ user.user !== null ? user.user.department.name : '' }}</h4>
@@ -47,6 +52,12 @@ export default {
         border-radius: 30px;
         background: #f1f1f1;
         overflow: hidden;
+
+        &.svg {
+            display: flex;
+            align-items: center;
+            justify-content: center !important;
+        }
 
         img {
             max-width: 100%;

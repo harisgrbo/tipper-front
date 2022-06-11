@@ -5,7 +5,7 @@
                <div class="profile-block">
                    <img :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
                    <div class="flex flex-col justify-between">
-                       <h2>{{ user.username || (user.firstname + ' ' + user.lastname ) }}</h2>
+                       <h2>{{ user.display_name }}</h2>
                        <div class="flex flex-row items-center">
                            <span>{{ user.address_1 ? user.address_1 + ', ' : '' }}</span>
                            <span>{{ user.city ? user.city + ', '  : '' }}</span>

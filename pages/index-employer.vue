@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="flex flex-col">
-                        <h1>{{ $auth.user.firstname + ' ' + $auth.user.lastname }}</h1>
+                        <h1>{{ $auth.user.display_name }}</h1>
                         <div class="flex flex-row items-center">
                             <p class="sub">{{ $auth.user.address_1 ? $auth.user.address_1 + ',&nbsp' : '' }}</p>
                             <p class="sub">{{ $auth.user.city ? $auth.user.city + ',&nbsp' : ' ' }}</p>

@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="flex flex-col" v-if="myEmployer">
-                        <h1>{{ $auth.user.firstname + ' ' + $auth.user.lastname }}</h1>
+                        <h1>{{ $auth.user.display_name }}</h1>
                         <p>{{ myEmployer.username || 'employer' }}</p>
                         <p class="sub">{{ $auth.user.address_1 !== null ? $auth.user.address_1 : '' + ', ' + $auth.user.state !== null ? $auth.user.state : '' }}</p>
                     </div>

@@ -18,7 +18,7 @@
                             <InputField v-model="userInfo.lastname" label="Last Name" placeholder="Doe"
                                         class="ml-4"></InputField>
                         </div>
-                        <InputField placeholder="John Doe" label="Nickname" v-model="userInfo.name"
+                        <InputField placeholder="John Doe" label="Nickname" v-model="userInfo.nickname"
                                     class="mb-6"></InputField>
                         <label class="department-label">Department</label>
                         <a class="dropdown-wrapper" href="mailto:help@thetippercompany.com?subject=Help with Tipper">
@@ -68,7 +68,6 @@ export default {
                 lastname: '',
                 nickname: '',
                 job_title: '',
-                name: '',
                 password: '',
                 email: '',
                 address_one: '',
@@ -81,7 +80,7 @@ export default {
         this.loaded = false;
         this.userInfo.firstname = this.$auth.user.firstname;
         this.userInfo.lastname = this.$auth.user.lastname;
-        this.userInfo.name = this.$auth.user.nickname;
+        this.userInfo.nickname = this.$auth.user.nickname;
         this.userInfo.address_1 = this.$auth.user.address_1;
         this.userInfo.address_2 = this.$auth.user.address_2;
         this.userInfo.city = this.$auth.user.city;

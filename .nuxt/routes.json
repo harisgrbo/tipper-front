@@ -35,6 +35,13 @@
     "_name": "_1c8892eb"
   },
   {
+    "name": "home",
+    "path": "/home",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/index.vue",
+    "chunkName": "pages/home/index",
+    "_name": "_62e39daf"
+  },
+  {
     "name": "index-employee",
     "path": "/index-employee",
     "component": "/Users/harisgrbo/Desktop/tipper-front/pages/index-employee.vue",
@@ -131,6 +138,20 @@
     "component": "/Users/harisgrbo/Desktop/tipper-front/pages/users.vue",
     "chunkName": "pages/users",
     "_name": "_a69d89ea"
+  },
+  {
+    "name": "home-faq",
+    "path": "/home/faq",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/faq.vue",
+    "chunkName": "pages/home/faq",
+    "_name": "_c3b1699a"
+  },
+  {
+    "name": "home-footer",
+    "path": "/home/footer",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/footer.vue",
+    "chunkName": "pages/home/footer",
+    "_name": "_2454100e"
   },
   {
     "name": "invite-employees",

@@ -55,7 +55,6 @@
                     </li>
                 </ul>
             </div>
-            <p v-else class="text-red-600 text-sm mt-2">Minimum tip value is $1.00</p>
             <div class="review-block">
                 <img src="/review.svg" alt="">
                 <star-rating :star-size="25" :increment="1" :inline="true" :rounded-corners="true" padding="2"
@@ -187,6 +186,10 @@ export default {
                   await this.fetchAuthUserBalance();
               } catch (e) {
                   console.log(e)
+                  this.$toast.open({
+                      message: 'Minimum tip value is $1.00',
+                      type: 'error',
+                  });
               }
           } else {
               try {
