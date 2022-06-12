@@ -28,7 +28,7 @@
                                     <table class="min-w-full divide-y divide-gray-300">
                                         <thead class="bg-white">
                                         <tr class="main">
-                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/4">List of Employees
+                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/3">List of Employees
                                             </th>
                                             <th scope="col" class="px-3 py-3.5 text-left w-full w-1/4">Date</th>
                                             <th scope="col" class="px-3 py-3.5 text-left w-1/4">
@@ -41,7 +41,7 @@
                                         </thead>
                                         <tbody class="divide-y bg-white">
                                         <tr v-for="(employee, index) in myEmployees" :key="index">
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 w-1/4 max-w-1/4">
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 w-1/3 max-w-1/3">
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0">
                                                         <img class="h-10 w-10 rounded-full" src="/avatar.svg" alt="">

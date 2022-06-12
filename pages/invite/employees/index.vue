@@ -12,7 +12,7 @@
             <h3>Employee's Email</h3>
             <p class="subtitle">Enter one email or multiple emails separated by a comma.</p>
             <InputField v-model="emails" placeholder="johndoe@gmail.com"></InputField>
-            <p class="subtitle mt-4">Creating at least one pool is required (ex. Front Desk, Housekeeping, Valet, Beach)</p>
+            <p class="subtitle mt-4">Creating at least one pool is required (ex. Front Desk, Housekeeping, Valet, Beach).</p>
             <div class="dropdown-wrapper mt-2" v-on-clickaway="away">
                 <div class="dropdown-selected" @click="showPoolList = true;">
                     {{ selectedPool !== null ? selectedPool.name : 'Choose Pool' }}

@@ -87,6 +87,8 @@ export default {
                     message: 'Settings saved successfully',
                     type: 'success',
                 });
+
+                await this.$auth.fetchUser();
             } catch (e) {
                 console.log(e)
             }

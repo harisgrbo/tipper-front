@@ -6,7 +6,7 @@
             <div class="flex-1 flex flex-col justify-center items-center">
                 <div class="mx-auto w-full">
                     <div class="flex flex-col justify-start items-start title-wrap">
-                        <img src="/logo.svg" class="mb-4" @click="$router.push('/')"/>
+                        <img src="/transparent.png" class="mb-4 logo" @click="$router.push('/')"/>
                         <span>Join the Tipper community today and help your employees earn more.</span>
                     </div>
 
@@ -224,5 +224,9 @@ export default {
     @include for-phone-only {
         display: none;
     }
+}
+
+.logo {
+    height: 60px;
 }
 </style>

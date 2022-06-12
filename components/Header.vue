@@ -2,7 +2,7 @@
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="relative header">
         <div class="flex flex-row items-center">
-            <img src="/logo.svg" class="logo" @click="$router.push('/')"/>
+            <img src="/transparent.png" class="logo" @click="$router.push('/')"/>
         </div>
 
         <div class="flex flex-row items-center">
@@ -122,6 +122,7 @@ export default {
         -moz-user-drag: none;
         -o-user-drag: none;
         user-drag: none;
+        height: 40px;
     }
 
     .auth {

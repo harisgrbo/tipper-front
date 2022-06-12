@@ -5,7 +5,7 @@
                 <button @click="$router.go(-1)" class="back">
                     <img src="/arrow-left.svg" alt="">
                 </button>
-                <img src="/logo.svg" class="logo" @click="$router.push('/')"/>
+                <img src="/transparent.png" class="logo" @click="$router.push('/')"/>
             </div>
             <h3>Send Tip to:</h3>
 
@@ -614,5 +614,9 @@ h3 {
         width: fit-content;
         margin: 0 2px;
     }
+}
+
+.logo {
+    height: 40px;
 }
 </style>

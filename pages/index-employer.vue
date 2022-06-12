@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="flex flex-col">
-                        <h1>{{ $auth.user.display_name }}</h1>
+                        <h1>{{ $auth.user.username }}</h1>
                         <div class="flex flex-row items-center">
                             <p class="sub">{{ $auth.user.address_1 ? $auth.user.address_1 + ',&nbsp' : '' }}</p>
                             <p class="sub">{{ $auth.user.city ? $auth.user.city + ',&nbsp' : ' ' }}</p>
@@ -116,7 +116,6 @@
                 <div class="review-cards-wrapper">
                     <ReviewCard @open-review-card-modal="handleOpenReviewCardInModal(user)" :user="user"
                                 v-for="(user, index) in reviewUsers.slice(0, 5)" :key="index"
-                                v-show="user.description && user.description.length"
                     ></ReviewCard>
                 </div>
                 <client-only>

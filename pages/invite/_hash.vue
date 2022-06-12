@@ -6,7 +6,7 @@
             <div class="flex-1 flex flex-col justify-center items-center">
                 <div class="mx-auto w-full">
                     <div class="flex flex-col justify-start items-start title-wrap">
-                        <img src="/logo.svg" class="mb-4" @click="$router.push('/')"/>
+                        <img src="/transparent.png" class="mb-4 logo" @click="$router.push('/')"/>
                     </div>
 
                     <form class="mt-8 bg-white main-form-wrapper" @submit.prevent="register">
@@ -29,9 +29,9 @@
                                                   txt-color="#fff"></GlobalButton>
                                 </div>
                                 <div class="sign-up">
-                                    <span>Already a member? Log in.</span>
+                                    <span>Already a member?</span>
                                     <nuxt-link to="/sign-in" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                        Login
+                                        Log in
                                     </nuxt-link>
                                 </div>
                             </div>
@@ -298,5 +298,9 @@ label {
 
 ::placeholder {
     color: #b1b1b1;
+}
+
+.logo {
+    height: 40px;
 }
 </style>

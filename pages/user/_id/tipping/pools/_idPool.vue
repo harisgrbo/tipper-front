@@ -5,7 +5,7 @@
                 <button @click="$router.go(-1)" class="back">
                     <img src="/arrow-left.svg" alt="">
                 </button>
-                <img src="/logo.svg" class="logo" @click="$router.push('/')"/>
+                <img src="/transparent.png" class="logo" @click="$router.push('/')"/>
             </div>
             <h3>{{ pool.name }}</h3>
             <div class="flex flex-col w-full" v-if="pool_users.length">
@@ -238,6 +238,10 @@ export default {
         border-radius: 15px;
         margin-right: 27px;
     }
+}
+
+.logo {
+    height: 40px;
 }
 
 </style>

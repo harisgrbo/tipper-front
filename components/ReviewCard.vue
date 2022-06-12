@@ -1,5 +1,5 @@
 <template>
-    <div class="review-card">
+    <div class="review-card" v-show="user.description && user.description.length">
         <div class="avatar-wrapper" v-if="user.user !== null">
             <img :src="user.user !== null ? (user.user.avatar_url !== null ? user.user.avatar_url : '/noimage.png') : '/noimage.png'" alt="">
         </div>

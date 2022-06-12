@@ -9,6 +9,9 @@
                     <li v-for="(link, index) in links" :key="index">
                         <nuxt-link :to="'/home/' + link.link">{{ link.name }}</nuxt-link>
                     </li>
+                    <li>
+                        <nuxt-link to="/sign-in">SIGN IN</nuxt-link>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -47,10 +50,6 @@ export default {
                 {
                     name: 'CONTACT US',
                     link: 'contact-us'
-                },
-                {
-                    name: 'LOG IN',
-                    link: 'sign-up'
                 },
             ]
         }

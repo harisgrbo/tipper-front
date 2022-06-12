@@ -6,7 +6,7 @@
             <div class="flex-1 flex flex-col justify-center items-center">
                 <div class="mx-auto w-full">
                     <div class="flex flex-col justify-start items-start title-wrap">
-                        <img src="/logo.svg" class="mb-4" @click="$router.push('/')"/>
+                        <img src="/transparent.png" class="mb-4 logo" @click="$router.push('/')"/>
                     </div>
 
                     <div class="mt-8 bg-white main-form-wrapper">
@@ -198,5 +198,9 @@ button {
     @include for-phone-only {
         display: none;
     }
+}
+
+.logo {
+    height: 40px;
 }
 </style>
