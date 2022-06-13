@@ -21,7 +21,7 @@
                 <h3>Tip an individual</h3>
 
                 <div class="staff-wrapper">
-                    <div v-for="(user, index) in pool_users" :key="index" class="staff-block" @click="$router.push(`/user/${user.id}/tip?id=${user.id}&type=user`)">
+                    <div v-for="(user, index) in pool_users" :key="index" class="staff-block" @click="$router.push(`/user/${user.id}/tip?id=${user.id}&type=user`)" v-show="user.stripe_completed">
                         <img class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
                         <div class="flex flex-col items-start w-full justify-start">
                             <p>{{ user.display_name }}</p>
@@ -89,6 +89,8 @@ export default {
             let res = await this.$axios.get('/pools/' + this.$route.params.idPool + '/users');
 
             this.pool_users = res.data.data;
+
+            console.log(this.pool_users)
         }
     }
 }

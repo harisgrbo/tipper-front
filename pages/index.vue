@@ -1,7 +1,6 @@
 <template>
     <div class="w-full flex flex-col index-wrapper">
         <div class="max-w-7xl mx-auto" v-if="loaded">
-            index
         </div>
         <Loader v-else></Loader>
     </div>

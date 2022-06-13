@@ -220,7 +220,12 @@ export default {
 
                 this.$modal.hide('create-pool')
             } catch (e) {
+                this.$toast.open({
+                    message: e.response.data.message,
+                    type: 'error',
+                });
                 console.log(e)
+
             }
         },
         async addUserToPool(u) {

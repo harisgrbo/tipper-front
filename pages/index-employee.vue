@@ -1,7 +1,7 @@
 <template>
     <div class="employer-wrapper">
         <div class="flex flex-col w-full" v-show="loaded">
-            <div class="rounded-md bg-yellow-50 p-4 mb-6" v-if="!$auth.user.stripe_completed">
+            <div class="rounded-md bg-yellow-50 p-4 mb-6 cursor-pointer" @click="finishOnboarding" v-if="!$auth.user.stripe_completed">
                 <div class="flex">
                     <div class="flex-shrink-0">
                         <!-- Heroicon name: solid/exclamation -->
@@ -13,7 +13,7 @@
                         <h3 class="text-sm font-medium text-yellow-800">Attention needed</h3>
                         <div class="mt-2 text-sm text-yellow-700 flex flex-row items-center justify-between w-full">
                             <p>You haven't completed the Stripe onboarding. Please click this link to complete it.</p>
-                            <button @click="finishOnboarding" class="whitespace-nowrap font-medium text-yellow-700 hover:text-yellow-800">Complete <span aria-hidden="true">&rarr;</span></button>
+                            <button class="whitespace-nowrap font-medium text-yellow-700 hover:text-yellow-800">Complete <span aria-hidden="true">&rarr;</span></button>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="flex flex-col">
                             <span>Account balance ready for payout</span>
-                            <b>${{ parseFloat(me).toFixed(2) }}</b>
+                            <b>${{ parseFloat(me / 100).toFixed(2) }}</b>
                         </div>
                     </div>
                     <button :class="['payout', me <= 0 ? 'disabled' : '']" :disabled="me <= 0" @click="$modal.show('payout')">Payout</button>
@@ -201,10 +201,9 @@ export default {
         async finishOnboarding() {
             try {
                 let res = await this.$axios.post('/employee/onboarding');
-
                 let link = res.data.redirect_uri;
 
-                window.replace(link);
+                window.location.replace(link);
             } catch(e) {
                 console.log()
             }

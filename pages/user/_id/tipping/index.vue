@@ -5,11 +5,14 @@
                <div class="profile-block">
                    <img :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
                    <div class="flex flex-col justify-between">
-                       <h2>{{ user.display_name }}</h2>
-                       <div class="flex flex-row items-center">
-                           <span>{{ user.address_1 ? user.address_1 + ', ' : '' }}</span>
-                           <span>{{ user.city ? user.city + ', '  : '' }}</span>
-                           <span>{{ user.state ? user.state: ' ' }} </span>
+                       <h2>{{ user.username }}</h2>
+                       <div class="flex flex-col items-start address-wrap">
+                           <p class="sub">{{ user.address_1 ? user.address_1 + '' : '' }}</p>
+                           <div class="flex flex-row items-center">
+                               <p class="sub">{{ user.city ? user.city + ', &nbsp' : ' ' }}</p>
+                               <p class="sub">{{ user.state ? user.state + '&nbsp'  : ' ' }} </p>
+                               <p class="sub">{{ user.zip_code ? user.zip_code  : ' ' }} </p>
+                           </div>
                        </div>
                    </div>
                </div>
@@ -240,4 +243,8 @@ export default {
     }
 }
 
+.address-wrap p {
+    color: #fff;
+    font-size: 12px;
+}
 </style>

@@ -17,10 +17,13 @@
                     </div>
                     <div class="flex flex-col">
                         <h1>{{ $auth.user.username }}</h1>
-                        <div class="flex flex-row items-center">
-                            <p class="sub">{{ $auth.user.address_1 ? $auth.user.address_1 + ',&nbsp' : '' }}</p>
-                            <p class="sub">{{ $auth.user.city ? $auth.user.city + ',&nbsp' : ' ' }}</p>
-                            <p class="sub">{{ $auth.user.state ? $auth.user.state  : ' ' }} </p>
+                        <div class="flex flex-col items-start">
+                            <p class="sub">{{ $auth.user.address_1 ? $auth.user.address_1 + '' : '' }}</p>
+                            <div class="flex flex-row items-center">
+                                <p class="sub">{{ $auth.user.city ? $auth.user.city + ', &nbsp' : ' ' }}</p>
+                                <p class="sub">{{ $auth.user.state ? $auth.user.state + '&nbsp'  : ' ' }} </p>
+                                <p class="sub">{{ $auth.user.zip_code ? $auth.user.zip_code  : ' ' }} </p>
+                            </div>
                         </div>
                     </div>
                 </div>
