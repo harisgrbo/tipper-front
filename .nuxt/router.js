@@ -24,8 +24,12 @@ const _06d402f8 = () => interopDefault(import('../pages/sign-in.vue' /* webpackC
 const _7fa4b5e6 = () => interopDefault(import('../pages/stripe-register.vue' /* webpackChunkName: "pages/stripe-register" */))
 const _563a88c6 = () => interopDefault(import('../pages/success.vue' /* webpackChunkName: "pages/success" */))
 const _a69d89ea = () => interopDefault(import('../pages/users.vue' /* webpackChunkName: "pages/users" */))
+const _668a6d56 = () => interopDefault(import('../pages/home/blog.vue' /* webpackChunkName: "pages/home/blog" */))
+const _3e352744 = () => interopDefault(import('../pages/home/contact-us.vue' /* webpackChunkName: "pages/home/contact-us" */))
 const _c3b1699a = () => interopDefault(import('../pages/home/faq.vue' /* webpackChunkName: "pages/home/faq" */))
 const _2454100e = () => interopDefault(import('../pages/home/footer.vue' /* webpackChunkName: "pages/home/footer" */))
+const _0ffc8c16 = () => interopDefault(import('../pages/home/legal.vue' /* webpackChunkName: "pages/home/legal" */))
+const _de95f2e0 = () => interopDefault(import('../pages/home/team.vue' /* webpackChunkName: "pages/home/team" */))
 const _57d8b562 = () => interopDefault(import('../pages/invite/employees/index.vue' /* webpackChunkName: "pages/invite/employees/index" */))
 const _5b1f9ebb = () => interopDefault(import('../pages/admin/business/_id/index.vue' /* webpackChunkName: "pages/admin/business/_id/index" */))
 const _0de00d29 = () => interopDefault(import('../pages/admin/employee/_id/index.vue' /* webpackChunkName: "pages/admin/employee/_id/index" */))
@@ -132,6 +136,14 @@ export const routerOptions = {
     component: _a69d89ea,
     name: "users"
   }, {
+    path: "/home/blog",
+    component: _668a6d56,
+    name: "home-blog"
+  }, {
+    path: "/home/contact-us",
+    component: _3e352744,
+    name: "home-contact-us"
+  }, {
     path: "/home/faq",
     component: _c3b1699a,
     name: "home-faq"
@@ -139,6 +151,14 @@ export const routerOptions = {
     path: "/home/footer",
     component: _2454100e,
     name: "home-footer"
+  }, {
+    path: "/home/legal",
+    component: _0ffc8c16,
+    name: "home-legal"
+  }, {
+    path: "/home/team",
+    component: _de95f2e0,
+    name: "home-team"
   }, {
     path: "/invite/employees",
     component: _57d8b562,

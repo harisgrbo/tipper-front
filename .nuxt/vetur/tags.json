@@ -20,6 +20,18 @@
   "Tutorial": {
     "description": "Auto imported from components/Tutorial.vue"
   },
+  "HomeEmployeeComponent": {
+    "description": "Auto imported from components/home/EmployeeComponent.vue"
+  },
+  "HomeEmployerComponent": {
+    "description": "Auto imported from components/home/EmployerComponent.vue"
+  },
+  "HomeFooter": {
+    "description": "Auto imported from components/home/HomeFooter.vue"
+  },
+  "HomeTipperComponent": {
+    "description": "Auto imported from components/home/TipperComponent.vue"
+  },
   "InputsInputField": {
     "description": "Auto imported from components/inputs/InputField.vue"
   }

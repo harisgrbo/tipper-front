@@ -5,6 +5,10 @@ export { default as Notification } from '../../components/Notification.vue'
 export { default as NuxtLogo } from '../../components/NuxtLogo.vue'
 export { default as ReviewCard } from '../../components/ReviewCard.vue'
 export { default as Tutorial } from '../../components/Tutorial.vue'
+export { default as HomeEmployeeComponent } from '../../components/home/EmployeeComponent.vue'
+export { default as HomeEmployerComponent } from '../../components/home/EmployerComponent.vue'
+export { default as HomeFooter } from '../../components/home/HomeFooter.vue'
+export { default as HomeTipperComponent } from '../../components/home/TipperComponent.vue'
 export { default as InputsInputField } from '../../components/inputs/InputField.vue'
 
 // nuxt/nuxt.js#8607

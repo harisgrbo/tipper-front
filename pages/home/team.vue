@@ -1,0 +1,427 @@
+<template>
+    <div class="homepage-wrapper flex flex-col">
+        <div class="hero-unit">
+            <div class="hero-unit-top">
+                <div class="inner flex flex-col">
+                    <h4>MEET THE</h4>
+                    <h5>TEAM</h5>
+                    <div class="grid grid-cols-2">
+                        <div class="person">
+                            <img src="/person1.svg" alt="">
+                            <span>JONATHAN BUCKELEW</span>
+                            <span class="position">Co-Founder & CEO</span>
+                        </div>
+                        <div class="person">
+                            <img src="/person2.svg" alt="">
+                            <span>ALAN SCARPA</span>
+                            <span class="position">Co-Founder & CTO</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-team flex flex-col items-center justify-start">
+                    <h2 class="advisors mt-4 mb-6">ADVISORS</h2>
+                    <div class="inner">
+                        <div class="grid grid-cols-5 gap-8 w-full">
+                            <div class="advisor">
+                                <img src="/advisor1.png" alt="">
+                                <p class="name">JONATHAN BUCKELEW</p>
+                                <p class="position">Ex- CAO & CHRO @ CBS</p>
+                                <img class="company" src="/company1.svg" alt="">
+                            </div>
+                            <div class="advisor">
+                                <img src="/advisor2.png" alt="">
+                                <p class="name">JONATHAN BUCKELEW</p>
+                                <p class="position">Investor @ AMEX Ventures</p>
+                                <img class="company" src="/company2.svg" alt="">
+
+                            </div>
+                            <div class="advisor">
+                                <img src="/advisor3.png" alt="">
+                                <p class="name">JONATHAN BUCKELEW</p>
+                                <p class="position">Executive Vice President
+                                    @ Fulcrum Hospitality </p>
+                                <img class="company" src="/company3.svg" alt="">
+                            </div>
+                            <div class="advisor">
+                                <img src="/advisor3.png" alt="">
+                                <p class="name">JONATHAN BUCKELEW</p>
+                                <p class="position">Chief Strategist @ Kroll Institute. Ex-Assistant
+                                    Treasury Secretary </p>
+                                <img class="company" src="/company4.svg" alt="">
+                            </div>
+                            <div class="advisor">
+                                <img src="/advisor5.png" alt="">
+                                <p class="name">JONATHAN BUCKELEW</p>
+                                <p class="position">Executive Director for
+                                    Apple @ TBWA/Medla Labs</p>
+                                <img class="company" src="/apple2.svg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="top-image-wrapper">
+                <div class="inner relative">
+                    <div class="text-wrapper">
+                        Employees are mini-brand ambassadors. Treat them right and your customers will notice.
+                    </div>
+                </div>
+            </div>
+            <div class="inner">
+                <div class="flex flex-col items-start justify-start text-left w-full pt-20">
+                    <h1>OUR MISSION</h1>
+                    <h2 class="test">We created Tipper with a clear goal in mind: to help service-based employees make more money by offering people who want to send tips an easy digital solution to do so.</h2>
+                    <p>The idea came about from the experience of wanting to provide deserving service staff like doormen and parking garage attendants with holiday tips but knowing people seldom carry cash on them and also realizing there wasn’t an efficient way to send them their well-deserved tips digitally without having to ask for their personal information. Tipper was born out of this observation to be the solution for bridging the gap between the cashless age and the dedicated workers in industries that rely on tipping.</p>
+                </div>
+            </div>
+            <div class="form">
+                <div class="inner flex flex-row items-center justify-between">
+                    <div class="request">
+                        <h1>JOIN OUR TEAM</h1>
+                    </div>
+                    <div class="form-wrapper">
+                        <input type="text" placeholder="FIRST NAME*">
+                        <input type="text" placeholder="LAST NAME*">
+                        <input type="text" placeholder="EMAIL ADDRESS*">
+                        <input type="text" placeholder="TELL US ABOUT YOURSELF*">
+                        <button>JOIN A TEAM</button>
+                    </div>
+                </div>
+            </div>
+            <div class="follow">
+                <div class="inner flex flex-row items-center justify-center">
+                    <div class="mr-6 text-right">
+                        <h1>FOLLOW US</h1>
+                        <h2>CONNECT WITH US</h2>
+                    </div>
+                    <img class="ml-6" src="/social.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+
+export default {
+    name: "team",
+    layout: 'home',
+}
+</script>
+
+<style scoped lang="scss">
+.inner {
+    width: 980px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+.hero-unit {
+
+
+    .hero-unit-top {
+        background: #EDE9E3;
+        background-image: url(/new-bg-2.svg);
+        min-height: 500px;
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-position-x: 552px;
+        background-size: 1658px;
+        background-position-y: -410px;
+    }
+    .inner {
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #000;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+    }
+}
+
+.blog-card {
+    outline: 20px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &.central {
+        outline: 30px solid #fff;
+        background: #fff;
+    }
+
+    h2 {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+        margin-top: 20px;
+        height: 60px
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+
+    button {
+        background: #B45F4B;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: #fff;
+        width: fit-content;
+        margin-top: 20px;
+        padding: 4px 24px
+    }
+}
+.follow {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F6F4F2;
+
+    .inner {
+        background-image: url("/white-bg.svg");
+        background-repeat: no-repeat;
+        padding: 45px 0;
+        background-position: right;
+        background-size: cover;
+        background-position-x: 230px;
+    }
+
+    img {
+        height: 100px;
+    }
+
+    h1 {
+        color: #B45F4B;
+        font-size: 26px;
+        margin-bottom: 0 !important;
+    }
+
+    h2 {
+        font-size: 22px;
+        font-weight: 300;
+        color: #000;
+    }
+}
+
+.form {
+    background: #FDFCFB;
+    padding: 64px 0;
+
+    .inner {
+        min-height: 500px;
+        background-image: url("/employer-bh.svg");
+        background-repeat: no-repeat;
+        min-height: fit-content;
+        background-position: left;
+        min-height: 370px;
+
+        img {
+            height: 60px;
+        }
+
+        h1 {
+            max-width: 210px;
+            margin-top: 30px;
+            font-size: 42px;
+            font-weight: 700;
+        }
+
+        .request {
+            height: 362px;
+        }
+
+        .form-wrapper {
+            max-width: 450px;
+            button {
+                background: #B45E4B;
+                color: #fff;
+                width: fit-content;
+                height: 60px;
+                padding: 0 32px;
+                font-size: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            input {
+                height: 45px;
+                width: 100%;
+                padding: 0 16px;
+                font-size: 15px;
+                font-weight: 300;
+                border: 2px solid #000;
+                margin-bottom: 24px;
+            }
+
+            ::placeholder {
+                font-size: 15px;
+                font-weight: 300;
+                color: #000;
+            }
+        }
+    }
+}
+
+span.main {
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #C67D65;
+    margin-bottom: 25px;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+strong {
+    font-weight: 700;
+}
+
+ul {
+    list-style: none;
+
+    li {
+        font-size: 14px;
+        font-weight: 300;
+    }
+}
+
+.top-image-wrapper {
+    background-image: url("/person.svg");
+    background-position: center;
+    background-size: cover;
+    min-height: 1100px;
+    background-repeat: no-repeat;
+    height: fit-content;
+
+    .inner {
+        min-height: 1100px;
+        position: relative;
+        marign-top: 0 !important;
+    }
+}
+
+.text-wrapper {
+    position: absolute;
+    bottom: -80px;
+    background: #929271;
+    color: #fff;
+    text-align: center;
+    font-size: 27px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 50px;
+    max-width: 500px;
+    padding: 40px;
+    right: 0;
+}
+
+h2.test {
+    font-size: 22px;
+    line-height: 33px;
+    font-weight: 300;
+    text-transform: uppercase;
+    max-width: 80%;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 28px;
+}
+
+.person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -200px;
+    span {
+        font-size: 24px;
+        font-weight: 300;
+
+        &.position {
+            font-size: 18px;
+            font-weight: 700;
+            font-style: italic;
+            text-transform: uppercase;
+        }
+    }
+}
+
+h4 {
+    font-size: 42px;
+    font-weight: 400;
+}
+
+h5 {
+    font-size: 59px;
+    font-weight: 700;
+}
+
+.section-team {
+    background: #fff;
+    min-height: 500px;
+    padding-top: 260px;
+}
+
+h2.advisors {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.advisor {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 100%;
+    height: 400px;
+    img {
+        height: 150px;
+        width: 150px;
+        margin-bottom: 20px;
+
+        &.company {
+            height: 30px;
+            width: fit-content;
+            margin-bottom: 0;
+        }
+    }
+
+    p {
+        font-size: 15px;
+        font-weight: 300;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 12px !important;
+        margin-top: 0;
+
+        &.position {
+            font-size: 13px;
+            font-style: italic;
+            font-weight: bold !important;
+        }
+
+    }
+}
+
+</style>

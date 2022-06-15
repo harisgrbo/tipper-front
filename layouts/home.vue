@@ -10,12 +10,12 @@
                         <nuxt-link :to="'/home/' + link.link">{{ link.name }}</nuxt-link>
                     </li>
                     <li>
-                        <nuxt-link to="/sign-in">SIGN IN</nuxt-link>
+                        <nuxt-link to="/sign-in">LOG IN</nuxt-link>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="inner">
+        <div class="main-wrapper">
             <nuxt></nuxt>
             <Footer></Footer>
         </div>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Footer from "@/pages/home/footer.vue"
+import Footer from "@/components/home/HomeFooter.vue"
 
 export default {
     name: "home",
@@ -32,12 +32,12 @@ export default {
         return {
             links: [
                 {
-                    name: 'HOW IT WORKS',
-                    link: 'how-it-works'
-                },
-                {
                     name: 'TEAM',
                     link: 'team'
+                },
+                {
+                    name: 'LEGAL',
+                    link: 'legal'
                 },
                 {
                     name: 'FAQ',
@@ -53,6 +53,9 @@ export default {
                 },
             ]
         }
+    },
+    created() {
+        console.log(this.$route)
     }
 }
 </script>
@@ -65,18 +68,17 @@ export default {
 }
 
 .main-layout {
-    padding-bottom: 120px;
     min-height: 100vh;
     width: 100%;
 
     .inner {
-        width: 1280px;
+        width: 980px;
         margin: 0 auto;
 
     }
 
     .header {
-        background: #F6F4F2;
+        background-image: url("/header-bg.svg");
         width: 100%;
         display: flex;
         align-items: center;
@@ -84,7 +86,7 @@ export default {
         padding: 67px 0;
 
         .inner-header {
-            width: 1280px;
+            width: 980px;
             margin: 0 auto;
         }
 

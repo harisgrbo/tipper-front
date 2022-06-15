@@ -120,6 +120,18 @@
     "chunkName": "pages/users"
   },
   {
+    "name": "home-blog",
+    "path": "/home/blog",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/blog.vue",
+    "chunkName": "pages/home/blog"
+  },
+  {
+    "name": "home-contact-us",
+    "path": "/home/contact-us",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/contact-us.vue",
+    "chunkName": "pages/home/contact-us"
+  },
+  {
     "name": "home-faq",
     "path": "/home/faq",
     "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/faq.vue",
@@ -130,6 +142,18 @@
     "path": "/home/footer",
     "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/footer.vue",
     "chunkName": "pages/home/footer"
+  },
+  {
+    "name": "home-legal",
+    "path": "/home/legal",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/legal.vue",
+    "chunkName": "pages/home/legal"
+  },
+  {
+    "name": "home-team",
+    "path": "/home/team",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/team.vue",
+    "chunkName": "pages/home/team"
   },
   {
     "name": "invite-employees",
