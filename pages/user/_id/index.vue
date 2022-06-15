@@ -17,16 +17,19 @@
                                                 <h1 class="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">{{ user.username }}</h1>
                                             </div>
                                             <dl class="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap" v-if="user.type === 'employer'">
-                                                <dd class="flex items-center text-sm text-gray-500 font-medium capitalize sm:mr-6">
+                                                <dd class="flex flex-col items-start text-sm text-gray-500 font-medium capitalize sm:mr-6">
                                                     <!-- Heroicon name: solid/office-building -->
-                                                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                        <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd" />
-                                                    </svg>
-                                                    <p class="sub">{{ $auth.user.address_1 ? $auth.user.address_1 + '' : '' }}</p>
+                                                    <div class="flex flex-row items-center justify-start">
+                                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                            <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd" />
+                                                        </svg>
+                                                        <p class="sub">{{ user.address_1 ? user.address_1 + '' : '' }}</p>
+                                                    </div>
+
                                                     <div class="flex flex-row items-center">
-                                                        <p class="sub">{{ $auth.user.city ? $auth.user.city + ', &nbsp' : ' ' }}</p>
-                                                        <p class="sub">{{ $auth.user.state ? $auth.user.state + '&nbsp'  : ' ' }} </p>
-                                                        <p class="sub">{{ $auth.user.zip_code ? $auth.user.zip_code  : ' ' }} </p>
+                                                        <p class="sub">{{ user.city ? user.city + ', &nbsp' : ' ' }}</p>
+                                                        <p class="sub">{{ user.state ? user.state + '&nbsp'  : ' ' }} </p>
+                                                        <p class="sub">{{ user.zip_code ? user.zip_code  : ' ' }} </p>
                                                     </div>
                                                 </dd>
                                             </dl>
