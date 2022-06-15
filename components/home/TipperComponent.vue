@@ -25,10 +25,10 @@
             <h3>ways your guests can access Tipper</h3>
         </div>
         <div class="images">
-            <div class="inner grid grid-cols-3 gap-4">
-                <img src="/4.svg" alt="">
-                <img src="/6.svg" alt="">
-                <img src="/5.svg" alt="">
+            <div class="inner grid grid-cols-3 gap-4 images">
+                <img src="/first.jpg" alt="">
+                <img src="/second.jpg" alt="">
+                <img class="h-full" src="/last.jpg" alt="">
             </div>
         </div>
         <div class="form">
@@ -257,5 +257,9 @@ export default {
             color: #000;
         }
     }
+}
+
+.images {
+    margin-top: 46px;
 }
 </style>

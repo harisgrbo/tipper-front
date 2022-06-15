@@ -303,7 +303,7 @@ ul {
 }
 
 .top-image-wrapper {
-    background-image: url("/person.svg");
+    background-image: url("/teambg.svg");
     background-position: center;
     background-size: cover;
     min-height: 1100px;
