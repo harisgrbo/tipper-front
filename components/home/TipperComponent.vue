@@ -21,16 +21,16 @@
                 <p>- Press Tip!</p>
             </div>
         </div>
-        <div class="ways">
-            <h3>ways your guests can access Tipper</h3>
-        </div>
-        <div class="images">
-            <div class="inner grid grid-cols-3 gap-4 images">
-                <img src="/first.jpg" alt="">
-                <img src="/second.jpg" alt="">
-                <img class="h-full" src="/last.jpg" alt="">
-            </div>
-        </div>
+<!--        <div class="ways">-->
+<!--            <h3>ways your guests can access Tipper</h3>-->
+<!--        </div>-->
+<!--        <div class="images">-->
+<!--            <div class="inner grid grid-cols-3 gap-4 images">-->
+<!--                <img src="/first.jpg" alt="">-->
+<!--                <img src="/second.jpg" alt="">-->
+<!--                <img class="h-full" src="/last.jpg" alt="">-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="form">
             <div class="inner flex flex-row items-center justify-between">
                 <div class="request">
@@ -146,7 +146,7 @@ export default {
 
         p {
             color: #000;
-            font-weight: 300;
+            font-weight: 500;
             font-size: 17px;
         }
     }

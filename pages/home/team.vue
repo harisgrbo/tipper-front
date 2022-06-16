@@ -130,9 +130,10 @@ export default {
         min-height: 500px;
         background-repeat: no-repeat;
         background-position: bottom;
-        background-position-x: 552px;
-        background-size: 1658px;
-        background-position-y: -410px;
+        background-position-x: 365px;
+        background-size: 1448px;
+        background-position-y: -385px;
+        padding-bottom: 80px;
     }
     .inner {
 

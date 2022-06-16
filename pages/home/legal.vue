@@ -176,10 +176,10 @@ export default {
     background-color: #EDE9E3;
     background-repeat: no-repeat;
     background-position: bottom;
-    background-position-x: 552px;
-    background-size: 1658px;
-    background-position-y: -410px;
-    padding-bottom: 160px;
+    background-position-x: 365px;
+    background-size: 1448px;
+    background-position-y: -385px;
+    padding-bottom: 80px;
 
 
     .inner {

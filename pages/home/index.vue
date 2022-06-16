@@ -16,7 +16,7 @@
         <div class="benefits">
             <div class="inner">
                 <div class="flex flex-row items-center w-full justify-between">
-                    <div>
+                    <div class="benefits-wrap">
                         <h1>BENEFITS</h1>
                         <h2>why tipper is right for your hotel</h2>
                     </div>
@@ -139,10 +139,10 @@ export default {
     background-color: #EDE9E3;
     background-repeat: no-repeat;
     background-position: bottom;
-    background-position-x: 552px;
-    background-size: 1658px;
-    background-position-y: -410px;
-    padding-bottom: 210px;
+    background-position-x: 365px;
+    background-size: 1448px;
+    background-position-y: -385px;
+    padding-bottom: 80px;
 
 
     .inner {
@@ -381,5 +381,9 @@ export default {
     height: 60px !important;
     position: relative !important;
     margin-top: -80px;
+}
+
+.benefits-wrap {
+    margin-left: 110px;
 }
 </style>

@@ -2,7 +2,7 @@
     <div class="employer-component">
         <div class="flex flex-row items-center justify-between inner first-block">
             <div class="image-wrapper">
-                <h1 class="ml-6">EMPLOYEE</h1>
+                <h1>EMPLOYEE</h1>
                 <img src="/2.png" alt="">
             </div>
             <div class="text-wrap">
@@ -54,6 +54,11 @@ export default {
     }
     .image-wrapper {
         position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
 
         img {
             width: 290px;
@@ -109,7 +114,7 @@ export default {
 
         p {
             color: #000;
-            font-weight: 300;
+            font-weight: 500;
             font-size: 17px;
         }
     }

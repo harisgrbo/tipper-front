@@ -13,7 +13,7 @@
                             </div>
                             <div>
                                 <h2>SALES</h2>
-                                <p>8am to 6pm PT, M-F.</p>
+                                <p>8am to 6pm ET, M-F.</p>
                                 <p>(212) 918-8110</p>
                             </div>
                             <div>
@@ -23,11 +23,11 @@
                             </div>
                         </div>
                         <div class="form-wrapper">
-                            <select name="cars" id="cars">
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="audi">Audi</option>
+                            <select name="cars" id="cars" class="cursor-pointer">
+                                <option value="" disabled selected>Select your option</option>
+                                <option value="option1" selected>Option 1</option>
+                                <option value="option2">Option 2</option>
+                                <option value="option3">Option 3</option>
                             </select>
                             <div class="grid grid-cols-2 gap-4">
                                 <input type="text" placeholder="FIRST NAME*">
@@ -76,10 +76,10 @@ export default {
     background-color: #EDE9E3;
     background-repeat: no-repeat;
     background-position: bottom;
-    background-position-x: 552px;
-    background-size: 1658px;
-    background-position-y: -410px;
-    padding-bottom: 60px;
+    background-position-x: 365px;
+    background-size: 1448px;
+    background-position-y: -385px;
+    padding-bottom: 80px;
 
 
     .inner {

@@ -3,7 +3,7 @@
         <div class="flex flex-row items-center justify-between inner first-block">
             <div class="image-wrapper">
                 <h1>EMPLOYER DASHBOARD</h1>
-                <img src="/dashboard.png" alt="">
+                <img src="/new-dashboard.jpg" alt="">
             </div>
             <div class="text-wrap">
                 <h1>the dashboard you always wanted</h1>
@@ -110,7 +110,7 @@ export default {
 
         p {
             color: #000;
-            font-weight: 300;
+            font-weight: 500;
             font-size: 17px;
         }
     }

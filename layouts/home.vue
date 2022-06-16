@@ -75,11 +75,16 @@ export default {
 
     .header {
         background-image: url("/header-bg.svg");
+        background-color: #EDE9E3;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 67px 0;
+        background-repeat: no-repeat;
+        background-position: top;
+        background-size: cover;
+        background-position-x: -120px;
 
         .inner-header {
             width: 980px;
