@@ -45,7 +45,7 @@
                                     <h2>
                                         Labor is the #1 issue the hospitality industry is facing
                                     </h2>
-                                    <h3>help your staff earn what they deserve and keep your place of business running smoothly. </h3>
+                                    <h3>To help your staff earn what they deserve and keep your place of business running smoothly. </h3>
                                     <h3>perfect for: <b>HOTELS</b></h3>
                                     <h4>Housekeeping, Front Desk, Valet, and more. </h4>
                                 </div>
@@ -56,15 +56,15 @@
                         <div class="inner">
                             <div class="flex flex-row items-center w-full justify-between">
                                 <div>
-                                    <img src="/woman.png" alt="">
+                                    <img class="valet" src="/valet.png" alt="">
                                 </div>
                                 <div class="flex flex-col text-wrap">
                                     <h1>who should use this</h1>
                                     <h2>
                                         Labor is the #1 issue the hospitality industry is facing
                                     </h2>
-                                    <h3>help your staff earn what they deserve and keep your place of business running smoothly. </h3>
-                                    <h3>perfect for: <b>HOTELS</b></h3>
+                                    <h3>To help your staff earn what they deserve and keep your place of business running smoothly. </h3>
+                                    <h3>perfect for: <b>PARKING/VALETS</b></h3>
                                     <h4>Housekeeping, Front Desk, Valet, and more. </h4>
                                 </div>
                             </div>
@@ -275,6 +275,11 @@ export default {
    img  {
        width: 550px;
        border: 20px solid #fff;
+
+       &.valet {
+           object-fit: cover;
+           height: 640px;
+       }
    }
 
     .text-wrap {
