@@ -7,11 +7,11 @@
                 </button>
                 <img src="/transparent.png" class="logo" @click="$router.push('/')"/>
             </div>
-            <h3>{{ pool.name }}</h3>
-            <div class="flex flex-col w-full" v-if="pool_users.length">
+<!--            <h3>{{ pool.name }}</h3>-->
+            <div class="flex flex-col w-full mt-6" v-if="pool_users.length">
                 <div class="staff-block" @click="$router.push(`/user/${$route.params.id}/tip?id=${pool.id}&type=pool`)">
                     <div class="flex flex-col items-start justify-start">
-                        <p>Entire {{ pool.name }} Staff</p>
+                        <p>Tip Entire {{ pool.name }} Staff</p>
                         <p class="sub">
                             Send one tip to be evenly split among entire staff.
                         </p>

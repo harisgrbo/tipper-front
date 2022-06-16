@@ -10,7 +10,7 @@
             <h3>Send Tip to:</h3>
 
             <div class="staff-block" v-if="user">
-                <img class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
+                <img v-if="$route.query.type === 'employee'" class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
                 <div class="flex flex-col items-start w-full justify-start">
                     <p v-if="user.type === 'employee'">{{ user.display_name }}</p>
                     <p v-else>{{ user.username }}</p>
@@ -56,11 +56,11 @@
                 </ul>
             </div>
             <div class="review-block">
-                <img src="/review.svg" alt="">
+
+                <h2 class="mb-4">Leave a Review!</h2>
                 <star-rating :star-size="25" :increment="1" :inline="true" :rounded-corners="true" padding="2"
                              inactive-color="#F0EBE4" :show-rating="false" active-color="#F9C52D"
                              v-model="rating"></star-rating>
-                <h2>Leave a Review!</h2>
                 <textarea v-model="description" placeholder="Leave a review (Optional)" rows="10"></textarea>
             </div>
             <button class="submit" @click="submit">

@@ -11,14 +11,14 @@
 
                 </div>
                 <div class="text-center flex flex-col items-center justify-center">
-                    <p class="mb-4">faq</p>
-                    <p class="mb-4">contact</p>
-                    <p class="mb-4">Privacy Policy</p>
+                    <nuxt-link class="mb-4" :to="('/home/faq')">faq</nuxt-link>
+                    <nuxt-link class="mb-4" :to="('/home/contact-us')">contact</nuxt-link>
+                    <nuxt-link class="mb-4" :to="('/home/legal')">Privacy Policy</nuxt-link>
                 </div>
                 <div class="text-center flex flex-col items-center justify-center">
-                    <p class="mb-4">About</p>
-                    <p class="mb-4">Blog</p>
-                    <p class="mb-4">Terms of use</p>
+                    <nuxt-link class="mb-4" to="">About</nuxt-link>
+                    <nuxt-link class="mb-4" :to="('/home/blog')">Blog</nuxt-link>
+                    <nuxt-link class="mb-4" :to="('/home/legal')">Terms of use</nuxt-link>
                 </div>
             </div>
             <p class="text-center mt-6 w-full">©2022 Tipper  | Site Credit Karima Creative</p>
@@ -42,7 +42,7 @@ export default {
         margin: 0 auto;
     }
 
-    p {
+    p, a {
         color: #fff;
         font-size: 16px;
         text-transform: uppercase;

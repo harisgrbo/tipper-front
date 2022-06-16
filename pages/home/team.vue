@@ -9,12 +9,16 @@
                         <div class="person">
                             <img src="/person1.svg" alt="">
                             <span>JONATHAN BUCKELEW</span>
-                            <span class="position">Co-Founder & CEO</span>
+                            <span class="position">                                <img src="/linkedin.png" alt="">
+Co-Founder & CEO</span>
+
                         </div>
                         <div class="person">
                             <img src="/person2.svg" alt="">
                             <span>ALAN SCARPA</span>
-                            <span class="position">Co-Founder & CTO</span>
+                            <span class="position">                                <img src="/linkedin.png" alt="">
+Co-Founder & CTO</span>
+
                         </div>
                     </div>
                 </div>
@@ -24,34 +28,34 @@
                         <div class="grid grid-cols-5 gap-8 w-full">
                             <div class="advisor">
                                 <img src="/advisor1.png" alt="">
-                                <p class="name">JONATHAN BUCKELEW</p>
+                                <p class="name">Tony Ambrosio</p>
                                 <p class="position">Ex- CAO & CHRO @ CBS</p>
                                 <img class="company" src="/company1.svg" alt="">
                             </div>
                             <div class="advisor">
                                 <img src="/advisor2.png" alt="">
-                                <p class="name">JONATHAN BUCKELEW</p>
+                                <p class="name">Sarah kreifus</p>
                                 <p class="position">Investor @ AMEX Ventures</p>
                                 <img class="company" src="/company2.svg" alt="">
 
                             </div>
                             <div class="advisor">
                                 <img src="/advisor3.png" alt="">
-                                <p class="name">JONATHAN BUCKELEW</p>
+                                <p class="name">jonathan korr</p>
                                 <p class="position">Executive Vice President
                                     @ Fulcrum Hospitality </p>
                                 <img class="company" src="/company3.svg" alt="">
                             </div>
                             <div class="advisor">
-                                <img src="/advisor3.png" alt="">
-                                <p class="name">JONATHAN BUCKELEW</p>
+                                <img src="/new-campbell.png" alt="">
+                                <p class="name">chris Campbell</p>
                                 <p class="position">Chief Strategist @ Kroll Institute. Ex-Assistant
                                     Treasury Secretary </p>
                                 <img class="company" src="/company4.svg" alt="">
                             </div>
                             <div class="advisor">
                                 <img src="/advisor5.png" alt="">
-                                <p class="name">JONATHAN BUCKELEW</p>
+                                <p class="name">nicole rowett</p>
                                 <p class="position">Executive Director for
                                     Apple @ TBWA/Medla Labs</p>
                                 <img class="company" src="/apple2.svg" alt="">
@@ -357,6 +361,14 @@ p {
         font-weight: 300;
 
         &.position {
+            display: flex;
+            margin-top: 12px;
+            align-items: center;
+            img {
+                height: auto;
+                width: 40px;
+                margin-right: 10px;
+            }
             font-size: 18px;
             font-weight: 700;
             font-style: italic;
@@ -414,11 +426,13 @@ h2.advisors {
         width: 100%;
         margin-bottom: 12px !important;
         margin-top: 0;
+        text-transform: uppercase;
 
         &.position {
             font-size: 13px;
             font-style: italic;
             font-weight: bold !important;
+            text-transform: initial;
         }
 
     }

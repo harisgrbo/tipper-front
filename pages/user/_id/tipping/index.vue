@@ -1,6 +1,12 @@
 <template>
     <div class="tipping-wrapper">
         <div class="flex flex-col w-full" v-if="loaded">
+            <div class="flex flex-row items-center justify-start mb-6">
+                <button @click="$router.go(-1)" class="back">
+                    <img src="/arrow-left.svg" alt="">
+                </button>
+                <img src="/transparent.png" class="logo" @click="$router.push('/')"/>
+            </div>
            <div class="flex flex-col">
                <div class="profile-block">
                    <img :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
@@ -21,7 +27,7 @@
 
                <div class="staff-wrapper">
                    <div class="staff-block" @click="$router.push(`/user/${user.id}/tip?id=${user.id}&type=user`)" v-if="userMeta.employee_count > 0">
-                       <img class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
+<!--                       <img class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">-->
                        <div class="flex flex-col items-start justify-start">
                            <p>Entire {{ user.username }} Staff</p>
                            <p class="sub">
@@ -246,5 +252,21 @@ export default {
 .address-wrap p {
     color: #fff;
     font-size: 12px;
+}
+
+.back {
+    height: 54px;
+    width: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    border-radius: 15px;
+    margin-right: 27px;
+}
+
+.logo {
+    height: 40px;
 }
 </style>

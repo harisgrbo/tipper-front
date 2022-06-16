@@ -98,12 +98,27 @@
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 username w-1/5">{{ employee.department.name }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 username w-1/5">${{ employee.total_earned_amount }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 username w-auto"><svg xmlns="http://www.w3.org/2000/svg" @click="deleteEmployee(employee)" class="h-5 w-5 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                                            <td class="whitespace-nowrap px-3 py-4 username w-auto"><svg xmlns="http://www.w3.org/2000/svg" @click="selectedUserFromList = employee; $modal.show('delete')" class="h-5 w-5 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                             </svg></td>
                                         </tr>
                                         </tbody>
                                     </table>
+                                    <client-only>
+                                        <modal name="delete"
+                                               width="476"
+                                               height="auto"
+                                               @before-open="beforeOpen"
+                                               @before-close="beforeClose">
+                                            <div class="flex flex-col">
+                                                <h1 class="text-center">Are you sure you want to delete {{ selectedUserFromList !== null ? selectedUserFromList.display_name : '' }}?</h1>
+                                                <div class="modal-buttons">
+                                                    <button @click="$modal.hide('delete')">No</button>
+                                                    <button @click="deleteEmployee(selectedUserFromList); $modal.hide('delete')">Yes</button>
+                                                </div>
+                                            </div>
+                                        </modal>
+                                    </client-only>
                                 </div>
                             </div>
                         </div>
@@ -269,6 +284,7 @@ export default {
     data() {
         return {
             avatarUrl: '',
+            selectedUserFromList: null,
             options: [
                 {
                     name: 'Today',
@@ -422,12 +438,9 @@ export default {
         },
         async fetchReviews() {
             try {
-                let res = await this.$axios.get('/users/' + this.$auth.user.id + '/tips');
+                let res = await this.$axios.get('/users/' + this.$auth.user.id + '/tips?desc_only=true');
 
                 this.reviewUsers = res.data.data;
-
-                console.log(this.reviewUsers, 'review')
-
             } catch (e) {
                 console.log(e)
             }
@@ -938,5 +951,36 @@ canvas {
 
 .download {
     font-size: 13px;
+}
+
+h1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    color: #1B1A1A;
+    opacity: 0.4;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+        height: 54px;
+        background: #B45F4B;
+        border-radius: 15px;
+        color: #fff;
+        margin-right: 8px;
+        width: 100%;
+
+        &:last-child {
+            background: rgba(180, 95, 75, 0.1);
+            color: #B45F4B;
+            margin-left: 8px;
+        }
+    }
 }
 </style>

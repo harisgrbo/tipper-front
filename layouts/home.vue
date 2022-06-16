@@ -36,8 +36,8 @@ export default {
                     link: 'team'
                 },
                 {
-                    name: 'LEGAL',
-                    link: 'legal'
+                    name: 'HOW IT WORKS',
+                    link: '#how-it-works'
                 },
                 {
                     name: 'FAQ',

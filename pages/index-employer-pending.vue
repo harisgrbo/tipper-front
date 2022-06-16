@@ -44,7 +44,7 @@
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 w-1/3 max-w-1/3">
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0">
-                                                        <img class="h-10 w-10 rounded-full" src="/avatar.svg" alt="">
+                                                        <img class="h-10 w-10 rounded-full" src="/noimage.png" alt="">
                                                     </div>
                                                     <div class="ml-4">
                                                         <div class="username">
@@ -58,13 +58,28 @@
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 w-1/4 capitalize">{{ employee.status }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 w-1/4 capitalize text-right">
-                                                <svg v-show="employee.status === 'pending'" @click="removeInvitation(employee.id)" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer hover:text-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                                                <svg v-show="employee.status === 'pending'" @click="selectedInvitedUser = employee; $modal.show('delete')" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer hover:text-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                 </svg>
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
+                                    <client-only>
+                                        <modal name="delete"
+                                               width="476"
+                                               height="auto"
+                                               @before-open="beforeOpen"
+                                               @before-close="beforeClose">
+                                            <div class="flex flex-col">
+                                                <h1 class="text-center">Are you sure you want to delete {{ selectedInvitedUser !== null ? selectedInvitedUser.email : '' }}?</h1>
+                                                <div class="modal-buttons">
+                                                    <button @click="$modal.hide('delete')">No</button>
+                                                    <button @click="removeInvitation(selectedInvitedUser.id); $modal.hide('delete')">Yes</button>
+                                                </div>
+                                            </div>
+                                        </modal>
+                                    </client-only>
                                 </div>
                             </div>
                         </div>
@@ -94,6 +109,7 @@ export default {
                 'This Month',
                 'This Year'
             ],
+            selectedInvitedUser: null,
             email: '',
             loaded: false,
             current_option: 0,
@@ -529,4 +545,36 @@ tr th {
     width: 25% !important;
     min-width: 25% !important;
 }
+
+h1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    color: #1B1A1A;
+    opacity: 0.4;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+        height: 54px;
+        background: #B45F4B;
+        border-radius: 15px;
+        color: #fff;
+        margin-right: 8px;
+        width: 100%;
+
+        &:last-child {
+            background: rgba(180, 95, 75, 0.1);
+            color: #B45F4B;
+            margin-left: 8px;
+        }
+    }
+}
+
 </style>
