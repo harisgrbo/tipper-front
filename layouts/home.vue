@@ -32,16 +32,12 @@ export default {
         return {
             links: [
                 {
-                    name: 'TEAM',
-                    link: 'team'
-                },
-                {
                     name: 'HOW IT WORKS',
                     link: '#how-it-works'
                 },
                 {
-                    name: 'FAQ',
-                    link: 'faq'
+                    name: 'TEAM',
+                    link: 'team'
                 },
                 {
                     name: 'BLOG',

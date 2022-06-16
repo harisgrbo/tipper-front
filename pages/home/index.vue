@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="how-this-works">
+        <div class="how-this-works" id="how-it-works">
             <div class="inner flex flex-col items-center justify-center">
                 <label>how this works</label>
                 <div class="flex flex-row items-center justify-center">
@@ -90,6 +90,9 @@ export default {
                 'Employee'
             ]
         }
+    },
+    mounted() {
+
     }
 }
 </script>
