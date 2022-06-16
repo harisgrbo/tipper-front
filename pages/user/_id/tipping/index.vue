@@ -9,7 +9,7 @@
                        <div class="flex flex-col items-start address-wrap">
                            <p class="sub">{{ user.address_1 ? user.address_1 + '' : '' }}</p>
                            <div class="flex flex-row items-center">
-                               <p class="sub">{{ user.city ? user.city + ', &nbsp' : ' ' }}</p>
+                               <p class="sub">{{ user.city ? user.city + ',&nbsp' : ' ' }}</p>
                                <p class="sub">{{ user.state ? user.state + '&nbsp'  : ' ' }} </p>
                                <p class="sub">{{ user.zip_code ? user.zip_code  : ' ' }} </p>
                            </div>

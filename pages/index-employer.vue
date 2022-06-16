@@ -27,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-row items-end">
+                <div class="flex flex-col-reverse items-center justify-center">
                     <p class="download cursor-pointer" @click="downloadQR">Download QR code Image</p>
                     <div>
                         <canvas ref="canvas"/>
@@ -808,19 +808,18 @@ tr.main th {
     p {
         font-style: normal;
         font-weight: 400;
-        font-size: 18px;
+        font-size: 14px;
         line-height: 25px;
         color: #000000;
         opacity: 0.6;
 
         &.sub {
             font-style: normal;
-            font-weight: 400;
+            font-weight: 600;
             font-size: 14px;
             line-height: 19px;
             margin-top: 8px;
-            color: #000000;
-            opacity: 0.4;
+            color: rgba(0, 0, 0, 0.72);
         }
     }
 
@@ -935,5 +934,9 @@ canvas {
     width: auto;
     display: flex;
     justify-content: flex-end;
+}
+
+.download {
+    font-size: 13px;
 }
 </style>

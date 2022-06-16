@@ -21,12 +21,12 @@
                         <h2>why tipper is right for your hotel</h2>
                     </div>
                     <ul>
-                        <li>Tips go directly to your employees’ bank accounts</li>
-                        <li>More money for your employees</li>
-                        <li>More recognition leads to happier employees</li>
-                        <li>Reporting features for easy tax-related reporting</li>
-                        <li>Increased employee retention</li>
-                        <li>Right staff count leading to happier guests</li>
+                        <li><img src="/thick2.svg" alt="">Tips go directly to your employees’ bank accounts</li>
+                        <li><img src="/thick2.svg" alt="">More money for your employees</li>
+                        <li><img src="/thick2.svg" alt="">More recognition leads to happier employees</li>
+                        <li><img src="/thick2.svg" alt="">Reporting features for easy tax-related reporting</li>
+                        <li><img src="/thick2.svg" alt="">Increased employee retention</li>
+                        <li><img src="/thick2.svg" alt="">Right staff count leading to happier guests</li>
                     </ul>
                 </div>
             </div>
@@ -185,16 +185,18 @@ export default {
             font-size: 16px;
             position: relative;
             padding-left: 20px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            img {
+                height: auto;
+                width: 24px;
+                margin-right: 10px;
+            }
 
             &:last-child {
                 margin-bottom: 0;
-            }
-
-            &:before {
-                content: "\2713";
-                position: absolute;
-                left: 0;
-
             }
         }
     }
