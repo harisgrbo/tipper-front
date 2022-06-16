@@ -20,6 +20,7 @@ import nuxt_plugin_modal_6299f5fe from 'nuxt_plugin_modal_6299f5fe' // Source: .
 import nuxt_plugin_calendar_a6482c7c from 'nuxt_plugin_calendar_a6482c7c' // Source: ../plugins/calendar.js (mode: 'client')
 import nuxt_plugin_toastnotifications_1928db8c from 'nuxt_plugin_toastnotifications_1928db8c' // Source: ../plugins/toast-notifications.js (mode: 'client')
 import nuxt_plugin_starrating_8841d5d4 from 'nuxt_plugin_starrating_8841d5d4' // Source: ../plugins/star-rating.js (mode: 'client')
+import nuxt_plugin_carousel_7d478f40 from 'nuxt_plugin_carousel_7d478f40' // Source: ../plugins/carousel.js (mode: 'client')
 import nuxt_plugin_auth_0d2a4be7 from 'nuxt_plugin_auth_0d2a4be7' // Source: ./auth.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -243,6 +244,10 @@ async function createApp(ssrContext, config = {}) {
 
   if (process.client && typeof nuxt_plugin_starrating_8841d5d4 === 'function') {
     await nuxt_plugin_starrating_8841d5d4(app.context, inject)
+  }
+
+  if (process.client && typeof nuxt_plugin_carousel_7d478f40 === 'function') {
+    await nuxt_plugin_carousel_7d478f40(app.context, inject)
   }
 
   if (typeof nuxt_plugin_auth_0d2a4be7 === 'function') {

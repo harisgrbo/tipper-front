@@ -32,22 +32,47 @@
             </div>
         </div>
         <div class="who-should-use-this">
-            <div class="inner">
-                <div class="flex flex-row items-center w-full justify-between">
-                    <div>
-                        <img src="/woman.png" alt="">
-                    </div>
-                    <div class="flex flex-col text-wrap">
-                        <h1>who should use this</h1>
-                        <h2>
-                            Labor is the #1 issue the hospitality industry is facing
-                        </h2>
-                        <h3>help your staff earn what they deserve and keep your place of business running smoothly. </h3>
-                        <h3>perfect for: <b>HOTELS</b></h3>
-                        <h4>Housekeeping, Front Desk, Valet, and more. </h4>
-                    </div>
-                </div>
-            </div>
+            <client-only>
+                <carousel :perPage="1" :paginationEnabled="false" :navigationEnabled="true">
+                    <slide>
+                        <div class="inner">
+                            <div class="flex flex-row items-center w-full justify-between">
+                                <div>
+                                    <img src="/woman.png" alt="">
+                                </div>
+                                <div class="flex flex-col text-wrap">
+                                    <h1>who should use this</h1>
+                                    <h2>
+                                        Labor is the #1 issue the hospitality industry is facing
+                                    </h2>
+                                    <h3>help your staff earn what they deserve and keep your place of business running smoothly. </h3>
+                                    <h3>perfect for: <b>HOTELS</b></h3>
+                                    <h4>Housekeeping, Front Desk, Valet, and more. </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </slide>
+                    <slide>
+                        <div class="inner">
+                            <div class="flex flex-row items-center w-full justify-between">
+                                <div>
+                                    <img src="/woman.png" alt="">
+                                </div>
+                                <div class="flex flex-col text-wrap">
+                                    <h1>who should use this</h1>
+                                    <h2>
+                                        Labor is the #1 issue the hospitality industry is facing
+                                    </h2>
+                                    <h3>help your staff earn what they deserve and keep your place of business running smoothly. </h3>
+                                    <h3>perfect for: <b>HOTELS</b></h3>
+                                    <h4>Housekeeping, Front Desk, Valet, and more. </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </slide>
+                </carousel>
+
+            </client-only>
         </div>
         <div class="how-this-works" id="how-it-works">
             <div class="inner flex flex-col items-center justify-center">
@@ -80,7 +105,11 @@ import EmployeeComponent from "@/components/home/EmployeeComponent";
 export default {
     name: "index",
     layout: 'home',
-    components: {EmployeeComponent, TipperComponent, EmployerComponent},
+    components: {
+        EmployeeComponent,
+        TipperComponent,
+        EmployerComponent,
+    },
     data() {
         return {
             currentOption: 0,
@@ -206,8 +235,13 @@ export default {
 }
 
 .who-should-use-this {
-    background: #fff;
     padding: 70px 0;
+    margin-top: -110px;
+    background: transparent;
+    width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+
     h1 {
         font-size: 32px;
         font-weight: 700;
@@ -240,7 +274,6 @@ export default {
 
    img  {
        width: 550px;
-       margin-top: -110px;
        border: 20px solid #fff;
    }
 
@@ -292,5 +325,56 @@ export default {
 
 .custom-component {
     background: #fff;
+}
+
+::v-deep .VueCarousel-navigation-prev {
+    position: absolute;
+    bottom: 0 !important;
+    box-sizing: border-box;
+    color: #000;
+    text-decoration: none;
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    background-image: url("/arrow-left-carousel.jpg");
+    background-repeat: no-repeat;
+    height: 50px !important;
+    width: 30px !important;
+    background-position: center;
+    background-size: cover;
+    left: 60% !important;
+    color: transparent;
+
+}
+
+::v-deep .VueCarousel-navigation-next {
+    position: absolute;
+    bottom: 0 !important;
+    box-sizing: border-box;
+    color: #000;
+    text-decoration: none;
+    appearance: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    background-image: url("/arrow-right-carousel.jpg");
+    backgorund-color: #fff !important;
+    background-repeat: no-repeat;
+    height: 50px !important;
+    width: 30px !important;
+    background-position: center;
+    background-size: cover;
+    right: 38% !important;
+    color: transparent;
+}
+
+::v-deep .VueCarousel-navigation {
+    height: 60px !important;
+    position: relative !important;
+    margin-top: -80px;
 }
 </style>

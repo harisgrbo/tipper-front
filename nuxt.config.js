@@ -53,6 +53,7 @@ export default {
     { src: '~plugins/calendar.js', ssr: false},
     { src: '~plugins/toast-notifications.js', ssr: false},
     { src: '~plugins/star-rating.js', ssr: false},
+    { src: '~plugins/carousel.js', ssr: false},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
