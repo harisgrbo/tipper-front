@@ -2,8 +2,10 @@
     <div class="flex flex-col w-full main-layout">
         <div class="header">
             <div class="flex inner-header flex-row items-center justify-between">
+                <img src="/hero-bg.svg" alt="" class="hero-unit-logo">
+
                 <nuxt-link to="/">
-                    <img src="/transparent.png" alt="">
+                    <img class="logo" src="/transparent.png" alt="">
                 </nuxt-link>
                 <ul>
                     <li v-for="(link, index) in links" :key="index">
@@ -74,31 +76,34 @@ export default {
     }
 
     .header {
-        background-image: url("/header-bg.svg");
-        background-color: #EDE9E3;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 67px 0;
-        background-repeat: no-repeat;
-        background-position: top;
-        background-size: cover;
-        background-position-x: -120px;
+        background-color: #F6F4F1;
+
+
 
         .inner-header {
             width: 980px;
             margin: 0 auto;
+            height: 193px;
+            position: relative;
+
         }
 
-        img {
+        img.logo {
             height: 60px;
+            position: relative;
+            z-index: 1;
         }
 
         ul {
             display: flex;
             flex-direction: row;
             align-items: center;
+            position: relative;
+            z-index: 1;
 
             li {
                 margin-left: 36px;
@@ -123,5 +128,13 @@ export default {
     @include for-phone-only {
         display: none;
     }
+}
+
+.hero-unit-logo {
+    position: absolute;
+    right: 0;
+    height: 540px;
+    z-index: 0;
+    top: 1%;
 }
 </style>

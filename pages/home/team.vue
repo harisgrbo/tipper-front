@@ -7,14 +7,14 @@
                     <h5>TEAM</h5>
                     <div class="grid grid-cols-2">
                         <div class="person">
-                            <img src="/person1.svg" alt="">
+                            <img src="/top1.jpg" alt="">
                             <span>JONATHAN BUCKELEW</span>
                             <span class="position">                                <img src="/linkedin.png" alt="">
 Co-Founder & CEO</span>
 
                         </div>
                         <div class="person">
-                            <img src="/person2.svg" alt="">
+                            <img src="/top2.jpg" alt="">
                             <span>ALAN SCARPA</span>
                             <span class="position">                                <img src="/linkedin.png" alt="">
 Co-Founder & CTO</span>
@@ -27,34 +27,34 @@ Co-Founder & CTO</span>
                     <div class="inner">
                         <div class="grid grid-cols-5 gap-8 w-full">
                             <div class="advisor">
-                                <img src="/advisor1.png" alt="">
+                                <img src="/bottom1.jpg" alt="">
                                 <p class="name">Tony Ambrosio</p>
                                 <p class="position">Ex- CAO & CHRO @ CBS</p>
                                 <img class="company" src="/company1.svg" alt="">
                             </div>
                             <div class="advisor">
-                                <img src="/advisor2.png" alt="">
+                                <img src="/bottom2.jpg" alt="">
                                 <p class="name">Sarah kreifus</p>
                                 <p class="position">Investor @ AMEX Ventures</p>
                                 <img class="company" src="/company2.svg" alt="">
 
                             </div>
                             <div class="advisor">
-                                <img src="/advisor3.png" alt="">
+                                <img src="/bottom3.jpg" alt="">
                                 <p class="name">jonathan korr</p>
                                 <p class="position">Executive Vice President
                                     @ Fulcrum Hospitality </p>
                                 <img class="company" src="/company3.svg" alt="">
                             </div>
                             <div class="advisor">
-                                <img src="/new-campbell.png" alt="">
+                                <img src="/bottom4.jpg" alt="">
                                 <p class="name">chris Campbell</p>
                                 <p class="position">Chief Strategist @ Kroll Institute. Ex-Assistant
                                     Treasury Secretary </p>
                                 <img class="company" src="/company4.svg" alt="">
                             </div>
                             <div class="advisor">
-                                <img src="/advisor5.png" alt="">
+                                <img src="/bottom5.jpg" alt="">
                                 <p class="name">nicole rowett</p>
                                 <p class="position">Executive Director for
                                     Apple @ TBWA/Medla Labs</p>
@@ -125,18 +125,14 @@ export default {
 
 
     .hero-unit-top {
-        background: #EDE9E3;
-        background-image: url(/new-bg-2.svg);
-        min-height: 500px;
-        background-repeat: no-repeat;
-        background-position: bottom;
-        background-position-x: 365px;
-        background-size: 1448px;
-        background-position-y: -385px;
+        background-color: #F6F4F1;
+        padding-bottom: 80px;
+        min-height: 600px;
         padding-bottom: 80px;
     }
     .inner {
-
+        position: relative;
+        z-index: 1;
         h1 {
             font-size: 42px;
             font-weight: 700;
@@ -357,6 +353,18 @@ p {
     align-items: center;
     justify-content: center;
     margin-bottom: -200px;
+    &:first-child {
+        margin-right: 50px;
+    }
+    &:last-child {
+        margin-left: 50px;
+    }
+    img {
+        height: 300px;
+        width: 300px;
+        border-radius: 150px;
+        overflow: hidden;
+}
     span {
         font-size: 24px;
         font-weight: 300;
@@ -412,6 +420,7 @@ h2.advisors {
         height: 150px;
         width: 150px;
         margin-bottom: 20px;
+        border-radius: 100px;
 
         &.company {
             height: 30px;

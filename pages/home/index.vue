@@ -134,19 +134,13 @@ export default {
     align-items: center;
 }
 .hero-unit {
-    background-image: url(/new-bg-2.svg);
     min-height: 500px;
-    background-color: #EDE9E3;
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-position-x: 365px;
-    background-size: 1448px;
-    background-position-y: -385px;
+    background-color: #F6F4F1;
     padding-bottom: 80px;
 
-
     .inner {
-
+        position: relative;
+        z-index: 1;
         h1 {
             font-size: 45px;
             font-weight: 700;
