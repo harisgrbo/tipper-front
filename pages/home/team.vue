@@ -126,9 +126,7 @@ export default {
 
     .hero-unit-top {
         background-color: #F6F4F1;
-        padding-bottom: 80px;
         min-height: 600px;
-        padding-bottom: 80px;
     }
     .inner {
         position: relative;
