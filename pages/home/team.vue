@@ -424,6 +424,7 @@ h2.advisors {
             height: 30px;
             width: fit-content;
             margin-bottom: 0;
+            border-radius: 0;
         }
     }
 

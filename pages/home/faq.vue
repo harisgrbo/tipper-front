@@ -296,6 +296,8 @@ ul {
     min-height: 1100px;
     background-repeat: no-repeat;
     height: fit-content;
+    position: relative;
+    z-index: 1;
 
     .inner {
         min-height: 1100px;
