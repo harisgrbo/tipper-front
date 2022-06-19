@@ -6,7 +6,10 @@
                     <div class="flex flex-col items-start justify-between">
                         <h1>APP-LESS TIPPING</h1>
                         <h2>The touchless Tipping platform designed for the Hospitality Industry</h2>
-                        <button>REQUEST A DEMO</button>
+                        <a href="#request">
+                            <button>REQUEST A DEMO</button>
+
+                        </a>
                         <img class="cards" src="/new-cards.svg" alt="">
                     </div>
                     <img class="phone" src="/phone-placeholder.svg" alt="">
@@ -18,7 +21,7 @@
                 <div class="flex flex-row items-center w-full justify-between">
                     <div class="benefits-wrap">
                         <h1>BENEFITS</h1>
-                        <h2>why tipper is right for your hotel</h2>
+                        <h2 class="text-center">Why Tipper is right for your business</h2>
                     </div>
                     <ul>
                         <li><img src="/thick2.svg" alt="">Tips go directly to your employees’ bank accounts</li>
@@ -76,7 +79,7 @@
         </div>
         <div class="how-this-works" id="how-it-works">
             <div class="inner flex flex-col items-center justify-center">
-                <label>how this works</label>
+                <label>how it works</label>
                 <div class="flex flex-row items-center justify-center">
                     <button v-for="(option, index) in options" @click="currentOption = index" :class="[ currentOption === index ? 'active' : '' ]">{{ option }}</button>
                 </div>
@@ -96,11 +99,11 @@
 
             </div>
         </div>
-        <div class="form">
+        <div class="form" id="request">
             <div class="inner flex flex-row items-center justify-between">
                 <div class="request">
                     <img src="/transparent.png" alt="">
-                    <h1>REQUEST A DEMO</h1>
+                    <h1 class="request-title">REQUEST A DEMO</h1>
                 </div>
                 <div class="form-wrapper">
                     <input type="text" placeholder="FIRST NAME*">
@@ -117,7 +120,11 @@
                     <h1>FOLLOW US</h1>
                     <h2>CONNECT WITH US</h2>
                 </div>
-                <img class="ml-6" src="/social.svg" alt="">
+                <div class="social-icons">
+                    <img class="ml-6" src="/instagram.png" alt="">
+                    <img class="ml-6" src="/facebook.png" alt="">
+                    <img class="ml-6" src="/linkedin.png" alt="">
+                </div>
             </div>
         </div>
     </div>
@@ -494,5 +501,22 @@ export default {
         font-weight: 300;
         color: #000;
     }
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img {
+        width: 60px;
+        height: auto;
+    }
+}
+
+.request-title {
+    max-width: 180px !important;
+    margin-top: 30px !important;
+    font-size: 42px !important;
+    font-weight: 700 !important;
 }
 </style>

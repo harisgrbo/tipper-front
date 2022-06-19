@@ -9,14 +9,16 @@
                         <div class="person">
                             <img src="/top1.jpg" alt="">
                             <span>JONATHAN BUCKELEW</span>
-                            <span class="position">                                <img src="/linkedin.png" alt="">
-Co-Founder & CEO</span>
-
+                            <span class="position">
+                                <a href="https://www.linkedin.com/in/jonathan-buckelew/" class="flex flex-row items-center">
+                                    <img src="/linkedin.png" alt="">Co-Founder & CEO
+                                </a>
+                            </span>
                         </div>
                         <div class="person">
                             <img src="/top2.jpg" alt="">
                             <span>ALAN SCARPA</span>
-                            <span class="position">                                <img src="/linkedin.png" alt="">
+                            <span class="position">
 Co-Founder & CTO</span>
 
                         </div>
@@ -99,7 +101,11 @@ Co-Founder & CTO</span>
                         <h1>FOLLOW US</h1>
                         <h2>CONNECT WITH US</h2>
                     </div>
-                    <img class="ml-6" src="/social.svg" alt="">
+                    <div class="social-icons">
+                        <img class="ml-6" src="/instagram.png" alt="">
+                        <img class="ml-6" src="/facebook.png" alt="">
+                        <img class="ml-6" src="/linkedin.png" alt="">
+                    </div>
                 </div>
             </div>
         </div>
@@ -302,7 +308,7 @@ ul {
 }
 
 .top-image-wrapper {
-    background-image: url("/teambg.svg");
+    background-image: url("/new-team-bg.jpg");
     background-position: center;
     background-size: cover;
     min-height: 1100px;
@@ -447,4 +453,13 @@ h2.advisors {
     }
 }
 
+.social-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img {
+        width: 60px;
+        height: auto;
+    }
+}
 </style>

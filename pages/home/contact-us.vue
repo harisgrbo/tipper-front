@@ -49,7 +49,11 @@
                     <h1>FOLLOW US</h1>
                     <h2>CONNECT WITH US</h2>
                 </div>
-                <img class="ml-6" src="/social.svg" alt="">
+                <div class="social-icons">
+                    <img class="ml-6" src="/instagram.png" alt="">
+                    <img class="ml-6" src="/facebook.png" alt="">
+                    <img class="ml-6" src="/linkedin.png" alt="">
+                </div>
             </div>
         </div>
     </div>
@@ -209,4 +213,13 @@ export default {
     }
 }
 
+.social-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img {
+        width: 60px;
+        height: auto;
+    }
+}
 </style>
