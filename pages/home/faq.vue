@@ -73,20 +73,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form">
+                    <form @submit.prevent="requestDemo" class="form">
                         <div class="inner flex flex-row items-center justify-between">
                             <div class="request">
                                 <h1>REQUEST A DEMO</h1>
                             </div>
                             <div class="form-wrapper">
-                                <input type="text" placeholder="FIRST NAME*">
-                                <input type="text" placeholder="LAST NAME*">
-                                <input type="text" placeholder="EMAIL ADDRESS*">
-                                <input type="text" placeholder="COMPANY NAME*">
-                                <button>REQUEST A DEMO</button>
+                                <input type="text" placeholder="FIRST NAME*" required v-model="payload.first_name">
+                                <input type="text" placeholder="LAST NAME*" required v-model="payload.last_name">
+                                <input type="text" placeholder="EMAIL ADDRESS*" required v-model="payload.email">
+                                <input type="text" placeholder="COMPANY NAME*" required v-model="payload.company">
+                                <button type="submit">REQUEST A DEMO</button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="follow">
@@ -111,6 +111,36 @@
 export default {
     name: "faq",
     layout: 'home',
+    data() {
+        return {
+            payload: {
+                first_name: '',
+                last_name: '',
+                email: '',
+                company: '',
+            }
+        }
+    },
+    methods: {
+        async requestDemo() {
+            try {
+                let res = await this.$axios.post('/website/demo', this.payload);
+
+                this.$toast.open({
+                    message: "Demo requested successfully",
+                    type: 'success',
+                });
+
+                this.payload.first_name = '';
+                this.payload.last_name = '';
+                this.payload.email = '';
+                this.payload.company = '';
+
+            } catch(e){
+                console.log(e)
+            }
+        }
+    }
 }
 </script>
 
@@ -276,7 +306,7 @@ span.main {
 }
 
 p {
-    font-size: 14px;
+    font-size: 17px;
     font-weight: 300;
 }
 

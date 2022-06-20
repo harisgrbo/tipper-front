@@ -22,23 +22,32 @@
                                 <p>New York, NY 10013</p>
                             </div>
                         </div>
-                        <div class="form-wrapper">
-                            <select name="cars" id="cars" class="cursor-pointer">
-                                <option value="" disabled selected>Select your option</option>
-                                <option value="option1" selected>Option 1</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>
-                            </select>
-                            <div class="grid grid-cols-2 gap-4">
-                                <input type="text" placeholder="FIRST NAME*">
-                                <input type="text" placeholder="LAST NAME*">
+                        <form @submit.prevent="contactUs" class="form-wrapper">
+                            <div class="input-wrapper">
+                                <label>NAME</label>
+                                <div class="grid grid-cols-2 gap-6 w-full">
+                                    <input type="text" placeholder="First" v-model="contactPayload.first_name" required>
+                                    <input type="text" placeholder="Last*" v-model="contactPayload.last_name" required>
+                                </div>
                             </div>
-                            <input type="text" placeholder="BUSINESS NAME*">
-                            <input type="text" placeholder="EMAIL*">
-                            <input type="text" placeholder="SUBJECT*">
-                            <textarea name="" id="" rows="10" placeholder="MESSAGE"></textarea>
-                            <button>SEND INQUIRY</button>
-                        </div>
+                            <div class="input-wrapper">
+                                <label for="">BUSINESS NAME</label>
+                                <input type="text" placeholder="Name" v-model="contactPayload.company" required>
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="">EMAIL</label>
+                                <input type="text" placeholder="Email Address" v-model="contactPayload.email" required>
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="">SUBJECT</label>
+                                <input type="text" v-model="contactPayload.subject" required>
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="">MESSAGE</label>
+                                <textarea name="" id="" rows="10" required v-model="contactPayload.message"></textarea>
+                            </div>
+                            <button type="submit">SEND INQUIRY</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -64,6 +73,41 @@
 export default {
     name: "contact-us",
     layout: 'home',
+    data() {
+        return {
+            contactPayload: {
+                first_name: '',
+                last_name: '',
+                email: '',
+                company: '',
+                subject: '',
+                message: ''
+            }
+        }
+    },
+    methods: {
+        async contactUs() {
+            try {
+                let res = await this.$axios.post('/website/contact', this.contactPayload);
+
+                this.$toast.open({
+                    message: "Message sent successfully",
+                    type: 'success',
+                });
+
+                this.contactPayload.first_name = '';
+                this.contactPayload.last_name = '';
+                this.contactPayload.email = '';
+                this.contactPayload.company = '';
+                this.contactPayload.subject = '';
+                this.contactPayload.message = '';
+
+
+            } catch(e){
+                console.log(e)
+            }
+        }
+    }
 }
 </script>
 
@@ -220,6 +264,23 @@ export default {
     img {
         width: 60px;
         height: auto;
+    }
+}
+
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    label {
+        color: #fff;
+        margin-bottom: 8px;
+    }
+
+    input, textarea {
+        width: 100%;
+        color: #fff !important;
     }
 }
 </style>

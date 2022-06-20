@@ -68,7 +68,7 @@
                                     </h2>
                                     <h3>To help your staff earn what they deserve and keep your place of business running smoothly. </h3>
                                     <h3>perfect for: <b>PARKING/VALETS</b></h3>
-                                    <h4>Housekeeping, Front Desk, Valet, and more. </h4>
+                                    <h4>Parking Garages, Private events, Restaurants, and more.</h4>
                                 </div>
                             </div>
                         </div>
@@ -99,21 +99,20 @@
 
             </div>
         </div>
-        <div class="form" id="request">
+        <form @submit.prevent="requestDemo" id="request" class="form">
             <div class="inner flex flex-row items-center justify-between">
                 <div class="request">
-                    <img src="/transparent.png" alt="">
-                    <h1 class="request-title">REQUEST A DEMO</h1>
+                    <h1>REQUEST A DEMO</h1>
                 </div>
                 <div class="form-wrapper">
-                    <input type="text" placeholder="FIRST NAME*">
-                    <input type="text" placeholder="LAST NAME*">
-                    <input type="text" placeholder="EMAIL ADDRESS*">
-                    <input type="text" placeholder="COMPANY NAME*">
-                    <button>REQUEST A DEMO</button>
+                    <input type="text" placeholder="FIRST NAME*" required v-model="payload.first_name">
+                    <input type="text" placeholder="LAST NAME*" required v-model="payload.last_name">
+                    <input type="text" placeholder="EMAIL ADDRESS*" required v-model="payload.email">
+                    <input type="text" placeholder="COMPANY NAME*" required v-model="payload.company">
+                    <button type="submit">REQUEST A DEMO</button>
                 </div>
             </div>
-        </div>
+        </form>
         <div class="follow">
             <div class="inner flex flex-row items-center justify-center">
                 <div class="mr-6 text-right">
@@ -144,6 +143,12 @@ export default {
     },
     data() {
         return {
+            payload: {
+                first_name: '',
+                last_name: '',
+                email: '',
+                company: '',
+            },
             currentOption: 0,
             options: [
                 'Tipper',
@@ -152,8 +157,26 @@ export default {
             ]
         }
     },
-    mounted() {
 
+    methods: {
+        async requestDemo() {
+            try {
+                let res = await this.$axios.post('/website/demo', this.payload);
+
+                this.$toast.open({
+                    message: "Demo requested successfully",
+                    type: 'success',
+                });
+
+                this.payload.first_name = '';
+                this.payload.last_name = '';
+                this.payload.email = '';
+                this.payload.company = '';
+
+            } catch(e){
+                console.log(e)
+            }
+        }
     }
 }
 </script>
@@ -356,6 +379,7 @@ export default {
 
 .custom-component {
     background: #fff;
+    border-bottom: 100px solid #C67D65;
 }
 
 ::v-deep .VueCarousel-navigation-prev {

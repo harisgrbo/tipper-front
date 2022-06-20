@@ -81,7 +81,7 @@
                         <p>
                             Tipper utilizes Stripe for all payments. Check your Stripe Dashboard for more information on your tips.
                         </p>
-                        <a href="https://dashboard.stripe.com/login" class="access" target="_blank">Access Here</a>
+                        <button @click="stripeLogin()" href="https://dashboard.stripe.com/login" class="access" target="_blank">Access Here</button>
                     </div>
 
                     <img src="/stripe-logo.svg" alt="">
@@ -198,6 +198,17 @@ export default {
         }
     },
     methods: {
+        async stripeLogin() {
+          try {
+              let res = await this.$axios.get('/stripe/dashboard');
+
+              let url = res.data.data.url;
+
+              window.location.replace(url);
+          } catch(e) {
+              console.log(e)
+          }
+        },
         async finishOnboarding() {
             try {
                 let res = await this.$axios.post('/employee/onboarding');

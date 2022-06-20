@@ -10,10 +10,10 @@
                 <h2>FAST. PRIVATE. SECURE.</h2>
                 <p class="mb-4">Our mission is to help you the employee obtain more financial wealth.</p>
 
-                <p>- Lorem ipsum</p>
-                <p>- Lorem ipsum</p>
-                <p>- Lorem ipsum</p>
-                <p>- Lorem ipsum</p>
+                <p>- Sign up</p>
+                <p>- Connect a funding source</p>
+                <p>- Tips go directly to your bank account</p>
+                <p>- Get the money that you deserve</p>
             </div>
         </div>
     </div>
@@ -56,12 +56,13 @@ export default {
         position: relative;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         width: 100%;
+        padding-left: 130px;
 
         img {
-            width: 290px;
+            width: 220px;
         }
 
         .one, .two, .three, .four {

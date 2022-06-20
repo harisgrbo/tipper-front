@@ -108,7 +108,7 @@
                        @before-close="beforeClose">
                     <div class="flex flex-col" v-if="selectedNewPool !== null">
                         <div class="flex flex-row items-center justify-between w-full mb-6">
-                            <h2 class="modal-title">List of {{ selectedNewPool.name }} Pool employees</h2>
+                            <h2 class="modal-title">List of {{ selectedNewPool.name }} employees</h2>
                             <svg @click="$modal.hide('pool-employees'); selectedNewPool = null;" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
