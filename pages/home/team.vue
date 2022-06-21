@@ -27,7 +27,7 @@ Co-Founder & CTO</span>
                 <div class="section-team flex flex-col items-center justify-start">
                     <h2 class="advisors mt-4 mb-6">ADVISORS</h2>
                     <div class="inner">
-                        <div class="grid grid-cols-5 gap-8 w-full">
+                        <div class="grid grid-cols-5 gap-8 w-full mobile-grid">
                             <div class="advisor">
                                 <img src="/bottom1.jpg" alt="">
                                 <p class="name">Tony Ambrosio</p>
@@ -75,14 +75,14 @@ Co-Founder & CTO</span>
                 </div>
             </div>
             <div class="inner">
-                <div class="flex flex-col items-start justify-start text-left w-full pt-20">
+                <div class="flex flex-col items-start justify-start text-left w-full pt-2 mobile-col">
                     <h1>OUR MISSION</h1>
                     <h2 class="test">We created Tipper with a clear goal in mind: to help service-based employees make more money by offering people who want to send tips an easy digital solution to do so.</h2>
                     <p>The idea came about from the experience of wanting to provide deserving service staff like doormen and parking garage attendants with holiday tips but knowing people seldom carry cash on them and also realizing there wasn’t an efficient way to send them their well-deserved tips digitally without having to ask for their personal information. Tipper was born out of this observation to be the solution for bridging the gap between the cashless age and the dedicated workers in industries that rely on tipping.</p>
                 </div>
             </div>
             <div class="form">
-                <div class="inner flex flex-row items-center justify-between">
+                <div class="inner flex flex-row items-center justify-between mobile-col">
                     <div class="request">
                         <h1>JOIN OUR TEAM</h1>
                     </div>
@@ -96,15 +96,21 @@ Co-Founder & CTO</span>
                 </div>
             </div>
             <div class="follow">
-                <div class="inner flex flex-row items-center justify-center">
-                    <div class="mr-6 text-right">
+                <div class="inner flex flex-row items-center justify-center mobile-col">
+                    <div class="mr-6 text-right mobile-text">
                         <h1>FOLLOW US</h1>
                         <h2>CONNECT WITH US</h2>
                     </div>
                     <div class="social-icons">
-                        <img class="ml-6" src="/instagram.png" alt="">
-                        <img class="ml-6" src="/facebook.png" alt="">
-                        <img class="ml-6" src="/linkedin.png" alt="">
+                        <a href="https://www.instagram.com/accounts/login/?next=/thetippercompany/" target="_blank">
+                            <img class="ml-6" src="/instagram.png" alt="">
+                        </a>
+                        <a href="https://www.facebook.com/TheTipperCompany/" class="mobile-center" target="_blank">
+                            <img class="ml-6" src="/facebook.png" alt="">
+                        </a>
+                        <a href="https://www.linkedin.com/company/thetippercompany" target="_blank">
+                            <img class="ml-6" src="/linkedin.png" alt="">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -121,11 +127,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@mixin for-phone-only {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
+
 .inner {
     width: 980px;
     margin: 0 auto;
     display: flex;
     align-items: center;
+
+    @include for-phone-only {
+        width: 100%;
+        padding: 0 24px;
+    }
 }
 .hero-unit {
 
@@ -225,6 +242,11 @@ export default {
     background: #FDFCFB;
     padding: 64px 0;
 
+    @include for-phone-only {
+        padding: 24px 0;
+        margin-top: 24px;
+    }
+
     .inner {
         min-height: 500px;
         background-image: url("/employer-bh.svg");
@@ -246,6 +268,15 @@ export default {
 
         .request {
             height: 362px;
+
+            @include for-phone-only {
+                height: fit-content;
+
+                h1 {
+                    text-align: center;
+                    margin-top: 0;
+                }
+            }
         }
 
         .form-wrapper {
@@ -260,6 +291,10 @@ export default {
                 display: flex;
                 align-items: center;
                 justify-content: center;
+
+                @include for-phone-only {
+                    height: 40px;
+                }
             }
 
             input {
@@ -315,10 +350,22 @@ ul {
     background-repeat: no-repeat;
     height: fit-content;
 
+    @include for-phone-only {
+        margin-top: 36px;
+        min-height: 400px;
+        max-height: 400px;
+    }
+
     .inner {
         min-height: 1100px;
         position: relative;
         marign-top: 0 !important;
+
+        @include for-phone-only {
+            width: 100%;
+            padding: 0 24px;
+            min-height: 400px;
+        }
     }
 }
 
@@ -335,6 +382,24 @@ ul {
     max-width: 500px;
     padding: 40px;
     right: 0;
+
+    @include for-phone-only {
+        position: absolute;
+        bottom: 0;
+        background: #929271;
+        color: #fff;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 28px;
+        max-width: 100%;
+        padding: 24px;
+        right: 0;
+        height: fit-content;
+        left: 24px;
+        bottom: -20px;
+    }
 }
 
 h2.test {
@@ -359,19 +424,39 @@ p {
     margin-bottom: -200px;
     &:first-child {
         margin-right: 50px;
+
+        @include for-phone-only {
+            margin-right: 16px;
+        }
     }
     &:last-child {
         margin-left: 50px;
+
+        @include for-phone-only {
+            margin-left: 16px;
+        }
     }
     img {
         height: 300px;
         width: 300px;
         border-radius: 150px;
         overflow: hidden;
+
+        @include for-phone-only {
+            width: 100%;
+            height: auto;
+        }
 }
     span {
         font-size: 24px;
         font-weight: 300;
+
+        @include for-phone-only {
+            font-size: 17px;
+            height: 50px;
+            margin-top: 16px;
+            text-align: center;
+        }
 
         &.position {
             display: flex;
@@ -386,6 +471,10 @@ p {
             font-weight: 700;
             font-style: italic;
             text-transform: uppercase;
+
+            @include for-phone-only {
+                font-size: 17px;
+            }
         }
     }
 }
@@ -420,6 +509,10 @@ h2.advisors {
     justify-content: flex-start;
     min-width: 100%;
     height: 400px;
+
+    @include for-phone-only {
+        height: auto;
+    }
     img {
         height: 150px;
         width: 150px;
@@ -460,6 +553,44 @@ h2.advisors {
     img {
         width: 60px;
         height: auto;
+
+        @include for-phone-only {
+            margin-left: 0 !important;
+        }
+    }
+
+    a {
+        @include for-phone-only {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+.mobile-grid {
+    @include for-phone-only {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.mobile-col {
+    @include for-phone-only {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.mobile-text {
+    @include for-phone-only {
+        text-align: center !important;
+        margin-right: 0 !important;
+        margin-bottom: 24px;
+    }
+}
+
+.mobile-center {
+    @include for-phone-only {
+        margin: 0 16px;
     }
 }
 </style>

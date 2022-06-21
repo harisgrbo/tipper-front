@@ -10,7 +10,7 @@
             <h3>Send Tip to:</h3>
 
             <div class="staff-block" v-if="user">
-                <img v-if="$route.query.type === 'employee'" class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
+                <img v-if="$route.query.type === 'user'" class="avatar" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
                 <div class="flex flex-col items-start w-full justify-start">
                     <p v-if="user.type === 'employee'">{{ user.display_name }}</p>
                     <p v-else>{{ user.username }}</p>

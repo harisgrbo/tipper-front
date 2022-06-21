@@ -1,6 +1,6 @@
 <template>
     <div class="employer-component">
-        <div class="flex flex-row items-center justify-between inner first-block">
+        <div class="flex flex-row items-center justify-between inner first-block mobile-col">
             <div class="image-wrapper">
                 <h1>FEATURES</h1>
                 <img src="/mobile-arrows.svg" alt="">
@@ -41,6 +41,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@mixin for-phone-only {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
+
 .employer-component {
 
     position: relative;
@@ -57,6 +63,11 @@ export default {
     .inner {
         width: 980px;
         margin: 0 auto;
+
+        @include for-phone-only {
+            width: 100%;
+            padding: 0 24px;
+        }
     }
 
     h1 {
@@ -68,8 +79,15 @@ export default {
     .image-wrapper {
         position: relative;
 
+        @include for-phone-only {
+            width: 100%;
+        }
         img {
             width: 450px;
+
+            @include for-phone-only {
+                width: 300px;
+            }
         }
 
         .one, .two, .three, .four {
@@ -82,6 +100,11 @@ export default {
         .one {
             top: 215px;
             left: 27px;
+
+            @include for-phone-only {
+                top: 165px;
+                left: 7px;
+            }
         }
 
         .two {
@@ -90,6 +113,16 @@ export default {
             text-align: right;
             left: 27px;
             line-height: 16px;
+
+            @include for-phone-only {
+
+                bottom: 47px;
+                width: 50px;
+                text-align: right;
+                left: -3px;
+                line-height: 16px;
+
+            }
         }
 
         .three {
@@ -97,6 +130,13 @@ export default {
             right: -17px;
             width: 50px;
             line-height: 16px;
+
+            @include for-phone-only {
+                top: 144px;
+                right: 13px;
+                width: 50px;
+                line-height: 16px;
+            }
         }
 
         .four {
@@ -104,12 +144,27 @@ export default {
             right: 39px;
             width: 50px;
             line-height: 16px;
+
+            @include for-phone-only {
+                bottom: 65px;
+                right: 50px;
+                width: 50px;
+                line-height: 16px;
+            }
         }
     }
     .text-wrap {
         max-width: 40%;
         background: #F1EEEA;
         padding: 36px 0px 46px 24px;
+
+        @include for-phone-only {
+            width: 100%;
+            max-width: 100%;
+            padding: 24px;
+            margin-top: 24px;
+            margin-bottom: 36px;
+        }
 
         h2 {
             color: #000;
@@ -149,5 +204,12 @@ export default {
 
 .images {
     margin-top: 46px;
+}
+
+.mobile-col {
+    @include for-phone-only {
+        display: flex;
+        flex-direction: column;
+    }
 }
 </style>

@@ -4,11 +4,11 @@
             <div class="inner">
                 <div class="flex flex-col items-center justify-center text-center w-full">
                     <h1>GET IN TOUCH</h1>
-                    <div class="flex flex-row items-center justify-between w-full">
+                    <div class="flex flex-row items-center justify-between w-full mobile-col">
                         <div class="text-wrap">
                             <div>
                                 <h2>Customer support</h2>
-                                <p>8am to 6pm PT, M-F.</p>
+                                <p>8am to 6pm ET, M-F.</p>
                                 <p>support@thetippercompany.com</p>
                             </div>
                             <div>
@@ -18,7 +18,7 @@
                             </div>
                             <div>
                                 <h2>OUR OFFICE</h2>
-                                <p>55 Hudson Street,</p>
+                                <p>55 Hudson Street</p>
                                 <p>New York, NY 10013</p>
                             </div>
                         </div>
@@ -53,15 +53,21 @@
             </div>
         </div>
         <div class="follow">
-            <div class="inner flex flex-row items-center justify-center">
-                <div class="mr-6 text-right">
+            <div class="inner flex flex-row items-center justify-center mobile-col">
+                <div class="mr-6 text-right mobile-text">
                     <h1>FOLLOW US</h1>
                     <h2>CONNECT WITH US</h2>
                 </div>
                 <div class="social-icons">
-                    <img class="ml-6" src="/instagram.png" alt="">
-                    <img class="ml-6" src="/facebook.png" alt="">
-                    <img class="ml-6" src="/linkedin.png" alt="">
+                    <a href="https://www.instagram.com/accounts/login/?next=/thetippercompany/" target="_blank">
+                        <img class="ml-6" src="/instagram.png" alt="">
+                    </a>
+                    <a href="https://www.facebook.com/TheTipperCompany/" class="mobile-center" target="_blank">
+                        <img class="ml-6" src="/facebook.png" alt="">
+                    </a>
+                    <a href="https://www.linkedin.com/company/thetippercompany" target="_blank">
+                        <img class="ml-6" src="/linkedin.png" alt="">
+                    </a>
                 </div>
             </div>
         </div>
@@ -112,11 +118,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@mixin for-phone-only {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
+
 .inner {
     width: 980px;
     margin: 0 auto;
     display: flex;
     align-items: center;
+
+    @include for-phone-only {
+        width: 100%;
+        padding: 0 24px;
+    }
 }
 .hero-unit {
     min-height: 500px;
@@ -172,6 +189,11 @@ export default {
     background: #000;
     padding: 25px;
     padding-right: 45px;
+
+    @include for-phone-only {
+        width: 100%;
+        padding: 24px;
+    }
     button {
         background: #B45E4B;
         color: #fff;
@@ -183,6 +205,11 @@ export default {
         align-items: center;
         justify-content: center;
         margin-left: 180px;
+
+        @include for-phone-only {
+            margin: 0 auto;
+            height: 40px;
+        }
     }
 
     input, select, textarea {
@@ -220,6 +247,11 @@ export default {
 .text-wrap {
     display: flex;
     flex-direction: column;
+
+    @include for-phone-only {
+        width: 100%;
+        text-align: right;
+    }
 
     > div {
         display: flex;
@@ -264,6 +296,18 @@ export default {
     img {
         width: 60px;
         height: auto;
+
+        @include for-phone-only {
+            margin-left: 0 !important;
+        }
+    }
+
+    a {
+        @include for-phone-only {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
 }
 
@@ -281,6 +325,27 @@ export default {
     input, textarea {
         width: 100%;
         color: #fff !important;
+    }
+}
+
+.mobile-col {
+    @include for-phone-only {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.mobile-center {
+    @include for-phone-only {
+        margin: 0 16px;
+    }
+}
+
+.mobile-text {
+    @include for-phone-only {
+        text-align: center !important;
+        margin-right: 0 !important;
+        margin-bottom: 24px;
     }
 }
 </style>

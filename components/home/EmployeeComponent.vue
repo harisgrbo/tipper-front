@@ -1,6 +1,6 @@
 <template>
     <div class="employer-component">
-        <div class="flex flex-row items-center justify-between inner first-block">
+        <div class="flex flex-row items-center justify-between inner first-block mobile-col">
             <div class="image-wrapper">
                 <h1>EMPLOYEE</h1>
                 <img src="/2.png" alt="">
@@ -26,6 +26,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@mixin for-phone-only {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
+
 .employer-component {
 
     position: relative;
@@ -42,6 +48,11 @@ export default {
     .inner {
         width: 980px;
         margin: 0 auto;
+
+        @include for-phone-only {
+            padding: 0 24px;
+            width: 100%;
+        }
     }
 
     h1 {
@@ -59,10 +70,22 @@ export default {
         align-items: flex-start;
         justify-content: center;
         width: 100%;
-        padding-left: 130px;
+
+        @include for-phone-only {
+            align-items: center;
+            margin-top: 36px;
+        }
 
         img {
             width: 220px;
+            margin-left: 130px;
+            min-width: 220px;
+
+            @include for-phone-only {
+                width: 220px;
+                margin-left: 0;
+            }
+
         }
 
         .one, .two, .three, .four {
@@ -104,6 +127,14 @@ export default {
         background: #F1EEEA;
         padding: 36px 24px 46px 24px;
 
+        @include for-phone-only {
+            max-width: 100%;
+            width: 100%;
+            padding: 24px;
+            margin-top: 24px;
+            margin-bottom: 36px;
+        }
+
         h2 {
             color: #000;
             font-weight: 400;
@@ -118,6 +149,13 @@ export default {
             font-weight: 500;
             font-size: 17px;
         }
+    }
+}
+
+.mobile-col {
+    @include for-phone-only {
+        display: flex;
+        flex-direction: column;
     }
 }
 </style>

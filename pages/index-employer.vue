@@ -20,7 +20,7 @@
                         <div class="flex flex-col items-start">
                             <p class="sub">{{ $auth.user.address_1 ? $auth.user.address_1 + '' : '' }}</p>
                             <div class="flex flex-row items-center">
-                                <p class="sub">{{ $auth.user.city ? $auth.user.city + ', &nbsp' : ' ' }}</p>
+                                <p class="sub">{{ $auth.user.city ? $auth.user.city + ',&nbsp' : ' ' }}</p>
                                 <p class="sub">{{ $auth.user.state ? $auth.user.state + '&nbsp'  : ' ' }} </p>
                                 <p class="sub">{{ $auth.user.zip_code ? $auth.user.zip_code  : ' ' }} </p>
                             </div>
@@ -828,11 +828,11 @@ tr.main th {
 
         &.sub {
             font-style: normal;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 14px;
-            line-height: 19px;
+            line-height: 16px;
             margin-top: 8px;
-            color: rgba(0, 0, 0, 0.72);
+            color: #343434;
         }
     }
 

@@ -4,7 +4,7 @@
             <div class="inner">
                 <div class="flex flex-col items-center justify-center text-center w-full">
                     <h1>BLOG</h1>
-                    <div class="grid grid-cols-3 gap-14">
+                    <div class="grid grid-cols-3 gap-14 mobile-grid">
                         <div class="blog-card">
                             <img src="/img1.png" alt="">
                             <h2>HOW TO KEEP YOUR STAFF HAPPY DURING THE GREAT RESIGNATION</h2>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <form @submit.prevent="requestDemo" class="form">
-            <div class="inner flex flex-row items-center justify-between">
+            <div class="inner flex flex-row items-center justify-between mobile-col">
                 <div class="request">
                     <h1>REQUEST A DEMO</h1>
                 </div>
@@ -45,15 +45,21 @@
             </div>
         </form>
         <div class="follow">
-            <div class="inner flex flex-row items-center justify-center">
-                <div class="mr-6 text-right">
+            <div class="inner flex flex-row items-center justify-center mobile-col">
+                <div class="mr-6 text-right mobile-text">
                     <h1>FOLLOW US</h1>
                     <h2>CONNECT WITH US</h2>
                 </div>
                 <div class="social-icons">
-                    <img class="ml-6" src="/instagram.png" alt="">
-                    <img class="ml-6" src="/facebook.png" alt="">
-                    <img class="ml-6" src="/linkedin.png" alt="">
+                    <a href="https://www.instagram.com/accounts/login/?next=/thetippercompany/" target="_blank">
+                        <img class="ml-6" src="/instagram.png" alt="">
+                    </a>
+                    <a href="https://www.facebook.com/TheTipperCompany/" class="mobile-center" target="_blank">
+                        <img class="ml-6" src="/facebook.png" alt="">
+                    </a>
+                    <a href="https://www.linkedin.com/company/thetippercompany" target="_blank">
+                        <img class="ml-6" src="/linkedin.png" alt="">
+                    </a>
                 </div>
             </div>
         </div>
@@ -99,11 +105,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@mixin for-phone-only {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
+
 .inner {
     width: 980px;
     margin: 0 auto;
     display: flex;
     align-items: center;
+
+    @include for-phone-only {
+        width: 100%;
+        padding: 0 24px;
+    }
 }
 .hero-unit {
     min-height: 500px;
@@ -119,6 +136,10 @@ export default {
             font-weight: 700;
             color: #B45F4B;
             margin-bottom: 80px;
+
+            @include for-phone-only {
+                margin-bottom: 36px;
+            }
         }
     }
 }
@@ -219,6 +240,16 @@ export default {
 
         .request {
             height: 362px;
+
+            @include for-phone-only {
+                height: fit-content;
+
+                h1 {
+                    text-align: center;
+                    margin-top: 0;
+                    margin-bottom: 15px;
+                }
+            }
         }
 
         .form-wrapper {
@@ -233,6 +264,10 @@ export default {
                 display: flex;
                 align-items: center;
                 justify-content: center;
+
+                @include for-phone-only {
+                    height: 40px;
+                }
             }
 
             input {
@@ -261,6 +296,46 @@ export default {
     img {
         width: 60px;
         height: auto;
+
+        @include for-phone-only {
+            margin-left: 0 !important;
+        }
+    }
+
+    a {
+        @include for-phone-only {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+.mobile-grid {
+    @include for-phone-only {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.mobile-col {
+    @include for-phone-only {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.mobile-center {
+    @include for-phone-only {
+        margin: 0 16px;
+    }
+}
+
+.mobile-text {
+    @include for-phone-only {
+        text-align: center !important;
+        margin-right: 0 !important;
+        margin-bottom: 24px;
     }
 }
 

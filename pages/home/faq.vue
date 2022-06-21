@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="inner">
-                <div class="flex flex-col items-start justify-start text-left w-full pt-20">
+                <div class="flex flex-col items-start justify-start text-left w-full pt-20 mobile-padding">
                     <h1>FAQS</h1>
                     <div>
                         <div>
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <form @submit.prevent="requestDemo" class="form">
-                        <div class="inner flex flex-row items-center justify-between">
+                        <div class="inner flex flex-row items-center justify-between mobile-col">
                             <div class="request">
                                 <h1>REQUEST A DEMO</h1>
                             </div>
@@ -90,15 +90,21 @@
                 </div>
             </div>
             <div class="follow">
-                <div class="inner flex flex-row items-center justify-center">
-                    <div class="mr-6 text-right">
+                <div class="inner flex flex-row items-center justify-center mobile-col">
+                    <div class="mr-6 text-right mobile-text">
                         <h1>FOLLOW US</h1>
                         <h2>CONNECT WITH US</h2>
                     </div>
                     <div class="social-icons">
-                        <img class="ml-6" src="/instagram.png" alt="">
-                        <img class="ml-6" src="/facebook.png" alt="">
-                        <img class="ml-6" src="/linkedin.png" alt="">
+                        <a href="https://www.instagram.com/accounts/login/?next=/thetippercompany/" target="_blank">
+                            <img class="ml-6" src="/instagram.png" alt="">
+                        </a>
+                        <a href="https://www.facebook.com/TheTipperCompany/" class="mobile-center" target="_blank">
+                            <img class="ml-6" src="/facebook.png" alt="">
+                        </a>
+                        <a href="https://www.linkedin.com/company/thetippercompany" target="_blank">
+                            <img class="ml-6" src="/linkedin.png" alt="">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -145,17 +151,29 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@mixin for-phone-only {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
 .inner {
     width: 980px;
     margin: 0 auto;
     display: flex;
     align-items: center;
+
+    @include for-phone-only {
+        width: 100%;
+    }
 }
 .hero-unit {
     background-color: #F6F4F1;
     min-height: 500px;
     padding-bottom: 80px;
 
+    @include for-phone-only {
+        padding-bottom: 36px;
+    }
 
     .inner {
 
@@ -249,6 +267,10 @@ export default {
         background-position: left;
         min-height: 370px;
 
+        @include for-phone-only {
+            margin: 24px auto;
+        }
+
         img {
             height: 60px;
         }
@@ -262,6 +284,15 @@ export default {
 
         .request {
             height: 362px;
+
+            @include for-phone-only {
+                margin-bottom: 24px;
+                height: fit-content;
+
+                h1 {
+                    margin-bottom: 0;
+                }
+            }
         }
 
         .form-wrapper {
@@ -333,6 +364,11 @@ ul {
     position: relative;
     z-index: 1;
 
+    @include for-phone-only {
+        min-height: 400px;
+        height: 400px;
+    }
+
     .inner {
         min-height: 1100px;
         position: relative;
@@ -353,6 +389,17 @@ ul {
     max-width: 400px;
     padding: 60px 90px;
     right: 0;
+
+    @include for-phone-only {
+        bottom: inherit;
+        top: 330px;
+        height: 150px;
+        font-size: 22px;
+        line-height: 29px;
+        padding: 24px;
+        left: 24px;
+        height: auto;
+    }
 }
 
 .social-icons {
@@ -362,7 +409,45 @@ ul {
     img {
         width: 60px;
         height: auto;
+
+        @include for-phone-only {
+            margin-left: 0 !important;
+        }
+    }
+
+    a {
+        @include for-phone-only {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
 }
 
+.mobile-col {
+    @include for-phone-only {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.mobile-center {
+    @include for-phone-only {
+        margin: 0 16px;
+    }
+}
+
+.mobile-text {
+    @include for-phone-only {
+        text-align: center !important;
+        margin-right: 0 !important;
+        margin-bottom: 24px;
+    }
+}
+
+.mobile-padding {
+    @include for-phone-only {
+        padding: 46px 24px;
+    }
+}
 </style>

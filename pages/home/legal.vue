@@ -164,11 +164,21 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@mixin for-phone-only {
+    @media (max-width: 599px) {
+        @content;
+    }
+}
 .inner {
     width: 980px;
     margin: 0 auto;
     display: flex;
     align-items: center;
+
+    @include for-phone-only {
+        padding: 0 24px;
+        width: 100%;
+    }
 }
 .hero-unit {
     background-color: #F6F4F1;
