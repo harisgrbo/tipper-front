@@ -291,7 +291,7 @@ export default {
         font-size: 27px;
         margin-bottom: 36px;
         font-weight: 700;
-        max-width: 200px;
+        max-width: 220px;
     }
 
     ul {
@@ -561,8 +561,14 @@ export default {
             }
 
             h1 {
+                font-size: 45px;
+                font-weight: 700;
+                color: #000;
+                margin-bottom: 36px;
+
                 @include for-phone-only {
-                    margin-top: 0;
+                    font-size: 35px;
+                    margin-bottom: 10px;
                 }
             }
         }

@@ -3,9 +3,8 @@
         <div class="flex flex-row items-center justify-between inner first-block mobile-col">
             <div class="image-wrapper">
                 <h1>FEATURES</h1>
-                <img src="/mobile-arrows.svg" alt="">
+                <img src="/phone-new.jpg" alt="">
                 <span class="one">Recipient</span>
-                <span class="two">Total Amount</span>
                 <span class="three">Tip Amount</span>
                 <span class="four">Send Payment</span>
             </div>
@@ -83,7 +82,7 @@ export default {
             width: 100%;
         }
         img {
-            width: 450px;
+            width: 400px;
 
             @include for-phone-only {
                 width: 300px;
@@ -98,12 +97,12 @@ export default {
         }
 
         .one {
-            top: 215px;
-            left: 27px;
+            top: 305px;
+            left: -20px;
 
             @include for-phone-only {
-                top: 165px;
-                left: 7px;
+                top: 251px;
+                left: -16px;
             }
         }
 
@@ -126,28 +125,28 @@ export default {
         }
 
         .three {
-            top: 184px;
-            right: -17px;
+            top: 334px;
+            right: -57px;
             width: 50px;
             line-height: 16px;
 
             @include for-phone-only {
-                top: 144px;
-                right: 13px;
+                top: 270px;
+                right: -12px;
                 width: 50px;
                 line-height: 16px;
             }
         }
 
         .four {
-            bottom: 89px;
-            right: 39px;
+            bottom: 95px;
+            right: 2px;
             width: 50px;
             line-height: 16px;
 
             @include for-phone-only {
-                bottom: 65px;
-                right: 50px;
+                bottom: 75px;
+                right: 30px;
                 width: 50px;
                 line-height: 16px;
             }

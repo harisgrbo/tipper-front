@@ -590,7 +590,6 @@ export default {
     line-height: 45px;
     color: #1B1A1A;
     margin-bottom: 0;
-    margin-bottom: 24px;
 }
 
 .transfer {

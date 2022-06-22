@@ -10,7 +10,7 @@
                 <h2>Visibility into employee and guest interactions</h2>
                 <p class="mb-4">Access to our dashboard allows you to see:</p>
 
-                <p>- Total amount of property tip volume on</p>
+                <p>- Total amount of property tip volume</p>
                 <p>- Total amount of individual tip volume</p>
                 <p>- Guest Reviews</p>
                 <p>- Easy tip report export for tax purposes</p>
