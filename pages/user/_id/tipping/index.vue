@@ -2,9 +2,6 @@
     <div class="tipping-wrapper">
         <div class="flex flex-col w-full" v-if="loaded">
             <div class="flex flex-row items-center justify-start mb-6">
-                <button @click="$router.go(-1)" class="back">
-                    <img src="/arrow-left.svg" alt="">
-                </button>
                 <img src="/transparent.png" class="logo" @click="$router.push('/')"/>
             </div>
            <div class="flex flex-col">
@@ -54,7 +51,7 @@
                            </div>
                        </div>
                    </div>
-                   <div v-for="(pool, index) in pools" :key="index" class="staff-block" @click="$router.push(`/user/${user.id}/tipping/pools/${pool.id}`)">
+                   <div v-for="(pool, index) in pools" :key="index" class="staff-block" v-show="pool.employments_count > 0" @click="$router.push(`/user/${user.id}/tipping/pools/${pool.id}`)">
                        <div class="flex flex-col items-start w-full justify-start">
                            <p>{{ pool.name }}</p>
                        </div>

@@ -3,7 +3,7 @@
         <div class="flex flex-row items-center justify-between inner first-block mobile-col">
             <div class="image-wrapper">
                 <h1>FEATURES</h1>
-                <img src="/phone-new.jpg" alt="">
+                <img src="/mobile-transparent.png" alt="">
                 <span class="one">Recipient</span>
                 <span class="three">Tip Amount</span>
                 <span class="four">Send Payment</span>

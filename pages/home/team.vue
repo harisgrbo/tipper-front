@@ -76,7 +76,7 @@ Co-Founder & CTO</span>
             </div>
             <div class="inner">
                 <div class="flex flex-col items-start justify-start text-left w-full pt-2 mobile-col">
-                    <h1>OUR MISSION</h1>
+                    <h1 class="mt-8">OUR MISSION</h1>
                     <h2 class="test">We created Tipper with a clear goal in mind: to help service-based employees make more money by offering people who want to send tips an easy digital solution to do so.</h2>
                     <p>The idea came about from the experience of wanting to provide deserving service staff like doormen and parking garage attendants with holiday tips but knowing people seldom carry cash on them and also realizing there wasn’t an efficient way to send them their well-deserved tips digitally without having to ask for their personal information. Tipper was born out of this observation to be the solution for bridging the gap between the cashless age and the dedicated workers in industries that rely on tipping.</p>
                 </div>
@@ -91,7 +91,7 @@ Co-Founder & CTO</span>
                         <input type="text" placeholder="LAST NAME*">
                         <input type="text" placeholder="EMAIL ADDRESS*">
                         <input type="text" placeholder="TELL US ABOUT YOURSELF*">
-                        <button>JOIN A TEAM</button>
+                        <button>JOIN OUR TEAM</button>
                     </div>
                 </div>
             </div>

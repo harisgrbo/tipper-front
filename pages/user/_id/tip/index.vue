@@ -76,11 +76,11 @@
                 By continuing, you confirm that you have read and agreed to our
 
 
-                <a href="https://www.thetippercompany.com/terms-and-conditions" target="_blank">Terms and Conditions</a>
+                <nuxt-link to="/home/legal">Terms and Conditions</nuxt-link>
 
                 and
 
-                <a href="https://www.thetippercompany.com/privacy-policy">Privacy Policy.</a>
+                <nuxt-link to="/home/legal">Privacy Policy.</nuxt-link>
             </div>
         </div>
         <Loader v-else></Loader>
@@ -174,6 +174,7 @@ export default {
                       rating: this.rating,
                       name: this.name,
                       description: this.description,
+                      back_url: window.location.href,
                   });
 
                   location.href = res.data.redirect_uri;

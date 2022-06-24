@@ -37,7 +37,7 @@ export default {
         } else if (this.$auth.user && this.$auth.user.type === 'admin') {
             await this.$router.push('/admin')
         } else {
-            await this.$router.push('/home/')
+            await this.$router.push('/home')
         }
 
         this.loaded = true;

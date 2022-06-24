@@ -6,7 +6,7 @@
             </div>
             <h3>Thank You</h3>
             <p>Our staff hope everything was to your satisfaction and appreciate your recognition!</p>
-            <nuxt-link class="tip-again" :to="'/user/' + this.id + '/tipping'">Tip Again?</nuxt-link>
+            <nuxt-link v-show="id !== 0" class="tip-again" :to="'/user/' + this.id + '/tipping'">Tip Again?</nuxt-link>
         </div>
     </div>
 </template>

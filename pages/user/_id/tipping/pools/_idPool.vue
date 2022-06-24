@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="flex flex-col w-full" v-else>
-                <div class="rounded-md bg-yellow-50 p-4">
+                <div class="rounded-md bg-yellow-50 p-4 mt-4">
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <!-- Heroicon name: solid/exclamation -->

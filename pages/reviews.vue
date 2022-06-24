@@ -85,7 +85,7 @@ export default {
         async fetchReviews() {
             this.loaded = false;
             try {
-                let res = await this.$axios.get('/users/' + this.$auth.user.id + '/tips');
+                let res = await this.$axios.get('/users/' + this.$auth.user.id + '/tips?desc_only=true&latest=true');
 
                 this.reviewUsers = res.data.data;
 

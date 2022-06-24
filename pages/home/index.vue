@@ -419,9 +419,9 @@ export default {
 
     label {
         margin-bottom: 24px;
-        font-weight: 300;
+        font-weight: 400;
         text-transform: uppercase;
-        font-size: 16px;
+        font-size:24px;
         color: #fff;
     }
 
