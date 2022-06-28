@@ -10,7 +10,7 @@
                                 <div class="flex-1 min-w-0 flex-col">
                                     <!-- Profile -->
                                     <div v-if="user" class="flex items-center">
-                                        <img class="h-16 w-16 rounded-full sm:block" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
+                                        <img class="h-16 w-16 rounded-full sm:block image-user" :src="user.avatar_url !== null ? user.avatar_url : '/noimage.png'" alt="">
                                         <div>
                                             <div class="flex items-center">
                                                 <img class="h-16 w-16 rounded-full sm:hidden" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80" alt="">
@@ -312,5 +312,11 @@ canvas {
     background: #f1f1f1;
     cursor: not-allowed;
     color: #969696;
+}
+
+.image-user {
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
 }
 </style>

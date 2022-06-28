@@ -44,7 +44,7 @@
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 w-1/3 max-w-1/3">
                                                 <div class="flex items-center">
                                                     <div class="flex-shrink-0">
-                                                        <img class="h-10 w-10 rounded-full" :src="employee.avatar_url !== null ? employee.avatar_url : '/noimage.png'" alt="">
+                                                        <img class="h-10 w-10 rounded-full" src="/noimage.png" alt="">
                                                     </div>
                                                     <div class="ml-4">
                                                         <div class="username">

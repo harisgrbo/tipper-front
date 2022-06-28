@@ -11,68 +11,18 @@
             <div class="inner">
                 <div class="flex flex-col items-start justify-start text-left w-full pt-20 mobile-padding">
                     <h1>FAQS</h1>
-                    <div>
-                        <div>
-                            <div>
-                                <dl>
-                                    <div>
-                                        <dt class="text-lg">
-                                            <!-- Expand/collapse question button -->
-                                            <button type="button" class="text-left w-full flex justify-between items-start text-gray-400" aria-controls="faq-0" aria-expanded="false">
-                                                <span class="font-medium text-gray-900 main">- WHY DO I WANT TIPPER? WHAT’S THE BENEFIT?</span>
-                                                <span class="ml-6 h-7 flex items-center">
-                                                    <svg class="rotate-0 h-6 w-6 transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                                                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                        </dt>
-                                        <dd class="pr-12" id="faq-0">
-                                          <p>Tipper allows “Tippers” to send money in the form of tips to “Employees”. Tippers don’t have to go out of their way to find cash and never have to fear not having money on them to tip. Employees now have an increased chance of receiving a private and secure tip that they can deposit directly into their bank account.</p>
-
-                                        </dd>
-                                    </div>
-
-                                    <!-- More questions... -->
-                                </dl>
-                                <dl class="mt-8">
-                                    <div>
-                                        <dt class="text-lg">
-                                            <!-- Expand/collapse question button -->
-                                            <button type="button" class="text-left w-full flex justify-between items-start text-gray-400" aria-controls="faq-0" aria-expanded="false">
-                                                <span class="font-medium text-gray-900 main">+ WHY NOT JUST USE VENMO OR ZELLE?</span>
-                                                <span class="ml-6 h-7 flex items-center">
-                                                    <svg class="rotate-0 h-6 w-6 transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                                                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                        </dt>
-                                    </div>
-
-                                    <!-- More questions... -->
-                                </dl>
-                                <dl class="mt-8">
-                                    <div>
-                                        <dt class="text-lg">
-                                            <!-- Expand/collapse question button -->
-                                            <button type="button" class="text-left w-full flex justify-between items-start text-gray-400" aria-controls="faq-0" aria-expanded="false">
-                                                <span class="font-medium text-gray-900 main">+ WHAT FEES DO I INCUR USING TIPPER?</span>
-                                                <span class="ml-6 h-7 flex items-center">
-                                                    <svg class="rotate-0 h-6 w-6 transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                                                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                        </dt>
-                                    </div>
-
-                                    <!-- More questions... -->
-                                </dl>
-
-                            </div>
-                        </div>
-                    </div>
+                    <accordion>
+                        <accordion-item v-for="item in faq_text">
+                            <!-- This slot will handle the title/header of the accordion and is the part you click on -->
+                            <template slot="accordion-trigger">
+                                <h3>{{ item.question }}</h3>
+                            </template>
+                            <!-- This slot will handle all the content that is passed to the accordion -->
+                            <template slot="accordion-content">
+                                <span>{{ item.answer }}</span>
+                            </template>
+                        </accordion-item>
+                    </accordion>
                     <form @submit.prevent="requestDemo" class="form">
                         <div class="inner flex flex-row items-center justify-between mobile-col">
                             <div class="request">
@@ -113,9 +63,12 @@
 </template>
 
 <script>
+import Accordion from "@/components/Accordion";
+import AccordionItem from "@/components/AccordionItem";
 
 export default {
     name: "faq",
+    components: {Accordion, AccordionItem},
     layout: 'home',
     data() {
         return {
@@ -124,7 +77,65 @@ export default {
                 last_name: '',
                 email: '',
                 company: '',
-            }
+            },
+            faq_text:[
+                {
+                    question: 'HOW DOES TIPPER WORK?\n',
+                    answer: 'Tipper is a digital tip platform that allows customers/guests to easily send a tip to your employees using their phones. Through either scanning a QR codes and/or tapping a link placed in an email (e.g. checkout email), customers simply select who they want to tip, enter an amount, and press tip. That’s it!'
+                },
+                {
+                    question: 'WHO SHOULD USE TIPPER?',
+                    answer: 'Businesses where employees receive a portion of their income through tips, like hotels, parking garages/valet, cruises, country clubs, restaurants, and more.'
+                },
+                {
+                    question: 'WHY DO I WANT TIPPER? WHAT’S THE BENEFIT?',
+                    answer: 'Tipper allows guests/customers to send money in the form of tips to “Employees”. Tippers don’t have to find an ATM to withdraw cash and never have to fear skipping on a tip again. Employees now have an increased chance of receiving a private and secure tip that deposits directly into their bank account.'
+                },
+                {
+                    question: 'WHY NOT JUST USE VENMO OR ZELLE?',
+                    answer: 'Venmo, Zelle, and other digital payment services force you to know another party’s personal information (like a first/last name, email address or phone number). However. in tipping situations, a customer/guest is most likely not going to know an employee’s personal information, nor do they want to ask for it, thereby making those digital solutions useless. Using QR codes that link to Venmo prohibits an employer from knowing which employees are receiving tips and doesn’t include features like tip pooling, shift entry, and report access.',
+                },
+                {
+                    question: 'HOW DO I SET UP AN ACCOUNT?',
+                    answer: 'To get started, contact our sales team at hello@thetippercompany.com. We’ll schedule an onboarding call to help set up the businesses’ profile, where you can customize the customer/guest experience and send invites to your employees.',
+                },
+                {
+                    question: 'HOW MUCH DOES TIPPER COST?',
+                    answer: 'Currently, the Tipper platform is free for all employers and employees. Those who wish to send a tip through our platform are charged a small convenience fee to do so.',
+                },
+                {
+                    question: 'DO CUSTOMERS/GUESTS NEED TO DOWNLOAD AN APP?',
+                    answer: 'No, the Tipper platform is a web-based system that never requires a customer/guest to download or sign-up for anything. Simply scanning the QR-code or tapping a link prompts our platform to pop up on their mobile device, allowing a tip to be sent in less than 20 seconds.',
+                },
+                {
+                    question: 'HOW DO I ADD EMPLOYEES TO TIPPER?',
+                    answer: 'Once the employer has created an account, they will send out invites to employees using their email address',
+                },
+                {
+                    question: 'WHAT DO MY EMPLOYEES NEED TO DO TO GET STARTED?',
+                    answer: 'A link to sign up for Tipper will be present in the invite email. Once the link is clicked on, the employee will be taken through the onboarding process, which is facilitated by our payment partner Stripe (Stripe Official | Payment Processing Platform for the Internet). On average, the sign-up process takes 5 minutes.',
+                }, {
+                    question: 'HOW WILL EMPLOYEES KNOW THEY RECEIVED A TIP?',
+                    answer: 'Each time an employee receives a tip, they will be notified via email.',
+                }, {
+                    question: 'MY EMPLOYEES ARE NERVOUS ABOUT GIVING OUT THEIR BANKING INFO. HOW CAN I ENSURE THAT IT WILL BE PROTECTED?',
+                    answer: 'We take privacy and protection of sensitive very seriously. That’s why we partnered with stripe.com to ensure everything from signing up to receiving tips is done with the highest level of security and accuracy. Please see Stripe’s Privacy Policy (Privacy Policy (stripe.com) for more information on their processes in place.',
+                },
+                {
+                    question: 'MY EMPLOYEES ARE USED TO CASH TIPS. WHY WOULD THEY WANT TO CHANGE THAT?',
+                    answer: 'This is a very common question. Tipper does not replace cash - your employees can continue to receive cash tips as they normally do. Tipper is an alternative that gives your employees an additional opportunity to receive tips. Only 16% of U.S. consumers consistently carry cash on them and most are used to performing financial transactions digitally. We’re helping employees collect tips from the 86% of people who are cashless, thereby increasing their hourly wages and annual incomes.',
+                }, {
+                    question: 'WHO HANDLES TAX COMPLIANCE?',
+                    answer: 'All tips are considered reportable income and are obligated to be reported. For employers, our platform allows for easy tip data export for your accounting needs. Each employee will receive a 1099-K from Tipper, as required by the IRS. Please consult with your tax advisor for any tax-related advice.',
+                },
+                {
+                    question: 'WHEN DO TIPS DEPOSIT?',
+                    answer: 'As Tipper currently offers ACH transfers, the standard transfer time is 1-3 business days. However, most transfers take place within 1 business day so you can enjoy your tips quickly and securely.'
+                }
+
+
+
+            ]
         }
     },
     methods: {
@@ -373,6 +384,10 @@ ul {
         min-height: 1100px;
         position: relative;
         marign-top: 0 !important;
+
+        @include for-phone-only {
+            min-height: fit-content;
+        }
     }
 }
 

@@ -76,11 +76,11 @@
                 By continuing, you confirm that you have read and agreed to our
 
 
-                <nuxt-link to="/home/legal">Terms and Conditions</nuxt-link>
+                <nuxt-link to="/home/terms-of-use">Terms and Conditions</nuxt-link>
 
                 and
 
-                <nuxt-link to="/home/legal">Privacy Policy.</nuxt-link>
+                <nuxt-link to="/home/privacy-policy">Privacy Policy.</nuxt-link>
             </div>
         </div>
         <Loader v-else></Loader>

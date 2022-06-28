@@ -175,11 +175,25 @@
     "_name": "_0ffc8c16"
   },
   {
+    "name": "home-privacy-policy",
+    "path": "/home/privacy-policy",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/privacy-policy.vue",
+    "chunkName": "pages/home/privacy-policy",
+    "_name": "_fbefd6ec"
+  },
+  {
     "name": "home-team",
     "path": "/home/team",
     "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/team.vue",
     "chunkName": "pages/home/team",
     "_name": "_de95f2e0"
+  },
+  {
+    "name": "home-terms-of-use",
+    "path": "/home/terms-of-use",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/terms-of-use.vue",
+    "chunkName": "pages/home/terms-of-use",
+    "_name": "_8321086c"
   },
   {
     "name": "invite-employees",

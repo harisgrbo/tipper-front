@@ -13,12 +13,12 @@
                 <div class="text-center flex flex-col items-center justify-center">
                     <nuxt-link class="mb-4" :to="('/home/faq')">faq</nuxt-link>
                     <nuxt-link class="mb-4" :to="('/home/contact-us')">contact</nuxt-link>
-                    <nuxt-link class="mb-4" :to="('/home/legal')">Privacy Policy</nuxt-link>
+                    <nuxt-link class="mb-4" :to="('/home/privacy-policy')">Privacy Policy</nuxt-link>
                 </div>
                 <div class="text-center flex flex-col items-center justify-center">
                     <nuxt-link class="mb-4" to="">About</nuxt-link>
                     <nuxt-link class="mb-4" :to="('/home/blog')">Blog</nuxt-link>
-                    <nuxt-link class="mb-4" :to="('/home/legal')">Terms of use</nuxt-link>
+                    <nuxt-link class="mb-4" :to="('/home/terms-of-use')">Terms of use</nuxt-link>
                 </div>
             </div>
             <p class="text-center mt-6 w-full">©2022 Tipper  | Site Credit Karima Creative</p>

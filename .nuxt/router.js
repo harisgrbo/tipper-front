@@ -29,7 +29,9 @@ const _3e352744 = () => interopDefault(import('../pages/home/contact-us.vue' /* 
 const _c3b1699a = () => interopDefault(import('../pages/home/faq.vue' /* webpackChunkName: "pages/home/faq" */))
 const _2454100e = () => interopDefault(import('../pages/home/footer.vue' /* webpackChunkName: "pages/home/footer" */))
 const _0ffc8c16 = () => interopDefault(import('../pages/home/legal.vue' /* webpackChunkName: "pages/home/legal" */))
+const _fbefd6ec = () => interopDefault(import('../pages/home/privacy-policy.vue' /* webpackChunkName: "pages/home/privacy-policy" */))
 const _de95f2e0 = () => interopDefault(import('../pages/home/team.vue' /* webpackChunkName: "pages/home/team" */))
+const _8321086c = () => interopDefault(import('../pages/home/terms-of-use.vue' /* webpackChunkName: "pages/home/terms-of-use" */))
 const _57d8b562 = () => interopDefault(import('../pages/invite/employees/index.vue' /* webpackChunkName: "pages/invite/employees/index" */))
 const _5b1f9ebb = () => interopDefault(import('../pages/admin/business/_id/index.vue' /* webpackChunkName: "pages/admin/business/_id/index" */))
 const _0de00d29 = () => interopDefault(import('../pages/admin/employee/_id/index.vue' /* webpackChunkName: "pages/admin/employee/_id/index" */))
@@ -156,9 +158,17 @@ export const routerOptions = {
     component: _0ffc8c16,
     name: "home-legal"
   }, {
+    path: "/home/privacy-policy",
+    component: _fbefd6ec,
+    name: "home-privacy-policy"
+  }, {
     path: "/home/team",
     component: _de95f2e0,
     name: "home-team"
+  }, {
+    path: "/home/terms-of-use",
+    component: _8321086c,
+    name: "home-terms-of-use"
   }, {
     path: "/invite/employees",
     component: _57d8b562,

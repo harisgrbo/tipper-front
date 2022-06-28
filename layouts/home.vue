@@ -13,7 +13,7 @@
                     </svg>
                 </button>
                 <ul class="navigation-dropdown" v-show="showNavigationDropdown">
-                    <li v-for="(link, index) in links" :key="index">
+                    <li v-for="(link, index) in links" :key="index" @click="showNavigationDropdown = false">
                         <nuxt-link :to="'/home/' + link.link">{{ link.name }}</nuxt-link>
                     </li>
                     <li>
