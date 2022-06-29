@@ -42,10 +42,9 @@
                                         <thead class="bg-white">
                                         <tr class="main py-3">
                                             <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/3">Name</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left w-1/3">Date</th>
-                                            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 text-right w-full pr-2">
-                                                <span class="add-user">Add User</span>
-                                            </th>
+                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/3">Email</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left w-1/3">Date Invited</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left w-1/3">Status</th>
                                         </tr>
                                         </thead>
                                         <tbody class="divide-y bg-white">
@@ -57,15 +56,18 @@
                                                              :src="user.avatar_url || '/noimage.png'" alt="">
                                                     </div>
                                                     <div class="ml-4">
-                                                        <div class="username">{{ user.username }}</div>
+                                                        <div class="username">{{ user.name }}</div>
                                                     </div>
                                                 </div>
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 username">
+                                                {{ user.email }}
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 username">
                                                 {{ $moment(user.created_at).format('MM/DD/YYYY') }}
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 username text-right">
-                                                delete
+                                                {{ user.status ? 'Accepted' : 'Pending' }}
                                             </td>
                                         </tr>
                                         </tbody>
@@ -121,9 +123,9 @@ export default {
         },
         async fetchUsers() {
             try {
-                let res = await this.$axios.get('/admin/users/' + this.$route.params.id + '/employees');
+                let res = await this.$axios.get('/admin/employer/' + this.$route.params.id);
 
-                this.users = res.data.data;
+                this.users = res.data.data.employees;
 
             } catch (e) {
                 console.log(e)

@@ -58,7 +58,7 @@
                             <b>${{ parseFloat(me / 100).toFixed(2) }}</b>
                         </div>
                     </div>
-                    <button :class="['payout', me <= 0 ? 'disabled' : '']" :disabled="me <= 0" @click="$modal.show('payout')">Payout</button>
+<!--                    <button :class="['payout', me <= 0 ? 'disabled' : '']" :disabled="me <= 0" @click="$modal.show('payout')">Payout</button>-->
                 </div>
                 <div class="p-6 bg-white flex flex-row justify-between items-center">
                     <div class="flex flex-row items-center">
@@ -67,7 +67,7 @@
                         </div>
                         <div class="flex flex-col">
                             <span>Total Earned Amount</span>
-                            <b>${{ $auth.user.total_earned_amount }}</b>
+                            <b>${{ current_balance }}</b>
                         </div>
                     </div>
 
@@ -159,6 +159,7 @@ export default {
     data() {
         return {
             myEmployer: null,
+            current_balance: 0,
             loaded: false,
             stripeDetails: null,
             currency: 'USD',
@@ -249,7 +250,10 @@ export default {
             try {
                 let res = await this.$axios.get('/balance');
 
+                this.current_balance = res.data.data.total;
                 this.me = res.data.data.payout && res.data.data.payout.length ? res.data.data.payout[0].amount: 0;
+
+                console.log(res.data, 'meeee')
             } catch (e) {
                 console.log(e)
             }
@@ -473,12 +477,15 @@ export default {
 
     .image-wrapper {
         margin-top: 36px;
-        background: url("/employee-bg.png"), #B45F4B;
+        background: url(/person.svg), #B45F4B;
         height: 204px;
         width: 100%;
         border-radius: 8px;
         overflow: hidden;
         padding: 36px 0;
+        background-position: left;
+        background-size: contain;
+        background-repeat: no-repeat;
 
         .image-wrapper-inner {
             margin-left: 420px;

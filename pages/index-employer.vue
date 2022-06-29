@@ -28,6 +28,9 @@
                     </div>
                 </div>
                 <div class="flex flex-col-reverse items-center justify-center">
+                    <div class="flex flex-row items-center justify-center">
+                        <nuxt-link :to="'/user/' + $auth.user.id + '/tipping'" class="tipping-link">Copy Link</nuxt-link>
+                    </div>
                     <p class="download cursor-pointer" @click="downloadQR">Download QR code Image</p>
                     <div>
                         <canvas ref="canvas"/>
@@ -979,6 +982,16 @@ h1 {
             color: #B45F4B;
             margin-left: 8px;
         }
+    }
+}
+
+.tipping-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: blue;
+
+    &:hover {
+        text-decoration: underline;
     }
 }
 </style>

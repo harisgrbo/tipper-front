@@ -13,11 +13,9 @@
                                         <thead class="bg-white">
                                         <tr class="main py-3">
                                             <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6">Bussiness Name</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left">Tips sent today</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left">Reviews</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left">Today's income</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left">Avg tip amount</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left">Date</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left">Total # of Tips Sent</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left">Total $ Amount of Tips Sent</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left">Avg. Tip Amount</th>
                                             <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 md:pr-0">
                                                 <span class="sr-only">Edit</span>
                                             </th>
@@ -32,23 +30,14 @@
                                                              :src="user.avatar_url || '/noimage.png'" alt="">
                                                     </div>
                                                     <div class="ml-4">
-                                                        <div class="username">{{ user.username }}</div>
+                                                        <div class="username">{{ user.name }}</div>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-4 username">{{ user.type || 'User' }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <star-rating :star-size="15" :increment="1" :inline="true" :read-only="true"
-                                                             inactive-color="#F0EBE4" :show-rating="true"
-                                                             active-color="#C67D65" v-model="rating"></star-rating>
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 username">$40.00</td>
-                                            <td class="whitespace-nowrap px-3 py-4 username">
-                                                $12.00
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 username">
-                                                {{ $moment(user.created_at).format('MM/DD/YYYY') }}
-                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 username">{{ user.tips_count }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 username">${{ user.tips_amount }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 username">${{ user.tips_avg }}</td>
+
                                         </tr>
                                         </tbody>
                                     </table>
