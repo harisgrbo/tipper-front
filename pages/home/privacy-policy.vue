@@ -5,8 +5,6 @@
                 <div class="flex flex-col items-start justify-start text-left w-full">
                     <h1>PRIVACY POLICY</h1>
                     <div>
-                        <p><strong>PRIVACY POLICY</strong></p>
-                        <p><br></p>
                         <p>This Privacy Policy outlines how Bluewheel Corporation and its affiliates (collectively, the &ldquo;Company,&rdquo; &ldquo;Tipper,&rdquo; &ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) process the information we collect about you through our mobile apps, websites, and other online services (collectively, the &ldquo;Tipper Services&rdquo;) and when you otherwise interact with us, such as through our customer service channels.</p>
                         <p><br></p>
                         <p>If you are a California resident, please also see the &ldquo;Notice to California Residents&rdquo; section below. If you have a Tipper account, or have taken steps to register for an account, you can also review our Consumer Privacy Notice for a summary of our practices regarding the information we collect about you.</p>
@@ -76,8 +74,7 @@
                         <p><br></p>
                         <p><strong>6. CONTROL OVER YOUR INFORMATION.</strong></p>
                         <p><br></p>
-                        <p><strong>Account profile.&nbsp;</strong>You may update certain of your account profile information by logging into your</p>
-                        <p>account.</p>
+                        <p><strong>Account profile.&nbsp;</strong>You may update certain of your account profile information by logging into your account</p>
                         <p><strong>Access to your device data.&nbsp;</strong>You may control the mobile app&rsquo;s access to your device information in your device&rsquo;s settings. For instance, you can withdraw permission for the app to access your contact list or photo gallery.</p>
                         <p><strong>How to control your communications preferences.&nbsp;</strong>You can stop receiving promotional emails from us by clicking on the provided &ldquo;unsubscribe&rdquo; link. You may not opt out of service-related or other non-promotional communications (e.g., account verification, transactional communications, changes/updates to features of the Services, and technical and security notices).</p>
                         <p><br></p>
@@ -306,6 +303,10 @@ ul {
         font-size: 14px;
         font-weight: 300;
     }
+}
+
+a {
+    color: blue !important;
 }
 
 </style>
