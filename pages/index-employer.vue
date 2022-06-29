@@ -198,7 +198,6 @@
                                 </vc-date-picker>
                                 <div class="modal-buttons">
                                     <button>Download in excel form</button>
-                                    <button>Download in pdf format</button>
                                 </div>
                             </div>
                         </div>
