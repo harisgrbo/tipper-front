@@ -6,21 +6,21 @@
                     <h1>BLOG</h1>
                     <div class="grid grid-cols-3 gap-14 mobile-grid">
                         <div class="blog-card">
-                            <img src="/img1.png" alt="">
+                            <img src="/firstblog.jpg" alt="">
                             <h2>HOW TO KEEP YOUR STAFF HAPPY DURING THE GREAT RESIGNATION</h2>
                             <p>The Great Resignation: In 2021, employers began receiving resignation letters at the highest rate in recent history. According to the U.S. Bureau of Labor Statistics, over 4.5 million Americans left their jobs in November alone. Propelled by the shift from in-person...</p>
                             <b>March 15 2022</b>
                             <button>READ MORE</button>
                         </div>
                         <div class="blog-card central">
-                            <img src="/img2.png" alt="">
+                            <img src="/secondblog.jpg" alt="">
                             <h2>TIPPING AS AN EMPLOYEE BENEFIT</h2>
                             <p>Tipper is not just a tipping platform- it's an employee benefit and a culture enhancement. These days, employees want more than just a paycheck. They want a suite of benefits that help mold an enticing culture for them to come to each day. And the right culture...</p>
                             <b>March 15 2022</b>
                             <button>READ MORE</button>
                         </div>
                         <div class="blog-card">
-                            <img src="/img3.png" alt="">
+                            <img src="/thirdblog.jpg" alt="">
                             <h2>HIGHER TIPS LEADS TO HIGHER EMPLOYEE RETENTION</h2>
                             <p>At Tipper, we're so interested in learning about what companies implement to enhance the employee experience. That's right- the employee experience, not the customer one. In the age of the great resignation, companies need to rightfully focus on their employees more...</p>
                             <b>March 15 2022</b>

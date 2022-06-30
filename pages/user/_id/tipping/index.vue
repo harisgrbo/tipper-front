@@ -1,7 +1,7 @@
 <template>
     <div class="tipping-wrapper">
         <div class="flex flex-col w-full" v-if="loaded">
-            <div class="flex flex-row items-center justify-start mb-6">
+            <div class="flex flex-row items-center justify-center mb-6">
                 <img src="/transparent.png" class="logo" @click="$router.push('/')"/>
             </div>
            <div class="flex flex-col">

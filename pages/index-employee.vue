@@ -81,7 +81,7 @@
                         <p>
                             Tipper utilizes Stripe for all payments. Check your Stripe Dashboard for more information on your tips.
                         </p>
-                        <button @click="stripeLogin()" href="https://dashboard.stripe.com/login" class="access" target="_blank">Access Here</button>
+                        <button @click="stripeLogin()" class="access">Access Here</button>
                     </div>
 
                     <img src="/stripe-logo.svg" alt="">
@@ -205,7 +205,8 @@ export default {
 
               let url = res.data.data.url;
 
-              window.location.replace(url);
+              window.open(
+                  url, "_blank");
           } catch(e) {
               console.log(e)
           }

@@ -16,7 +16,7 @@
                             </span>
                         </div>
                         <div class="person">
-                            <img src="/top2.jpg" alt="">
+                            <img src="/alan.jpg" alt="">
                             <span>ALAN SCARPA</span>
                             <span class="position">
 Co-Founder & CTO</span>
