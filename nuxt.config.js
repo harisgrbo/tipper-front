@@ -1,4 +1,5 @@
 export default {
+  serverMiddleware: ["redirect-ssl"],
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Tipper',
