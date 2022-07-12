@@ -14,6 +14,15 @@
                     <div class="flex flex-col w-full justify-between">
                         <div class="modal-header w-full">
                             <div class="w-full flex flex-col">
+                                <InputField v-model="payload_form.firstname" label="First name" class="mb-4"></InputField>
+                                <InputField v-model="payload_form.lastname" label="Last name" class="mb-4"></InputField>
+                                <InputField v-model="payload_form.email" label="Email" class="mb-4"></InputField>
+                                <InputField v-model="payload_form.nickname" label="Nickname" class="mb-4"></InputField>
+                                <InputField v-model="payload_form.address_1" label="Address" class="mb-4"></InputField>
+                                <InputField v-model="payload_form.zip_code" label="Zip Code" class="mb-4"></InputField>
+                                <InputField v-model="payload_form.city" label="City" class="mb-4"></InputField>
+                                <InputField v-model="payload_form.password" type="password" label="Password" class="mb-4"></InputField>
+                                <InputField v-model="payload_form.repeatpassword" type="password" label="Repeat Password" class="mb-4"></InputField>
                                 <h1 class="username">{{ employee !== null ? employee.username : '' }}</h1>
                                 <div class="flex flex-row items-center justify-between w-full mt-8 rating-stars">
                                     <client-only>
@@ -27,7 +36,7 @@
                                     <span>Total Tips Earned</span>
                                     <span class="total">$1920.00</span>
                                 </div>
-                                <div class="dropdown-wrapper mt-8" v-on-clickaway="away">
+                                <div class="dropdown-wrapper mt-8" v-on-clickaway="away" >
                                     <div class="dropdown-selected" @click="showPoolList = true;">
                                         {{ employee.department.name !== null ? employee.department.name : 'Choose Pool' }}
                                     </div>
@@ -47,6 +56,7 @@
                             <div class="modal-buttons-second review">
                                 <!--                            <button>Change Department</button>-->
                                 <button @click="$modal.show('delete')">Delete Employee</button>
+                                <button @click="updateEmployee">Update Employee</button>
                             </div>
                         </div>
                     </div>
@@ -82,12 +92,13 @@
 <script>
 import {mixin as clickaway} from 'vue-clickaway';
 import Loader from "@/components/Loader"
+import InputField from "@/components/inputs/InputField";
 
 export default {
     name: "_id",
     layout: 'standard',
     mixins: [clickaway],
-    components: {Loader},
+    components: {Loader, InputField},
     data() {
         return {
             range: {
@@ -107,6 +118,17 @@ export default {
             pools: [],
             loaded: false,
             employer_id: 0,
+            payload_form: {
+                address_1: '',
+                city: '',
+                zip_code: '',
+                firstname: '',
+                lastname: '',
+                nickname: '',
+                email: '',
+                password: '',
+                repeatpassword: ''
+            }
         }
     },
     async created() {
@@ -114,6 +136,13 @@ export default {
         await this.fetchEmployee();
         await this.fetchPools();
 
+        this.payload_form.address_1 = this.employee.address_1 || '';
+        this.payload_form.city = this.employee.city || '';
+        this.payload_form.zip_code = this.employee.zip_code || '';
+        this.payload_form.firstname = this.employee.firstname;
+        this.payload_form.lastname = this.employee.lastname;
+        this.payload_form.nickname = this.employee.nickname;
+        this.payload_form.email = this.employee.email;
         this.loaded = true;
     },
     methods: {
@@ -143,7 +172,28 @@ export default {
                 this.employer_id = res.data.data.department.employer_id;
                 this.employee_meta = res.data.meta;
 
-                console.log(res.data.data, 'sta je ovo')
+            } catch (e) {
+                console.log(e)
+            }
+        },
+        async updateEmployee() {
+            try {
+                if (this.payload_form.password !== this.payload_form.repeatpassword) {
+                    this.$toast.open({
+                        message: 'Passwords dont match',
+                        type: 'error',
+                    });
+
+                    return
+                }
+                let res = await this.$axios.put('/admin/employee/' + this.$route.params.id, this.payload_form);
+
+                this.$toast.open({
+                    message: 'You have successfully updated the employee' + this.employee.username,
+                    type: 'success',
+                });
+
+                this.employee = res.data.data;
 
             } catch (e) {
                 console.log(e)

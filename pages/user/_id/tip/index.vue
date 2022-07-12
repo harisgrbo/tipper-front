@@ -31,7 +31,7 @@
                 <h3>Custom Amount</h3>
                 <div class="input-wrapper">
                     <p>$</p>
-                    <input type="number" v-model="selected_tip_amount" @input="fetchFee();">
+                    <input @focus="selected_tip_amount = null" type="number" v-model="selected_tip_amount" @input="fetchFee();">
                 </div>
             </div>
             <div class="tipping-wrapper-info mt-4" v-if="selected_tip_amount >= 1">

@@ -26,6 +26,9 @@
   "Tutorial": {
     "description": "Auto imported from components/Tutorial.vue"
   },
+  "InputsInputField": {
+    "description": "Auto imported from components/inputs/InputField.vue"
+  },
   "HomeEmployeeComponent": {
     "description": "Auto imported from components/home/EmployeeComponent.vue"
   },
@@ -37,8 +40,5 @@
   },
   "HomeTipperComponent": {
     "description": "Auto imported from components/home/TipperComponent.vue"
-  },
-  "InputsInputField": {
-    "description": "Auto imported from components/inputs/InputField.vue"
   }
 }

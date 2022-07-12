@@ -37,6 +37,13 @@
                     </div>
                 </div>
             </div>
+            <div class="disperse-wrapper">
+                <div class="flex flex-col items-start">
+                    <p>Balance Available to be Disbursed:  $500</p>
+                    <span>Last Disbursement Date: 6/1/2022</span>
+                </div>
+                <button class="disperse" @click="$router.push('/shifts/' + $auth.user.id)">Disperse Tips</button>
+            </div>
             <div>
                 <div class="bg-white table-header p-md">
                     <div class="p-6 flex w-full flex-row items-center justify-between inner">
@@ -139,6 +146,76 @@
                                 v-for="(user, index) in reviewUsers.slice(0, 5)" :key="index"
                     ></ReviewCard>
                 </div>
+                <div class="flex flex-col mt-8 w-full">
+                    <div class="disperse-wrapper" style="margin-bottom: 0 !important; border-bottom: 1px solid #ddd">
+                        <div class="flex flex-col items-start">
+                            <p>Tip Amount to split :  $239</p>
+                            <span>Please enter the amount of hours each employee worked from 09/01/22 - 09/28/22 (Yesterday’s date)</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col employees-wrap">
+                        <div class="-overflow-x-auto">
+                            <div class="inline-block min-w-full align-middle">
+                                <div class="overflow-hidden">
+                                    <table class="min-w-full divide-y divide-gray-300">
+                                        <thead class="bg-white">
+                                        <tr class="main">
+                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/2">List of Employees
+                                            </th>
+                                            <th scope="col" class="px-3 py-3.5 text-left w-1/5">Hours</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left w-1/5">Tip Amount</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="divide-y bg-white">
+                                        <tr v-for="(employee, index) in myEmployees" :key="index">
+                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 w-1/2">
+                                                <div class="flex items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <img class="h-10 w-10 rounded-full" :src="employee.avatar_url !== null ? employee.avatar_url : '/noimage.png'" alt="">
+                                                    </div>
+                                                    <div class="ml-4">
+                                                        <div class="username"
+                                                             @click="$router.push('/employee/' + employee.id)">
+                                                            {{ employee.display_name }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-left text-sm text-gray-500 w-1/5">
+                                                test
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-left w-1/5">${{ employee.total_earned_amount }}</td>
+                                        </tr>
+                                        <tr class="main bg-white" style="background: #fff !important;">
+                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/2">
+                                            </th>
+                                            <th scope="col" class="px-3 py-3.5 text-left w-1/5">Total Hours: 30</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left w-1/5"><button class="disperse" @click="$router.push('/shifts/' + $auth.user.id)">Disperse tips</button></th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <client-only>
+                                        <modal name="delete"
+                                               width="476"
+                                               height="auto"
+                                               @before-open="beforeOpen"
+                                               @before-close="beforeClose">
+                                            <div class="flex flex-col">
+                                                <h1 class="text-center">Are you sure you want to delete {{ selectedUserFromList !== null ? selectedUserFromList.display_name : '' }}?</h1>
+                                                <div class="modal-buttons">
+                                                    <button @click="$modal.hide('delete')">No</button>
+                                                    <button @click="deleteEmployee(selectedUserFromList); $modal.hide('delete')">Yes</button>
+                                                </div>
+                                            </div>
+                                        </modal>
+                                    </client-only>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
                 <client-only>
                     <modal name="mutation"
                            width="910"
@@ -993,5 +1070,57 @@ h1 {
     &:hover {
         text-decoration: underline;
     }
+}
+
+.disperse-wrapper {
+    padding: 42px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 42px;
+
+    p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 30px;
+        /* identical to box height */
+        margin-bottom: 8px;
+
+        color: #1B1A1A;
+
+        opacity: 0.8;
+    }
+
+    span {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 22px;
+        /* identical to box height */
+
+        letter-spacing: 0.01em;
+
+        color: #161616;
+
+        opacity: 0.5;
+    }
+
+
+}
+
+.disperse {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 14px;
+    width: 131px;
+    height: 36px;
+    background: #C67D65;
+    border-radius: 90px;
+    color: #fff;
 }
 </style>

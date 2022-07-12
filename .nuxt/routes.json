@@ -252,6 +252,13 @@
     "_name": "_f1263c28"
   },
   {
+    "name": "shifts-id",
+    "path": "/shifts/:id",
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/shifts/_id/index.vue",
+    "chunkName": "pages/shifts/_id/index",
+    "_name": "_0702d0a8"
+  },
+  {
     "name": "user-id",
     "path": "/user/:id",
     "component": "/Users/harisgrbo/Desktop/tipper-front/pages/user/_id/index.vue",

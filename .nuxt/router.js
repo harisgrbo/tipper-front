@@ -40,6 +40,7 @@ const _12b4adb4 = () => interopDefault(import('../pages/invite/_hash.vue' /* web
 const _2242dcaf = () => interopDefault(import('../pages/password-reset/_token.vue' /* webpackChunkName: "pages/password-reset/_token" */))
 const _513bd8c8 = () => interopDefault(import('../pages/pools/_id/index.vue' /* webpackChunkName: "pages/pools/_id/index" */))
 const _f1263c28 = () => interopDefault(import('../pages/report/_id.vue' /* webpackChunkName: "pages/report/_id" */))
+const _0702d0a8 = () => interopDefault(import('../pages/shifts/_id/index.vue' /* webpackChunkName: "pages/shifts/_id/index" */))
 const _1fedb306 = () => interopDefault(import('../pages/user/_id/index.vue' /* webpackChunkName: "pages/user/_id/index" */))
 const _3e81c492 = () => interopDefault(import('../pages/user/_id/tip/index.vue' /* webpackChunkName: "pages/user/_id/tip/index" */))
 const _2311e7f8 = () => interopDefault(import('../pages/user/_id/tipping/index.vue' /* webpackChunkName: "pages/user/_id/tipping/index" */))
@@ -201,6 +202,10 @@ export const routerOptions = {
     path: "/report/:id?",
     component: _f1263c28,
     name: "report-id"
+  }, {
+    path: "/shifts/:id",
+    component: _0702d0a8,
+    name: "shifts-id"
   }, {
     path: "/user/:id",
     component: _1fedb306,

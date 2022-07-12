@@ -74,14 +74,14 @@
                 </div>
             </div>
 
-            <div class="image-wrapper">
+            <div class="image-wrapper" v-if="redirect_url.length">
                 <div class="image-wrapper-inner">
                     <div class="flex flex-col justify-center">
                         <h2>Access your Stripe Dashboard</h2>
                         <p>
                             Tipper utilizes Stripe for all payments. Check your Stripe Dashboard for more information on your tips.
                         </p>
-                        <button @click="stripeLogin()" class="access">Access Here</button>
+                        <a :href="redirect_url" target="_blank" class="access">Access Here</a>
                     </div>
 
                     <img src="/stripe-logo.svg" alt="">
@@ -158,6 +158,7 @@ export default {
     components: {GlobalButton, Loader, InputField},
     data() {
         return {
+            redirect_url: '',
             myEmployer: null,
             current_balance: 0,
             loaded: false,
@@ -172,8 +173,8 @@ export default {
         }
     },
     async created() {
-        console.log(this.$auth.user)
         this.loaded = false;
+        await this.stripeLogin();
         await this.fetchMyEmployer();
         await this.fetchAuthUserBalance();
         await this.fetchStripeDetails();
@@ -203,10 +204,8 @@ export default {
           try {
               let res = await this.$axios.get('/stripe/dashboard');
 
-              let url = res.data.data.url;
+              this.redirect_url = res.data.data.url;
 
-              window.open(
-                  url, "_blank");
           } catch(e) {
               console.log(e)
           }

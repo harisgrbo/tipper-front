@@ -26,8 +26,6 @@
                         <div class="flex flex-row items-center justify-between mt-2">
                             <dd class="sub mr-4">
                                 <img src="/email.svg" class="mr-1" alt="">{{ user.email }}</dd>
-                            <dd class="sub">
-                                <img src="/call.svg" class="mr-1" alt="">+1 342 3212 3212</dd>
                         </div>
                     </div>
                 </div>
@@ -117,6 +115,7 @@ export default {
                 let res = await this.$axios.get('/users/' + this.$route.params.id);
 
                 this.user = res.data.data;
+                console.log(this.user,'user')
             } catch (e) {
                 console.log(e)
             }
@@ -126,6 +125,9 @@ export default {
                 let res = await this.$axios.get('/admin/employer/' + this.$route.params.id);
 
                 this.users = res.data.data.employees;
+
+                console.log(this.users, 'user employees')
+                console.log(res)
 
             } catch (e) {
                 console.log(e)

@@ -48,13 +48,24 @@
                                         class="ml-4"></InputField>
                         </div>
                     </div>
-                    <div class="logo-wrapper">
-                        <h4 v-if="$auth.user.avatar_url === null">Profile Photo</h4>
-                        <img v-else :src="$auth.user.avatar_url" alt="">
-                        <label for="file-upload" class="custom-file-upload">
-                            Change Profile Photo
-                        </label>
-                        <input id="file-upload" type="file" @change="updateAvatar"/>
+                    <div class="flex flex-col">
+                        <div class="payout-type">
+                            <h2>Payout type</h2>
+                            <span>Please select one type</span>
+                            <div class="flex flex-col mt-4">
+                                <div :class="[ 'option', selected_payment_type === type ? 'active' : '' ]" v-for="(type, index) in payment_types" @click="selected_payment_type = type">
+                                    {{ type.title }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="logo-wrapper">
+                            <h4 v-if="$auth.user.avatar_url === null">Profile Photo</h4>
+                            <img v-else :src="$auth.user.avatar_url" alt="">
+                            <label for="file-upload" class="custom-file-upload">
+                                Change Profile Photo
+                            </label>
+                            <input id="file-upload" type="file" @change="updateAvatar"/>
+                        </div>
                     </div>
                 </div>
                 <div class="buttons-wrapper">
@@ -78,6 +89,17 @@ export default {
     mixins: [clickaway],
     data() {
         return {
+            selected_payment_type: null,
+            payment_types: [
+                {
+                    value: 'equal',
+                    title: 'Equal Payouts'
+                },
+                {
+                    value: 'shifts',
+                    title: 'Shifts'
+                },
+            ],
             showStates: false,
             states: [],
             loaded: false,
@@ -98,6 +120,7 @@ export default {
     },
     async created() {
         this.loaded = false;
+        this.selected_payment_type = this.payment_types[0]
         await this.fetchStates();
         this.userInfo.firstname = this.$auth.user.firstname;
         this.userInfo.lastname = this.$auth.user.lastname;
@@ -220,7 +243,8 @@ export default {
         }
 
         .logo-wrapper {
-            height: 518px;
+            height: fit-content;
+            margin-top: 65px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -396,6 +420,81 @@ button.back {
         border-radius: 14px;
         color: #fff;
         margin-right: 0;
+    }
+}
+
+.option {
+    background: #F7F3F0;
+    border-radius: 14px;
+    height: 60px;
+    padding: 0 16px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    color: #1B1A1A;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 24px;
+    cursor: pointer;
+
+    &::after {
+        content: '';
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+        top: 20px;
+        right: 20px;
+    }
+
+    &.active {
+        background: #B45F4B;
+        color: #fff;
+
+        &::after {
+            content: '';
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            border-radius: 10px;
+            background-color: #B45F4B;
+            border: 5px solid #fff;
+            top: 20px;
+            right: 20px;
+        }
+    }
+}
+
+.payout-type {
+    h2 {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 19px;
+        /* identical to box height */
+
+        letter-spacing: 0.01em;
+
+        color: #1B1A1A;
+
+        opacity: 0.6;
+    }
+
+    span {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.01em;
+
+        color: #1B1A1A;
+
+        opacity: 0.6;
+        margin-bottom: 16px;
     }
 }
 </style>
