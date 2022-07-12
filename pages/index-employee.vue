@@ -183,7 +183,9 @@ export default {
         if (process.browser) {
             let QRCode = require('qrcode');
 
-            let url = `https://thetippercompany.com/user/${this.$auth.user.id}/`;
+            const base = window.location.origin
+
+            let url = `${base}/user/${this.$auth.user.id}/`;
 
             if (this.$auth.user.type === 'employee') {
                 url += `tip?type=user&id=${this.$auth.user.id}`;
