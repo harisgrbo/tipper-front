@@ -37,9 +37,9 @@
                     </div>
                 </div>
             </div>
-            <div class="disperse-wrapper">
+            <div class="disperse-wrapper" v-show="$auth.user.shifts === 1">
                 <div class="flex flex-col items-start">
-                    <p>Balance Available to be Disbursed:  $500</p>
+                    <p>Balance Available to be Disbursed:  ${{ $auth.user.total_balance }}</p>
                     <span>Last Disbursement Date: 6/1/2022</span>
                 </div>
                 <button class="disperse" @click="$router.push('/shifts/' + $auth.user.id)">Disperse Tips</button>
@@ -146,11 +146,11 @@
                                 v-for="(user, index) in reviewUsers.slice(0, 5)" :key="index"
                     ></ReviewCard>
                 </div>
-                <div class="flex flex-col mt-8 w-full">
+                <div class="flex flex-col mt-8 w-full"  v-show="$auth.user.shifts === 1">
                     <div class="disperse-wrapper" style="margin-bottom: 0 !important; border-bottom: 1px solid #ddd">
                         <div class="flex flex-col items-start">
-                            <p>Tip Amount to split :  $239</p>
-                            <span>Please enter the amount of hours each employee worked from 09/01/22 - 09/28/22 (Yesterday’s date)</span>
+                            <p>Tip Amount to split :  ${{ $auth.user.total_balance }}</p>
+                            <span>Please enter the amount of hours each employee worked from {{ $moment().subtract(1, 'days').format('MM/DD/YYYY') }} (Yesterday’s date)</span>
                         </div>
                     </div>
                     <div class="flex flex-col employees-wrap">
@@ -182,14 +182,15 @@
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-left text-sm text-gray-500 w-1/5">
-                                                test
+                                                <input class="hours-input" type="number" @change="updateUserHours(employee.id, $event)" v-model="employee.hours">
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-left w-1/5">${{ employee.total_earned_amount }}</td>
                                         </tr>
                                         <tr class="main bg-white" style="background: #fff !important;">
                                             <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/2">
                                             </th>
-                                            <th scope="col" class="px-3 py-3.5 text-left w-1/5">Total Hours: 30</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left w-1/5">
+                                                Total Hours: {{ getSumHours(this.myEmployees) }}</th>
                                             <th scope="col" class="px-3 py-3.5 text-left w-1/5"><button class="disperse" @click="$router.push('/shifts/' + $auth.user.id)">Disperse tips</button></th>
                                         </tr>
                                         </tbody>
@@ -401,6 +402,8 @@ export default {
         this.loaded = false;
         await this.fetchMyEmployees();
         await this.fetchReviews();
+        console.log(this.$auth.user)
+
         this.loaded = true
     },
     mounted() {
@@ -423,6 +426,19 @@ export default {
         }
     },
     methods: {
+        async updateUserHours(id, e) {
+            let h = e.target.value;
+            try {
+                 let res = await this.$axios.put('/employees/' + id + '/hours', {
+                     hours: h
+                 });
+
+                 await this.$auth.fetchUser();
+
+            } catch(e) {
+                console.log(e)
+            }
+        },
         downloadQR() {
             if (this.$refs.canvas) {
                 let url = this.$refs.canvas.toDataURL().replace("image/png", "image/octet-stream");
@@ -443,6 +459,15 @@ export default {
         },
         beforeClose() {
             document.body.style.overflow = 'auto';
+        },
+        getSumHours(arr) {
+            let sum = 0;
+
+            arr.forEach(user => {
+                sum += parseInt(user.hours);
+            });
+            console.log(sum)
+            return sum.toFixed(2);
         },
         handleOpenReviewCardInModal(u) {
             this.selectedUser = u;
@@ -1122,5 +1147,17 @@ h1 {
     background: #C67D65;
     border-radius: 90px;
     color: #fff;
+}
+
+.hours-input {
+    width: 63px;
+    height: 30px;
+    background: #FFFFFF;
+    border: 1px solid rgba(180, 95, 75, 0.3);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 </style>

@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="settings-wrapper">
-                <div class="flex flex-row w-full">
+                <div class="flex flex-row w-full justify-between">
                     <div class="form-wrapper">
                         <div class="flex flex-row items-center mb-6">
                             <InputField v-model="userInfo.firstname" label="First Name" placeholder="John"
@@ -53,7 +53,7 @@
                             <h2>Payout type</h2>
                             <span>Please select one type</span>
                             <div class="flex flex-col mt-4">
-                                <div :class="[ 'option', selected_payment_type === type ? 'active' : '' ]" v-for="(type, index) in payment_types" @click="selected_payment_type = type">
+                                <div :class="[ 'option', selected_payment_type === type.value ? 'active' : '' ]" v-for="(type, index) in payment_types" @click="selected_payment_type = type.value; setSelectedPaymentType(selected_payment_type)">
                                     {{ type.title }}
                                 </div>
                             </div>
@@ -92,11 +92,11 @@ export default {
             selected_payment_type: null,
             payment_types: [
                 {
-                    value: 'equal',
+                    value: false,
                     title: 'Equal Payouts'
                 },
                 {
-                    value: 'shifts',
+                    value: true,
                     title: 'Shifts'
                 },
             ],
@@ -120,7 +120,13 @@ export default {
     },
     async created() {
         this.loaded = false;
-        this.selected_payment_type = this.payment_types[0]
+        if(this.$auth.user.shifts === 0) {
+            this.selected_payment_type = false
+        } else {
+            this.selected_payment_type = true
+
+        }
+        console.log(this.$auth.user)
         await this.fetchStates();
         this.userInfo.firstname = this.$auth.user.firstname;
         this.userInfo.lastname = this.$auth.user.lastname;
@@ -137,6 +143,23 @@ export default {
     methods: {
         away() {
             this.showStates = false;
+        },
+        async setSelectedPaymentType(t) {
+            try {
+                await this.$axios.put('/shifts', {
+                    shifts: t
+                })
+                await this.$auth.fetchUser();
+                await window.location.reload();
+
+            } catch(e) {
+                this.$toast.open({
+                    message: e.response.data.message,
+                    type: 'error',
+                });
+                await this.$auth.fetchUser();
+                await location.reload();
+            }
         },
         async updateAvatar(event) {
             if (event.target.files.length) {
@@ -244,6 +267,7 @@ export default {
 
         .logo-wrapper {
             height: fit-content;
+            min-height: 300px;
             margin-top: 65px;
             display: flex;
             align-items: center;
@@ -261,6 +285,11 @@ export default {
             width: 100%;
             position: relative;
             margin-top: 12px;
+            width: 300px;
+
+            h4 {
+                font-size: 23px;
+            }
 
             input[type="file"] {
                 display: none;
@@ -285,6 +314,10 @@ export default {
                 letter-spacing: 0.02em;
 
                 color: #B45F4B;
+            }
+
+            label {
+                font-size: 20px;
             }
         }
     }

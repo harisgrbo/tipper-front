@@ -7,9 +7,13 @@
             </div>
             <div v-for="pool in pools" class="flex flex-col mt-8 w-full">
                 <div class="disperse-wrapper" style="margin-bottom: 0 !important; border-bottom: 1px solid #ddd">
-                    <div class="grid grid-cols-4">
+                    <div class="grid grid-cols-4 w-full">
                         <p>{{ pool.name }}</p>
-                        <p>Available Amount: ${{ getSum(pool.employments) }}</p>
+                        <p>Available Amount: ${{ pool.balance }}</p>
+                        <div></div>
+                        <div class="flex items-center justify-end">
+                            <button class="disperse" @click="selected_pool = pool.id; $modal.show('pool-disperse')">Disperse Tips</button>
+                        </div>
                     </div>
                 </div>
                 <div class="flex flex-col employees-wrap">
@@ -40,7 +44,7 @@
                                             </div>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-left text-sm text-gray-500 w-1/5">
-                                            <input class="hours-input" type="number" v-model="user.user.hours">
+                                            <input class="hours-input" type="number" @change="updateUserHours(user.user.id, $event)" v-model="user.user.hours">
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-left w-1/5">${{ user.user.total_earned_amount }}</td>
                                     </tr>
@@ -60,9 +64,9 @@
 
             <div class="flex flex-col mt-8 w-full">
                 <div class="disperse-wrapper" style="margin-bottom: 0 !important; border-bottom: 1px solid #ddd">
-                    <div class="grid grid-cols-4">
+                    <div class="grid grid-cols-4 w-full">
                         <p>General Tip Jar</p>
-                        <p>Available Amount: 100$</p>
+                        <p>Available Amount: ${{ $auth.user.total_balance }}</p>
                     </div>
                 </div>
                 <div class="flex flex-col employees-wrap">
@@ -130,15 +134,45 @@
 
             <div class="flex flex-row items-center justify-between bg-white p-8 mt-8 w-full">
                 <div class="flex items-center justify-end px-4 flex-1">
-                    <p class="total-sub">Total hours: 100</p>
+                    <p class="total-sub">Total Hours: {{ getTotalHoursSumInPools() }}</p>
                 </div>
                 <div class="flex flex-row items-center justify-between px-4 flex-1">
-                    <p class="total-sub">Total hours: 100</p>
-                    <button class="disperse">Disperse tips</button>
+                    <p class="total-sub">Total Tips: ${{ getTotalTipsSumInPools() }}</p>
+                    <button class="disperse" @click="$modal.show('jar-disperse')">Disperse tips</button>
                 </div>
             </div>
         </div>
         <Loader v-show="!loaded"></Loader>
+        <client-only>
+            <modal name="pool-disperse"
+                   width="476"
+                   height="auto"
+                   @before-open="beforeOpen"
+                   @before-close="beforeClose">
+                <div class="flex flex-col">
+                    <h1 class="text-center">Are you sure you want to disperse tips to the pool?</h1>
+                    <div class="modal-buttons">
+                        <button @click="$modal.hide('pool-disperse')">No</button>
+                        <button @click="dispersTipsToPool">Yes</button>
+                    </div>
+                </div>
+            </modal>
+        </client-only>
+        <client-only>
+            <modal name="jar-disperse"
+                   width="476"
+                   height="auto"
+                   @before-open="beforeOpen"
+                   @before-close="beforeClose">
+                <div class="flex flex-col">
+                    <h1 class="text-center">Are you sure you want to disperse tips to the General Jar?</h1>
+                    <div class="modal-buttons">
+                        <button @click="$modal.hide('jar-disperse')">No</button>
+                        <button @click="dispersTipsToGeneralJar">Yes</button>
+                    </div>
+                </div>
+            </modal>
+        </client-only>
     </div>
 </template>
 
@@ -159,15 +193,94 @@ export default {
             myEmployees: [],
             loaded: false,
             showGeneralJar: false,
+            selected_pool: 0,
         }
     },
     async created() {
         this.loaded = false;
         await this.fetchMyEmployees();
         await this.fetchPools();
+        await this.getTotalHoursSumInPools();
+        await this.getTotalTipsSumInPools();
         this.loaded = true
     },
     methods: {
+        beforeOpen() {
+            document.body.style.overflow = 'hidden';
+        },
+        beforeClose() {
+            document.body.style.overflow = 'auto';
+        },
+        async updateUserHours(id, e) {
+            let h = e.target.value;
+            try {
+                let res = await this.$axios.put('/employees/' + id + '/hours', {
+                    hours: h
+                });
+
+                await this.$auth.fetchUser();
+
+            } catch(e) {
+                console.log(e)
+            }
+        },
+        async dispersTipsToPool() {
+            try {
+                let res = await this.$axios.post('/pools/' + this.selected_pool + '/disperse');
+
+                this.$toast.open({
+                    message: 'You have successfully dispersed tips to the pool',
+                    type: 'success',
+                });
+
+                await this.$auth.fetchUser();
+            } catch(e) {
+                console.log(e.response);
+                this.$toast.open({
+                    message: e.response.data.message,
+                    type: 'error',
+                });
+            }
+        },
+        async dispersTipsToGeneralJar() {
+            try {
+                let res = await this.$axios.post('/employer/disperse');
+
+                this.$toast.open({
+                    message: 'You have successfully dispersed tips to the General Jar',
+                    type: 'success',
+                });
+
+                await this.$auth.fetchUser();
+
+            } catch(e) {
+                console.log(e.response);
+                this.$toast.open({
+                    message: e.response.data.message,
+                    type: 'error',
+                });
+            }
+        },
+        getTotalHoursSumInPools() {
+            let sum = 0;
+
+            this.pools.forEach(pool => {
+                pool.employments.forEach(user => {
+                    sum += parseInt(user.user.hours);
+                })
+            });
+           return sum
+        },
+        getTotalTipsSumInPools() {
+            let sum = 0;
+
+            this.pools.forEach(pool => {
+                pool.employments.forEach(user => {
+                    sum += parseInt(user.user.total_earned_amount);
+                })
+            });
+            return sum
+        },
         getSum(arr) {
             let sum = 0;
 

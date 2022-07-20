@@ -22,7 +22,7 @@
             <h2>Employee Dashboard</h2>
 
             <div class="user-info">
-                <div class="flex flex-row items-center">
+                <div class="flex w-full flex-row items-center first p-8">
                     <div class="user-avatar">
                         <img class="user-avatar" :src="$auth.user.avatar_url || '/noimage.png' " alt="">
                         <div class="upload" @click="$modal.show('image-upload')">
@@ -37,7 +37,7 @@
                         <p class="sub">{{ $auth.user.address_1 !== null ? $auth.user.address_1 : '' + ', ' + $auth.user.state !== null ? $auth.user.state : '' }}</p>
                     </div>
                 </div>
-                <div class="flex flex-row items-end">
+                <div class="flex w-full flex-row items-end justify-end p-8">
                     <p class="download cursor-pointer" @click="downloadQR">Download QR code Image</p>
                     <div>
                         <canvas ref="canvas"/>
@@ -345,7 +345,6 @@ export default {
 
     .user-info {
         background: #fff;
-        padding: 38px;
         margin-bottom: 36px;
         display: flex;
         flex-direction: row;
@@ -607,5 +606,9 @@ export default {
     border: none !important;
     color: #fff !important;
     margin-top: 24px;
+}
+
+.first {
+    border-right: 2px solid #C67D65;
 }
 </style>
