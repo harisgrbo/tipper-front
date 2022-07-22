@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="flex flex-row items-center justify-between w-full mt-8 rating-stars">
                                     <span>Total Tips Earned</span>
-                                    <span class="total">$1920.00</span>
+                                    <span class="total">${{ employee.total_earned_amount }}</span>
                                 </div>
                                 <div class="dropdown-wrapper mt-8" v-on-clickaway="away" >
                                     <div class="dropdown-selected" @click="showPoolList = true;">
@@ -171,6 +171,8 @@ export default {
                 this.employee = res.data.data;
                 this.employer_id = res.data.data.department.employer_id;
                 this.employee_meta = res.data.meta;
+
+                console.log(this.employee, 'employee')
 
             } catch (e) {
                 console.log(e)

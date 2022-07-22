@@ -2,295 +2,253 @@
   {
     "name": "admin",
     "path": "/admin",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/admin/index.vue",
-    "chunkName": "pages/admin/index",
-    "_name": "_dec4ba06"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/admin/index.vue",
+    "chunkName": "pages/admin/index"
   },
   {
     "name": "database",
     "path": "/database",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/database.vue",
-    "chunkName": "pages/database",
-    "_name": "_42568fc0"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/database.vue",
+    "chunkName": "pages/database"
   },
   {
     "name": "employee-settings",
     "path": "/employee-settings",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/employee-settings.vue",
-    "chunkName": "pages/employee-settings",
-    "_name": "_dbb819e6"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/employee-settings.vue",
+    "chunkName": "pages/employee-settings"
   },
   {
     "name": "employer-settings",
     "path": "/employer-settings",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/employer-settings.vue",
-    "chunkName": "pages/employer-settings",
-    "_name": "_0a673020"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/employer-settings.vue",
+    "chunkName": "pages/employer-settings"
   },
   {
     "name": "fail",
     "path": "/fail",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/fail.vue",
-    "chunkName": "pages/fail",
-    "_name": "_7ceec2c3"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/fail.vue",
+    "chunkName": "pages/fail"
   },
   {
     "name": "home",
     "path": "/home",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/home/index.vue",
-    "chunkName": "pages/home/index",
-    "_name": "_45ec8b87"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/index.vue",
+    "chunkName": "pages/home/index"
   },
   {
     "name": "index-employee",
     "path": "/index-employee",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/index-employee.vue",
-    "chunkName": "pages/index-employee",
-    "_name": "_e85801a4"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/index-employee.vue",
+    "chunkName": "pages/index-employee"
   },
   {
     "name": "index-employer",
     "path": "/index-employer",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/index-employer.vue",
-    "chunkName": "pages/index-employer",
-    "_name": "_e6e99e8a"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/index-employer.vue",
+    "chunkName": "pages/index-employer"
   },
   {
     "name": "index-employer-pending",
     "path": "/index-employer-pending",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/index-employer-pending.vue",
-    "chunkName": "pages/index-employer-pending",
-    "_name": "_68f65585"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/index-employer-pending.vue",
+    "chunkName": "pages/index-employer-pending"
   },
   {
     "name": "notification",
     "path": "/notification",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/notification.vue",
-    "chunkName": "pages/notification",
-    "_name": "_f8792de0"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/notification.vue",
+    "chunkName": "pages/notification"
   },
   {
     "name": "notification-settings",
     "path": "/notification-settings",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/notification-settings.vue",
-    "chunkName": "pages/notification-settings",
-    "_name": "_b9044b20"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/notification-settings.vue",
+    "chunkName": "pages/notification-settings"
   },
   {
     "name": "onboarding",
     "path": "/onboarding",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/onboarding.vue",
-    "chunkName": "pages/onboarding",
-    "_name": "_14b34500"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/onboarding.vue",
+    "chunkName": "pages/onboarding"
   },
   {
     "name": "pools",
     "path": "/pools",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/pools/index.vue",
-    "chunkName": "pages/pools/index",
-    "_name": "_65930185"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/pools/index.vue",
+    "chunkName": "pages/pools/index"
   },
   {
     "name": "register",
     "path": "/register",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/register.vue",
-    "chunkName": "pages/register",
-    "_name": "_d735fd70"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/register.vue",
+    "chunkName": "pages/register"
   },
   {
     "name": "reset-password",
     "path": "/reset-password",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/reset-password.vue",
-    "chunkName": "pages/reset-password",
-    "_name": "_503bd984"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/reset-password.vue",
+    "chunkName": "pages/reset-password"
   },
   {
     "name": "reviews",
     "path": "/reviews",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/reviews.vue",
-    "chunkName": "pages/reviews",
-    "_name": "_07871206"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/reviews.vue",
+    "chunkName": "pages/reviews"
   },
   {
     "name": "sign-in",
     "path": "/sign-in",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/sign-in.vue",
-    "chunkName": "pages/sign-in",
-    "_name": "_1a6da420"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/sign-in.vue",
+    "chunkName": "pages/sign-in"
   },
   {
     "name": "stripe-register",
     "path": "/stripe-register",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/stripe-register.vue",
-    "chunkName": "pages/stripe-register",
-    "_name": "_1ebeaf0e"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/stripe-register.vue",
+    "chunkName": "pages/stripe-register"
   },
   {
     "name": "success",
     "path": "/success",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/success.vue",
-    "chunkName": "pages/success",
-    "_name": "_69d429ee"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/success.vue",
+    "chunkName": "pages/success"
   },
   {
     "name": "users",
     "path": "/users",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/users.vue",
-    "chunkName": "pages/users",
-    "_name": "_59110633"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/users.vue",
+    "chunkName": "pages/users"
   },
   {
     "name": "home-blog",
     "path": "/home/blog",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/home/blog.vue",
-    "chunkName": "pages/home/blog",
-    "_name": "_6070c07d"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/blog.vue",
+    "chunkName": "pages/home/blog"
   },
   {
     "name": "home-contact-us",
     "path": "/home/contact-us",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/home/contact-us.vue",
-    "chunkName": "pages/home/contact-us",
-    "_name": "_7fff6586"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/contact-us.vue",
+    "chunkName": "pages/home/contact-us"
   },
   {
     "name": "home-faq",
     "path": "/home/faq",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/home/faq.vue",
-    "chunkName": "pages/home/faq",
-    "_name": "_047c61ea"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/faq.vue",
+    "chunkName": "pages/home/faq"
   },
   {
     "name": "home-footer",
     "path": "/home/footer",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/home/footer.vue",
-    "chunkName": "pages/home/footer",
-    "_name": "_bb2e4594"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/footer.vue",
+    "chunkName": "pages/home/footer"
   },
   {
     "name": "home-legal",
     "path": "/home/legal",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/home/legal.vue",
-    "chunkName": "pages/home/legal",
-    "_name": "_19f50c24"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/legal.vue",
+    "chunkName": "pages/home/legal"
   },
   {
     "name": "home-privacy-policy",
     "path": "/home/privacy-policy",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/home/privacy-policy.vue",
-    "chunkName": "pages/home/privacy-policy",
-    "_name": "_b89d8c9c"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/privacy-policy.vue",
+    "chunkName": "pages/home/privacy-policy"
   },
   {
     "name": "home-team",
     "path": "/home/team",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/home/team.vue",
-    "chunkName": "pages/home/team",
-    "_name": "_246afdb8"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/team.vue",
+    "chunkName": "pages/home/team"
   },
   {
     "name": "home-terms-of-use",
     "path": "/home/terms-of-use",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/home/terms-of-use.vue",
-    "chunkName": "pages/home/terms-of-use",
-    "_name": "_02206a1c"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/home/terms-of-use.vue",
+    "chunkName": "pages/home/terms-of-use"
   },
   {
     "name": "invite-employees",
     "path": "/invite/employees",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/invite/employees/index.vue",
-    "chunkName": "pages/invite/employees/index",
-    "_name": "_12a2e1b2"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/invite/employees/index.vue",
+    "chunkName": "pages/invite/employees/index"
   },
   {
     "name": "admin-business-id",
     "path": "/admin/business/:id",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/admin/business/_id/index.vue",
-    "chunkName": "pages/admin/business/_id/index",
-    "_name": "_42a77293"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/admin/business/_id/index.vue",
+    "chunkName": "pages/admin/business/_id/index"
   },
   {
     "name": "admin-employee-id",
     "path": "/admin/employee/:id",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/admin/employee/_id/index.vue",
-    "chunkName": "pages/admin/employee/_id/index",
-    "_name": "_15303dfe"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/admin/employee/_id/index.vue",
+    "chunkName": "pages/admin/employee/_id/index"
   },
   {
     "name": "employee-id",
     "path": "/employee/:id?",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/employee/_id.vue",
-    "chunkName": "pages/employee/_id",
-    "_name": "_509a3004"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/employee/_id.vue",
+    "chunkName": "pages/employee/_id"
   },
   {
     "name": "invite-hash",
     "path": "/invite/:hash?",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/invite/_hash.vue",
-    "chunkName": "pages/invite/_hash",
-    "_name": "_5739858c"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/invite/_hash.vue",
+    "chunkName": "pages/invite/_hash"
   },
   {
     "name": "password-reset-token",
     "path": "/password-reset/:token?",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/password-reset/_token.vue",
-    "chunkName": "pages/password-reset/_token",
-    "_name": "_7e3757d7"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/password-reset/_token.vue",
+    "chunkName": "pages/password-reset/_token"
   },
   {
     "name": "pools-id",
     "path": "/pools/:id",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/pools/_id/index.vue",
-    "chunkName": "pages/pools/_id/index",
-    "_name": "_1f545c20"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/pools/_id/index.vue",
+    "chunkName": "pages/pools/_id/index"
   },
   {
     "name": "report-id",
     "path": "/report/:id?",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/report/_id.vue",
-    "chunkName": "pages/report/_id",
-    "_name": "_6a75cfc4"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/report/_id.vue",
+    "chunkName": "pages/report/_id"
   },
   {
     "name": "shifts-id",
     "path": "/shifts/:id",
     "component": "/Users/harisgrbo/Desktop/tipper-front/pages/shifts/_id/index.vue",
-    "chunkName": "pages/shifts/_id/index",
-    "_name": "_0702d0a8"
+    "chunkName": "pages/shifts/_id/index"
   },
   {
     "name": "user-id",
     "path": "/user/:id",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/user/_id/index.vue",
-    "chunkName": "pages/user/_id/index",
-    "_name": "_569bf4de"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/user/_id/index.vue",
+    "chunkName": "pages/user/_id/index"
   },
   {
     "name": "user-id-tip",
     "path": "/user/:id?/tip",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/user/_id/tip/index.vue",
-    "chunkName": "pages/user/_id/tip/index",
-    "_name": "_0e0b5a6a"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/user/_id/tip/index.vue",
+    "chunkName": "pages/user/_id/tip/index"
   },
   {
     "name": "user-id-tipping",
     "path": "/user/:id?/tipping",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/user/_id/tipping/index.vue",
-    "chunkName": "pages/user/_id/tipping/index",
-    "_name": "_1111f5dc"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/user/_id/tipping/index.vue",
+    "chunkName": "pages/user/_id/tipping/index"
   },
   {
     "name": "user-id-tipping-pools-idPool",
     "path": "/user/:id?/tipping/pools/:idPool?",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/user/_id/tipping/pools/_idPool.vue",
-    "chunkName": "pages/user/_id/tipping/pools/_idPool",
-    "_name": "_cd535070"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/user/_id/tipping/pools/_idPool.vue",
+    "chunkName": "pages/user/_id/tipping/pools/_idPool"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/Users/admirferhatovic/Code/tipper-front/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_13a72bfd"
+    "component": "/Users/harisgrbo/Desktop/tipper-front/pages/index.vue",
+    "chunkName": "pages/index"
   }
 ]
