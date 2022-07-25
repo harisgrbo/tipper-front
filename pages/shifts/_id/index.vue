@@ -5,14 +5,13 @@
                 <h2>Shifts Mode</h2>
                 <button class="pending-button" @click="$router.push('/index-employer-pending')">Check invitation status</button>
             </div>
-            <div v-for="pool in pools" class="flex flex-col mt-8 w-full">
+            <div v-for="pool in pools" v-if="pool.employments.length" class="flex flex-col mt-8 w-full">
                 <div class="disperse-wrapper" style="margin-bottom: 0 !important; border-bottom: 1px solid #ddd">
                     <div class="grid grid-cols-4 w-full">
                         <p>{{ pool.name }}</p>
                         <p>Available Amount: ${{ pool.balance }}</p>
                         <div></div>
                         <div class="flex items-center justify-end">
-                            <button class="disperse" @click="selected_pool = pool.id; $modal.show('pool-disperse')">Disperse Tips</button>
                         </div>
                     </div>
                 </div>
@@ -113,7 +112,7 @@
                                             </div>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-left text-sm text-gray-500 w-1/5">
-                                            <input class="hours-input" type="number" v-model="user.hours">
+                                            {{ user.hours }}
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-left w-1/5">${{ user.total_earned_amount }}</td>
                                     </tr>
@@ -215,10 +214,12 @@ export default {
             let h = e.target.value;
             try {
                 let res = await this.$axios.put('/employees/' + id + '/hours', {
-                    hours: h
+                    hours: parseInt(h)
                 });
 
                 await this.$auth.fetchUser();
+
+                await window.location.reload();
 
             } catch(e) {
                 console.log(e)
@@ -285,10 +286,11 @@ export default {
             let sum = 0;
 
             arr.forEach(user => {
-                sum += parseInt(user.user.total_earned_amount);
+                console.log(user.user.total_earned_amount)
+                sum += parseFloat(user.user.total_earned_amount);
             });
             console.log(sum)
-            return sum.toFixed(2);
+            return sum;
         },
 
         getSumHours(arr) {
