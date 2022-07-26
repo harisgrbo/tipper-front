@@ -119,8 +119,8 @@
                                     <tr class="main bg-white" style="background: #fff !important;">
                                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/2">
                                         </th>
-                                        <th scope="col" class="px-3 py-3.5 text-left w-1/5">Total: 100</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left w-1/5">$100</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left w-1/5">Total: {{ getTotalHoursSumInPools() }}</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left w-1/5">${{ getTotalTipsSumInPools() }}</th>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -252,6 +252,8 @@ export default {
                     type: 'success',
                 });
 
+                this.$modal.hide('pool-disperse')
+
                 await this.$auth.fetchUser();
 
             } catch(e) {
@@ -267,7 +269,7 @@ export default {
 
             this.pools.forEach(pool => {
                 pool.employments.forEach(user => {
-                    sum += parseInt(user.user.hours);
+                    sum += parseFloat(user.user.hours);
                 })
             });
            return sum
@@ -277,7 +279,7 @@ export default {
 
             this.pools.forEach(pool => {
                 pool.employments.forEach(user => {
-                    sum += parseInt(user.user.total_earned_amount);
+                    sum += parseFloat(user.user.total_earned_amount);
                 })
             });
             return sum
