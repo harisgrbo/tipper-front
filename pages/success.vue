@@ -22,9 +22,13 @@ export default {
     },
     async created() {
         if(this.$route.query.tip) {
-            let res = await this.$axios.post('/tips/' + this.$route.query.tip + '/complete');
+            try {
+                await this.$axios.post('/tips/' + this.$route.query.tip + '/complete');
+            } catch(e) {
+                console.log(e)
+            }
 
-            this.id = this.$route.query .employer;
+            this.id = this.$route.query.employer;
         }
     }
 }
