@@ -45,7 +45,7 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-left text-sm text-gray-500 w-1/5">
                                             <input class="hours-input" type="number" @change="updateUserHours(user.user.id, $event)" v-model="user.user.hours">
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-left w-1/5">${{ user.user.total_earned_amount }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-left w-1/5">${{ ((user.user.total_earned_amount - user.user.singular_earned_amount) * user.user.hours / getSumHours(pool.employments) + 1.0 * user.user.total_earned_amount).toFixed(2) }}</td>
                                     </tr>
                                     <tr class="main bg-white" style="background: #fff !important;">
                                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/2">
