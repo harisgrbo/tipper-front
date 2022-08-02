@@ -205,9 +205,7 @@ export default {
     },
     methods: {
         calculateTipPercentage(hours, totalHours, totalTips) {
-          if (hours == 0) return 'No hours';
-          if (totalHours == 0) return 'No hours';
-          if (totalTips == 0) return 0;
+          if (hours == 0 || totalHours == 0 || totalTips == 0) return 0;
 
           return 1.0 * hours / totalHours * totalTips;
         },
