@@ -45,13 +45,13 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-left text-sm text-gray-500 w-1/5">
                                             <input class="hours-input" type="number" @change="updateUserHours(user.user.id, $event)" v-model="user.user.hours">
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-left w-1/5">${{ calculateTipPercentage(user.user.hours, getSumHours(pool.employments), getSum(pool.employments)) }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-left w-1/5">${{ calculateTipPercentage(user.user.hours, getSumHours(pool.employments), pool.balance).toFixed(2) }}</td>
                                     </tr>
                                     <tr class="main bg-white" style="background: #fff !important;">
                                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/2">
                                         </th>
                                         <th scope="col" class="px-3 py-3.5 text-left w-1/5">Total: {{ getSumHours(pool.employments) }}</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left w-1/5">${{ getSum(pool.employments) }}</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left w-1/5">${{ pool.balance }}</th>
                                     </tr>
                                     </tbody>
                                 </table>
