@@ -65,7 +65,7 @@
                 <div class="disperse-wrapper" style="margin-bottom: 0 !important; border-bottom: 1px solid #ddd">
                     <div class="grid grid-cols-4 w-full">
                         <p>General Tip Jar</p>
-                        <p>Available Amount: ${{ $auth.user.total_balance }}</p>
+                        <p>Available Amount: ${{ $auth.user.balance }}</p>
                     </div>
                 </div>
                 <div class="flex flex-col employees-wrap">
@@ -114,7 +114,7 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-left text-sm text-gray-500 w-1/5">
                                             {{ user.hours }}
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-left w-1/5">${{ user.total_earned_amount }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-left w-1/5">${{ calculateTipPercentage(user.hours, getTotalHoursSumInPools(), $auth.user.balance) }}</td>
                                     </tr>
                                     <tr class="main bg-white" style="background: #fff !important;">
                                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/2">
