@@ -201,6 +201,7 @@ export default {
         await this.fetchPools();
         await this.getTotalHoursSumInPools();
         await this.getTotalTipsSumInPools();
+        console.log(this.$auth.user)
         this.loaded = true
     },
     methods: {
@@ -261,6 +262,8 @@ export default {
                 this.$modal.hide('pool-disperse')
 
                 await this.$auth.fetchUser();
+
+                await location.reload();
 
             } catch(e) {
                 console.log(e.response);
