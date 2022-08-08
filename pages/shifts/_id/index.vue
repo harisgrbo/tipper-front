@@ -114,13 +114,13 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-left text-sm text-gray-500 w-1/5">
                                             {{ user.hours }}
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-left w-1/5">${{ calculateTipPercentage(user.hours, getTotalHoursSumInPools(), $auth.user.balance) }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-left w-1/5">${{ calculateTipPercentage(user.hours, getTotalHoursSumInPools(), $auth.user.balance).toFixed(2) }}</td>
                                     </tr>
                                     <tr class="main bg-white" style="background: #fff !important;">
                                         <th scope="col" class="py-3.5 pl-4 pr-3 text-left sm:pl-6 w-1/2">
                                         </th>
                                         <th scope="col" class="px-3 py-3.5 text-left w-1/5">Total: {{ getTotalHoursSumInPools() }}</th>
-                                        <th scope="col" class="px-3 py-3.5 text-left w-1/5">${{ getTotalTipsSumInPools() }}</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left w-1/5">${{ $auth.user.balance.toFixed(2) }}</th>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -136,7 +136,7 @@
                     <p class="total-sub">Total Hours: {{ getTotalHoursSumInPools() }}</p>
                 </div>
                 <div class="flex flex-row items-center justify-between px-4 flex-1">
-                    <p class="total-sub">Total Tips: ${{ getTotalTipsSumInPools() }}</p>
+                    <p class="total-sub">Total Tips: ${{ (getTotalTipsSumInPools() + $auth.user.balance).toFixed(2) }}</p>
                     <button class="disperse" @click="$modal.show('jar-disperse')">Disperse tips</button>
                 </div>
             </div>
@@ -167,7 +167,7 @@
                     <h1 class="text-center">Are you sure you want to disperse tips to the General Jar?</h1>
                     <div class="modal-buttons">
                         <button @click="$modal.hide('jar-disperse')">No</button>
-                        <button @click="dispersTipsToGeneralJar">Yes</button>
+                        <button @click="disperseAll">Yes</button>
                     </div>
                 </div>
             </modal>
@@ -250,28 +250,38 @@ export default {
                 });
             }
         },
-        async dispersTipsToGeneralJar() {
+        async disperseAll() {
+            let error = false;
+
+            this.pools.forEach(async (pool) => {
+                try {
+                  await this.$axios.post('/pools/' + pool.id + '/disperse');
+                } catch (e) {
+                  console.log(e)
+                  error = true;
+                }
+            })
+
             try {
-                let res = await this.$axios.post('/employer/disperse');
+                await this.$axios.post('/employer/disperse');
+            } catch (e) {
+                console.log(e);
+                error = true;
+            }
 
+            if (error) {
                 this.$toast.open({
-                    message: 'You have successfully dispersed tips to the General Jar',
-                    type: 'success',
+                  message: "Dispersal wasn't completely successful",
+                  type: 'error',
                 });
-
-                this.$modal.hide('pool-disperse')
-
-                await this.$auth.fetchUser();
-
-                await location.reload();
-
-            } catch(e) {
-                console.log(e.response);
+            } else {
                 this.$toast.open({
-                    message: e.response.data.message,
-                    type: 'error',
+                  message: 'You have successfully dispersed tips',
+                  type: 'success',
                 });
             }
+
+            await this.$auth.fetchUser();
         },
         getTotalHoursSumInPools() {
             let sum = 0;
