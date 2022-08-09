@@ -136,7 +136,7 @@
                     <p class="total-sub">Total Hours: {{ getTotalHoursSumInPools() }}</p>
                 </div>
                 <div class="flex flex-row items-center justify-between px-4 flex-1">
-                    <p class="total-sub">Total Tips: ${{ (getTotalTipsSumInPools() + $auth.user.balance).toFixed(2) }}</p>
+                    <p class="total-sub">Total Tips: ${{ getTotalTipsSumInPools() + $auth.user.balance.toFixed(2) }}</p>
                     <button class="disperse" @click="$modal.show('jar-disperse')">Disperse tips</button>
                 </div>
             </div>
