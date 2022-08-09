@@ -297,9 +297,7 @@ export default {
             let sum = 0;
 
             this.pools.forEach(pool => {
-                pool.employments.forEach(user => {
-                    sum += parseFloat(user.user.total_earned_amount);
-                })
+                sum += pool.balance;
             });
             return sum
         },
